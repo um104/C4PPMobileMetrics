@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My First App</string>
+    <string name="name_message">Enter your name</string>
+    <string name="age_message">Enter your age</string>
+    <string name="upload_event">Upload Event</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+</resources>
