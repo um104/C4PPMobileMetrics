@@ -8,5 +8,5 @@ More to come in this repo!
 ---
 
 Team Members
- - Ray Tam
- - Mark Lerner
+  - Ray Tam
+  - Mark Lerner
