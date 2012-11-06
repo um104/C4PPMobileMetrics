@@ -1,0 +1,1049 @@
+\documentclass[12pt,oneside,letterpaper]{article}
+\usepackage{longtable}
+\usepackage{hyperref}
+%\usepackage{fullpage}
+
+\newenvironment{packed_enumerate}{ %custom enumerate for single-spacing
+\vspace{-7mm}
+\begin{enumerate}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}
+\vspace{-8mm}}
+
+\pagestyle{headings}
+\oddsidemargin 0.25in \textwidth     6.25in \topmargin     0.4in
+\textheight    8.5in
+
+\begin{document}
+
+
+\title{\bfseries Project Name: Mobile Metrics\\
+Software Requirements Specification\\
+Version 1.1}
+
+\author {
+\large{Channel 4++}\\
+\emph{Computer Science Department}\\
+\emph{California Polytechnic State University}\\
+\emph{San Luis Obispo, CA USA}\\
+}
+
+\date{October 25, 2012}
+\maketitle \thispagestyle{empty}
+
+
+\pagebreak
+\tableofcontents
+
+\addcontentsline{toc}{section}{Revision History}
+
+%TODO take credit for what you did guys!
+\addcontentsline{toc}{section}{Credits}
+\newpage
+\section*{Credits}
+\begin{tabular}{|l|l|p{2.5in}|l|}
+\hline
+\textbf{Name}&\textbf{Date}&\textbf{Role}&\textbf{Version}\\
+\hline
+Brian Middaugh&October 24, 2012&Author: Introduction, Use Case 1. Contributor: Overall Description, Use Case 4, Use Case 5, added new use cases&1.1\\
+\hline
+Mark Lerner&October 24, 2012&Author of Use Case 2, System Feature 1, Nonfunctional Performance Requirement 1, External Interface Requirements, Updating SRS with more use cases and requirements&1.1\\
+\hline
+Ray Tam&October 8, 2012& Author: Use Case 3&1.0\\
+\hline
+Chun Hui Pek&October 8, 2012&Author: Use Case 4&1.0\\
+\hline
+Girum Ibssa&October 10, 2012&Author: Use Case 5&1.0\\
+\hline
+\end{tabular}
+
+\section*{Revision History}
+\begin{tabular}{|l|l|p{2.5in}|l|}
+\hline
+\textbf{Name}&\textbf{Date}&\textbf{Reason for Changes}&\textbf{Version}\\
+\hline
+Mark Lerner&October 11, 2012&Initial draft sent to Customer&1.0\\
+\hline
+Mark Lerner&October 24, 2012&Updated to more closely resemble current understanding&1.1\\
+\hline
+\end{tabular}
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% INTRODUCTION %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\subsection{Purpose}
+This software requirements specification details the requirements for release 1.0 of the Mobile Metrics suite. The Mobile Metrics suite includes both an Android SDK for gathering and recording user data, and an Analytics App for viewing collected user data (see glossary). 
+\subsection{Document Conventions}
+%Describe any standards or typographical conventions that were followed when writing this SRS, such as fonts or highlighting that have special significance. For example, state whether priorities  for higher-level requirements are assumed to be inherited by detailed requirements, or whether every requirement statement is to have its own priority.
+\begin{itemize}
+\item See the Glossary section for a list of terms and their definitions as they are used throughout this document.
+\item Any articles that will be referenced from other documents are labeled by a unique identintifier.
+\item Requirements begin with the version number where they first appeared in this document enclosed in parentheses.
+\end{itemize}
+
+\subsection{Intended Audience and Reading Suggestions}
+This document is intended primarily for reference by the developers to keep track of project requirements and judge if product features are complete. This document is also intended to help customers understand what features will be in the final product. The developers and customers must agree on a baseline of features to be included in the final product, and must stay current on any changes made to product requirements after the baseline. To help with this, each requirement starts with the number of the version where it first appeared enclosed in parentheses. Developers and customers who are already familiar with the project will most often refer to the System Features section and Use Cases section. Developers should also read the Business Rules, User Classes, and Operating Environment sections. Anyone who is not familiar with the project's goals should start by reading the Overall Description section and then move on to System Features.
+\subsection{Project Scope}
+%Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. Relate the software to corporate goals or business strategies. If a separate vision and scope document is available, refer to it rather than duplicating its contents here. An SRS that specifies the next release of an evolving product should contain its own scope statement as a subset of the long-term strategic product vision.
+See the Vision and Scope document for more information on the project scope.
+\subsection{References}
+This document references the following documents:
+\begin{itemize}
+\item Vision and Scope Document: This document outlines the project goals at a high level and defines the scope of the project for each iteration of the project period.
+\item Deployment Diagram: This image describes in very high-level detail the different parts of the project, breaking the whole software system into individual software subsystems to be able to articulate relationships between large subsystems.
+\item Horizontal Prototype: This document is a storyboard of the user interactions with the Mobile Metrics Dashboard App.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% OVERALL DESCRIPTION %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Overall Description}
+\emph{This section is a work in progress}
+%TODO consider having separate srs's for SDK, Analytics, DB, and Sample App.
+\subsection{Product Perspective}
+The Mobile Metrics application is a data analytics suite which is designed for app developers to record, save, and view data on customers who use their applications. It is separated into two parts, each with their own set of features. Part one, referred to as the SDK, is a mobile SDK that provides an API to allow app developers with a Salesforce Developer Edition account to send user data to a Salesforce database. Part two, referred to as the Analytics App, is a mobile application that will allow Salesforce customers to view the data collected by the SDK.
+\subsection{Product Features}
+%Summarize the major features the product contains or the significant functions that it performs or lets the user perform. Details will be provided in Section 3, so only a high level summary  is needed here. Organize the functions to make them understandable to any reader of the SRS. A picture of the major groups of related requirements and how they relate, such as a top level data flow diagram or a class diagram, is often effective.
+\subsubsection{SDK Features}
+The SDK will provide a small set of functions for app developers to send customer data to a Salesforce database. Developers will not need any significant database knowledge to start using the SDK. The SDK will allow for the gathering of data, and for the uploading of that data to Salesforce. 
+\subsubsection{Analytics App Features}
+The analytics application will allow Salesforce customers to view user data stored by the SDK on their various apps. The application will be able to display the data stored in a raw table format, as well as customizable graphical data representations for relating usage statistics (i.e. Histograms, Line Charts). 
+\subsection{User Classes and Characteristics}
+%Identify the various user classes that you anticipate will use this product. User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. Describe the pertinent characteristics of each user class. Certain requirements may pertain only to certain user classes. Distinguish the favored user classes from those who are less important to satisfy.  You might use a table like this:
+\begin{tabular}{|l|p{3.8in}|}
+\hline
+\textbf{User Class}& \textbf{Description} \\
+\hline
+Mobile App Developers (Favored) & App Developers who use the SDK to gather metrics for their mobile app.\tabularnewline
+\hline
+Small Business owner & Non-developer who will use the analytics app.\tabularnewline
+\hline
+Independent App developer & Wants to collect basic statistics on their products in a fast, cheap manner.\tabularnewline
+%\hline
+%Mobile Analytics app users&People who use the mobile analytics app to view the data that has been recorded by the SDK.\\
+\hline
+Financial Business Manager & A user of the Mobile Analytics app that creates reports and extracts data specifically to make financial business decisions.\tabularnewline
+\hline
+Standard Android users & An end-user who uses a mobile app created by Mobile App Developer. The SDK will collect data on these users and send it to Salesforce.\tabularnewline
+\hline
+\end{tabular}
+
+\subsection{Operating Environment}
+The SDK will be able to be used on Android OS applications, and will support Android OS versions 2.3+. The metrics analysis mobile app will run on Android-powered smartphones, also versions 2.3+. 
+\subsection{Design and Implementation Constraints}
+%Describe any items or issues that will limit the options available to the developers. These might include: corporate or regulatory policies; hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer's organization will be responsible for maintaining the delivered software).
+\begin{enumerate}
+\item Corporate and regulartory policies on automatically collecting user demographics.
+\item Interface to Android OS, specifically for accessing user information.
+\item Interface to Salesforce Mobile SDK, specifically for sending and receiving data.
+\item Constraints placed on the database by APEX or other Salesforce technologies.
+\end{enumerate}
+\subsection{User Documentation}
+%List the user documentation components (such as user manuals, on-line help, and tutorials) that will be delivered along with the software. Identify any known user documentation delivery formats or standards.
+Detailed documentation will be provided that will describe how to use the API of the SDK. The goal of the SDK is to have as few method calls as possible that provide as much flexibility as possible.\\
+Detailed how-to documents for installing the SDK and setting up the Mobile Metrics Salesforce Package will be written. Furthermore, an example app will be developed and used to demonstrate the explicit use of the SDK in a running app.\\
+A set of instructions for using the Analytics App will be delivered, giving steps and examples for viewing custom reports and raw user data. These instructions will be included in the app, as well as available in a separate format through the Mobile Metrics Salesforce Package accompanying the Mobile Metrics service.
+\subsection{Assumptions and Dependencies}
+%List any assumed factors (as opposed to known facts) that could affect the requirements stated in the SRS. These could include third-party or commercial components that you plan to use, issues around the development or operating environment, or constraints. The project could be affected if these assumptions are incorrect, are not shared, or change. Also identify any dependencies the project has on external factors, such as software components that you intend to reuse from another project, unless they are already documented elsewhere (for example, in the vision and scope document or the project plan).
+Please see the Vision and Scope document for previously recorded assumptions and dependencies.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Use Cases %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Use Cases}
+\subsection{SDK Use Cases}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Use Case 2 - Mark Lerner %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{\label{Sending Basic App Startup Data}UC2: Sending Basic App Startup Data}
+\begin{longtable}{|r|p{3.8in}|}
+\hline
+Use Case ID:&2\\
+\hline
+Use Case Name:&Sending Basic App Startup Data\\
+\hline
+Created By:&Mark Lerner\\
+\hline
+Last Updated By:&Mark Lerner\\
+\hline
+Date Created:&October 8, 2012\\
+\hline
+Date Last Updated:&October 24, 2012\\
+\hline
+Actors:&Users of mobile app developed by Salesforce customer\\
+\hline
+Description:&Users of the mobile app developed by Salesforce customers start up the mobile app. The mobile app collects basic information that is immediately available to the SDK, and eventually sends it to Salesforce. \\
+\hline
+Preconditions:&
+\begin{packed_enumerate}
+\item App developer is a Salesforce Customer.
+\item App developer has installed the Mobile Metrics Salesforce Package.
+\item App developer uses the Mobile Metrics SDK in their mobile app.
+\item App developer has a mobile app available on an app store.
+\item End user has downloaded and installed the mobile app.
+\end{packed_enumerate}\\
+\hline
+Postconditions:&
+\begin{packed_enumerate}
+\item Basic user information is stored on Salesforce and is accessible through the Analytics App.
+\end{packed_enumerate}\\
+\hline
+Normal Flow:&1.0 End user starting the app, data transmitted to Salesforce\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item End user opens the mobile app.
+\item Initial SDK code in mobile app collects basic available user data, such as locale, phone model, mobile app version, etc.
+\item SDK creates a connection to Salesforce, attaching identifying information such as login credentials that allow it to push data to the correct database.
+\item SDK sends the recorded data over the connection to Salesforce database.
+\end{packed_enumerate}\\
+\hline
+Alternative Flows:&1.1 No connection to Salesforce services is available until later during app usage.\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item No connection to Salesforce is available at app start-up time.
+\item Metrics are stored locally until a connection to the Salesforce service is made.
+\item Return to Flow 1.0, Step 3.
+\end{packed_enumerate}\\
+&1.2 No connection to Salesforce services is available until the next usage of the app.\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item The SDK records all cached user data into an allocated SQLite database for the app.
+\item Next time the end user starts the app, it attempts to make a connection to Salesforce.
+\item When the connection is made, all data recorded from the previous session is sent.
+\item The SQLite database is cleared of all data recorded by the SDK.
+\item Return to Flow 1.0, Step 2.
+\end{packed_enumerate}\\
+&1.3. No connection to Salesforce services is available for multiple usages of the app.\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item As 1.2 until step 2.
+\item The SDK begins to collect new user information from the current session, and stores it locally.
+\item The SDK continues to attempt to connect to Salesforce throughout.
+\item When the app closes without having connected, it stores all of the new data into the SQLite database alongside the old data.
+\item The SDK will record as much information as is permitted by the allocated size of the SQLite database.
+\item Return to Alternative Flow 1.2.
+\end{packed_enumerate}\\
+\hline
+Exceptions:&1.0.E.1 The mobile app is never able to connect to Salesforce databases. (at step 1)\\
+& %line needed for aligning enumeration
+\begin{packed_enumerate}
+\item As 1.3 until step 5.
+\item When the SDK runs out of allocated SQLite space, it deletes the earliest entered user data until the SDK has enough space to store new user data.
+\end{packed_enumerate}\\
+\hline
+Includes:&None\\
+\hline
+Priority:&High\\
+\hline
+Assumptions:&Assume that a high percentage of end users will be able to connect to Salesforce during regular app usage.\\
+\hline
+Notes and Issues:&
+\begin{packed_enumerate}
+\item The app developed by the developer will require (or at least use) internet connection to send data to Salesforce.
+\item The information gathered and sent to Salesforce during the initialization of the app is to be defined by the app developer.
+\end{packed_enumerate}\\
+\hline
+\end{longtable}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Use Case 3 - Ray Tam %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\subsubsection{\label{Installing SDK into App}UC3: Installing the SDK into a mobile app}
+\begin{longtable}{|r|p{3.8in}|}
+\hline
+Use Case ID:&3\\
+\hline
+Use Case Name:&Installing the SDK into a mobile app\\
+\hline
+Created By:&Ray Tam\\
+\hline
+Last Updated By:&Mark Lerner\\
+\hline
+Date Created:&October 8, 2012\\
+\hline
+Date Last Updated:&October 11, 2012\\
+\hline
+Actors:&Developer\\
+\hline
+Description:& The Developer wants to install the SDK into their mobile app to begin gathering user data.\\
+\hline
+Preconditions:&
+\begin{packed_enumerate}
+\item Developer is a Salesforce Cpustomer.
+\item Developer has an Android app, either in development or released.
+\end{packed_enumerate}\\
+\hline
+Postconditions:&
+\begin{packed_enumerate}
+\item Developer's mobile app uses the SDK to collect user data.
+\item Developer is able to run their mobile app and have it send data to their Salesforce account.
+\item Developer is able to view gathered metrics on Salesforce.
+\end{packed_enumerate}\\
+\hline
+Normal Flow:&1.0 Developer writes code for recording specific metrics\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item Developer downloads the Mobile Metrics SDK
+\item Developer edits existing source code for their mobile app.
+\item Developer includes the SDK into the mobile app.
+\item Developer places "Quick Start" code into the initializing method of the app. "Quick Start" will be available in help documentation.
+\item Developer edits "Quick Start" code to include credentials/ID for sending data to Salesforce. This will either include hard-coding Salesforce credentials, or including a specific database ID. This allows the SDK to send the recorded data to the right database.
+\item Developer places "recordEvent()" calls throughout their code, which tells the SDK to record specific data during the app session. The "recordEvent()" method must be given the information that the developer wants to record. Specific usage examples are presented in the help documentation.
+\item Developer packages and releases mobile app.
+\end{packed_enumerate}\\
+\hline
+Alternative Flow:&1.1 Developer only installs SDK to record basic user data. \\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item As 1.0 until step 5.
+\item Developer packages and releases mobile app.
+\end{packed_enumerate}\\
+\hline
+Exceptions:&1.0.E.1 Calls to SDK do not work\\
+&1. Compile time error describing the SDK is missing.\\
+&2. The given call to the SDK is not valid.\\
+&3. Runtime errors in an SDK handle themselves, and result in no data being logged.\\
+\hline
+Includes:&N/A\\
+\hline
+Priority:&High\\
+\hline
+Assumptions:&The developer has access to, and uses, the help documentation provided with the SDK.\\
+\hline
+Notes and Issues:&N/A.\\
+
+\hline
+\end{longtable}
+
+\newpage
+\subsubsection{\label{Record Specific Event}UC6: Record Specific Event during App Session}
+The mobile app dev would specify certain points in his code at which he would like user data to be recorded. This data would eventually be sent to the dev's Salesforce database.
+\begin{enumerate}
+\item The app dev writes "recordEvent()" calls to the SDK into specific points in their app
+\item The app dev would pass the information being recorded to "recordEvent()", letting it know what information to gather when triggered
+\item When the action "recordEvent()" call is triggered during app usage, the SDK records the specified information.
+\item When possible, the SDK sends the information to Salesforce.
+\end{enumerate}
+
+\subsubsection{\label{Save data locally when closing the app}UC7: Save data locally when closing the app}
+When the user closes an app, the data that hasn't been sent to Salesforce database will be saved locally.
+\begin{enumerate}
+\item Save only data that hasn't been sent to Salesforce database.
+\end{enumerate}
+
+\clearpage
+
+\subsection{Analytics App Use Cases}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Dressed Use Case  - Brian Middaugh %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{\label{Viewing A Historgram}UC1: Viewing a Histogram}
+\begin{longtable}{|r|p{3.8in}|}
+\hline
+Use Case ID:&1\\
+\hline
+Use Case Name:&Viewing A Histogram\\
+\hline
+Created By:&Brian Middaugh\\
+\hline
+Last Updated By:&Mark Lerner\\
+\hline
+Date Created:&October 7, 2012\\
+\hline
+Date Last Updated:&October 24, 2012\\
+\hline
+Actors:&Analyst\\
+\hline
+Description:&Analyst chooses which app they'd like to examine, chooses to view a histogram, and selects the data sets for the histogram\\
+\hline
+Preconditions:& 
+\begin{packed_enumerate}
+\item Analyst is a Salesforce Customer.
+\item Analyst has Mobile Metrics Salesforce Package installed in their Salesforce Dashboard.
+\item Analyst has logged in to the Mobile Metrics Dashboard App.
+\end{packed_enumerate}\\
+\hline
+Postconditions:&
+\begin{packed_enumerate}
+\item Analyst has seen a graphical representation of their app's popularity by age group.
+\end{packed_enumerate}\\
+\hline
+Normal Flow:&1.0 Viewing a Histogram\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item Analyst launches the Mobile Metrics Dashboard app on their Android device.
+\item Analyst selects the application they would like to examine from a list of tracked applications.
+\item The Analytics App shows the dashboard for that app.
+\item Analyst selectes "New"-$>$ "New Graph".
+\item The analytics app displays a list of currently supported graph types.
+\item Analyst selects "Histogram"
+\item The analytics app displays the Histogram configuration screen.
+\item The analyst performs a long-click on "x-axis data set".
+\item The Analytics App displays a list of valid data sets for the x-axis. The analyst can narrow down the list using a search bar.
+\item The analyst selects the desired data set for the x-axis.
+\item Analyst repeats steps 7-9 for the y axis data set.
+\item The Analytics App now displays a histogram representing the selected data sets, by default it separates the x-axis into five intervals.
+\end{packed_enumerate}
+\hline
+\newpage
+\hline
+Alternative Flow&1.1 Adjust number of intervals on the x-axis. (after step 11)\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item Analyst touches "edit". (This essentially takes the user back to step 6)
+\item The analytics application displays a window with editable options.
+\item Analyst touches the text box for "Intervals" and enters the desired number of intervals.
+\item Return to step 9
+\end{packed_enumerate}\\
+\hline
+Exceptions:&1.0.E.1 Salesforce database is unreachable (at step 1)\\
+&1.     Analytics app informs analyst that the database is unreachable.\\
+&2.     Analyst selects "OK" and is returned to select application menu.\\
+&3a.    Analyst selects a different application.\\
+&3b.    Analyst exits the application.\\
+\hline
+Includes:&Login\\
+\hline
+Priority:&High\\
+\hline
+Assumptions:&The application developer has shared names of collected data sets with the analyst.\\
+\hline
+Notes and Issues:&
+\begin{packed_enumerate}
+\item Only categorizable data (i.e. integers and enumerated types) is valid for the x-axis.
+\item Only quantifiable data is valid for the y-axis.
+\end{packed_enumerate}\\
+\hline
+\end{longtable}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Use Case 4 - Calvin Pek %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{\label{View raw analytical data}UC4: View raw analytical data}
+\begin{longtable}{|r|p{3.8in}|}
+\hline
+Use Case ID:&4\\
+\hline
+Use Case Name:&View raw analytical data\\
+\hline
+Created By:&Chun Hui Pek\\
+\hline
+Last Updated By:&Chun Hui Pek\\
+\hline
+Date Created:&October 8, 2012\\
+\hline
+Date Last Updated:&October 8, 2012\\
+\hline
+Actors:&Analyst\\
+\hline
+Description:&In the analytics app, an analyst clicks on the "View Raw Data" button to view the underlying raw data in a table format.\\
+\hline
+Preconditions:&
+\begin{packed_enumerate}
+\item Analyst has a mobile device.
+\item Analyst has a Salesforce account.
+\item Analyst has the permission to view the data.
+\item The database must contain data sent by the SDK.
+\end{packed_enumerate}\\
+\hline
+Postconditions:&
+\begin{packed_enumerate}
+\item Raw end-users’ data of the chosen mobile app is shown on the mobile device in table format.
+\end{packed_enumerate}\\
+\hline
+Normal Flow:&1.0 View user data in table format..\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item User starts mobile app.
+\item System displays the list of mobile app whose data can be view by the analyst with permission.
+\item System displays a list of supported data representation formats.
+\item User selects a certain representation format.
+\item User clicks on the representation to view the underlying data.
+\item The system displays the underlying data, with user events as the rows, and event data in the columns.
+\end{packed_enumerate}\\
+\hline
+Alternative Flows:&None\\
+\hline
+Exceptions:&1.0.E.1 The database is unreachable (after step 2)\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item System displays message: “The database for this app is unreachable.”
+\item Analyst Selects "OK".
+\item Return to step 1
+\end{packed_enumerate}\\
+\hline
+Includes:&Login\\
+\hline
+Priority:&Very Low\\
+\hline
+Assumptions:&The data is assumed to be valid. (Sent by the SDK) \\
+\hline
+Notes and Issues:&None\\
+\hline
+
+\end{longtable}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Use Case 5 - Girum Ibssa %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\clearpage
+\subsubsection{\label{Mobile Analytics App Authentication and DB Display}UC5: Mobile Analytics App Authentication and DB Display}
+\begin{longtable}{|r|p{3.8in}|}
+\hline
+Use Case ID:&5\\
+\hline
+Use Case Name:&Mobile Analytics App Authentication and DB Display\\
+\hline
+Created By:&Girum Ibssa\\
+\hline
+Last Updated By:&Girum Ibssa\\
+\hline
+Date Created:&October 8, 2012\\
+\hline
+Date Last Updated:&October 10, 2012\\
+\hline
+Actors:&Analyst\\
+\hline
+Description:&The analyst logs into the the mobile analytics app and is greeted with a list of the different “mobile apps” that he has analytics information on.  Clicking on a particular “app” that he has access to will display the analytics about that app.    \\
+\hline
+Preconditions:&
+\begin{packed_enumerate}
+\item Analyst has a Salesforce account.
+\end{packed_enumerate}\\
+\hline
+Postconditions:&
+\begin{packed_enumerate}
+\item N/A
+\end{packed_enumerate}\\
+\hline
+Normal Flow:&1.0 Request and display analytics data about mobile apps from Salesforce\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item System prompts analyst for their Salesforce username and password.
+\item Analyst entears their username and password.
+\item System displys a list of apps that the Analyst is authorized to examine.
+\item Analyst selects "log out" in the top-right corner of the screen.
+\item System prompts the analyst to confirm logout.
+\item Analyst chooses "Yes".
+\end{packed_enumerate}\\
+\hline
+Alternative Flows:&1.1 Analyst wants to view data from multiple applications. (after step 4)\\
+& 
+\begin{packed_enumerate}
+\item Return to step 3.
+\end{packed_enumerate}
+\hline
+Exceptions:&1.0.E.1 The table is no longer available (at step 3)\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item User fails to login to Salesforce – Mobile app tells the user that his username/password aren't vaild and bounces him.
+\item User does not have permission to view app data – The mobile app simply won't list the app in  question in the list of app that he wants to view data for.
+\end{packed_enumerate}\\
+\hline
+&1.0.E.2 User has provided invalid credentials (after step 2)\\
+&
+\begin{packed_enumerate}
+\item System informs analyst that the credentials provided are invalid.
+\item User presses "OK".
+\item Return to step 1.
+\end{packed_enumerate}
+\hline
+Includes:&None\\
+\hline
+Priority:&High\\
+\hline
+Assumptions:&There exist apps that the analyst is authorized to view data analytics for. \\
+\hline
+Notes and Issues:&None\\
+\hline
+
+\end{longtable}
+
+\clearpage
+\subsubsection{\label{Viewing a New Statistic}UC15: Viewing a New Statistic}
+\begin{longtable}{|r|p{3.8in}|}
+\hline
+Use Case ID:&15\\
+\hline
+Use Case Name:&Viewing a New Statistic\\
+\hline
+Created By:&Brian Middaugh\\
+\hline
+Last Updated By:&Brian Middaugh\\
+\hline
+Date Created:&October 24, 2012\\
+\hline
+Date Last Updated:&October 24, 2012\\
+\hline
+Actors:&Analyst\\
+\hline
+Description:& The analyst logs into the analytics app, selects the app they wish to view data on, configures a new statistic, and views it.\\
+\hline
+Preconditions:&
+\begin{packed_enumerate}
+\item Analyst has a Salesforce account.
+\item Analyst has logged into the Analytics app.
+\end{packed_enumerate}\\
+\hline
+Postconditions:&
+\begin{packed_enumerate}
+\item Analyst has viewed statistics about data saved in their database.
+\end{packed_enumerate}\\
+\hline
+Normal Flow:&1.0 Viewing a New Statistic\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item The app displays a list of applications that the analyst is authorized to view.
+\item The analyst selects the app they would like to view data on.
+\item The app displays the app dashboard for the selected app.
+\item The Analyst selects "New" -$>$ "New Statistic"
+\item The app displays a list of fields that are saved in the database.
+\item The analyst selects the field they would like to view data on.
+\item The application calculates some common statistics (average, median, mode etc.) and displays each statistic along with its value.
+\end{packed_enumerate}\\
+\hline
+Alternative Flows:&None\\
+\hline
+Exceptions:&1.0.E.1 The database is unreachable (after step 2)\\
+&  %line needed for aligning enumeration 
+\begin{packed_enumerate}
+\item The application informs the analyst that the database for the app is unreachable
+\item Return to step 1
+\end{packed_enumerate}\\
+\hline
+Includes:&Login\\
+\hline
+Priority:&High\\
+\hline
+Assumptions:&There exist apps that the analyst is authorized to view data analytics for. \\
+\hline
+Notes and Issues:&None\\
+\hline
+
+\end{longtable}
+\renewcommand{\enumii}{\arabic{\enumii}} %% What's this for? It makes nested enumerates use 1, 2, 3 instead of a, b, c.
+\newpage
+\subsubsection{\label{Display list of app when user opens analytics app}UC9: Select specific mobile apps to examine}
+If the user uses Mobile Metrics to track multiple apps, they will have access to each apps data through the Analytics App. When the user opens and logs in to the Analytics App, the list of tracked apps displays on the screen.
+\begin{enumerate}
+\item Only apps that have data that can be viewed by the user are displayed.
+\item Apps are displayed with their names, logos, and descriptions.
+\item If the user only has access to one apps data, this screen is not presented. Instead, the app's dashboard is automatically opened.
+\end{enumerate}
+
+\subsubsection{\label{Adding a Graph or Statistic to the List of Favorites}UC10: Adding a Graph or Statistic to the List of Favorites.}
+Once the user has configured a graph or statistic, and they are in the graph or statistic view window, the user add can the current graph or statistic configuration to their favorites. Once this has been done, the user can select this graph or statistic in their dashboard with one touch and see an updated version of that graph or statistic.
+\begin{enumerate}
+\item User touches the star icon in the top-right corner of the screen.
+\item If the view has not previously been saved, the app opens a window prompting the user to enter a name for the graph or statistic.
+\item User enters a name and presses  "OK".
+\item The app returns to the graph or statistic view and displays a notification that the graph or statistic has been added to their favorites.
+\end{enumerate}
+Note: If the name the user enters in step 3 already exists in the users favorites, the app shall warn the user that the name is already being used, and shall ask the user to enter a different name for the new item.
+
+\renewcommand{\enumii}{\arabic{\enumii}}
+\subsubsection{\label{Viewing a Favorite Graph or Statistic}UC11: Viewing a Favorite Graph or Statistic}
+Once the user has at least one graph or statistic configuration saved in their favorites, that graph or statistic will show up in the favorites section of the dashboard. Selecting one of these will take the user to the graph or statistic viewing window with an updated version of that graph or statistic.
+\begin{enumerate}
+\item User selects the graph or statistic they wish to view from the Favorites section. (They may have to scroll sideways through their favorites to find it)
+\item The app recalculates the graph or statistic with the same configuration as it had when the user most recently favorited.
+\end{enumerate}
+
+\renewcommand{\enumii}{\arabic{\enumii}}
+\subsubsection{\label{Saving a Graph or Statistic}UC12: Saving a Graph or Statistic}
+Once the user has configured a graph or statistic, and they are viewing the graph or statistic window, they can save the graph or statistic they are viewing.
+\begin{enumerate}
+\item User selects "Save" at the bottom of the window.
+\item The application prompts the user to name the graph or statistic.
+\item User enters a name and selects "OK"
+\item The application adds the graph or statistic configurations to the user's saved graphs and statistics under the name the user entered.
+\end{enumerate}
+Note: If the name the user enters in step 3 already exists in the users saved graphs and statistics, the app shall warn the user that the name is already being used ask the user if they would like to overwrite the item with the same name or enter a different name for the new item.
+
+\renewcommand{\enumii}{\arabic{\enumii}}
+\subsubsection{\label{Viewing a Saved Graph or Statistic}UC13: Viewing a Saved Graph or Statistic}
+The user can regenerate a graph or statistic from any saved configurations.
+\begin{enumerate}
+\item User selects "Saved" at the bottom of the app dashbolard.
+\item The application displays a two-column view listing ail the graph and statistic configurations previously saved by the user.
+\item User selects the graph or statistic configuration they wish to view. (They may have to scroll through the saved configurations to find the one they want)
+\item The application recalculates the graph or statistic with the saved configuration and displays it.
+\end{enumerate}
+
+\renewcommand{\enumii}{\arabic{\enumii}}
+\subsubsection{\label{Sending a Graph image or Statistical Data to an email address}UC14: Sending Graph or Statistical data to a recipient through multiple protocols}
+Once the user has configured a graph or statistic, and they are viewing the graph or statistic window, they can choose to send the data to a recipient through multiple protocols, including standard email, Salesforce Chatter, and SMS/MMS.
+\begin{enumerate}
+\item User selects "send" at the bottom of the window.
+\item The app prompts the user with a list of supported sending protocols.
+\item User selects a protocol to send the data through.
+\item The app shows optiosn of what to send, and allows the user to select who to send it to.
+\item User enters a recipient and selects "OK".
+\item The application sends the requested data to the given recipient.
+\end{enumerate}
+Note: Data that can be sent includes an image of any graph being shown on screen, or formatted text representing the statistic shown on screen, as well as a CVS file with the data required to replicate the graph/statistic shown.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Other use cases %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Other Use Cases}
+\subsubsection{\label{Installing the Mobile Metrics Salesforce Package}UC8: Install the Mobile Metrics Salesforce Package from Salesforce App Exchange}
+When a mobile app developer wants to start working with the Mobile Metrics service by Salesforce, the developer (assuming they already have a Salesforce account) will need to add the Mobile Metrics Salesforce Package to their Salesforce account from the App Exchange. This will set up new databases for their users data to be sent to, as well as create any necessary rules on Salesforce needed for the service to work.
+\begin{enumerate}
+\item If the mobile app developer doesn't have one already, they will register for a Salesforce account.
+\item The mobile app developer visits the App Exchange on Salesforce, and installs into their profile the Mobile Metrics Salesforce Package.
+\item The developer then follows the simple on-screen instructions presented with the package.
+\item For further documentation and information, the developer would view the documentation that accompany the packages.
+\end{enumerate}
+
+
+
+%%%%% Template for non-fleshed out Use Cases %%%%%
+
+%\subsection{\label{Whatever the next one is}Use Case 2: Whatever the next one is}
+%This is a casual use-case.  Note that there is a label in the LaTeX so you can refer
+%to it as being in section~\ref{Whatever the next one is} on page~\pageref{Whatever the next one is}.
+%\begin{enumerate}
+%\item This is step one.
+%\item This is step two.
+%\item This is step three.
+%\end{enumerate}
+
+%%%%% End Template %%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% System Features %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{System Features}
+%This template illustrates organizing the functional requirements for the product by system features, the major services provided by the product. You may prefer to organize this section by use case, mode of operation, user class, object class, functional hierarchy, or combinations of these, whatever makes the most logical sense for your product.
+%\subsection{System Feature 1}
+%Don't really say ``System Feature 1.'' State the feature name in just a few words.
+%\subsubsection{Description and Priority}
+%Provide a short description of the feature and indicate whether it is of High, Medium, or Low priority. You could also include specific priority component ratings, such as benefit, penalty, cost, and risk (each rated on a relative scale from a low of 1 to a high of 9).
+%\subsubsection{Stimulus/Response Sequences}
+%List the sequences of user actions and system responses that stimulate the behavior defined for this feature. These will correspond to the dialog elements associated with use cases.
+%\subsubsection{Functional Requirements}
+%Itemize the detailed functional requirements associated with this feature. These are the software capabilities that must be present in order for the user to carry out the services provided by the feature, or to execute the use case. Include how the product should respond to anticipated error conditions or invalid inputs. Requirements should be concise, complete, unambiguous, verifiable, and necessary. Use "TBD" as a placeholder to indicate when necessary information is not yet available.
+
+%Each requirement should be uniquely identified with a sequence number or a meaningful tag of some kind.
+
+%\begin{enumerate}
+%\item REQ-1:
+%\item REQ-2:
+%\end{enumerate}
+
+%template bitches! DO NOT TOUCH
+\newcommand{\systemfeature}[5]{
+\begin{flushleft}
+\subsection{SF-#1 : #2}
+\begin{tabular}{p{1in} p{4in}}
+\textbf{Name} & #2 \tabularnewline
+\textbf{Priority} & #3 \tabularnewline
+\textbf{Component} & #4 \tabularnewline
+\textbf{Description} & #5 \tabularnewline
+\end{tabular}
+\end{flushleft}
+\vspace{20pt}
+}
+% end DO NOT TOUCH
+
+%use this to make new system features
+%\systemfeature{int number}
+%{name of system feature}
+%{priority}
+%{description}
+
+\systemfeature{1}
+{Log in user name and password}
+{High}
+{Dashboard}
+{In login screen, the user must enter their Salesforce user name and password to access their data.}
+
+\systemfeature{2}
+{Create Graph}
+{High}
+{Dashboard}
+{Allow user to create and edit a specific type of graph from a list.}
+
+\systemfeature{3}
+{Display Graph}
+{High}
+{Dashboard}
+{Render graph generated from recorded data. The graph can either be newly configured, a saved configuration, or a favorited configuration.}
+
+\systemfeature{4}
+{Create Statistic}
+{High}
+{Dashboard}
+{Allow user to create a specific type of statistic from a list.}
+
+\systemfeature{5}
+{Display Statistic}
+{High}
+{Dashboard}
+{Display statistics generated from recorded data. The statistic can either be newly configured, a saved configuration, or a favorited configuration.}
+
+\systemfeature{6}
+{App Metrics selection}
+{High}
+{Dashboard}
+{On metrics app open, a list of apps user has permissions to view metrics for.  Should only appear if user has more than one app to view metrics for.  If you do not have permission to view any metrics, then it should tell you.}
+
+\systemfeature{7}
+{Editing a graph}
+{High}
+{Dashboard}
+{The system shall allow a user to return to the graph editing screen from the graph view screen at any time to change the graph configuration.}
+
+\systemfeature{8}
+{Editing a statistic}
+{High}
+{Dashboard}
+{The system shall allow a user to return to the statistic editing screen from the statistic view screen at any time to change the statistics configuration.}
+
+\systemfeature{9}
+{Saving a Graph}
+{High}
+{Dashboard}
+{When viewing a graph within the Mobile Metrics Dashboard, the option to save the graph configuration is presented. If saved, the necessary graph configuration data is saved and given a name, and is made available from the "Saved" and "App Dashboard" screens. Further, a miniaturized image of the graph will be saved for icon usage.}
+
+\systemfeature{10}
+{Record specific event during app session}
+{High}
+{SDK}
+{A call to the SDK with "recordEvent()" records data at specific points in the code specified by the mobile app developer. This data is recorded and sent to a Salesforce database when possible.}
+
+\systemfeature{11}
+{Collect start-up data}
+{Medium}
+{SDK}
+{When the end-user opens the mobile app that uses Mobile Metrics, the SDK will collect available user information during app startup. The SDK will provide an API for this initialization -- start() -- that will collect basic data and prepare to send it to Salesforce on app close.}
+
+
+\systemfeature{12}
+{Favoriting a Data View}
+{Medium}
+{Dashboard}
+{When displaying a data view (either a graph or a statistic), the user is able to “favorite” a data view by touching a star on the page. Doing so allows the user to name the data view (if it isn’t already saved and named), and adds the data view to a list of “Favorites”.}
+
+\systemfeature{13}
+{Unfavoriting a Data View}
+{Medium}
+{Dashboard}
+{When displaying a favorited data view, the user is able to remove the data view from their favorites list by touching the star on the data view page.}
+
+\systemfeature{14}
+{Upload all currently recorded events}
+{Medium}
+{SDK}
+{During the execution of the app, if the SDK has recorded any events, the developer can force the SDK to upload all events to Salesforce. This is similar to flushing a buffer of events.}
+
+\systemfeature{15}
+{Automatic data set filtering}
+{Medium}
+{Dashboard}
+{When creating a new graph, the system shall only suggest value types which are valid input sets for that graph type. For example the vertical axis of a bar chart must representable as a number (i.e a quantity or rate) and not an enumerated type (i.e red, blue, green). }
+
+\systemfeature{16}
+{Store data locally during Nonconnectivity}
+{Low}
+{SDK}
+{In the case that the SDK cannot connect to Salesforce when it needs to send recorded data, the SDK will store the information locally on the phone, in a SQLite database. If an opportunity is presented to later upload the information to Salesforce, the SDK will do so. Prioritization of storing data will be based on the recency of the data}
+
+\systemfeature{17}
+{Customize start-up data collection}
+{Low}
+{SDK}
+{The app developer will be able to customize what default data is collected on app initialization. A default list will be provided, and individual data items can be removed as necessary. See SF-8.}
+
+\systemfeature{18}
+{View Raw Data}
+{Very Low}
+{Dashboard}
+{Allows the user to view raw end-user data in a table format}
+
+\systemfeature{19}
+{Notified Delays in Rendering}
+{Very Low}
+{Dashboard}
+{In the event that more than 1 minute is required between requesting a graph and rendering it, the Dashboard app will notify the user of the delay, and offer to notify the user when the graph is ready. The user will also have the option of cancelling the request at any time.}
+
+
+\subsubsection{Functional Requirements}
+\begin{enumerate}
+\item REQ-1: When the Mobile Metrics SDK successfully connects to Salesforce, having sent the necessary credentials to verify which database to send the data to, the SDK shall
+\begin{enumerate}
+\item send any queued data currently stored locally on the Android device to Salesforce,
+\item gather user data from the Android device, where the data to collect is defined by the app developer,
+\item send newly gathered user data to Salesforce, and
+\item clear local App storage of all data sent to Salesforce.
+\end{enumerate} 
+\end{enumerate}
+
+\subsection{SF2: Displaying User Data}
+\subsubsection{Description and Priority}
+This Medium priority feature allows the developer or authorized user to view data in a graphical representation through charts and graphics. This information would be viewed through the Mobile Analytics app.
+\subsubsection{Stimulus/Response Sequences}
+\begin{enumerate}
+\item The user accesses the Mobile Analytics app.
+\item The user is shown a list of all mobile app data they have access to, if multiple are available.
+\item The user selects which app to view data from.
+\item The user selects a particular view for displaying the data.
+\item The user is shown related data that can be viewed in that form.
+\item The user selects what data to view.
+\item The Mobile Analytics app dislpays the information selected in the format chosen by the app user.
+\end{enumerate}
+
+\subsubsection{Functional Requirements}
+\begin{enumerate}
+\item REQ-1: The option to view raw data user data will be available, in a tabular format.
+\begin{enumerate}
+\item The system shall only show the data of the seleceted app.
+\item The raw data is displayed in table form, with each data item recorded as an individual row.
+\item The table shall remain visible until the user exits.
+\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% External Interface Requirements %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{External Interface Requirements}
+\subsection{User Interfaces}
+%Describe the logical characteristics of each interface between the software product and the users. This may include sample screen images, any GUI standards or product family style guides that are to be followed, screen layout constraints, standard buttons and functions (e.g., help) that will appear on every screen, keyboard shortcuts, error message display standards, and so on. Define the software components for which a user interface is needed. Details of the user interface design should be documented in a separate user interface specification.
+There is only one major UI needed for this project -- the UI for the metrics analysis mobile app. The most obvious constraints to this UI, as well as the most exciting aspects, are that it is built for use on a mobile Android device.
+\newline
+
+The UI would be built to match current Salesforce Dashboard design as much as possible. The main screens shown include:
+\begin{itemize}
+\item Login Screen
+\item List of mobile apps linked to the users SalesFoce account
+\item List of available views for analyzing user data collected from a partcular mobile app
+\item Dialog screen for creating customized dashboards/views of the user data
+\end{itemize}
+\subsection{Hardware Interfaces}
+%Describe the logical and physical characteristics of each interface between the software product and the hardware components of the system. This may include the supported device types, the nature of the data and control interactions between the software and the hardware, and communication protocols to be used.
+The devices supported by Mobile Metrics SDK include all Android OS devices that are supported by the app that the SDK is used in.\\
+The devices supported by the metrics analysis mobile app include Android OS mobile phones from Android OS version 2.3 up.
+\subsection{Software Interfaces}
+%Describe the connections between this product and other specific software components (name and version), including databases, operating systems, tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each. Describe the services needed and the nature of communications. Refer to documents that describe detailed application programming interface protocols. Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.
+\emph{This section is a work in progress}\\
+The Mobile Metrics service will be built to interact with many software systems. The largest, and most obvious, of these is the Salesforce platform, which will be used to store user data, and to provide API to place the data in the database and to retrieve the data. Besides the Salesforce platform, the Mobile Metrics service would use
+\begin{itemize}
+\item Android OS, versions 2.3+
+\item Salesforce Mobile APIs
+\item Database.com databases
+\begin{itemize}
+\item Note: the schema of the database will be predefined and installed through the Mobile Metrics Salesforce Package delivered.
+\end{itemize}
+\item APEX APIs for pulling data from the database to the Analytc App
+\item Google Cloud Messaging servers for sending push notifications from the APEX controllers of the database to the phone
+\item (Possibly) Localytics open-source SDK
+\end{itemize}
+\subsection{Communications Interfaces}
+%Describe the requirements associated with any communications functions required by this product, including e-mail, web browser, network server communications protocols, electronic forms, and so on. Define any pertinent message formatting. Identify any communication standards that will be used, such as FTP or HTTP. Specify any communication security or encryption issues, data transfer rates, and synchronization mechanisms.
+\begin{enumerate}
+\item Encrypted JSON for transfering user data from the SDK to Salesforce databases.
+\item Encrypted JSON for transfering user data fom the Salesforce databases to the Mobile Analytics app.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Nonfunctional Requirements %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Other Nonfunctional Requirements}
+\emph{This section is a work in progress}
+\subsection{Performance Requirements}
+%If there are performance requirements for the product under various circumstances, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specify the timing relationships for real time systems. Make such requirements as specific as possible. You may need to state performance requirements for individual functional requirements or features.
+\begin{enumerate}
+\item If the initial connection to Salesforce during the initialization of the mobile app fails, the Mobile Metrics SDK shall devote no more than 5\% of the mobile apps allocated resources (processing power, local storage, etc) to attempting to establish a connection to Salesforce.
+%
+%I would like to see some performance requirements around generating the charts, how long the app will/can wait, etc.
+%
+\item The Mobile Metrics SDK will use no more than 20\% of the database space allocated to the mobile app for storing data records.
+\item The Mobile Metrics SDK will send no more than 1 bulk set of records to the Salesforce database, unless a record flush is requested by the user.
+\item The Mobile Metrics SDK shall not take more than 100ms to complete any blocking operations.
+\item The Mobile Metrics Dashboard will wait no more than 1 minute between when the user requests to view a specific graph and when that graph is rendered.
+\item The Mobile Metrics Dashboard will not download data packets of larger than 250KB of data to view a particular graph or statistic.
+
+\end{enumerate}
+%\subsection{Safety Requirements}
+%Specify those requirements that are concerned with possible loss, damage, or harm that could result from the use of the product. Define any safeguards or actions that must be taken, as well as actions that must be prevented. Refer to any external policies or regulations that state safety issues that affect the product's design or use. Define any safety certifications that must be satisfied.
+\subsection{Security Requirements}
+%Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements. Refer to any external policies or regulations containing security issues that affect the product. Define any security or privacy certifications that must be satisfied.
+The collection of user data always warrants discussion of privacy issues and protection of data. Firstly, only user data that is accessible through the Android OS, as well as user data that is collected during the use of the app, will be sent to Salesforce. Secondly, besides the automated collection of user data done by the SDK, any information sent to Salesforce through the SDK is the responsibility of the app developer. Help documentation will include a section detailing caution that should be taken when dealing with user data, but ultimately Salesforce cannot discriminate against information sent to it.
+%\subsection{Software Quality Attributes}
+%Specify any additional quality characteristics for the product that will be important to either the customers or the developers. Some to consider are: adaptability, availability, correctness, flexibility, interoperability, maintainability, portability, reliability, reusability, robustness, testability, and usability. Write these to be specific, quantitative, and verifiable when possible. At the least, clarify the relative preferences for various attributes, such as ease of use over ease of learning.
+%TBD
+%\begin{enumerate}
+%\item Adaptability
+%\item Availability
+%\item Correctness
+%\item Flexibility
+%\item Interoperability
+%\item Maintainability
+%\item Portability
+%\item Reliability
+%\item Reusability
+%\item Robustness
+%\item Testability
+%\item Usability
+%\end{enumerate}
+
+%\clearpage
+%\section{Other Requirements}
+%Define any other requirements not covered elsewhere in the SRS. This might include database requirements, internationalization requirements, legal requirements, reuse objectives for the project, and so on. Add any new sections that are pertinent to the project.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Glossary %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\appendix
+\section{Glossary}
+%Define all the terms necessary to properly interpret the SRS, including acronyms and abbreviations. You may wish to build a separate glossary that spans multiple projects or the entire organization, and just include terms specific to a single project in each SRS.\\ \\
+\begin{flushleft}
+\textbf{End-User} Person who uses an app created by the Developer.\newline
+
+\textbf{Mobile Metrics SDK} Set of tools that allow Developer to push End-User data on to the Salesforce database.\newline
+
+\textbf{Developer} App creator who is using our SDK to gather data.\newline
+
+\textbf{Analyst} Someone authorized to access data in the database who is not the app Developer. \newline
+
+\textbf{Analytics App} Application that allows the Analyst and Developers to view data in the database.\newline
+
+\textbf{Mobile Metrics Dashboard} Android app which displays analytics stored in Salesforce. \newline
+
+\textbf{API} Documentation for the SDK \newline
+
+\textbf{App} Mobile aplication\newline
+
+\textbf{App Dashboard} Screen on the Analytics App that shows data about one particular App.\newline
+
+\textbf{Mobile Metrics Salesforce Package} The package that users will install on their Salesforce accounts  from the Salesforce App exchange to use the Mobile Metrics system.
+\end{flushleft}
+\section{Analysis Models}
+Please see our Horizontal Prototype, as well as our Architecture document, for more information on analysis models.
+%TBD
+%Optionally, include any pertinent analysis models, such as data flow diagrams, class diagrams, state-transition diagrams, or entity-relationship diagrams.
+
+\section{Issues List}
+Note: This is a dynamic list of the open requirements issues that remain to be resolved, including TBDs, pending decisions, information that is needed, conflicts awaiting resolution, and the like.
+\end{document}
