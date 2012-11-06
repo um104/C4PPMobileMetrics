@@ -1,0 +1,220 @@
+\documentclass[12pt,oneside,letterpaper]{article}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\begin{document}
+\setlength{\parindent}{0pt}
+%TODO decide on official project name
+\title{\bfseries Mobile Metrics: \\Vision and Scope}
+
+\author {
+\large{Channel 4++}\\
+\emph{Computer Science Department}\\
+\emph{California Polytechnic State University}\\
+\emph{San Luis Obispo, CA USA}\\
+}
+
+\date{October 4, 2012}
+\maketitle \thispagestyle{empty}
+
+\pagebreak
+\tableofcontents
+
+\addcontentsline{toc}{section}{Credits}
+
+\section*{Credits}
+\begin{tabular}{|l|l|p{2.5in}|l|}
+\hline
+\textbf{Name}&\textbf{Date}&\textbf{Role}&\textbf{Version}\\
+\hline
+Brian Middaugh&October 3, 2012&Document Owner, Editor&1.0\\
+\hline
+Mark Lerner&October 3, 2012&Author: Vision of the Solution&1.0\\
+\hline
+Ray Tam&October 3, 2012&Author: Scope and Limitations&1.0\\
+\hline
+Girum Ibssa&October 3, 2012&Author: Business Requirements&1.0\\
+\hline
+Chun Hui Pek&October 3, 2012&Author: Business Context&1.0\\
+\hline
+\end{tabular}
+
+\addcontentsline{toc}{section}{Revision History}
+
+\section*{Revision History}
+\begin{tabular}{|l|l|p{2.5in}|l|}
+\hline
+\textbf{Name}&\textbf{Date}&\textbf{Reason for Changes}&\textbf{Version}\\
+\hline
+Brian Middaugh&October 4, 2012&Initial baseline to be approved by Customer&1.0\\
+\hline
+\end{tabular}
+
+
+\newpage
+%%%%%%%%%%%%----Girum----%%%%%%%%%%%%
+%%%%%%% BUSINESS REQUIREMENTS %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Business Requirements}
+\subsection{Background}
+Salesforce is a large software enterprise that specializes in many areas of software, including SaaS , cloud database and computing services, CRM, social enterprise solutions and more. SalesForce has recently started extending their services to the mobile device market, but there is still more work to be done in this area.
+
+\subsection{Business Opportunity}
+\begin{enumerate}[label = {\textbf{BOP-\arabic*}}, align = left, leftmargin = *, labelsep = 15pt]
+\item App development is at an all-time high, and there are more tools for small app developers to create their apps than ever before. These developers need to track their customer's app usage, and what better service to do this with than SalesForce?
+\item Many of SalesForce's customers are app developers that utilize the business and data management solutions SalesForce provides. While SalesForce does offer mobile data processing and analysis, adding a simple-to-use option would complete SalesForce's suite for mobile application developers.
+\end{enumerate}
+
+\subsection{Business Objectives and Success Criteria}
+\begin{enumerate}[label = {\textbf{BOS-\arabic*}}, align = left, leftmargin = *, labelsep = 15pt]
+\item Publish an SDK for mobile app developers to simply store user data on SalesForce.
+    \begin{enumerate}[label = {\textbf{BOS-\arabic{enumi}.\arabic*}}, align = left, leftmargin = *, labelsep = 15pt]
+    \item Provide an open-source solution for mobile application developers that is simple and straightforward to use.
+    \item Have current and new customers easily add mobile analytics to the solution suite provided to them by SalesForce.
+    \end{enumerate}
+\item Publish a robust “SalesForce Analytics” application, which will either be a mobile app, or a mobile-friendly web app (TBD) for developers to view the user data they’ve collected. 
+\item Create a sample mobile app that uses our SDK as an example for app developers to learn from.
+\end{enumerate}
+
+\subsection{Customer or Market Needs}
+\begin{enumerate}[label = {\textbf{CN-\arabic*}}, align = left, leftmargin = *, labelsep = 15pt]
+\item A simple interface for mobile software application developers to send collected user data to SalesForce
+\item An easy way to view collected user information on the go
+\end{enumerate}
+\subsection{Business Risks}
+The competition present in the mobile analytics space is strong, with specific solutions provided by Google, Facebook, Flurry, and Mixpanel. 
+\newpage
+
+%%%%%%%%%%%----mlerner----%%%%%%%%%%%%
+%%%%%% VISION OF THE SOLUTION %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Vision of the Solution}
+\subsection{Vision Statement}
+For mobile app developers who want to easily record user data and analyze metrics, the Mobile Metrics by SalesForce is a mobile metrics recorder and mobile metrics analysis tool that provides an easy-to-use API with a very shallow learning curve, as well as a mobile-friendly website for viewing and analyzing recorded user metrics. Unlike the current SalesForce mobile API, our product will provide a much simpler API that allows developers to simply push any recorded metrics to a pre-fabricated SalesForce database, with tailored analytics tools helping developers view their users usage data.
+
+\subsection{Major Features}
+\begin{enumerate}[label = {\textbf{MF-\arabic*}}, align = left, leftmargin = *, labelsep = 15pt]
+\item Mobile SDK for Android that simplifies existing SalesForce APIs, providing easy-to-use methods to send data and related metadata to a SalesForce database. Developers will only need a few lines of code to get started.
+\item Structured database where user data is sent and stored, allowing for generic data input and analysis, and for third-party database interaction applications.
+\item Mobile-friendly website specifically tailored to analyze data recorded using the Mobile SDK. Displays data in the SalesForce database, relating usage statistics to each other using type-specific comparisons.
+\item Detailed documentation on how to use the mobile SDK, with a simple and fast how-to that allows users to start using the service with a simple code injection.
+\end{enumerate}
+
+\subsection{Assumptions and Dependencies}
+
+\subsubsection{Assumptions}
+\begin{enumerate}[label = {\textbf{ASM-\arabic*}}, align = left, leftmargin = *, labelsep = 15pt]
+\item New users will only need to write a few lines of code to get started
+\item Data being recorded is stored as different types, provided by SalesForce
+\item Less experienced app developers can use this new mobile SDK easily
+\item Customers will value a mobile app analytics display rather than a desktop analytics dislpay
+\item Customers will handle the gathering of metrics to record on their own -- our SDK will allow them to send their recorded data into a SalesForce database
+\item Some component of the project is to be released on the SalesForce App Exchange, whether it's the SDK, the database schema, the new types developed for the project, or the mobile analytics app.
+\end{enumerate}
+
+\subsubsection {Dependencies}
+\begin{enumerate}[label = {\textbf{DPN-\arabic*}}, align = left, leftmargin = *, labelsep = 15pt]
+\item Android OS and related tools for developing Android SDKs
+\item Database.com access APIs
+\item SalesForce Mobile APIs
+\item SalesForce prefabricated data types
+\item sites.SalesForce.com for making a mobile-friendly site (depending on choice of mobile or web app)
+\end{enumerate}
+
+\newpage
+%%%%%%%%%%%%%%----rmtam----%%%%%%%%%%%
+%%%%%%%%%%% SCOPE AND LIMITATIONS %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Scope and Limitations}
+\subsection{Scope of Initial and Subsequent Releases}
+%The types of data that should be gathered are: demographics of users, gender, age, location, login frequency, login times, friend data (for facebook), and exception logs. The library should allow the user to gather any type of metric they want to send.\newline\newline 
+
+%the ampersand seperates columns within the table
+\begin{tabular}{l p{2.0in} p{2.0in}}
+\hline
+\textbf{Feature}&\textbf{Release 1}&\textbf{Release 2}\\
+\hline
+MF-1&Partially Implemented& Fully Implemented\\
+MF-2& Partially Implemented& Fully Implemented\\
+MF-3&Not Implemented& Fully Implemented\\
+\hline
+\end{tabular}\newline\newline
+
+%Uses a wapper around the mobile SDK to access database information. 
+
+\subsection{Limitations and Exclusions}
+\begin{enumerate}[label = {\textbf{LI-\arabic*}}, align = left, leftmargin = *, labelsep = 15pt]
+\item Our SDK does not attempt to automatically determine data that is significant and should be collected. The SDK is simply a set of tools that makes it easy for developers to specify what data they want stored.
+\item Must be packaged on the SalesForce AppExchange.
+\end{enumerate}
+
+\newpage
+
+
+%%%%%%%%%%%%%%----cpek----%%%%%%%%%%%%%
+%%%%%%%%%%% BUSINESS CONTEXT %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Business Context}
+\newcommand{\rr}{\raggedright}
+\newcommand{\tn}{\tabularnewline}
+
+\subsection{Stakeholder Profiles}
+\begin{tabular}{|p{1in}|p{1in}|p{1in}|p{1in}|p{1in}|}
+\hline
+\rr \textbf{Stakeholder}&\rr \textbf{Major Value}&\rr \textbf{Attitudes}&\rr \textbf{Major Interests}&\rr \textbf{Constraints} \tn 
+\hline
+\rr SalesForce.com&\rr Provide project requirements&\rr Not satisfied with the existing data gathering tools&\rr SDK that stores user data and displays them on another application (either mobile or facebook app)&\rr Business Rule\tn
+\hline
+\rr Developers who use the SDK&\rr End users of our SDK &\rr None identified
+&\rr Simplified SDK&\rr None identified\tn
+\hline
+\rr Users of the data analytics application&\rr End users of data analytics app&\rr None identified&\rr Data analytics application&\rr None identified\tn
+\hline
+\rr Channel 4++&\rr Develop the SDK and data analytics application&\rr Strong commitment on developing high quality product&Product requirements&\rr None identified\tn
+\hline
+\end{tabular}
+
+%TODO section needs clarification
+\subsection{Project Priorities}
+\begin{tabular}{|p{0.7in}|p{1.4in}|p{1.4in}|p{1.5in}|}
+\hline
+&\rr \textbf{Driver}&\rr \textbf{Constraint}&\rr \textbf{Degree of Freedom}\tn
+\hline
+\rr Schedule&\rr 5 iteration reports due on 10/5, 10/12, 10/26, 11/9, and 11/30&\rr n/a &\rr Minor schedule adjustments are allowed as long as iteration reports and major features are delivered on time.\tn
+\hline
+\rr Features&\rr Major features must be completed according to release schedule &\rr Developer time is limited (approx. 8-12 hrs./wk. per developer)&\rr Low-priority features can be excluded or altered if necessary.\tn
+\hline
+\rr Quality&\rr Testing and code coverage must meet SalesForce standards&\rr Delays in development phases could overrun into test phases&\rr n/a\tn
+\hline
+\rr Cost&\rr Complete project with an average of 8-12 hrs/wk spent per developer&\rr Major project delays could increase time worked by developers&\rr n/a\tn
+\hline
+\rr Staff&\rr TBD&\rr n/a&\rr n/a\tn
+\hline
+\end{tabular}
+\newpage
+
+\subsection{Operating Environment}
+\begin{enumerate}[label = {\textbf{OE-\arabic*}}, align = left, leftmargin = *, labelsep = 15pt]
+\item Mobile device native environment or web environment (TBD).
+\item Data collection can occur on many devices simultaneously, and in many geographic locations, limited only by access to SalesForce servers.
+\item Data analytics can be viewed from any mobile device, limited only by access to SalesForce servers.
+\item Access to application user data will be restricted to the app's creators and authorized affiliates.
+\end{enumerate}
+
+
+\newpage
+
+%%%%%%%%%%%%%%----Girum----%%%%%%%%%%%%%
+%%%%%%%%%%% COMPETITIVE ANALYSIS %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Competitive Analysis}
+\subsection{Overview}
+
+SalesForce.com is not the first player in the mobile analytics space. Other applications already provide solutions for gathering mobile metrics, storing metrics in the cloud, and analyzing mobile application user data. However, given SalesForce.com's massive presence in SaaS and cloud solutions, as well as their already-developed mobile SDK, simplified mobile metrics from SalesForce would solidify SalesForce's position in the mobile development space.
+\subsection{Mobile Analytics}
+%clarification?
+For mobile analytics, Google Analytics will either be the foundation of how we draw our analytics data or be our biggest competitor for Android
+\url{https://developers.google.com/analytics/devguides/collection/android/} and iOS \url{https://developers.google.com/analytics/devguides/collection/ios/}.  Google Analytics is available for free. Beyond Google Analytics, there are several third-party analytics solutions, such as Flurry and Mixpanel: \url{http://list.ly/list/Ff-list-of-mobile-analytics-tools}.
+\subsection{Facebook Analytics}
+For Facebook analytics, Facebook has a metrics tool called Facebook Insight \url{https://developers.facebook.com/docs/insights/}.  Facebook Insight is also free.
+\end{document}
+
