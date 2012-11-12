@@ -65,7 +65,7 @@ import android.text.format.DateUtils;
      * Before releasing a production version of an app, this should be set to false for privacy and performance reasons. When
      * logging is enabled, sensitive information such as the device ID may be printed to the log.
      */
-    public static boolean IS_LOGGABLE = false;
+    public static boolean IS_LOGGABLE = true;
 
     /**
      * Flag indicating whether runtime method parameter checking is performed.

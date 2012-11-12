@@ -8,6 +8,38 @@
 
 package com.localytics.android;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.UUID;
+import java.util.zip.GZIPOutputStream;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.Manifest.permission;
 import android.content.ContentValues;
 import android.content.Context;
@@ -24,32 +56,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.UUID;
-import java.util.zip.GZIPOutputStream;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.localytics.android.JsonObjects.BlobHeader;
 import com.localytics.android.LocalyticsProvider.ApiKeysDbColumns;
@@ -238,6 +244,10 @@ public final class LocalyticsSession
      * accessing this field from within the {@link #mSessionHandler}.
      */
     private static Map<String, Boolean> sIsUploadingMap = new HashMap<String, Boolean>();
+    
+    private static String access_token;
+    
+    private static String instance_url;
 
     /**
      * Constructs a new {@link LocalyticsSession} object.
@@ -260,6 +270,47 @@ public final class LocalyticsSession
             throw new IllegalArgumentException("key cannot be null or empty"); //$NON-NLS-1$
         }
 
+        
+        Log.d("Start login", "Staring process");
+        
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(UploadHandler.LOGIN_URL);
+        
+        try {
+            // Add your data
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            
+            nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
+            nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG98XJQQAccJQdkGlSFiOGU4hqhO5WNZV_N3nvLTSq9VE8BHMA1jjA7TROYzERt7rFdWTmoWPIlo3epm.Ti"));
+            nameValuePairs.add(new BasicNameValuePair("client_secret", "7839900133621914482"));
+            
+            nameValuePairs.add(new BasicNameValuePair("username", "cpek@calpoly.edu"));
+            nameValuePairs.add(new BasicNameValuePair("password", "xiaobai91fQzQWS5A2KPJ3Q898DtGRyNy"));
+            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            
+            ResponseHandler<String> handler = new BasicResponseHandler();
+            // Execute HTTP Post Request
+            String response = client.execute(post, handler);
+            
+            Log.d("Response", response);
+            
+            JSONObject jobj = new JSONObject(response);
+            access_token = jobj.getString("access_token");
+            instance_url = jobj.getString("instance_url");
+            
+            Log.d("Access_Token", access_token);
+            Log.d("Instance_url", instance_url);
+            
+        } catch (ClientProtocolException e) {
+            Log.d("Error Message: ClientProtocolException\n", e.toString());
+        } catch (IOException e) {
+            Log.d("Error Message: IOException\n", e.toString());
+        } catch (JSONException e) {
+            Log.d("Error Message: JSONException\n", e.toString());
+        }
+        
+        Log.d("End Login proess", "End process");
+        
         /*
          * Get the application context to avoid having the Localytics object holding onto an Activity object. Using application
          * context is very important to prevent the customer from giving the library multiple different contexts with different
@@ -282,6 +333,8 @@ public final class LocalyticsSession
          * However this implementation is safe, as the Handler will process this initialization message before any other message.
          */
         mSessionHandler.sendMessage(mSessionHandler.obtainMessage(SessionHandler.MESSAGE_INIT));
+        
+        
     }
 
     /**
@@ -1845,8 +1898,10 @@ public final class LocalyticsSession
         /**
          * Localytics upload URL, as a format string that contains a format for the API key.
          */
-        private final static String ANALYTICS_URL = "http://analytics.localytics.com/api/v2/applications/%s/uploads"; //$NON-NLS-1$
-
+        //private final static String ANALYTICS_URL = "http://analytics.localytics.com/api/v2/applications/%s/uploads"; //$NON-NLS-1$
+        private final static String UPDATE_URL = "https://na1.salesforce.com/services/data/v20.0/sobjects/Account/001D000000IroHJ";
+        private final static String LOGIN_URL = "https://login.salesforce.com/services/oauth2/token";
+        
         /**
          * Handler message to upload all data collected so far
          * <p>
@@ -1938,7 +1993,7 @@ public final class LocalyticsSession
                                     builder.append('\n');
                                 }
 
-                                if (uploadSessions(String.format(ANALYTICS_URL, mApiKey), builder.toString()))
+                                if (uploadSessions(String.format(UPDATE_URL, mApiKey), builder.toString()))
                                 {
                                     mProvider.runBatchTransaction(new Runnable()
                                     {
@@ -2007,6 +2062,8 @@ public final class LocalyticsSession
          */
         /* package */static boolean uploadSessions(final String url, final String body)
         {
+            
+            
             if (Constants.ENABLE_PARAMETER_CHECKING)
             {
                 if (null == url)
@@ -2020,18 +2077,26 @@ public final class LocalyticsSession
                 }
             }
 
+            
+            /*
             if (Constants.IS_LOGGABLE)
             {
                 Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
             }
-
-            final DefaultHttpClient client = new DefaultHttpClient();
-            final HttpPost method = new HttpPost(url);
-            method.addHeader("Content-Type", "application/x-gzip"); //$NON-NLS-1$ //$NON-NLS-2$
+            */
+            
+            
+            /*
+            httpPost.addHeader("Content-Type", "application/x-gzip"); //$NON-NLS-1$ //$NON-NLS-2$
+            */
+            
 
             GZIPOutputStream gos = null;
             try
             {
+                /*
+                 * 
+
                 final byte[] originalBytes = body.getBytes("UTF-8"); //$NON-NLS-1$
                 final ByteArrayOutputStream baos = new ByteArrayOutputStream(originalBytes.length);
                 gos = new GZIPOutputStream(baos);
@@ -2040,9 +2105,8 @@ public final class LocalyticsSession
                 gos.flush();
 
                 final ByteArrayEntity postBody = new ByteArrayEntity(baos.toByteArray());
-                method.setEntity(postBody);
-
-                final HttpResponse response = client.execute(method);
+                httpPost.setEntity(postBody);
+                final HttpResponse response = client.execute(httpPost);
 
                 final StatusLine status = response.getStatusLine();
                 final int statusCode = status.getStatusCode();
@@ -2051,9 +2115,44 @@ public final class LocalyticsSession
                     Log.v(Constants.LOG_TAG, String.format("Upload complete with status %d", Integer.valueOf(statusCode))); //$NON-NLS-1$
                 }
 
+                */
+                
                 /*
                  * 5xx status codes indicate a server error, so upload should be reattempted
                  */
+                
+                /*
+                if (statusCode >= 500 && statusCode <= 599)
+                {
+                    return false;
+                }
+
+                return true;
+                
+                */
+                
+                //httpPost.setEntity(body);
+                String newurl = instance_url + "/services/data/v20.0/sobjects/AAA__c";
+                String newbody = "{\"Name\":\"test1\"}";
+                
+                final DefaultHttpClient client = new DefaultHttpClient();
+                final HttpPost httpPost = new HttpPost(newurl);
+                
+                StringEntity se = new StringEntity(newbody);
+                
+                httpPost.addHeader("Content-Type", "application/json");
+                httpPost.addHeader("Authorization", "Bearer " + access_token);
+                httpPost.setEntity(se);
+                
+                final HttpResponse response = client.execute(httpPost);
+
+                final StatusLine status = response.getStatusLine();
+                final int statusCode = status.getStatusCode();
+                if (Constants.IS_LOGGABLE)
+                {
+                    Log.v(Constants.LOG_TAG, String.format("Upload complete with status %d", Integer.valueOf(statusCode))); //$NON-NLS-1$
+                }
+                
                 if (statusCode >= 500 && statusCode <= 599)
                 {
                     return false;

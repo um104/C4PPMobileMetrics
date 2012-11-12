@@ -52,6 +52,7 @@ public class MainActivity extends Activity {
         recordData();
         localyticsSession.tagEvent("record first data", dataMap);
         this.localyticsSession.upload();
+        this.localyticsSession.close();
     }
     
     /*public void onResume()
