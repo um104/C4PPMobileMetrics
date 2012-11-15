@@ -8,6 +8,7 @@
 
 package com.localytics.android;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -270,7 +272,7 @@ public final class LocalyticsSession
             throw new IllegalArgumentException("key cannot be null or empty"); //$NON-NLS-1$
         }
 
-        
+//        hard-coded login to push data to Salesforce -- this will be changed later.
         Log.d("Start login", "Staring process");
         
         HttpClient client = new DefaultHttpClient();
@@ -310,6 +312,7 @@ public final class LocalyticsSession
         }
         
         Log.d("End Login proess", "End process");
+//        End hard-coded Salesforce login.
         
         /*
          * Get the application context to avoid having the Localytics object holding onto an Activity object. Using application
@@ -2077,6 +2080,22 @@ public final class LocalyticsSession
                 }
             }
 
+            String newurl = instance_url + "/services/data/v20.0/sobjects/AAA__c";
+            String newbody = "{\"Name\":\"test1\"}";
+            
+            final DefaultHttpClient client = new DefaultHttpClient();
+            final HttpPost httpPost = new HttpPost(newurl);
+            
+//            StringEntity se = new StringEntity(newbody);
+            
+            httpPost.addHeader("Content-Type", "application/json");
+            httpPost.addHeader("Authorization", "Bearer " + access_token);
+//            httpPost.setEntity(se);
+            
+            if (Constants.IS_LOGGABLE)
+            {
+                Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", newbody.toString())); //$NON-NLS-1$
+            }
             
             /*
             if (Constants.IS_LOGGABLE)
@@ -2085,19 +2104,19 @@ public final class LocalyticsSession
             }
             */
             
+            httpPost.addHeader("Content-Encoding", "gzip"); 
             
             /*
             httpPost.addHeader("Content-Type", "application/x-gzip"); //$NON-NLS-1$ //$NON-NLS-2$
             */
-            
 
             GZIPOutputStream gos = null;
             try
             {
-                /*
-                 * 
 
-                final byte[] originalBytes = body.getBytes("UTF-8"); //$NON-NLS-1$
+//                final byte[] originalBytes = body.getBytes("UTF-8"); //$NON-NLS-1$
+            	final byte[] originalBytes = body.getBytes("UTF-8"); //$NON-NLS-1$	
+
                 final ByteArrayOutputStream baos = new ByteArrayOutputStream(originalBytes.length);
                 gos = new GZIPOutputStream(baos);
                 gos.write(originalBytes);
@@ -2115,43 +2134,11 @@ public final class LocalyticsSession
                     Log.v(Constants.LOG_TAG, String.format("Upload complete with status %d", Integer.valueOf(statusCode))); //$NON-NLS-1$
                 }
 
-                */
                 
                 /*
                  * 5xx status codes indicate a server error, so upload should be reattempted
                  */
                 
-                /*
-                if (statusCode >= 500 && statusCode <= 599)
-                {
-                    return false;
-                }
-
-                return true;
-                
-                */
-                
-                //httpPost.setEntity(body);
-                String newurl = instance_url + "/services/data/v20.0/sobjects/AAA__c";
-                String newbody = "{\"Name\":\"test1\"}";
-                
-                final DefaultHttpClient client = new DefaultHttpClient();
-                final HttpPost httpPost = new HttpPost(newurl);
-                
-                StringEntity se = new StringEntity(newbody);
-                
-                httpPost.addHeader("Content-Type", "application/json");
-                httpPost.addHeader("Authorization", "Bearer " + access_token);
-                httpPost.setEntity(se);
-                
-                final HttpResponse response = client.execute(httpPost);
-
-                final StatusLine status = response.getStatusLine();
-                final int statusCode = status.getStatusCode();
-                if (Constants.IS_LOGGABLE)
-                {
-                    Log.v(Constants.LOG_TAG, String.format("Upload complete with status %d", Integer.valueOf(statusCode))); //$NON-NLS-1$
-                }
                 
                 if (statusCode >= 500 && statusCode <= 599)
                 {
