@@ -59,12 +59,13 @@ public class MainActivity extends Activity {
     {
         super.onResume();
         this.localyticsSession.open();
-    }
+    }*/
     
     public void onPause()
     {
         super.onPause();
-        this.localyticsSession.close();
+        this.localyticsSession.upload(); // upload any data
+        //this.localyticsSession.close();
         this.localyticsSession.upload();
-    }*/
+    }
 }

@@ -25,6 +25,7 @@ import java.util.TreeMap;
 import java.util.UUID;
 import java.util.zip.GZIPOutputStream;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
@@ -38,6 +39,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +51,7 @@ import android.database.Cursor;
 import android.database.CursorJoiner;
 import android.os.Build;
 import android.os.Build.VERSION;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -272,47 +275,7 @@ public final class LocalyticsSession
             throw new IllegalArgumentException("key cannot be null or empty"); //$NON-NLS-1$
         }
 
-//        hard-coded login to push data to Salesforce -- this will be changed later.
-        Log.d("Start login", "Staring process");
-        
-        HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(UploadHandler.LOGIN_URL);
-        
-        try {
-            // Add your data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            
-            nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
-            nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG98XJQQAccJQf_JCdrGZ5.3roL5wG41X0LfA0RAOcQ3Q9thdwa.QPCgwJtYsWaFpPohSezt6Iyl4eq27AX"));
-            nameValuePairs.add(new BasicNameValuePair("client_secret", "5648614951884930500"));
-            
-            nameValuePairs.add(new BasicNameValuePair("username", "mlerner@calpoly.edu"));
-            nameValuePairs.add(new BasicNameValuePair("password", "l3rn3rM00nXJIkCp1252jiz84BFHGTqrm3"));
-            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            
-            ResponseHandler<String> handler = new BasicResponseHandler();
-            // Execute HTTP Post Request
-            String response = client.execute(post, handler);
-            
-            Log.d("Response", response);
-            
-            JSONObject jobj = new JSONObject(response);
-            access_token = jobj.getString("access_token");
-            instance_url = jobj.getString("instance_url");
-            
-            Log.d("Access_Token", access_token);
-            Log.d("Instance_url", instance_url);
-            
-        } catch (ClientProtocolException e) {
-            Log.d("Error Message: ClientProtocolException\n", e.toString());
-        } catch (IOException e) {
-            Log.d("Error Message: IOException\n", e.toString());
-        } catch (JSONException e) {
-            Log.d("Error Message: JSONException\n", e.toString());
-        }
-        
-        Log.d("End Login proess", "End process");
-//        End hard-coded Salesforce login.
+        new AuthenticateSalesforceTask().execute(new Void[0]);
         
         /*
          * Get the application context to avoid having the Localytics object holding onto an Activity object. Using application
@@ -339,6 +302,71 @@ public final class LocalyticsSession
         
         
     }
+    
+    
+    
+    private class AuthenticateSalesforceTask extends AsyncTask<Void, Void, Void>
+    {
+    	
+    	@Override
+    	protected void onPreExecute() {
+    		Log.d("Start login", "Staring process");
+    	}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			
+//	        hard-coded login to push data to Salesforce -- this will be changed later.
+	        HttpClient client = new DefaultHttpClient();
+	        HttpPost post = new HttpPost(UploadHandler.LOGIN_URL);
+	        
+	        try {
+	            // Add your data
+	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+	            
+	            nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
+	            nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG98XJQQAccJQf_JCdrGZ5.3roL5wG41X0LfA0RAOcQ3Q9thdwa.QPCgwJtYsWaFpPohSezt6Iyl4eq27AX"));
+	            nameValuePairs.add(new BasicNameValuePair("client_secret", "5648614951884930500"));
+	            
+	            nameValuePairs.add(new BasicNameValuePair("username", "mlerner@calpoly.edu"));
+	            nameValuePairs.add(new BasicNameValuePair("password", "l3rn3rM00nXJIkCp1252jiz84BFHGTqrm3"));
+	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	            
+	            ResponseHandler<String> handler = new BasicResponseHandler();
+	            // Execute HTTP Post Request
+	            String response = client.execute(post, handler);
+	            
+	            Log.d("Response", response);
+	            
+	            JSONObject jobj = new JSONObject(response);
+	            access_token = jobj.getString("access_token");
+	            instance_url = jobj.getString("instance_url");
+	            
+	            Log.d("Access_Token", access_token);
+	            Log.d("Instance_url", instance_url);
+	            
+	        } catch (ClientProtocolException e) {
+	            Log.d("Error Message: ClientProtocolException\n", e.toString());
+	        } catch (IOException e) {
+	            Log.d("Error Message: IOException\n", e.toString());
+	        } catch (JSONException e) {
+	            Log.d("Error Message: JSONException\n", e.toString());
+	        }
+	        
+	        
+//	        End hard-coded Salesforce login.
+			
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result)
+		{
+			Log.d("End Login proess", "End process");
+		}
+    	
+    }
+    
 
     /**
      * Sets the Localytics opt-out state for this application. This call is not necessary and is provided for people who wish to
@@ -2101,10 +2129,13 @@ public final class LocalyticsSession
             if (Constants.IS_LOGGABLE)
             {
                 Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
+                Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
+                Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
+
             }
 
             
-            httpPost.addHeader("Content-Encoding", "gzip"); 
+            //httpPost.addHeader("Content-Encoding", "gzip"); 
             
             /*
             httpPost.addHeader("Content-Type", "application/x-gzip"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -2113,7 +2144,7 @@ public final class LocalyticsSession
             GZIPOutputStream gos = null;
             try
             {
-
+/*
             	final byte[] originalBytes = body.getBytes("UTF-8"); //$NON-NLS-1$	
 
                 final ByteArrayOutputStream baos = new ByteArrayOutputStream(originalBytes.length);
@@ -2124,12 +2155,21 @@ public final class LocalyticsSession
 
                 final ByteArrayEntity postBody = new ByteArrayEntity(baos.toByteArray());
                 httpPost.setEntity(postBody);
+                */
+                //
+                StringEntity se = new StringEntity(body);
+                httpPost.setEntity(se);
+                //
+                
                 final HttpResponse response = client.execute(httpPost);
 
                 final StatusLine status = response.getStatusLine();
                 final int statusCode = status.getStatusCode();
+                HttpEntity entity = response.getEntity();
+                String responseBody = EntityUtils.toString(entity);
                 if (Constants.IS_LOGGABLE)
                 {
+                	Log.v(Constants.LOG_TAG, String.format("Upload response %s", responseBody)); //$NON-NLS-1$
                     Log.v(Constants.LOG_TAG, String.format("Upload complete with status %d", Integer.valueOf(statusCode))); //$NON-NLS-1$
                 }
 
