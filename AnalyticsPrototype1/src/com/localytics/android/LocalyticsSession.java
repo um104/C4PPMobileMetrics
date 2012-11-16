@@ -283,11 +283,11 @@ public final class LocalyticsSession
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             
             nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
-            nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG98XJQQAccJQdkGlSFiOGU4hqhO5WNZV_N3nvLTSq9VE8BHMA1jjA7TROYzERt7rFdWTmoWPIlo3epm.Ti"));
-            nameValuePairs.add(new BasicNameValuePair("client_secret", "7839900133621914482"));
+            nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG98XJQQAccJQf_JCdrGZ5.3roL5wG41X0LfA0RAOcQ3Q9thdwa.QPCgwJtYsWaFpPohSezt6Iyl4eq27AX"));
+            nameValuePairs.add(new BasicNameValuePair("client_secret", "5648614951884930500"));
             
-            nameValuePairs.add(new BasicNameValuePair("username", "cpek@calpoly.edu"));
-            nameValuePairs.add(new BasicNameValuePair("password", "xiaobai91fQzQWS5A2KPJ3Q898DtGRyNy"));
+            nameValuePairs.add(new BasicNameValuePair("username", "mlerner@calpoly.edu"));
+            nameValuePairs.add(new BasicNameValuePair("password", "l3rn3rM00nXJIkCp1252jiz84BFHGTqrm3"));
             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             
             ResponseHandler<String> handler = new BasicResponseHandler();
@@ -2080,8 +2080,8 @@ public final class LocalyticsSession
                 }
             }
 
-            String newurl = instance_url + "/services/data/v20.0/sobjects/AAA__c";
-            String newbody = "{\"Name\":\"test1\"}";
+	    String newurl = instance_url + "/services/apexrest/channel4_upload/";
+            //String newbody = "{\"Name\":\"test1\"}";
             
             final DefaultHttpClient client = new DefaultHttpClient();
             final HttpPost httpPost = new HttpPost(newurl);
@@ -2092,17 +2092,17 @@ public final class LocalyticsSession
             httpPost.addHeader("Authorization", "Bearer " + access_token);
 //            httpPost.setEntity(se);
             
-            if (Constants.IS_LOGGABLE)
+/*            if (Constants.IS_LOGGABLE)
             {
                 Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", newbody.toString())); //$NON-NLS-1$
             }
-            
-            /*
+*/
+  
             if (Constants.IS_LOGGABLE)
             {
                 Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
             }
-            */
+
             
             httpPost.addHeader("Content-Encoding", "gzip"); 
             
@@ -2114,7 +2114,6 @@ public final class LocalyticsSession
             try
             {
 
-//                final byte[] originalBytes = body.getBytes("UTF-8"); //$NON-NLS-1$
             	final byte[] originalBytes = body.getBytes("UTF-8"); //$NON-NLS-1$	
 
                 final ByteArrayOutputStream baos = new ByteArrayOutputStream(originalBytes.length);
