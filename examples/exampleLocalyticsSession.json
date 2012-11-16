@@ -1,0 +1,25 @@
+{
+    "seq": 7,
+    "dt": "h",
+    "u": "91aa0e64-80ee-4b1c-a614-13e0f0f731c0",
+    "pa": 1352266752,
+    "attrs": {
+        "dt": "a",
+        "dc": "us",
+        "dac": "android_network_type_7",
+        "du": "1bafe0f8-57d5-48cf-8bb3-5a97df9ba1fd",
+        "dmo": "LG-MS690",
+        "dlc": "US",
+        "dma": "LGE",
+        "lv": "android_2.3",
+        "dms": null,
+        "dov": "2.2",
+        "av": "1.0",
+        "au": "786812c3cfbbdc519406399-643a17c8-289d-11e2-6157-00ef75f32667",
+        "nca": "MetroPCS",
+        "nc": "",
+        "dll": "en",
+        "dsdk": "8",
+        "dp": "Android"
+    }
+}
