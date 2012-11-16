@@ -1,0 +1,31 @@
+{
+    "seq": 5,
+    "dt": "h",
+    "u": "3c538471-29d4-4da6-89cc-53360de5beac",
+    "pa": 1353051008,
+    "attrs": {
+        "dt": "a",
+        "dc": "us",
+        "dac": "android_network_type_3",
+        "du": "5fa4e280b61d991c3cc4a5c57493761e3095dc704468895ce0914d9ee17add5a",
+        "dmo": "sdk",
+        "dlc": "US",
+        "dma": "unknown",
+        "lv": "android_2.3",
+        "dms": "b23a6a8439c0dde5515893e7c90c1e3233b8616e634470f20dc4928bcf3609bc",
+        "dov": "4.1.2",
+        "av": "1.0",
+        "au": "2b9b47ca4e9178b076524b4-d8a060da-215f-11e2-5ebd-00ef75f32667",
+        "nca": "Android",
+        "nc": "us",
+        "dll": "en",
+        "dsdk": "16",
+        "dp": "Android"
+    }
+}
+{
+	"dt": "s",
+	"nth" 9,
+	"u": "really-freakin-long-string",
+	"ct": 1234567890
+}
