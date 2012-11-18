@@ -2018,11 +2018,17 @@ public final class LocalyticsSession
                             if (!toUpload.isEmpty())
                             {
                                 final StringBuilder builder = new StringBuilder();
+                                
+                                //TODO(mlerner): Change this area to store all objects in one big JSON obj
+                                builder.append("{\"hblob\":");
+                                
+                                
                                 for (final JSONObject json : toUpload)
                                 {
                                     builder.append(json.toString());
                                     builder.append('\n');
                                 }
+                                builder.append("}");
 
                                 if (uploadSessions(String.format(UPDATE_URL, mApiKey), builder.toString()))
                                 {
@@ -2109,7 +2115,6 @@ public final class LocalyticsSession
             }
 
 	    String newurl = instance_url + "/services/apexrest/channel4_upload/";
-            //String newbody = "{\"Name\":\"test1\"}";
             
             final DefaultHttpClient client = new DefaultHttpClient();
             final HttpPost httpPost = new HttpPost(newurl);
@@ -2130,8 +2135,6 @@ public final class LocalyticsSession
             {
                 Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
                 Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
-                Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
-
             }
 
             
@@ -2259,6 +2262,11 @@ public final class LocalyticsSession
                         blobHeader.put(JsonObjects.BlobHeader.KEY_ATTRIBUTES, getAttributesFromSession(mProvider, mApiKey, getSessionIdForBlobId(cursor.getLong(idColumn))));
                         result.add(blobHeader);
 
+                        
+                        /*
+                         * TODO(mlerner): THIS IS COMMENTED OUT FOR THE VERTICAL PROTOTYPE. Uncomment it to get
+                         * event recording functionality back. For now, it's just recording sessions.
+                         * 
                         Cursor blobEvents = null;
                         try
                         {
@@ -2279,6 +2287,7 @@ public final class LocalyticsSession
                                 blobEvents.close();
                             }
                         }
+                        */
                     }
                     catch (final JSONException e)
                     {
