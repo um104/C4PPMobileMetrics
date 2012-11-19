@@ -37,6 +37,11 @@ public class AppList extends ListActivity {
 				startActivity(intent);
 				*/
 				
+				//make a web view placeholder, a frame view?
+				//make a webview
+				//point it to the login screen
+				//fill the placeholder with the webview
+				//that's it
 				
 				Uri uri = Uri.parse("https://c.na9.visual.force.com/apex/OriginalTest");
 				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
