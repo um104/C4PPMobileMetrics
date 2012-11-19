@@ -325,11 +325,11 @@ public final class LocalyticsSession
 	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 	            
 	            nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
-	            nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG98XJQQAccJQf_JCdrGZ5.3roL5wG41X0LfA0RAOcQ3Q9thdwa.QPCgwJtYsWaFpPohSezt6Iyl4eq27AX"));
-	            nameValuePairs.add(new BasicNameValuePair("client_secret", "5648614951884930500"));
+	            nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4"));
+	            nameValuePairs.add(new BasicNameValuePair("client_secret", "603269615811711635"));
 	            
-	            nameValuePairs.add(new BasicNameValuePair("username", "mlerner@calpoly.edu"));
-	            nameValuePairs.add(new BasicNameValuePair("password", "l3rn3rM00nXJIkCp1252jiz84BFHGTqrm3"));
+	            nameValuePairs.add(new BasicNameValuePair("username", "channel4pp@calpoly.edu"));
+	            nameValuePairs.add(new BasicNameValuePair("password", "midnight2Vv5gu3WHOnhCvXMedEvtMs5eR"));
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	            
 	            ResponseHandler<String> handler = new BasicResponseHandler();
