@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -44,12 +43,12 @@ public class AppList extends ListActivity {
 				//fill the placeholder with the webview
 				//that's it
 				
-				Uri uri = Uri.parse("https://c.na9.visual.force.com/apex/VertProto");
+				Uri uri = Uri.parse("https://c.na9.visual.force.com/apex/OriginalTest");
 				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 				startActivity(intent);
 				
 				
-				WebView webview = new WebView(AppList.this); 
+				//WebView webview = new WebView(AppList.this); 
 				//setContentView(webview);
 				
 			    // When clicked, show a toast with the TextView text
