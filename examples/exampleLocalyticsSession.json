@@ -1,28 +1,28 @@
 {
     "seq": 7,
     "dt": "h",
-    "u": "91aa0e64-80ee-4b1c-a614-13e0f0f731c0",
-    "pa": 1352266752,
-    "attrs": {
+    "u": "91aa0e64-80ee-4b1c-a614-13e0f0f731c0",	//UUID
+    "pa": 1352266752, 					//Epoch time
+    "attrs": { 						//Session attributes
         "dt": "a",
-        "dc": "us",
-        "dac": "android_network_type_7",
-        "du": "1bafe0f8-57d5-48cf-8bb3-5a97df9ba1fd",
-        "dmo": "LG-MS690",
-        "dlc": "US",
-        "dma": "LGE",
-        "lv": "android_2.3",
-        "dms": null,
-        "dov": "2.2",
-        "av": "1.0",
+        "dc": "us",					//Device Country
+        "dac": "android_network_type_7", 		//Data Connection Type
+        "du": "1bafe0f8-57d5-48cf-8bb3-5a97df9ba1fd", 	//Androdi ID SHA Hash
+        "dmo": "LG-MS690", 				//Device Model
+        "dlc": "US", 					//Country code of current locale
+        "dma": "LGE", 					//Device Manufacturer
+        "lv": "android_2.3",				//Locatlytics version
+        "dms": null, 					//Device Serial Number
+        "dov": "2.2", 					//OS Version
+        "av": "1.0", 					//Version name of App
         "au": "786812c3cfbbdc519406399-643a17c8-289d-11e2-6157-00ef75f32667",
-        "nca": "MetroPCS",
-        "nc": "",
-        "dll": "en",
-        "dsdk": "8",
-        "dp": "Android"
+        "nca": "MetroPCS",				//Network Carrier
+        "nc": "", 					//Network Country
+        "dll": "en", 					//Language Locale
+        "dsdk": "8", 					//SDK Compatibility
+        "dp": "Android" 				//Device
     }
-    "events": [
+    "events": [						//Session events
         {
             "name": "LevelUp",
             "attrs": {
