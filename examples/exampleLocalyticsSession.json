@@ -22,4 +22,28 @@
         "dsdk": "8",
         "dp": "Android"
     }
+    "events": [
+        {
+            "name": "LevelUp",
+            "attrs": {
+	        "points":"1030",
+		"stars":"3",
+		"difficulty":"hard"
+	    }
+	},
+	{
+	    "name": "LevelUp",
+	    "attrs": {
+	        "points":"5402",
+		"stars":"2",
+		"difficulty":"easy"
+	    }
+	},
+	{
+	    "name": "settingsView",
+	    "attrs": {
+	        "fromScreen": "gameover"
+	    }
+	},
+    ]
 }
