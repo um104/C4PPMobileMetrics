@@ -1,1 +1,4 @@
-curl https://na11.salesforce.com/services/apexrest/channel4_upload/ -H 'Authorization: Bearer 00DG0000000BynN!AQ0AQGGu2J_.ETyMh0BSgEnJb9yndwXy4_W8bMSzuZGwT0BHR6txoG8h5y.s8jnB4ayKD.AqGmnGdBab6wCQ8VCJuwjJH03m' -H 'Content-Type: application/json' -d @exampleLocalyticsSession2.json
+echo
+echo 'Be sure to change the <instance_name> and <access_token>!'
+echo
+curl https://<instance_name>.salesforce.com/services/apexrest/channel4_upload/ -H 'Authorization: Bearer <access_token>' -H 'Content-Type: application/json' -d @exampleLocalyticsSession2.json
