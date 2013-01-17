@@ -47,6 +47,7 @@ import org.json.JSONObject;
 import android.Manifest.permission;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.CursorJoiner;
 import android.os.Build;
@@ -290,6 +291,9 @@ public final class LocalyticsSession
          */
         mContext = !(context.getClass().getName().equals("android.test.RenamingDelegatingContext")) && Constants.CURRENT_API_LEVEL >= 8 ? context.getApplicationContext() : context; //$NON-NLS-1$
         mLocalyticsKey = key;
+        
+        // Start the process of swapping credentials for an access token to load data into the Salesforce.com database.
+        new AuthenticateSalesforceTask().execute(new Void[0]);
 
         mSessionHandler = new SessionHandler(mContext, mLocalyticsKey, sSessionHandlerThread.getLooper());
 
@@ -304,7 +308,12 @@ public final class LocalyticsSession
     }
     
     
-    
+    /**
+     * Helper class that authenticates the app developer with Salesforce.com, and loads their instance_url and access_token
+     * into variables for use during upload.
+     * 
+     * @author mlerner
+     */
     private class AuthenticateSalesforceTask extends AsyncTask<Void, Void, Void>
     {
     	
@@ -317,7 +326,7 @@ public final class LocalyticsSession
 		@Override
 		protected Void doInBackground(Void... params) {
 			
-//	      TODO(mlerner):  hard-coded login to push data to Salesforce -- this will be changed later.
+			// TODO(mlerner):  hard-coded login to push data to Salesforce -- this will be changed later.
 	        HttpClient client = new DefaultHttpClient();
 	        HttpPost post = new HttpPost(UploadHandler.LOGIN_URL);
 	        
@@ -325,21 +334,27 @@ public final class LocalyticsSession
 	            // Add your data
 	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 	            
+	            String[] credentials = mContext.getResources().getStringArray(R.array.MobileMetricsCredentials);
+	            
+	            
 	            nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
 	            //TODO(mlerner): Figure out if these changed based on org
-	            nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4"));
-	            nameValuePairs.add(new BasicNameValuePair("client_secret", "603269615811711635"));
+	            //nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4"));
+	            //nameValuePairs.add(new BasicNameValuePair("client_secret", "603269615811711635"));
+	            nameValuePairs.add(new BasicNameValuePair("client_id", credentials[0]));
+	            nameValuePairs.add(new BasicNameValuePair("client_secret", credentials[1]));
 	            
 	            //TODO(mlerner): Read this stuff in from a file in "res". <username>, <password>, <security token> individually.
-	            nameValuePairs.add(new BasicNameValuePair("username", "channel4pp@calpoly.edu"));
-	            nameValuePairs.add(new BasicNameValuePair("password", "midnight2Vv5gu3WHOnhCvXMedEvtMs5eR"));
+	            //nameValuePairs.add(new BasicNameValuePair("username", "channel4pp@calpoly.edu"));
+	            //nameValuePairs.add(new BasicNameValuePair("password", "midnight2Vv5gu3WHOnhCvXMedEvtMs5eR"));
+	            nameValuePairs.add(new BasicNameValuePair("username", credentials[2]));
+	            nameValuePairs.add(new BasicNameValuePair("password", credentials[3] + credentials[4]));
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	            
 	            ResponseHandler<String> handler = new BasicResponseHandler();
 	            
 	            // Execute HTTP Post Request
 	            String response = client.execute(post, handler);
-	            
 	            JSONObject jobj = new JSONObject(response);
 	            access_token = jobj.getString("access_token");
 	            instance_url = jobj.getString("instance_url");
