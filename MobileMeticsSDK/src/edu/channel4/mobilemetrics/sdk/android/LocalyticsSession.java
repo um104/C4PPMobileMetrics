@@ -316,7 +316,7 @@ public final class LocalyticsSession
 		@Override
 		protected Void doInBackground(Void... params) {
 			
-//	        hard-coded login to push data to Salesforce -- this will be changed later.
+//	      TODO(mlerner):  hard-coded login to push data to Salesforce -- this will be changed later.
 	        HttpClient client = new DefaultHttpClient();
 	        HttpPost post = new HttpPost(UploadHandler.LOGIN_URL);
 	        
@@ -333,6 +333,7 @@ public final class LocalyticsSession
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	            
 	            ResponseHandler<String> handler = new BasicResponseHandler();
+	            
 	            // Execute HTTP Post Request
 	            String response = client.execute(post, handler);
 	            
@@ -1929,6 +1930,7 @@ public final class LocalyticsSession
         /**
          * Localytics upload URL, as a format string that contains a format for the API key.
          */
+        // TODO(mlerner): Formalize this.
         //private final static String ANALYTICS_URL = "http://analytics.localytics.com/api/v2/applications/%s/uploads"; //$NON-NLS-1$
         private final static String UPDATE_URL = "https://na1.salesforce.com/services/data/v20.0/sobjects/Account/001D000000IroHJ";
         private final static String LOGIN_URL = "https://login.salesforce.com/services/oauth2/token";
@@ -2099,7 +2101,7 @@ public final class LocalyticsSession
          */
         /* package */static boolean uploadSessions(final String url, final String body)
         {
-            
+            //TODO(mlerner): Make sure this is clean, too.
             
             if (Constants.ENABLE_PARAMETER_CHECKING)
             {
