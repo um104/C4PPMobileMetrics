@@ -310,7 +310,8 @@ public final class LocalyticsSession
     	
     	@Override
     	protected void onPreExecute() {
-    		Log.d("Start login", "Staring process");
+			if (Constants.IS_LOGGABLE)
+				Log.d("Start login", "Staring process");
     	}
 
 		@Override
@@ -325,9 +326,11 @@ public final class LocalyticsSession
 	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 	            
 	            nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
+	            //TODO(mlerner): Figure out if these changed based on org
 	            nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4"));
 	            nameValuePairs.add(new BasicNameValuePair("client_secret", "603269615811711635"));
 	            
+	            //TODO(mlerner): Read this stuff in from a file in "res". <username>, <password>, <security token> individually.
 	            nameValuePairs.add(new BasicNameValuePair("username", "channel4pp@calpoly.edu"));
 	            nameValuePairs.add(new BasicNameValuePair("password", "midnight2Vv5gu3WHOnhCvXMedEvtMs5eR"));
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -337,14 +340,14 @@ public final class LocalyticsSession
 	            // Execute HTTP Post Request
 	            String response = client.execute(post, handler);
 	            
-	            Log.d("Response", response);
-	            
 	            JSONObject jobj = new JSONObject(response);
 	            access_token = jobj.getString("access_token");
 	            instance_url = jobj.getString("instance_url");
-	            
-	            Log.d("Access_Token", access_token);
-	            Log.d("Instance_url", instance_url);
+	            if (Constants.IS_LOGGABLE) {
+	            	Log.d("Response", response);
+	            	Log.d("Access_Token", access_token);
+	            	Log.d("Instance_url", instance_url);
+	            }
 	            
 	        } catch (ClientProtocolException e) {
 	            Log.d("Error Message: ClientProtocolException\n", e.toString());
