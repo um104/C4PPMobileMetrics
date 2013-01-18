@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TestPack</fullName>
+    <description>Test Package for iteration 1 this is an unmanaged package. We will be using managed packages in the future.</description>
+    <types>
+        <members>VertProto</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>Session__c.Android_ID_SHA__c</members>
+        <members>Session__c.App_Version__c</members>
+        <members>Session__c.Data_Connection_Type__c</members>
+        <members>Session__c.Device_Country__c</members>
+        <members>Session__c.Device_Manufacturer__c</members>
+        <members>Session__c.Device_Model__c</members>
+        <members>Session__c.Device_Type__c</members>
+        <members>Session__c.Epoch_time__c</members>
+        <members>Session__c.Language_Locale__c</members>
+        <members>Session__c.Locale_Country_Code__c</members>
+        <members>Session__c.Network_Carrier__c</members>
+        <members>Session__c.Network_Country_Code__c</members>
+        <members>Session__c.OS_Version__c</members>
+        <members>Session__c.SDK_Compatibility__c</members>
+        <members>Session__c.UUID__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Session__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Session__c-Session Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Session__c.All</members>
+        <name>ListView</name>
+    </types>
+    <version>26.0</version>
+</Package>
