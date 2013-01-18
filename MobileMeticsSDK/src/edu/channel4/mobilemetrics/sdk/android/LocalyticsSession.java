@@ -276,8 +276,6 @@ public final class LocalyticsSession
             throw new IllegalArgumentException("key cannot be null or empty"); //$NON-NLS-1$
         }
 
-        new AuthenticateSalesforceTask().execute(new Void[0]);
-        
         /*
          * Get the application context to avoid having the Localytics object holding onto an Activity object. Using application
          * context is very important to prevent the customer from giving the library multiple different contexts with different
@@ -320,13 +318,12 @@ public final class LocalyticsSession
     	@Override
     	protected void onPreExecute() {
 			if (Constants.IS_LOGGABLE)
-				Log.d("Start login", "Staring process");
+				Log.d(Constants.LOG_TAG, "Staring process");
     	}
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			
-			// TODO(mlerner):  hard-coded login to push data to Salesforce -- this will be changed later.
 	        HttpClient client = new DefaultHttpClient();
 	        HttpPost post = new HttpPost(UploadHandler.LOGIN_URL);
 	        
@@ -334,29 +331,17 @@ public final class LocalyticsSession
 	            // Add your data
 	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 	            
-	            //String[] credentials = mContext.getResources().getStringArray(R.array.MobileMetricsCredentials);
-	            //String[] credentials = getResources().getStringArray(R.array.MobileMetricsCredentials);
-	            
 	            int credentialId = mContext.getResources().getIdentifier("MobileMetricsCredentials", "array", mContext.getPackageName());
 	            String[] credentials = mContext.getResources().getStringArray(credentialId);
 	            
-	            if(Constants.IS_LOGGABLE) {
-	            	for (int i = 0; i < credentials.length; i++)
-	            		Log.d("MOBILEMETRICSCredential: ", credentials[i]);
-	            }
-	            
-	            
 	            nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
-	            //TODO(mlerner): Figure out if these changed based on org
-	            //nameValuePairs.add(new BasicNameValuePair("client_id", "3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4"));
-	            //nameValuePairs.add(new BasicNameValuePair("client_secret", "603269615811711635"));
 	            nameValuePairs.add(new BasicNameValuePair("client_id", credentials[0]));
 	            nameValuePairs.add(new BasicNameValuePair("client_secret", credentials[1]));
+
+	            //TODO(mlerner): Use the User-Agent OAuth flow to receive a Refresh Token, and use that instead of username/pw
 	            
-	            //TODO(mlerner): Read this stuff in from a file in "res". <username>, <password>, <security token> individually.
-	            //nameValuePairs.add(new BasicNameValuePair("username", "channel4pp@calpoly.edu"));
-	            //nameValuePairs.add(new BasicNameValuePair("password", "midnight2Vv5gu3WHOnhCvXMedEvtMs5eR"));
 	            nameValuePairs.add(new BasicNameValuePair("username", credentials[2]));
+	            //"password" is actually "password" + "security token"
 	            nameValuePairs.add(new BasicNameValuePair("password", credentials[3] + credentials[4]));
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	            
@@ -374,25 +359,33 @@ public final class LocalyticsSession
 	            }
 	            
 	        } catch (ClientProtocolException e) {
-	            Log.d("Error Message: ClientProtocolException\n", e.toString());
+	        	if (Constants.IS_LOGGABLE) {
+	        		Log.d("Error Message: ClientProtocolException\n", e.toString());
+	        	}
 	        } catch (IOException e) {
-	            Log.d("Error Message: IOException\n", e.toString());
+	        	if (Constants.IS_LOGGABLE) {
+	        		Log.d("Error Message: IOException\n", e.toString());
+	        	}
 	        } catch (JSONException e) {
-	            Log.d("Error Message: JSONException\n", e.toString());
+	        	if (Constants.IS_LOGGABLE) {
+	        		Log.d("Error Message: JSONException\n", e.toString());
+	        	}
+	        } catch (Resources.NotFoundException e) {
+	        	if (Constants.IS_LOGGABLE) {
+	        		Log.d("Error Message: ResourceNotFoundException\n", e.toString());
+	        	}
 	        }
 	        
-	        
-//	        End hard-coded Salesforce login.
-			
 			return null;
 		}
 		
 		@Override
 		protected void onPostExecute(Void result)
 		{
-			Log.d("End Login proess", "End process");
+			if (Constants.IS_LOGGABLE) {
+				Log.d(Constants.LOG_TAG, "End process");
+			}
 		}
-    	
     }
     
 

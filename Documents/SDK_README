@@ -1,0 +1,21 @@
+To install the SDK, download the "mobilemetricssdk.jar" file and place it in your Android projects "libs" folder. Then, with your project selected, go to Project > Properties > Java Build Path > Libraries and select "Add JARs", adding the JAR that you just placed in the "libs" folder.
+
+To configure your Salesforce.com credentials so that the SDK can use them, open your res/values/strings.xml file. Copy the following code in between the <resources> tags:
+
+    <string-array name="MobileMetricsCredentials">
+        <item>client_id</item>
+        <item>client_secret</item>
+        <item>username</item>
+        <item>password</item>
+        <item>security_token</item>
+    </string-array>
+
+Replace the fields between each <item> tag with the actual credentials.
+
+To determine your client_id and client_secret, see step one here:
+http://www.salesforce.com/us/developer/docs/api_rest/index_Left.htm#CSHID=quickstart_oauth.htm|StartTopic=Content%2Fquickstart_oauth.htm|SkinName=webhelp
+
+Your username and password are the username and password of your org, or of one account of your org.
+
+To determine your security_token, see this link:
+https://na11.salesforce.com/help/doc/en/user_security_token.htm

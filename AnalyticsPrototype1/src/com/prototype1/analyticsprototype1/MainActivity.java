@@ -23,11 +23,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        String[] credentials = this.getApplicationContext().getResources().getStringArray(R.array.MobileMetricsCredentials);
-        for (int i = 0; i < credentials.length; i++)
-        	Log.d("MOBILEMETRICSCredential: ", credentials[i]);
-        
-        
         // Activity Creation Code
      
         // Instantiate the object
