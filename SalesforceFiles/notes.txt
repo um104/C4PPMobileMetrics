@@ -1,0 +1,35 @@
+Instructions: Script for pulling Salesforce.com packages and saving them
+              to the git repo
+Author: Ray Tam
+Date: 1/17/13
+
+Revisions
+Author:
+Date:
+Description:
+
+
+Author:
+Date:
+Description:
+
+---build.properties
+
+Includes the username, password and package fields. Currently using this
+file does not work [1/17, Ray]
+
+---build.xml
+
+Includes build target. Line 29 includes the target information. Enter in
+Username: <YourUserName>
+Password: <Your Password With Security Token Appended>
+   (For the password you must have Modify All Data permissions, you can check
+    to see if you have this under Administration Setup > Manage Users >
+    Profiles)
+   (To get a security token go to Personal Setup > Reset My Security Token.
+    From there reset your security token and you should get an email that
+    gives you your new security token)
+
+Server URL: https://login.salesforce.com
+retrieveTarget: <Name of directory to put package. Create a new directory
+                 if getting a new package>
