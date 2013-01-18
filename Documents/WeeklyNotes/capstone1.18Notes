@@ -1,0 +1,36 @@
+Notes 1/18 Thomas
+
+schema and apex class save it ther eand save it to mobile admin app.
+JSON does not include event data. Create Session Schema for sessions.
+
+Ray make a zip file to skirt the Version issue otherwise create  the link from salesforce.com
+when you make an umanaged package.
+
+
+mm-9 includes this one
+Install package into org managed unpackaged / zip
+
+Acceptance Criteria
+
+mm-42
+Download apk and put it on a phone
+
+MM-9
+Downloald apk be able to download to sf org
+
+m-25
+Demo add event button. Prototpye one button for add event1 and another for add event2
+and show on salesforce org that the event that is created.
+
+
+Stretch goal
+try to make progress on mm-41
+
+
+Schema in repo
+Admin App built and distributed
+JAR built and distributed
+CronJobs
+Managed/Unmanged Package (Manual) zip
+ANT for all
+Repo structure
