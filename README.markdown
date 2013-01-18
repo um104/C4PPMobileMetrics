@@ -11,3 +11,4 @@ Team Members
 
   - Ray Tam
   - Mark Lerner
+  - Brian Middaugh
