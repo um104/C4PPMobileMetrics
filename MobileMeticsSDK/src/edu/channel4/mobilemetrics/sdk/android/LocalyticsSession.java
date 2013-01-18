@@ -334,7 +334,11 @@ public final class LocalyticsSession
 	            // Add your data
 	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 	            
-	            String[] credentials = mContext.getResources().getStringArray(R.array.MobileMetricsCredentials);
+	            //String[] credentials = mContext.getResources().getStringArray(R.array.MobileMetricsCredentials);
+	            //String[] credentials = getResources().getStringArray(R.array.MobileMetricsCredentials);
+	            
+	            int credentialId = mContext.getResources().getIdentifier("MobileMetricsCredentials", "array", mContext.getPackageName());
+	            String[] credentials = mContext.getResources().getStringArray(credentialId);
 	            
 	            if(Constants.IS_LOGGABLE) {
 	            	for (int i = 0; i < credentials.length; i++)

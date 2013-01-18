@@ -8,6 +8,7 @@ import edu.channel4.mobilemetrics.sdk.android.LocalyticsSession;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -21,13 +22,20 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-     
+        
+        String[] credentials = this.getApplicationContext().getResources().getStringArray(R.array.MobileMetricsCredentials);
+        for (int i = 0; i < credentials.length; i++)
+        	Log.d("MOBILEMETRICSCredential: ", credentials[i]);
+        
+        
         // Activity Creation Code
      
         // Instantiate the object
         this.localyticsSession = new LocalyticsSession(
                 this.getApplicationContext(), // Context used to access device resources
                 LOCALYTICS_APP_KEY); // Application's key
+        
+        
      
         this.localyticsSession.open(); // open the session
         this.localyticsSession.upload(); // upload any data
