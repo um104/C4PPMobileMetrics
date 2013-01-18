@@ -1,6 +1,6 @@
-<project name="Sample usage of Salesforce Ant tasks" default="test" basedir="." xmlns:sf="antlib:com.salesforce">
+<project name="Mobile Metrics" default="test" basedir="." xmlns:sf="antlib:com.salesforce">
 
-    <property file="build.properties"/>
+    <property file="./build.properties"/>
     <property environment="env"/>
 
     <!-- Test out deploy and retrieve verbs for package 'mypkg' -->
@@ -27,13 +27,14 @@
 
     <!-- Retrieve metadata for all the packages specified under packageNames -->
     <target name="retrievePkg">
-      <!-- <sf:retrieve username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" retrieveTarget="retrieveOutput" packageNames="${sf.pkgName}"/> -->
-      <sf:retrieve username="rmtam@calpoly.edu" password="937484abLQI7KmmPNtx2R1DttOYgHgi3" serverurl="https://login.salesforce.com" retrieveTarget="retrieveOutput" packageNames="TestPack"/>
+      <sf:retrieve username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" retrieveTarget="retrieveOutput" packageNames="${sf.pkgName}"/>
+       <!--<sf:retrieve username="rmtam@calpoly.edu" password="937484abLQI7KmmPNtx2R1DttOYgHgi3" serverurl="https://login.salesforce.com" retrieveTarget="retrieveOutput" packageNames="TestPack"/> -->
     </target>
 
     <!-- Deploy the unpackaged set of metadata retrieved with retrieveUnpackaged -->
     <target name="deployUnpackaged">
-      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="retrieveUnpackaged"/>
+      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="codepkg"/> 
+      <!--<sf:deploy username="rmtam@calpoly.edu" password="937484abLQI7KmmPNtx2R1DttOYgHgi3" serverurl="https://login.salesforce.com" deployRoot="codepkg"/> -->
     </target>
 
     <!-- Deploy a zip of metadata files to the org -->
@@ -44,8 +45,8 @@
     <!-- Shows deploying code & running tests for code in directory -->
     <target name="deployCode">
       <!-- Upload the contents of the "codepkg" directory, running the tests for just 1 class -->
-      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="codepkg">
-        <runTest>SampleDeployClass</runTest>
+      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="retrieveOutput">
+        <runTest>SessionRestResourceTest</runTest>
       </sf:deploy>
     </target>
 
@@ -57,7 +58,8 @@
     <!-- Shows retrieving code; only succeeds if done after deployCode -->
     <target name="retrieveCode">
       <!-- Retrieve the contents listed in the file codepkg/package.xml into the codepkg directory -->
-      <sf:retrieve username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" retrieveTarget="codepkg" unpackaged="codepkg/package.xml"/>
+      <sf:retrieve username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" retrieveTarget="codepkg" unpackaged="codepkg/package.xml"/> 
+      <!--<sf:retrieve username="rmtam@calpoly.edu" password="937484abLQI7KmmPNtx2R1DttOYgHgi3" serverurl="https://login.salesforce.com" retrieveTarget="codepkg" unpackaged="codepkg/package.xml"/> -->
     </target>
 
     <!-- Shows deploying code, running all tests, and running tests (1 of which fails), and logging. -->

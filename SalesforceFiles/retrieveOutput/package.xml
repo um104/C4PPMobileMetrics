@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>TestPack</fullName>
-    <description>Test Package for iteration 1 this is an unmanaged package. We will be using managed packages in the future.</description>
+    <fullName>ClassAndPage</fullName>
+    <description>This package contains SessionRestResources and the VertProto Visualforce page</description>
+    <types>
+        <members>SessionRestResource</members>
+        <members>SessionRestResourceTest</members>
+        <name>ApexClass</name>
+    </types>
     <types>
         <members>VertProto</members>
         <name>ApexPage</name>
