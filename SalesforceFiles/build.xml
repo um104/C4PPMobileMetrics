@@ -45,8 +45,8 @@
     <!-- Shows deploying code & running tests for code in directory -->
     <target name="deployCode">
       <!-- Upload the contents of the "codepkg" directory, running the tests for just 1 class -->
-      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="codepkg">
-        <runTest>SampleDeployClass</runTest>
+      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="retrieveOutput">
+        <runTest>SessionRestResourceTest</runTest>
       </sf:deploy>
     </target>
 
