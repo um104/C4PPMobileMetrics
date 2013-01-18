@@ -1,0 +1,17 @@
+<project>
+
+    <target name="clean">
+        <delete dir="Ch4++"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="www/Ch4++/classes"/>
+        <javac srcdir="localytics/android" destdir="www/Ch4++/classes"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="www/Ch4++/jar"/>
+        <jar destfile="www/Ch4++/jar/Ch4++SDK.jar" basedir="www/Ch4++/classes"/>
+    </target>
+
+</project>

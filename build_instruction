@@ -1,0 +1,13 @@
+1) Where to download SDK?
+
+   Go to "user.csc.calpoly.edu/cpek/Ch4++SDK/jar/"
+   Download "Ch4++SDK.jar"
+
+2) How to use SDK?
+
+   The SDK provides three functions:
+   a) start() - Begin recording session
+   b) tagEvent() - Record specific event
+   c) end() - Stop recording session
+
+   Note*: Ch4++SDK defines session as a period between the open and close of a single app.
