@@ -1,5 +1,7 @@
 To install the SDK, download the "mobilemetricssdk.jar" file and place it in your Android projects "libs" folder. Then, with your project selected, go to Project > Properties > Java Build Path > Libraries and select "Add JARs", adding the JAR that you just placed in the "libs" folder.
 
+See: http://stackoverflow.com/questions/1334802/how-can-i-use-external-jars-in-an-android-project
+
 To configure your Salesforce.com credentials so that the SDK can use them, open your res/values/strings.xml file. Copy the following code in between the <resources> tags:
 
     <string-array name="MobileMetricsCredentials">
