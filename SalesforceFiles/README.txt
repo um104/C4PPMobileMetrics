@@ -1,25 +1,27 @@
-Instructions: Script for pulling Salesforce.com packages and saving them
-              to the git repo
+Script for pulling Salesforce.com packages and saving them to the git repo
 Author: Ray Tam
 Date: 1/17/13
+Issue: MM-15
 
 Revisions
-Author:
-Date:
-Description:
-
 
 Author:
 Date:
 Description:
 
+Author:
+Date:
+Description:
+
+******INSTRUCTIONS
+Use the command 'ant retrievePkg' to pull package. Read below first.
+
+******FILES
 ---build.properties
-
 Includes the username, password and package fields. Currently using this
 file does not work [1/17, Ray]
 
 ---build.xml
-
 Includes build target. Line 29 includes the target information. Enter in
 Username: <YourUserName>
 Password: <Your Password With Security Token Appended>
@@ -29,7 +31,7 @@ Password: <Your Password With Security Token Appended>
    (To get a security token go to Personal Setup > Reset My Security Token.
     From there reset your security token and you should get an email that
     gives you your new security token)
-
 Server URL: https://login.salesforce.com
 retrieveTarget: <Name of directory to put package. Create a new directory
                  if getting a new package>
+packageNames: <Name of package to pull off Salesforce>
