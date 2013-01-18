@@ -336,6 +336,11 @@ public final class LocalyticsSession
 	            
 	            String[] credentials = mContext.getResources().getStringArray(R.array.MobileMetricsCredentials);
 	            
+	            if(Constants.IS_LOGGABLE) {
+	            	for (int i = 0; i < credentials.length; i++)
+	            		Log.d("MOBILEMETRICSCredential: ", credentials[i]);
+	            }
+	            
 	            
 	            nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
 	            //TODO(mlerner): Figure out if these changed based on org

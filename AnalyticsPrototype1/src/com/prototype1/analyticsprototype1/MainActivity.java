@@ -3,7 +3,8 @@ package com.prototype1.analyticsprototype1;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.localytics.android.LocalyticsSession;
+//import com.localytics.android.LocalyticsSession;
+import edu.channel4.mobilemetrics.sdk.android.LocalyticsSession;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -66,6 +67,6 @@ public class MainActivity extends Activity {
         super.onPause();
         this.localyticsSession.upload(); // upload any data
         //this.localyticsSession.close();
-        this.localyticsSession.upload();
+        //this.localyticsSession.upload(); why was this being called twice?
     }
 }
