@@ -67,6 +67,6 @@
         <antcall target="build"/>
     </target>
     <target depends="build" description="Compiles all of relevant .class files into a JAR for usage as a library." name="build-jar">
-      <jar destfile="./mobilemetricssdk.jar" basedir="/bin/classes" excludes="**/R$*, **/R.class, **/BuildConfig.class"/>
+      <jar destfile="./mobilemetricssdk.jar" basedir="bin/classes" excludes="**/R$*, **/R.class, **/BuildConfig.class"/>
     </target>
 </project>
