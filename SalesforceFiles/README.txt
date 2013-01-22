@@ -18,7 +18,7 @@ Read below for how to configure the build.properties file.
 
 Use the command 'ant retrievePkg' to pull a package.
                 'ant deployCode' to upload a package to the specified user
-                from a local directory
+                from a local directory. This will also run test.
 
 setup your git to git push without a password
 https://confluence.atlassian.com/pages/viewpage.action?pageId=270827678
