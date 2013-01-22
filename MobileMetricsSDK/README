@@ -1,1 +1,16 @@
 To build the SDK JAR, use the provided build.xml file and Apache ANT to compile all .java files within src/ and gen/. (Note: depending on the build.xml file, there may be a "build-jar" target that will complete this entire process.) Then, use "jar" to package all of the .class files that came from the files in src/. The files should be located in bin/classes. This will exlude any R.java files, as well as BuildConfig.java.
+
+To understand more about OAuth, see:
+http://www.salesforce.com/us/developer/docs/api_rest/index_Left.htm#CSHID=intro_understanding_username_password_oauth_flow.htm|StartTopic=Content%2Fintro_understanding_username_password_oauth_flow.htm|SkinName=webhelp
+
+To understand accessing Android resources, see:
+http://developer.android.com/guide/topics/resources/accessing-resources.html
+
+To understand String Resources (ala StringArray's), see:
+http://developer.android.com/guide/topics/resources/string-resource.html#StringArray
+
+To see how to access resources from a Library, see:
+http://stackoverflow.com/questions/9421244/accessing-application-resources-from-the-library-project
+
+To understand Library Projects, see:
+http://developer.android.com/tools/projects/index.html#LibraryProjects
