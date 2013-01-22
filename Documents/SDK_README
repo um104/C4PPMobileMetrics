@@ -21,3 +21,23 @@ Your username and password are the username and password of your org, or of one 
 
 To determine your security_token, see this link:
 https://na11.salesforce.com/help/doc/en/user_security_token.htm
+
+------------
+
+1) Where to download SDK?
+
+   Go to "www.brianmiddaugh.com/channel4/"
+   Download "Mobile Metrics SDK JAR"
+
+2) How to use SDK?
+
+   The SDK provides three functions:
+   a) start() - Begin recording session
+   b) tagEvent() - Record specific event
+   c) end() - Stop recording session
+
+   Note*: Mobile Metrics SDK defines session as a period between the open and close of a single app.
+
+------------
+
+To build the SDK JAR, use the provided build.xml file and Apache ANT to compile all .java files within src/ and gen/. (Note: depending on the build.xml file, there may be a "build-jar" target that will complete this entire process.) Then, use "jar" to package all of the .class files that came from the files in src/. The files should be located in bin/classes. This will exlude any R.java files, as well as BuildConfig.java.
