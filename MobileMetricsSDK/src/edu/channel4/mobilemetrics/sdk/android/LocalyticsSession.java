@@ -31,6 +31,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -322,6 +323,7 @@ public final class LocalyticsSession
      */
     private class AuthenticateSalesforceTask extends AsyncTask<Void, Void, Void>
     {
+        private final static String LOGIN_URL = "https://login.salesforce.com/services/oauth2/token";
     	
     	@Override
     	protected void onPreExecute() {
@@ -333,8 +335,8 @@ public final class LocalyticsSession
 		protected Void doInBackground(Void... params) {
 			
 	        HttpClient client = new DefaultHttpClient();
-	        HttpPost post = new HttpPost(UploadHandler.LOGIN_URL);
-	        ResponseHandler<String> handler = new BasicResponseHandler();
+	        HttpPost post = new HttpPost(LOGIN_URL);
+	        
 	        
 	        try {
 	            // Create a nameValuePairs list to store HTTP parameters
@@ -355,7 +357,15 @@ public final class LocalyticsSession
 	            // Place the parameters into the HttpPost
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	            
+	            if (Constants.IS_LOGGABLE) {
+	            	Log.d(Constants.LOG_TAG, "User Credentials");
+	            	for (String cred : credentials)
+	            		Log.d(Constants.LOG_TAG, cred);
+	            	Log.d(Constants.LOG_TAG, post.toString());
+	            }
+	            
 	            // Execute HTTP Post Request
+	            ResponseHandler<String> handler = new BasicResponseHandler();
 	            String response = client.execute(post, handler);
 	            JSONObject jobj = new JSONObject(response);
 	            access_token = jobj.getString("access_token");
@@ -1958,10 +1968,9 @@ public final class LocalyticsSession
         /**
          * Localytics upload URL, as a format string that contains a format for the API key.
          */
-        // TODO(mlerner): Formalize this.
+        // TODO(mlerner): Formalize this. Change UPDATE_URL to be formatted, where it will take two strings: instance_url and access_key
         //private final static String ANALYTICS_URL = "http://analytics.localytics.com/api/v2/applications/%s/uploads"; //$NON-NLS-1$
-        private final static String UPDATE_URL = "https://na1.salesforce.com/services/data/v20.0/sobjects/Account/001D000000IroHJ";
-        private final static String LOGIN_URL = "https://login.salesforce.com/services/oauth2/token";
+        private final static String UPDATE_URL = "https://na1.salesforce.com/services/data/v20.0/sobjects/Account/001D000000IroHJ"; //$NON-NLS-1$
         
         /**
          * Handler message to upload all data collected so far
