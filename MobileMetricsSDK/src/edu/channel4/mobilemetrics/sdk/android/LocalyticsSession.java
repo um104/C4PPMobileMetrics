@@ -251,8 +251,14 @@ public final class LocalyticsSession
      */
     private static Map<String, Boolean> sIsUploadingMap = new HashMap<String, Boolean>();
     
+    /**
+     * Access token used to authenticate with Salesforce.com
+     */
     private static String access_token;
     
+    /**
+     * The URL of the Salesforce.com server instance to send all requests to
+     */
     private static String instance_url;
 
     /**
@@ -290,7 +296,9 @@ public final class LocalyticsSession
         mContext = !(context.getClass().getName().equals("android.test.RenamingDelegatingContext")) && Constants.CURRENT_API_LEVEL >= 8 ? context.getApplicationContext() : context; //$NON-NLS-1$
         mLocalyticsKey = key;
         
-        // Start the process of swapping credentials for an access token to load data into the Salesforce.com database.
+        /**
+         *  Start the process of swapping credentials for an access token to load data into the Salesforce.com database.
+         */
         new AuthenticateSalesforceTask().execute(new Void[0]);
 
         mSessionHandler = new SessionHandler(mContext, mLocalyticsKey, sSessionHandlerThread.getLooper());
@@ -326,26 +334,26 @@ public final class LocalyticsSession
 			
 	        HttpClient client = new DefaultHttpClient();
 	        HttpPost post = new HttpPost(UploadHandler.LOGIN_URL);
+	        ResponseHandler<String> handler = new BasicResponseHandler();
 	        
 	        try {
-	            // Add your data
+	            // Create a nameValuePairs list to store HTTP parameters
 	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 	            
+	            // Load HTTP parameters (ie user credentials) from a string array resource.
+	            //TODO(mlerner): Use the User-Agent OAuth flow to receive a Refresh Token, and use that instead of username/pw
 	            int credentialId = mContext.getResources().getIdentifier("MobileMetricsCredentials", "array", mContext.getPackageName());
 	            String[] credentials = mContext.getResources().getStringArray(credentialId);
 	            
 	            nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
 	            nameValuePairs.add(new BasicNameValuePair("client_id", credentials[0]));
 	            nameValuePairs.add(new BasicNameValuePair("client_secret", credentials[1]));
-
-	            //TODO(mlerner): Use the User-Agent OAuth flow to receive a Refresh Token, and use that instead of username/pw
-	            
 	            nameValuePairs.add(new BasicNameValuePair("username", credentials[2]));
 	            //"password" is actually "password" + "security token"
 	            nameValuePairs.add(new BasicNameValuePair("password", credentials[3] + credentials[4]));
-	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	            
-	            ResponseHandler<String> handler = new BasicResponseHandler();
+	            // Place the parameters into the HttpPost
+	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	            
 	            // Execute HTTP Post Request
 	            String response = client.execute(post, handler);
