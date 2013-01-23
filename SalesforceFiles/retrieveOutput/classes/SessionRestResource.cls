@@ -1,6 +1,6 @@
 @RestResource(urlMapping='/channel4_upload/*')
-global class SessionRestResource {
-
+global class SessionRestResource {     
+    
     @HttpPost
     global static String uploadSession(HeaderBlob hblob) {
         
