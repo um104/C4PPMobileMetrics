@@ -1,0 +1,85 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="650" measuredH="545" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::iPhone" x="368" y="35" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <topBar>false</topBar>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="587" y="131" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>006%26bm%3B006.bmml%26bm%3B006.bmml%26bm%3B006.bmml</href>
+        <icon>StarIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22219%2C96%2C243%2C120%22%20href%3D%22006.bmml%22%20alt%3D%22006%22%20id%3D%222%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="408" y="131" w="87" h="24" measuredW="89" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Field%20One</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::HRule" x="408" y="166" w="203" h="-1" measuredW="100" measuredH="10" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="420" y="361" w="-1" h="-1" measuredW="54" measuredH="26" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Mode%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="420" y="305" w="-1" h="-1" measuredW="84" measuredH="26" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Std.%20Dev.%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="416" y="251" w="-1" h="-1" measuredW="66" measuredH="26" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Median%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="416" y="197" w="140" h="47" measuredW="80" measuredH="26" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Average%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="510" y="197" w="140" h="47" measuredW="26" measuredH="26" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>10</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="510" y="255" w="140" h="47" measuredW="28" measuredH="26" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>76</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Label" x="510" y="305" w="140" h="47" measuredW="39" measuredH="26" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>654</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="510" y="361" w="140" h="47" measuredW="50" measuredH="26" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>6543</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Button" x="432" y="409" w="72" h="27" measuredW="66" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Save</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Button" x="526" y="408" w="-1" h="-1" measuredW="65" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>017%26bm%3B017.bmml%26bm%3B017.bmml%26bm%3B017.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22158%2C373%2C223%2C400%22%20href%3D%22017.bmml%22%20alt%3D%22017%22%20id%3D%2214%22/%3E</map>
+        <size>18</size>
+        <text>Send</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

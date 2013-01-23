@@ -1,0 +1,33 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="686" measuredH="541" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::iPhone" x="404" y="31" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <topBar>false</topBar>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="437" y="141" w="233" h="28" measuredW="109" measuredH="28" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Graph%20Type</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::HRule" x="437" y="169" w="202" h="-1" measuredW="100" measuredH="10" zOrder="2" locked="false" isInGroup="-1"/>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Accordion" x="470" y="209" w="150" h="166" measuredW="150" measuredH="240" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>%2C010%26bm%3B010.bmml%26bm%3B010.bmml%26bm%3B010.bmml%2C%2C%2C%2C</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2266%2C205%2C216%2C235%22%20href%3D%22010.bmml%22%20alt%3D%22010%22%20id%3D%224_0%22/%3E%0A</map>
+        <selectedIndex>-1</selectedIndex>
+        <text>Line%0ABar%0AHistogram%0APlot%0APie%0ABox%20and%20Whisker</text>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="502" y="425" w="-1" h="-1" measuredW="73" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>006%26bm%3B006.bmml%26bm%3B006.bmml%26bm%3B006.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2298%2C394%2C171%2C421%22%20href%3D%22006.bmml%22%20alt%3D%22006%22%20id%3D%225%22/%3E</map>
+        <size>16</size>
+        <text>Cancel</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

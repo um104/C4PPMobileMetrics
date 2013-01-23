@@ -1,0 +1,92 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="659" measuredH="561" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::iPhone" x="377" y="51" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <topBar>false</topBar>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::HRule" x="410" y="169" w="211" h="-1" measuredW="100" measuredH="10" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="410" y="179" w="-1" h="-1" measuredW="60" measuredH="33" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Email</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="410" y="335" w="-1" h="-1" measuredW="87" measuredH="33" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Chatter</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="410" y="260" w="67" h="20" measuredW="57" measuredH="33" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>SMS</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::ComboBox" x="410" y="215" w="211" h="-1" measuredW="121" measuredH="28" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Enter%20Email</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::ComboBox" x="410" y="368" w="211" h="-1" measuredW="218" measuredH="26" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Enter%20or%20Select%20Username</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::ComboBox" x="410" y="292" w="211" h="-1" measuredW="195" measuredH="28" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Enter%20Phone%20Number</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="410" y="141" w="205" h="28" measuredW="101" measuredH="28" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Send%20Data</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Button" x="473" y="419" w="-1" h="-1" measuredW="77" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Submit</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="__group__" x="410" y="224" w="211" h="164" measuredW="211" measuredH="164" zOrder="10" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="211" h="164" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="14">
+          <controlProperties>
+            <bottomheight>0</bottomheight>
+            <dragger>false</dragger>
+            <text/>
+            <topheight>38</topheight>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="52" y="112" w="107" h="27" measuredW="47" measuredH="27" zOrder="1" locked="false" isInGroup="14">
+          <controlProperties>
+            <href>017%26bm%3B017.bmml%26bm%3B017.bmml%26bm%3B017.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2285%2C285%2C192%2C312%22%20href%3D%22017.bmml%22%20alt%3D%22017%22%20id%3D%222%22/%3E</map>
+            <size>18</size>
+            <text>Ok</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="6" y="6" w="205" h="27" measuredW="50" measuredH="28" zOrder="2" locked="false" isInGroup="14">
+          <controlProperties>
+            <size>20</size>
+            <text>Error</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::TextArea" x="10" y="48" w="191" h="57" measuredW="200" measuredH="140" zOrder="3" locked="false" isInGroup="14">
+          <controlProperties>
+            <backgroundAlpha>0</backgroundAlpha>
+            <borderColor>16777215</borderColor>
+            <size>18</size>
+            <text>Invalid%20phone%20number.%20Message%20not%20sent.</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>

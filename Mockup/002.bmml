@@ -1,0 +1,17 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="652" measuredH="542" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::iPhone" x="370" y="32" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bgPattern>allWhite</bgPattern>
+        <topBar>false</topBar>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Alert" x="411" y="207" w="-1" h="-1" measuredW="200" measuredH="192" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>%2C003%26bm%3B003.bmml%26bm%3B003.bmml%26bm%3B003.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22146%2C317%2C231%2C357%22%20href%3D%22003.bmml%22%20alt%3D%22003%22%20id%3D%222_0%22/%3E%0A</map>
+        <text>Got%20Apps%3F%0ASorry%20-%20it%20doesn%27t%20seem%20like%20you%27ve%20started%20collecting%20data%20on%20your%20mobile%20applications%20yet%21%20Please%20see%20www.example.com%20for%20details%20on%20how%20you%20can%20get%20started.%0AGo%20to%20Help%2C%20OK</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

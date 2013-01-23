@@ -1,0 +1,87 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="679" measuredH="554" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::iPhone" x="397" y="44" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bgPattern>allWhite</bgPattern>
+        <topBar>false</topBar>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::IconLabel" x="435" y="143" w="61" h="-1" measuredW="52" measuredH="69" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>myApp1</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::IconLabel" x="442" y="237" w="-1" h="-1" measuredW="54" measuredH="69" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>myApp2</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::HRule" x="427" y="216" w="223" h="-1" measuredW="100" measuredH="10" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::HRule" x="427" y="315" w="223" h="-1" measuredW="100" measuredH="10" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::IconLabel" x="443" y="337" w="-1" h="-1" measuredW="53" measuredH="69" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>myApp3</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::HRule" x="427" y="407" w="223" h="-1" measuredW="100" measuredH="10" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::TextArea" x="496" y="137" w="143" h="75" measuredW="200" measuredH="140" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>16777215</borderColor>
+        <text>Here%20goes%20a%20description%20about%20my%20first%20app.%20I%27m%20collecting%20metrics%20on%20it.</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="549" y="431" w="-1" h="-1" measuredW="88" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Log%20Out</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::TextArea" x="500" y="234" w="143" h="75" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>16777215</borderColor>
+        <text>Description%20about%20myApp2</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::TextArea" x="500" y="334" w="143" h="75" measuredW="200" measuredH="140" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>16777215</borderColor>
+        <text>Description%20about%20myApp3</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="439" y="432" w="95" h="27" measuredW="89" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>004%26bm%3B004.bmml%26bm%3B004.bmml%26bm%3B004.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2242%2C388%2C137%2C415%22%20href%3D%22004.bmml%22%20alt%3D%22004%22%20id%3D%2212%22/%3E</map>
+        <size>18</size>
+        <text>Settings</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Canvas" x="428" y="133" w="211" h="83" measuredW="100" measuredH="70" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderStyle>none</borderStyle>
+        <href>006%26bm%3B006.bmml%26bm%3B006.bmml%26bm%3B006.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2231%2C89%2C242%2C172%22%20href%3D%22006.bmml%22%20alt%3D%22006%22%20id%3D%2213%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Canvas" x="435" y="230" w="211" h="83" measuredW="100" measuredH="70" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderStyle>none</borderStyle>
+        <href>006%26bm%3B006.bmml%26bm%3B006.bmml%26bm%3B006.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2238%2C186%2C249%2C269%22%20href%3D%22006.bmml%22%20alt%3D%22006%22%20id%3D%2214%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Canvas" x="435" y="325" w="211" h="83" measuredW="100" measuredH="70" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderStyle>none</borderStyle>
+        <href>006%26bm%3B006.bmml%26bm%3B006.bmml%26bm%3B006.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2238%2C281%2C249%2C364%22%20href%3D%22006.bmml%22%20alt%3D%22006%22%20id%3D%2215%22/%3E</map>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

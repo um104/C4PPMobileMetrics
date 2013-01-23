@@ -1,0 +1,85 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="681" measuredH="551" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::iPhone" x="399" y="41" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bgPattern>allWhite</bgPattern>
+        <topBar>false</topBar>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::HRule" x="431" y="177" w="208" h="-1" measuredW="100" measuredH="10" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="431" y="134" w="194" h="38" measuredW="94" measuredH="33" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Settings</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="440" y="202" w="-1" h="-1" measuredW="87" measuredH="26" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Font%20Size%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="440" y="243" w="-1" h="-1" measuredW="80" measuredH="26" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Contrast%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="440" y="326" w="-1" h="-1" measuredW="101" measuredH="26" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Cache%20Size%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="440" y="283" w="-1" h="-1" measuredW="93" measuredH="26" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Brightness%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Button" x="496" y="375" w="88" h="29" measuredW="75" measuredH="29" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>005%26bm%3B005.bmml%26bm%3B005.bmml%26bm%3B005.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2297%2C334%2C185%2C363%22%20href%3D%22005.bmml%22%20alt%3D%22005%22%20id%3D%228%22/%3E</map>
+        <size>20</size>
+        <text>About</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="440" y="416" w="88" h="29" measuredW="49" measuredH="29" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>003%26bm%3B003.bmml%26bm%3B003.bmml%26bm%3B003.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2241%2C375%2C129%2C404%22%20href%3D%22003.bmml%22%20alt%3D%22003%22%20id%3D%229%22/%3E</map>
+        <size>20</size>
+        <text>Ok</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="544" y="416" w="88" h="29" measuredW="85" measuredH="29" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>003%26bm%3B003.bmml%26bm%3B003.bmml%26bm%3B003.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22145%2C375%2C233%2C404%22%20href%3D%22003.bmml%22%20alt%3D%22003%22%20id%3D%2210%22/%3E</map>
+        <size>20</size>
+        <text>Cancel</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::ComboBox" x="545" y="204" w="-1" h="-1" measuredW="46" measuredH="23" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>16</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::ComboBox" x="545" y="285" w="-1" h="-1" measuredW="57" measuredH="23" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Med</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::ComboBox" x="545" y="328" w="-1" h="-1" measuredW="65" measuredH="23" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>20MB</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::ComboBox" x="545" y="245" w="-1" h="-1" measuredW="56" measuredH="23" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>200</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

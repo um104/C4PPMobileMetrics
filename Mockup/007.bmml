@@ -1,0 +1,67 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="716" measuredH="542" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::iPhone" x="434" y="32" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <topBar>false</topBar>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::IconLabel" x="479" y="187" w="60" h="-1" measuredW="48" measuredH="69" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>CellBarsIcon%7Clarge</icon>
+        <text>graph1</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::IconLabel" x="585" y="187" w="60" h="-1" measuredW="48" measuredH="69" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ChartColumnIcon%7Clarge</icon>
+        <text>graph2</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::IconLabel" x="585" y="267" w="60" h="-1" measuredW="48" measuredH="69" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ChartPieIcon%7Clarge</icon>
+        <text>graph3</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::IconLabel" x="479" y="347" w="60" h="-1" measuredW="48" measuredH="69" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ChartLineIcon%7Clarge</icon>
+        <text>graph4</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::IconLabel" x="479" y="267" w="60" h="-1" measuredW="48" measuredH="69" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>Number5Icon%7Clarge</icon>
+        <text>stat1</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::IconLabel" x="585" y="347" w="60" h="-1" measuredW="48" measuredH="69" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>DollarIcon%7Clarge</icon>
+        <text>stat2</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::HRule" x="462" y="166" w="227" h="-1" measuredW="100" measuredH="10" zOrder="7" locked="false" isInGroup="-1"/>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::TextArea" x="554" y="129" w="91" h="29" measuredW="200" measuredH="140" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>16777215</borderColor>
+        <size>18</size>
+        <text>myApp2%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Icon" x="476" y="127" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>AIMIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="604" y="424" w="-1" h="-1" measuredW="56" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>008%26bm%3B008.bmml%26bm%3B008.bmml%26bm%3B008.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22170%2C392%2C226%2C419%22%20href%3D%22008.bmml%22%20alt%3D%22008%22%20id%3D%2211%22/%3E</map>
+        <size>16</size>
+        <text>New</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

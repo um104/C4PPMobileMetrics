@@ -1,0 +1,30 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="682" measuredH="534" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::iPhone" x="400" y="24" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <topBar>false</topBar>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::TextArea" x="441" y="175" w="200" h="226" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>%28Description%20of%20Mobile%20Analytics%29%0A%20%0A%28Website%20for%20help%29%0A%20%0A%20%0A%28Developer%20Names%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="441" y="111" w="200" h="49" measuredW="200" measuredH="37" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>28</size>
+        <text>Mobile%20Analytics</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::HRule" x="437" y="150" w="208" h="-1" measuredW="100" measuredH="10" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Button" x="499" y="413" w="62" h="27" measuredW="47" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>004%26bm%3B004.bmml%26bm%3B004.bmml%26bm%3B004.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2299%2C389%2C161%2C416%22%20href%3D%22004.bmml%22%20alt%3D%22004%22%20id%3D%226%22/%3E</map>
+        <size>18</size>
+        <text>Ok</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

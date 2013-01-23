@@ -1,0 +1,35 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="725" measuredH="565" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="0" controlTypeID="__group__" x="443" y="55" w="282" h="510" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="0" y="0" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="0">
+          <controlProperties>
+            <topBar>false</topBar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::ProgressBar" x="43" y="385" w="196" h="14" measuredW="100" measuredH="20" zOrder="1" locked="false" isInGroup="0">
+          <controlProperties>
+            <indeterminate>false</indeterminate>
+            <scrollBarValue>78</scrollBarValue>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="37" y="126" w="209" h="176" measuredW="77" measuredH="79" zOrder="2" locked="false" isInGroup="0">
+          <controlProperties>
+            <href>001%26bm%3B001.bmml%26bm%3B001.bmml%26bm%3B001.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2237%2C126%2C246%2C302%22%20href%3D%22001.bmml%22%20alt%3D%22001%22%20id%3D%222%22/%3E</map>
+            <src>./assets/channel4logoPlus_Small.png</src>
+            <text/>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="43" y="338" w="203" h="47" measuredW="200" measuredH="37" zOrder="3" locked="false" isInGroup="0">
+          <controlProperties>
+            <href>001%26bm%3B001.bmml%26bm%3B001.bmml%26bm%3B001.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2243%2C338%2C246%2C385%22%20href%3D%22001.bmml%22%20alt%3D%22001%22%20id%3D%223%22/%3E</map>
+            <size>28</size>
+            <text>Mobile%20Analytics</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>
