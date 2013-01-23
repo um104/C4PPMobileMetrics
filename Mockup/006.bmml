@@ -26,25 +26,33 @@
     </control>
     <control controlID="6" controlTypeID="com.balsamiq.mockups::IconLabel" x="504" y="228" w="72" h="-1" measuredW="48" measuredH="69" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>ChartLineIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22124%2C181%2C196%2C250%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%226%22/%3E</map>
         <text>graph1</text>
       </controlProperties>
     </control>
     <control controlID="7" controlTypeID="com.balsamiq.mockups::IconLabel" x="625" y="228" w="48" h="-1" measuredW="48" measuredH="69" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>ChartColumnIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22245%2C181%2C293%2C250%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%227%22/%3E</map>
         <text>graph2</text>
       </controlProperties>
     </control>
     <control controlID="8" controlTypeID="com.balsamiq.mockups::IconLabel" x="838" y="228" w="48" h="-1" measuredW="48" measuredH="69" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>ChartPieIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22458%2C181%2C506%2C250%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%228%22/%3E</map>
         <text>graph3</text>
       </controlProperties>
     </control>
     <control controlID="9" controlTypeID="com.balsamiq.mockups::IconLabel" x="752" y="228" w="48" h="-1" measuredW="48" measuredH="69" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>Number4Icon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22372%2C181%2C420%2C250%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%229%22/%3E</map>
         <text>stat1</text>
       </controlProperties>
     </control>
@@ -79,13 +87,17 @@
     </control>
     <control controlID="14" controlTypeID="com.balsamiq.mockups::IconLabel" x="504" y="336" w="72" h="-1" measuredW="48" measuredH="69" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>CalendarIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22124%2C289%2C196%2C358%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%2214%22/%3E</map>
         <text>graph4</text>
       </controlProperties>
     </control>
     <control controlID="15" controlTypeID="com.balsamiq.mockups::IconLabel" x="752" y="336" w="48" h="-1" measuredW="48" measuredH="69" zOrder="14" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>PortletMaximizeIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22372%2C289%2C420%2C358%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%2215%22/%3E</map>
         <text>stat6</text>
       </controlProperties>
     </control>
@@ -96,13 +108,17 @@
     </control>
     <control controlID="17" controlTypeID="com.balsamiq.mockups::IconLabel" x="625" y="336" w="48" h="-1" measuredW="48" measuredH="69" zOrder="16" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>DataBaseIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22245%2C289%2C293%2C358%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%2217%22/%3E</map>
         <text>stat5</text>
       </controlProperties>
     </control>
     <control controlID="18" controlTypeID="com.balsamiq.mockups::IconLabel" x="838" y="336" w="48" h="-1" measuredW="48" measuredH="69" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>SmallClockIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22458%2C289%2C506%2C358%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%2218%22/%3E</map>
         <text>graph7</text>
       </controlProperties>
     </control>
