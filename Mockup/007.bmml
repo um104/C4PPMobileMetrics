@@ -7,37 +7,49 @@
     </control>
     <control controlID="2" controlTypeID="com.balsamiq.mockups::IconLabel" x="479" y="187" w="60" h="-1" measuredW="48" measuredH="69" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>CellBarsIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2245%2C155%2C105%2C224%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%222%22/%3E</map>
         <text>graph1</text>
       </controlProperties>
     </control>
     <control controlID="3" controlTypeID="com.balsamiq.mockups::IconLabel" x="585" y="187" w="60" h="-1" measuredW="48" measuredH="69" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>ChartColumnIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22151%2C155%2C211%2C224%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%223%22/%3E</map>
         <text>graph2</text>
       </controlProperties>
     </control>
     <control controlID="4" controlTypeID="com.balsamiq.mockups::IconLabel" x="585" y="267" w="60" h="-1" measuredW="48" measuredH="69" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>ChartPieIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22151%2C235%2C211%2C304%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%224%22/%3E</map>
         <text>graph3</text>
       </controlProperties>
     </control>
     <control controlID="5" controlTypeID="com.balsamiq.mockups::IconLabel" x="479" y="347" w="60" h="-1" measuredW="48" measuredH="69" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>ChartLineIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2245%2C315%2C105%2C384%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%225%22/%3E</map>
         <text>graph4</text>
       </controlProperties>
     </control>
     <control controlID="6" controlTypeID="com.balsamiq.mockups::IconLabel" x="479" y="267" w="60" h="-1" measuredW="48" measuredH="69" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>Number5Icon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2245%2C235%2C105%2C304%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%226%22/%3E</map>
         <text>stat1</text>
       </controlProperties>
     </control>
     <control controlID="7" controlTypeID="com.balsamiq.mockups::IconLabel" x="585" y="347" w="60" h="-1" measuredW="48" measuredH="69" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>012%26bm%3B012.bmml%26bm%3B012.bmml%26bm%3B012.bmml</href>
         <icon>DollarIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22151%2C315%2C211%2C384%22%20href%3D%22012.bmml%22%20alt%3D%22012%22%20id%3D%227%22/%3E</map>
         <text>stat2</text>
       </controlProperties>
     </control>
