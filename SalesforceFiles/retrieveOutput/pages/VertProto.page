@@ -11,6 +11,8 @@
     google.setOnLoadCallback(drawChart);
     google.setOnLoadCallback(drawVisualization);
       
+      //This is a comment
+      
       function drawVisualization() { 
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Country');
