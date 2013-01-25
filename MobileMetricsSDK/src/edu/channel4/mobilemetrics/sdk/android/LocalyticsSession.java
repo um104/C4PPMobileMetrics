@@ -2173,7 +2173,6 @@ public final class LocalyticsSession
             if (Constants.IS_LOGGABLE)
             {
                 Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
-                Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
             }
 
             

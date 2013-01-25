@@ -67,12 +67,12 @@
         <icon>AIMIcon%7Cmedium</icon>
       </controlProperties>
     </control>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="604" y="424" w="-1" h="-1" measuredW="56" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="522" y="425" w="106" h="27" measuredW="99" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
         <href>008%26bm%3B008.bmml%26bm%3B008.bmml%26bm%3B008.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22170%2C392%2C226%2C419%22%20href%3D%22008.bmml%22%20alt%3D%22008%22%20id%3D%2211%22/%3E</map>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2288%2C393%2C194%2C420%22%20href%3D%22008.bmml%22%20alt%3D%22008%22%20id%3D%2211%22/%3E</map>
         <size>16</size>
-        <text>New</text>
+        <text>New%20Chart</text>
       </controlProperties>
     </control>
   </controls>

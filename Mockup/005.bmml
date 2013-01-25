@@ -8,13 +8,13 @@
     <control controlID="2" controlTypeID="com.balsamiq.mockups::TextArea" x="441" y="175" w="200" h="226" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <size>16</size>
-        <text>%28Description%20of%20Mobile%20Analytics%29%0A%20%0A%28Website%20for%20help%29%0A%20%0A%20%0A%28Developer%20Names%29</text>
+        <text>http%3A//brianmiddaugh.com/channel4/index.html%0A%20%0ADeveloped%20by%3A%0ARay%20Tam%0ABrian%20Middaugh%0AMark%20Lerner%0ACalvin%20Hui%20Pek%0AGirum%20Ibssa</text>
       </controlProperties>
     </control>
-    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="441" y="111" w="200" h="49" measuredW="200" measuredH="37" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="451" y="115" w="181" h="49" measuredW="182" measuredH="37" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <size>28</size>
-        <text>Mobile%20Analytics</text>
+        <text>Mobile%20Metrics</text>
       </controlProperties>
     </control>
     <control controlID="4" controlTypeID="com.balsamiq.mockups::HRule" x="437" y="150" w="208" h="-1" measuredW="100" measuredH="10" zOrder="3" locked="false" isInGroup="-1"/>
