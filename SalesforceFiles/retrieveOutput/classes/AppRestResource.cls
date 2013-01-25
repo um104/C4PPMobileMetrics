@@ -7,7 +7,7 @@ public class AppRestResource
         String returnString = '{[';
         for (AppTable__c instance: appList)
         {
-            returnString += '{Id:' + instance.AppId__c + ';name:' + instance.AppName__c + ';},';
+            returnString += JSON.serialize(instance) + ',';
         }
         returnString = (returnString.substring(0, returnString.length() - 1) + ']}');
         
