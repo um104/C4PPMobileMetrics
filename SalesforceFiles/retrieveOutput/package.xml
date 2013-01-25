@@ -3,6 +3,7 @@
     <fullName>ClassAndPage</fullName>
     <description>This package contains SessionRestResources and the VertProto Visualforce page</description>
     <types>
+        <members>AppRestResource</members>
         <members>SessionRestResource</members>
         <members>SessionRestResourceTest</members>
         <name>ApexClass</name>
@@ -12,6 +13,8 @@
         <name>ApexPage</name>
     </types>
     <types>
+        <members>AppTable__c.AppId__c</members>
+        <members>AppTable__c.AppName__c</members>
         <members>Session__c.Android_ID_SHA__c</members>
         <members>Session__c.App_Version__c</members>
         <members>Session__c.Data_Connection_Type__c</members>
@@ -30,14 +33,17 @@
         <name>CustomField</name>
     </types>
     <types>
+        <members>AppTable__c</members>
         <members>Session__c</members>
         <name>CustomObject</name>
     </types>
     <types>
+        <members>AppTable__c-DatabaseTable Layout</members>
         <members>Session__c-Session Layout</members>
         <name>Layout</name>
     </types>
     <types>
+        <members>AppTable__c.All</members>
         <members>Session__c.All</members>
         <name>ListView</name>
     </types>

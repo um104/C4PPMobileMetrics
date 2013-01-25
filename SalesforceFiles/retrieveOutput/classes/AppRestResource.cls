@@ -12,5 +12,7 @@ public class AppRestResource
         returnString = (returnString.substring(0, returnString.length() - 1) + ']}');
         
         return returnString;
+        
+        // I think we can simply do "return JSON.serialize(returnString)", turning method into two lines of code
     }
 }
