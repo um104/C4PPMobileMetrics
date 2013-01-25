@@ -361,7 +361,6 @@ public final class LocalyticsSession
 	            	Log.d(Constants.LOG_TAG, "User Credentials");
 	            	for (String cred : credentials)
 	            		Log.d(Constants.LOG_TAG, cred);
-	            	Log.d(Constants.LOG_TAG, post.toString());
 	            }
 	            
 	            // Execute HTTP Post Request
@@ -378,7 +377,7 @@ public final class LocalyticsSession
 	            
 	        } catch (ClientProtocolException e) {
 	        	if (Constants.IS_LOGGABLE) {
-	        		Log.d("Error Message: ClientProtocolException\n", e.toString());
+	        		Log.e("Error Message: ClientProtocolException\n", e.getMessage());
 	        	}
 	        } catch (IOException e) {
 	        	if (Constants.IS_LOGGABLE) {

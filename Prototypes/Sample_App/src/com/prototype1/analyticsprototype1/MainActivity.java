@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 				LOCALYTICS_APP_KEY); // Application's key
 
 		this.localyticsSession.open(); // open the session
-		this.localyticsSession.upload(); // upload any data
+		//this.localyticsSession.upload(); // upload any data
 
 		// At this point, Localytics Initialization is done. After uploads
 		// complete nothing
