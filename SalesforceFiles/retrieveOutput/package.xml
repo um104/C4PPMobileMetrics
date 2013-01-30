@@ -15,6 +15,8 @@
     <types>
         <members>AppTable__c.AppId__c</members>
         <members>AppTable__c.AppName__c</members>
+        <members>AppTable__c.PackageName__c</members>
+        <members>AppTable__c.VersionName__c</members>
         <members>Session__c.Android_ID_SHA__c</members>
         <members>Session__c.App_Version__c</members>
         <members>Session__c.Data_Connection_Type__c</members>

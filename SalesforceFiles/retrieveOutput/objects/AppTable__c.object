@@ -57,6 +57,26 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>PackageName__c</fullName>
+        <description>Name of the package in which the user&apos;s app is being developed.</description>
+        <externalId>false</externalId>
+        <label>PackageName</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VersionName__c</fullName>
+        <description>The string name of the version of the current app.</description>
+        <externalId>false</externalId>
+        <label>VersionName</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <label>AppTable</label>
     <listViews>
         <fullName>All</fullName>

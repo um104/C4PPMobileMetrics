@@ -19,11 +19,11 @@ global class SessionRestResource {
             session.Data_Connection_Type__c = hblob.attrs.dac;
             session.Device_Country__c = hblob.attrs.dc;
             session.Device_Manufacturer__c = hblob.attrs.dma;
-        	session.Device_Model__c = hblob.attrs.dmo;
-        	session.Device_Type__c = hblob.attrs.dp;
-        	session.Language_Locale__c = hblob.attrs.dll;
-        	session.Locale_Country_Code__c = hblob.attrs.dlc;
-        	session.Network_Carrier__c = hblob.attrs.nca;
+            session.Device_Model__c = hblob.attrs.dmo;
+            session.Device_Type__c = hblob.attrs.dp;
+            session.Language_Locale__c = hblob.attrs.dll;
+            session.Locale_Country_Code__c = hblob.attrs.dlc;
+            session.Network_Carrier__c = hblob.attrs.nca;
             session.Network_Country_Code__c = hblob.attrs.nc;
             session.OS_Version__c = hblob.attrs.dov;
             session.SDK_Compatibility__c = hblob.attrs.dsdk;
