@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.channel4.mobilemetrics.dashboard.android"
+    package="edu.channel4.mm.db.android"
     android:versionCode="1"
     android:versionName="1.0" >
 

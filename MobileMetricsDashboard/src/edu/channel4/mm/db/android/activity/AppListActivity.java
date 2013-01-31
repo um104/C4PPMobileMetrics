@@ -1,4 +1,4 @@
-package edu.channel4.mobilemetrics.dashboard.android;
+package edu.channel4.mm.db.android.activity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,12 +13,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import edu.channel4.mobilemetrics.dashboard.android.model.AppData;
+import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.model.AppData;
 
-public class AppListActivity extends Activity {
+public class AppListActivity extends Activity implements AppListObserver {
 
 	List<AppData> appList;
 	ListView listViewAppList;
+	AppDataArrayAdapater arrayAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +33,8 @@ public class AppListActivity extends Activity {
 		appList = Arrays.asList(new AppData("test app", "com.example", 1),
 				new AppData("Hang", "com.hangapp.android", 4), new AppData(
 						"Polytalk", "com.polytalk.ios", 2));
-
-		listViewAppList.setAdapter(new AppDataArrayAdapater(this,
-				R.id.cellAppList));
+		arrayAdapter = new AppDataArrayAdapater(this, R.id.cellAppList);
+		listViewAppList.setAdapter(arrayAdapter);
 	}
 
 	@Override
@@ -77,6 +78,12 @@ public class AppListActivity extends Activity {
 			return convertView;
 		}
 
+	}
+
+	@Override
+	public void updateAppList(List<AppData> appList) {
+		this.appList = appList;
+		arrayAdapter.notifyDataSetChanged();
 	}
 
 }

@@ -2,4 +2,4 @@ echo
 echo 'Be sure to change the username, password, and security token here!'
 echo 'See https://na11.salesforce.com/help/doc/en/user_security_token.htm for more info'
 echo
-curl https://login.salesforce.com/services/oauth2/token -d "grant_type=password" -d "client_id=3MVG98XJQQAccJQf_JCdrGZ5.3roL5wG41X0LfA0RAOcQ3Q9thdwa.QPCgwJtYsWaFpPohSezt6Iyl4eq27AX" -d "client_secret=5648614951884930500" -d "username=<username>" -d "password=<password><security token>"
+curl https://login.salesforce.com/services/oauth2/token -d "grant_type=password" -d "client_id=3MVG98XJQQAccJQf_JCdrGZ5.3roL5wG41X0LfA0RAOcQ3Q9thdwa.QPCgwJtYsWaFpPohSezt6Iyl4eq27AX" -d "client_secret=5648614951884930500" -d "username=channel4pp@calpoly.edu" -d "password=midnight2FJdLykP57DdATDlCZr2WnXqZD"

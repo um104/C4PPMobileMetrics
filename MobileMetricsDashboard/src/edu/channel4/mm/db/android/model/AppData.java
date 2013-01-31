@@ -1,4 +1,4 @@
-package edu.channel4.mobilemetrics.dashboard.android.model;
+package edu.channel4.mm.db.android.model;
 
 public class AppData {
 	String appName;
