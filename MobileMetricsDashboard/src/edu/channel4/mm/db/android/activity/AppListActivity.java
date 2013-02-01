@@ -1,7 +1,7 @@
 package edu.channel4.mm.db.android.activity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -36,9 +36,7 @@ public class AppListActivity extends Activity implements IAppListObserver {
 		sfConn = new SalesforceConn(getApplicationContext());
 
 		// Fill up appList with fakes
-		appList = Arrays.asList(new AppData("test app", "com.example", 1),
-				new AppData("Hang", "com.hangapp.android", 4), new AppData(
-						"Polytalk", "com.polytalk.ios", 2));
+		appList = new ArrayList<AppData>();
 
 		// Setup ListView
 		listViewAppList = (ListView) findViewById(R.id.listViewAppList);
@@ -98,7 +96,7 @@ public class AppListActivity extends Activity implements IAppListObserver {
 				TextView packageName = (TextView) convertView
 						.findViewById(R.id.textViewPackageName);
 
-				appName.setText(appData.getAppName() + ", version"
+				appName.setText(appData.getAppName() + ", version "
 						+ appData.getVersionNumber());
 				packageName.setText(appData.getPackageName());
 			} else {
@@ -111,9 +109,20 @@ public class AppListActivity extends Activity implements IAppListObserver {
 	}
 
 	@Override
-	public void updateAppList(List<AppData> appList) {
-		this.appList = appList;
-		arrayAdapter.notifyDataSetChanged();
+	public void updateAppList(final List<AppData> appList) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				AppListActivity.this.appList.clear();
+
+				for (AppData appData : appList) {
+					AppListActivity.this.appList.add(appData);
+				}
+
+				Collections.sort(AppListActivity.this.appList);
+				arrayAdapter.notifyDataSetChanged();
+			}
+		});
 	}
 
 }

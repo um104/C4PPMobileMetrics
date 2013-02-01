@@ -6,6 +6,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
 
 import android.content.Context;
 import android.util.Log;
@@ -15,7 +16,6 @@ import edu.channel4.mm.db.android.util.BaseAsyncTask;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class SalesforceConn {
-	private static final String TAG = SalesforceConn.class.getSimpleName();
 	protected static final String SALESFORCE_URL = "https://na9.salesforce.com/services/apexrest/channel4_apps/";
 	private Context context;
 	protected HttpClient client;
@@ -69,6 +69,22 @@ public class SalesforceConn {
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage());
 			}
+			
+			Log.d(TAG, "Got JSON result: " + responseString);
+
+			// Try to parse the resulting JSON
+			List<AppData> appList = null;
+			try {
+				appList = AppData.parseList(responseString);
+			} catch (JSONException e) {
+				Log.e(TAG, e.getMessage());
+				return null;
+			}
+
+			// Tell each of the "observers" of the app list to update.
+			for (IAppListObserver appListObserver : appListObservers) {
+				appListObserver.updateAppList(appList);
+			}
 
 			return responseString;
 		}
@@ -77,15 +93,7 @@ public class SalesforceConn {
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
 
-			List<AppData> appList = null;
-
-			// TODO: Parse the JSON string result into a List<AppData>
-			Log.d(TAG, "Got JSON result: " + result);
-
-			// Tell each of the "observers" of the app list to update.
-			for (IAppListObserver appListObserver : appListObservers) {
-				appListObserver.updateAppList(appList);
-			}
+			
 		}
 	}
 
