@@ -53,6 +53,14 @@ public class AppListActivity extends Activity implements IAppListObserver {
 		return true;
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// Retrieve the app list from Salesforce
+		getAppList(null);
+	}
+
 	public void getAppList(View v) {
 		Toast.makeText(getApplicationContext(),
 				"Retrieving app list from Salesforce", Toast.LENGTH_SHORT)
