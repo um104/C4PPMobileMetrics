@@ -23,7 +23,6 @@ public class GraphRender extends Activity {
         wView.setWebViewClient(new WebViewClient());
         wView.getSettings().setJavaScriptEnabled(true);
         wView.loadUrl("https://c.na9.visual.force.com/apex/VertProto");
-        
     }
 
     @Override
