@@ -1,4 +1,4 @@
-package edu.channel4.mobilemetrics.dashboard.android;
+package edu.channel4.mm.db.android.activity;
 
 import android.test.AndroidTestCase;
 
@@ -19,6 +19,10 @@ public class FakeTest extends AndroidTestCase {
 	
 	public void testFake() {
 		assertEquals(3, one+two);
+	}
+	
+	public void testFakeFail() {
+		assertEquals(4, one+two);
 	}
 
 }

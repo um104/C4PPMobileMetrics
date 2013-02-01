@@ -1,4 +1,4 @@
-package edu.channel4.mobilemetrics.dashboard.android;
+package edu.channel4.mm.db.android.activity;
 
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -15,7 +15,7 @@ import android.test.ActivityInstrumentationTestCase2;
 public class AppListActivityTest extends ActivityInstrumentationTestCase2<AppListActivity> {
 
     public AppListActivityTest() {
-        super("edu.channel4.mobilemetrics.dashboard.android", AppListActivity.class);
+        super(AppListActivity.class);
     }
 
 }
