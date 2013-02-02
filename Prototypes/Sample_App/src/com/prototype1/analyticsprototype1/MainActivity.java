@@ -54,16 +54,29 @@ public class MainActivity extends Activity {
 		this.localyticsSession.upload();
 		this.localyticsSession.close();
 	}
-
-	/*
-	 * public void onResume() { super.onResume(); this.localyticsSession.open();
-	 * }
-	 */
+	
+	public void tagButton1(View view) {
+		buttonPressed("b1");
+	}
+	
+	public void tagButton2(View view) {
+		buttonPressed("b2");
+	}
+	
+	public void tagButton3(View view) {
+		buttonPressed("b3");
+	}
+	
+	private void buttonPressed(String buttonName) {
+		Map<String, String> dataMap = new HashMap<String, String>();
+		dataMap.put("button", buttonName);
+		localyticsSession.tagEvent("button pressed", dataMap);
+	}
 
 	public void onPause() {
-		super.onPause();
+		this.localyticsSession.close();
 		this.localyticsSession.upload(); // upload any data
-		// this.localyticsSession.close();
-		// this.localyticsSession.upload(); why was this being called twice?
+		//this.localyticsSession.close();
+		super.onPause();
 	}
 }
