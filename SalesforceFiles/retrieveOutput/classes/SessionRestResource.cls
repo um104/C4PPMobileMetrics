@@ -1,77 +1,111 @@
 @RestResource(urlMapping='/channel4_upload/*')
-global class SessionRestResource {     
-    
+
+global class SessionRestResource 
+{
     @HttpPost
-    global static String uploadSession(HeaderBlob hblob) {
-        
-        // have this method take in a "HeaderBlob" object param, and a "List<Event>" param
-        
-        // pa = epoch time
-        // u = UUID
-        // attrs = attributes
-        
-        Session__c session = new Session__c();
-        try {
-            session.Epoch_time__c = hblob.pa;
-            session.UUID__c = hblob.u;
-            session.Android_ID_SHA__c = hblob.attrs.du;
-            session.App_Version__c = hblob.attrs.av;
-            session.Data_Connection_Type__c = hblob.attrs.dac;
-            session.Device_Country__c = hblob.attrs.dc;
-            session.Device_Manufacturer__c = hblob.attrs.dma;
-            session.Device_Model__c = hblob.attrs.dmo;
-            session.Device_Type__c = hblob.attrs.dp;
-            session.Language_Locale__c = hblob.attrs.dll;
-            session.Locale_Country_Code__c = hblob.attrs.dlc;
-            session.Network_Carrier__c = hblob.attrs.nca;
-            session.Network_Country_Code__c = hblob.attrs.nc;
-            session.OS_Version__c = hblob.attrs.dov;
-            session.SDK_Compatibility__c = hblob.attrs.dsdk;
-        
+    global static String uploadSession(SessionClass s)
+    {        
+        try 
+        {
+            Session__c session = new Session__c();
+            session.Android_ID_Hash__c = s.du;
+            session.App_Label__c = s.an;
+            session.App_Package_Name__c = s.pn;
+            session.App_Version__c = s.av;
+            session.Data_Type__c = s.dt;
+            session.Data_Connection_Type__c = s.dac;
+            session.Device_Serial_Hash__c = s.dms;
+            session.Device_Country__c = s.dc;
+            session.Device_Manufacturer__c = s.dma;
+            session.Device_Model__c = s.dmo;
+            session.Device_Type__c = s.dp;
+            session.Epoch_time__c = s.ct;
+            session.Language_Locale__c = s.dll;
+            session.Locale_Country_Code__c = s.dlc;
+            session.Localytics_Api_Key__c = s.au;
+            session.Localytics_Library_Version__c = s.lv;
+            session.Network_Carrier__c = s.nca;
+            session.Network_Country_Code__c = s.nc;
+            session.OS_Version__c = s.dov;
+            session.Persistent_Storage_Creation_Time_Seconds__c = s.pa;
+            session.SDK_Compatibility__c = s.dsdk;
+            session.Session_Length_Seconds__c = s.ctl;
+            session.UUID__c = s.u;
+            
             insert session;
+            
+            for(EventClass e : s.events)
+            {
+                Event__c event = new Event__c();
+                event.Session__c = session.id;
+                event.Data_Type__c = e.dt;
+                event.Event_Name__c = e.n;
+                event.Event_UUID__c = e.u;
+                event.Session_UUID__c = e.su;
+                event.Wall_Time_Seconds__c = e.ct;
+                
+                insert event;
+            
+                for(EventAttributeClass a : e.attrs)
+                {
+                    Attribute__c attribute = new Attribute__c();
+                    attribute.Event__c = event.id;
+                    attribute.Value__c = a.value;
+                    attribute.Key__c = a.key;
+                    
+                    insert attribute;
+                }
+            }
         }
         catch(Exception e)
         {
-            System.Debug('damn');
+            System.Debug('uploadSession');
         }
         
-        
-        return 'OKAY!';
+        return 'DONE!';
     }
     
-    global class SessionOpen {
-      	public String dt;
-        public Integer ct;
-        public String u;
-        public Integer nth;
-    }
-    
-    global class HeaderBlob {
-        public Integer seq;
+    global class SessionClass
+    {
         public String dt;
-        public String u; //u = UUID
-        public Integer pa; //pa = epoch time
-        public Attributes attrs; //attrs = attributes
-    }
-
-    global class Attributes {
-        public String dt; // datatype for JSON object
-        public String dc; // device country --
-        public String dac; // data connection type --
-        public String du; // android id SHA hash --
-        public String dmo; // device model --
-        public String dlc; // country code of current locale settings --
-        public String dma; // device manufacturer --
-        public String lv; // Localytics version
-        public String dms; // devices serial number
-        public String dov; // OS version --
-        public String av; // version name of application --
-        public String au; // localytics API key
-        public String nca; // network carrier --
-        public String nc; // key network country --
-        public String dll; // language locale --
-        public String dsdk; // SDK compatability --
-        public String dp; // device (will always be "android") --
+        public String dc;
+        public String dac;
+        public String du;
+        public String dmo;
+        public List<EventClass> events;
+        public String dlc;
+        public Integer ctl;
+        public String dma;
+        public String lv;
+        public String dms;
+        public String dov;
+        public Integer ct;
+        public String av;
+        public String au;
+        public String nca;
+        public String u;
+        public Integer pa;
+        public String nc;
+        public String an;
+        public String pn;
+        public String dll;
+        public String dsdk;
+        public String dp;
     }
     
+    global class EventClass
+    {
+        public String n;
+        public String su;
+        public String dt;
+        public String u;
+        public List<EventAttributeClass> attrs;
+        public Integer ct;
+    }
+    
+    global class EventAttributeClass
+    {
+        public String value;
+        public String key;
+    }
 }

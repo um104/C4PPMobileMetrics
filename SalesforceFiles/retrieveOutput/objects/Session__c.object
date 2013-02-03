@@ -38,10 +38,28 @@
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
     <fields>
-        <fullName>Android_ID_SHA__c</fullName>
+        <fullName>Android_ID_Hash__c</fullName>
         <externalId>false</externalId>
-        <label>Android ID Hash</label>
+        <label>Android_ID_Hash</label>
         <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>App_Label__c</fullName>
+        <externalId>false</externalId>
+        <label>App_Label</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>App_Package_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>App_Package_Name</label>
+        <length>20</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
@@ -65,11 +83,20 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Data_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Data_Type</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Device_Country__c</fullName>
         <description>Country Code</description>
         <externalId>false</externalId>
         <label>Device Country</label>
-        <length>5</length>
+        <length>10</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
@@ -88,6 +115,15 @@
         <externalId>false</externalId>
         <label>Device Model</label>
         <length>30</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Device_Serial_Hash__c</fullName>
+        <externalId>false</externalId>
+        <label>Device_Serial_Hash</label>
+        <length>100</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
@@ -130,6 +166,24 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Localytics_Api_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>Localytics_Api_Key</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Localytics_Library_Version__c</fullName>
+        <externalId>false</externalId>
+        <label>Localytics_Library_Version</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Network_Carrier__c</fullName>
         <externalId>false</externalId>
         <label>Network Carrier</label>
@@ -157,12 +211,32 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Persistent_Storage_Creation_Time_Seconds__c</fullName>
+        <externalId>false</externalId>
+        <label>Persistent_Storage_Creation_Time_Seconds</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>SDK_Compatibility__c</fullName>
         <externalId>false</externalId>
         <label>SDK Compatibility</label>
-        <length>5</length>
+        <length>10</length>
         <required>false</required>
         <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Session_Length_Seconds__c</fullName>
+        <externalId>false</externalId>
+        <label>Session_Length_Seconds</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
         <unique>false</unique>
     </fields>
     <fields>
@@ -177,7 +251,8 @@
     <label>Session</label>
     <listViews>
         <fullName>All</fullName>
-        <columns>Android_ID_SHA__c</columns>
+        <columns>NAME</columns>
+        <columns>Android_ID_Hash__c</columns>
         <columns>App_Version__c</columns>
         <columns>Data_Connection_Type__c</columns>
         <columns>Device_Country__c</columns>
@@ -191,7 +266,6 @@
         <columns>Network_Country_Code__c</columns>
         <columns>OS_Version__c</columns>
         <columns>SDK_Compatibility__c</columns>
-        <columns>UUID__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

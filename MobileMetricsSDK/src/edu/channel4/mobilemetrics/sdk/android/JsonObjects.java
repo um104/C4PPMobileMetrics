@@ -62,7 +62,18 @@ import org.json.JSONArray;
          * A UUID for the blob.
          */
         public static final String KEY_UNIQUE_ID = "u"; //$NON-NLS-1$
-
+        
+        //TODO(mlerner): Make sure this is okay!
+        /**
+         * The name of the app.
+         */
+        public static final String KEY_APP_NAME = "an"; //$NON-NLS-1$
+        
+        /**
+         * The package name of the app.
+         */
+        public static final String KEY_PACKAGE_NAME = "pn"; //$NON-NLS-1$
+        
         /**
          * A JSON Object for attributes for the session.
          */

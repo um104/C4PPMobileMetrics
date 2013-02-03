@@ -8,7 +8,6 @@
 
 package edu.channel4.mobilemetrics.sdk.android;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -31,11 +30,9 @@ import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -48,12 +45,15 @@ import org.json.JSONObject;
 import android.Manifest.permission;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.CursorJoiner;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Build.VERSION;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -63,8 +63,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
-
-import edu.channel4.mobilemetrics.sdk.android.JsonObjects.BlobHeader;
 import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.ApiKeysDbColumns;
 import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.AttributesDbColumns;
 import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.EventHistoryDbColumns;
@@ -377,7 +375,7 @@ public final class LocalyticsSession
 	            
 	        } catch (ClientProtocolException e) {
 	        	if (Constants.IS_LOGGABLE) {
-	        		Log.e("Error Message: ClientProtocolException\n", e.getMessage());
+	        		Log.d("Error Message: ClientProtocolException\n", e.toString());
 	        	}
 	        } catch (IOException e) {
 	        	if (Constants.IS_LOGGABLE) {
@@ -1965,12 +1963,10 @@ public final class LocalyticsSession
         private static final String UPLOAD_CALLBACK_THREAD_NAME = "upload_callback"; //$NON-NLS-1$
 
         /**
-         * Localytics upload URL, as a format string that contains a format for the API key.
+         * Salesforce upload URL, as a format string that contains a format for the Instance URL key.
          */
-        // TODO(mlerner): Formalize this. Change UPDATE_URL to be formatted, where it will take two strings: instance_url and access_key
-        //private final static String ANALYTICS_URL = "http://analytics.localytics.com/api/v2/applications/%s/uploads"; //$NON-NLS-1$
-        private final static String UPDATE_URL = "https://na1.salesforce.com/services/data/v20.0/sobjects/Account/001D000000IroHJ"; //$NON-NLS-1$
-        
+        private final static String UPDATE_URL = "%s/services/apexrest/channel4_upload/"; //$NON-NLS-1$
+                
         /**
          * Handler message to upload all data collected so far
          * <p>
@@ -2025,6 +2021,7 @@ public final class LocalyticsSession
             mContext = context;
             mProvider = LocalyticsProvider.getInstance(context, apiKey);
             mSessionHandler = sessionHandler;
+            //TODO(mlerner): apiKey should be removed -- we're not using it.
             mApiKey = apiKey;
         }
 
@@ -2051,24 +2048,16 @@ public final class LocalyticsSession
 
                         try
                         {
-                            final List<JSONObject> toUpload = convertDatabaseToJson();
-
-                            if (!toUpload.isEmpty())
+                            final JSONObject toUpload = convertDatabaseToJson();
+                            
+                            if (toUpload.getJSONArray("sessions").length() != 0)
                             {
                                 final StringBuilder builder = new StringBuilder();
+                                                                
+                                builder.append(toUpload.toString());
+                                builder.append('\n');
                                 
-                                //TODO(mlerner): Change this area to store all objects in one big JSON obj
-                                builder.append("{\"hblob\":");
-                                
-                                
-                                for (final JSONObject json : toUpload)
-                                {
-                                    builder.append(json.toString());
-                                    builder.append('\n');
-                                }
-                                builder.append("}");
-
-                                if (uploadSessions(String.format(UPDATE_URL, mApiKey), builder.toString()))
+                                if (uploadSessions(String.format(UPDATE_URL, instance_url), builder.toString()))
                                 {
                                     mProvider.runBatchTransaction(new Runnable()
                                     {
@@ -2137,8 +2126,6 @@ public final class LocalyticsSession
          */
         /* package */static boolean uploadSessions(final String url, final String body)
         {
-            //TODO(mlerner): Make sure this is clean, too.
-            
             if (Constants.ENABLE_PARAMETER_CHECKING)
             {
                 if (null == url)
@@ -2152,39 +2139,24 @@ public final class LocalyticsSession
                 }
             }
 
-	    String newurl = instance_url + "/services/apexrest/channel4_upload/";
-            
             final DefaultHttpClient client = new DefaultHttpClient();
-            final HttpPost httpPost = new HttpPost(newurl);
-            
-//            StringEntity se = new StringEntity(newbody);
+            final HttpPost httpPost = new HttpPost(url);
             
             httpPost.addHeader("Content-Type", "application/json");
             httpPost.addHeader("Authorization", "Bearer " + access_token);
-//            httpPost.setEntity(se);
-            
-/*            if (Constants.IS_LOGGABLE)
-            {
-                Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", newbody.toString())); //$NON-NLS-1$
-            }
-*/
   
             if (Constants.IS_LOGGABLE)
             {
-                Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
+            	Log.v(Constants.LOG_TAG, String.format("Upload body before compression is: %s", body.toString())); //$NON-NLS-1$
             }
 
-            
-            //httpPost.addHeader("Content-Encoding", "gzip"); 
-            
-            /*
-            httpPost.addHeader("Content-Type", "application/x-gzip"); //$NON-NLS-1$ //$NON-NLS-2$
-            */
-
+            //TODO(mlerner): Add gzip encoding when you get a chance. Test it through cUrl first, if possible.
+            //httpPost.addHeader("Content-Encoding", "gzip");  //$NON-NLS-1$
+                        
             GZIPOutputStream gos = null;
             try
             {
-/*
+            	/*
             	final byte[] originalBytes = body.getBytes("UTF-8"); //$NON-NLS-1$	
 
                 final ByteArrayOutputStream baos = new ByteArrayOutputStream(originalBytes.length);
@@ -2274,47 +2246,76 @@ public final class LocalyticsSession
          *
          * @return A list of JSON objecs to upload to the server
          */
-        /* package */List<JSONObject> convertDatabaseToJson()
+        /* package */ JSONObject convertDatabaseToJson()
         {
-            final List<JSONObject> result = new LinkedList<JSONObject>();
+        	final JSONObject result = new JSONObject();
+        	final JSONArray sessionArray = new JSONArray();
             Cursor cursor = null;
             try
             {
+            	// get all upload blobs (sessions!)
                 cursor = mProvider.query(UploadBlobsDbColumns.TABLE_NAME, null, null, null, null);
 
                 final long creationTime = getApiKeyCreationTime(mProvider, mApiKey);
 
+                // two different kinds of unique ids. Just in case, I guess. This just gets their columns, not the actual value
                 final int idColumn = cursor.getColumnIndexOrThrow(UploadBlobsDbColumns._ID);
                 final int uuidColumn = cursor.getColumnIndexOrThrow(UploadBlobsDbColumns.UUID);
+                
+                // loops through multiple sessions stored in DB
                 while (cursor.moveToNext())
                 {
                     try
                     {
-                        final JSONObject blobHeader = new JSONObject();
-
-                        blobHeader.put(JsonObjects.BlobHeader.KEY_DATA_TYPE, BlobHeader.VALUE_DATA_TYPE);
-                        blobHeader.put(JsonObjects.BlobHeader.KEY_PERSISTENT_STORAGE_CREATION_TIME_SECONDS, creationTime);
-                        blobHeader.put(JsonObjects.BlobHeader.KEY_SEQUENCE_NUMBER, cursor.getLong(idColumn));
-                        blobHeader.put(JsonObjects.BlobHeader.KEY_UNIQUE_ID, cursor.getString(uuidColumn));
-                        blobHeader.put(JsonObjects.BlobHeader.KEY_ATTRIBUTES, getAttributesFromSession(mProvider, mApiKey, getSessionIdForBlobId(cursor.getLong(idColumn))));
-                        result.add(blobHeader);
-
+                    	// get session attributes, add to it app start time and unique ID
+                        JSONObject session = getAttributesFromSession(mProvider, mApiKey, getSessionIdForBlobId(cursor.getLong(idColumn)));
+                        session.put(JsonObjects.BlobHeader.KEY_PERSISTENT_STORAGE_CREATION_TIME_SECONDS, creationTime); // NOTE: THIS IS CREATION TIME OF THE DATABASE. IT STICKS AROUND LONGER THAN THE APP IS ALIVE!
+                        session.put(JsonObjects.BlobHeader.KEY_UNIQUE_ID, cursor.getString(uuidColumn));
                         
-                        /*
-                         * TODO(mlerner): THIS IS COMMENTED OUT FOR THE VERTICAL PROTOTYPE. Uncomment it to get
-                         * event recording functionality back. For now, it's just recording sessions.
-                         * 
+                        //Add app-specific unique ID. This will be the same from all of the same app on diff devices.
+                        final PackageManager pm = mContext.getPackageManager();
+                        ApplicationInfo ai;
+                        try {
+                            ai = pm.getApplicationInfo( mContext.getPackageName(), 0);
+                        } catch (final NameNotFoundException e) {
+                            ai = null;
+                        }
+                        final String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
+                        final String packageName = mContext.getPackageName();
+
+                        session.put(JsonObjects.BlobHeader.KEY_APP_NAME, applicationName);
+                        session.put(JsonObjects.BlobHeader.KEY_PACKAGE_NAME, packageName);
+                        
+                        JSONArray eventsArray = new JSONArray();
                         Cursor blobEvents = null;
                         try
                         {
+                        	// query the "upload_blob_events" table (project only the "events_key_ref" col) for all blob events 
+                        	// with upload_blobs_key_ref equal to the current session's ID, sorted by Events_Key_Ref
+                        	// effectively, gets all event data
                             blobEvents = mProvider.query(UploadBlobEventsDbColumns.TABLE_NAME, new String[]
                                 { UploadBlobEventsDbColumns.EVENTS_KEY_REF }, String.format("%s = ?", UploadBlobEventsDbColumns.UPLOAD_BLOBS_KEY_REF), new String[] //$NON-NLS-1$
                                 { Long.toString(cursor.getLong(idColumn)) }, UploadBlobEventsDbColumns.EVENTS_KEY_REF);
 
+                            // this adds all the event data to eventsArray
                             final int eventIdColumn = blobEvents.getColumnIndexOrThrow(UploadBlobEventsDbColumns.EVENTS_KEY_REF);
                             while (blobEvents.moveToNext())
                             {
-                                result.add(convertEventToJson(mProvider, mContext, blobEvents.getLong(eventIdColumn), cursor.getLong(idColumn), mApiKey));
+                            	JSONObject obj = convertEventToJson(mProvider, mContext, blobEvents.getLong(eventIdColumn), cursor.getLong(idColumn), mApiKey);
+                            	String dataType = obj.getString("dt");
+                            	// Catch all SessionOpen, SessionClose, OptIn/OptOut, EventFlow, add only relevent information, dump rest
+                            	//TODO(mlerner): put strings used here for keys in the right places
+                            	if (dataType.equals(JsonObjects.OptEvent.VALUE_DATA_TYPE) ||
+                            		dataType.equals(JsonObjects.EventFlow.VALUE_DATA_TYPE)) { ; } // do nothing
+                            	else if (dataType.equals(JsonObjects.SessionOpen.VALUE_DATA_TYPE)) {
+                            		// get KEY_WALL_TIME_SECONDs and put it in the session object
+                            		session.put(JsonObjects.SessionOpen.KEY_WALL_TIME_SECONDS, obj.getInt(JsonObjects.SessionOpen.KEY_WALL_TIME_SECONDS));
+                            	} else if (dataType.equals(JsonObjects.SessionClose.VALUE_DATA_TYPE)) {
+                            		session.put(JsonObjects.SessionClose.KEY_SESSION_LENGTH_SECONDS, obj.getInt(JsonObjects.SessionClose.KEY_SESSION_LENGTH_SECONDS));
+                            	} else {
+                            		// standard event
+                            		eventsArray.put(obj);
+                            	}
                             }
                         }
                         finally
@@ -2323,8 +2324,13 @@ public final class LocalyticsSession
                             {
                                 blobEvents.close();
                             }
+                            
+                            // load events into session, load session into sessionArray
+                            session.put("events", eventsArray); //TODO(mlerner): put that string somewhere not obnoxious
+                            sessionArray.put(session);
+                            //result = session;
+                            
                         }
-                        */
                     }
                     catch (final JSONException e)
                     {
@@ -2334,6 +2340,16 @@ public final class LocalyticsSession
                         }
                     }
                 }
+                
+                // wrap sessionArray in one {"sessions" : [{}, {}]} object
+                result.put("sessions", sessionArray);
+            }
+            catch (final JSONException e)
+            {
+            	if (Constants.IS_LOGGABLE)
+            	{
+            		Log.w(Constants.LOG_TAG, "Caught exception", e); //$NON-NLS-1$
+            	}
             }
             finally
             {
@@ -2574,7 +2590,8 @@ public final class LocalyticsSession
                     final String sessionUuid = getSessionUuid(provider, sessionId);
                     final long sessionStartTime = getSessionStartTime(provider, sessionId);
 
-                    if (OPEN_EVENT.equals(eventName))
+                    //TODO(mlerner): Should we turn every one of these off except for the "else" clause?
+                    if (OPEN_EVENT.equals(eventName)) // Session Open event
                     {
                         result.put(JsonObjects.SessionOpen.KEY_DATA_TYPE, JsonObjects.SessionOpen.VALUE_DATA_TYPE);
                         result.put(JsonObjects.SessionOpen.KEY_WALL_TIME_SECONDS, Math.round((double) cursor.getLong(cursor.getColumnIndex(EventsDbColumns.WALL_TIME))
@@ -2586,11 +2603,12 @@ public final class LocalyticsSession
                          */
                         result.put(JsonObjects.SessionOpen.KEY_COUNT, sessionId);
                     }
-                    else if (CLOSE_EVENT.equals(eventName))
+                    else if (CLOSE_EVENT.equals(eventName)) // Session Close event
                     {
                         result.put(JsonObjects.SessionClose.KEY_DATA_TYPE, JsonObjects.SessionClose.VALUE_DATA_TYPE);
                         result.put(JsonObjects.SessionClose.KEY_EVENT_UUID, cursor.getString(cursor.getColumnIndexOrThrow(EventsDbColumns.UUID)));
                         result.put(JsonObjects.SessionClose.KEY_SESSION_UUID, sessionUuid);
+                        //TODO(mlerner): For some reason the below two values are totally wrong. What's going on? We could just dump them...
                         result.put(JsonObjects.SessionClose.KEY_SESSION_START_TIME, Math.round((double) sessionStartTime / DateUtils.SECOND_IN_MILLIS));
                         result.put(JsonObjects.SessionClose.KEY_WALL_TIME_SECONDS, Math.round((double) cursor.getLong(cursor.getColumnIndex(EventsDbColumns.WALL_TIME))
                                 / DateUtils.SECOND_IN_MILLIS));
@@ -2663,7 +2681,7 @@ public final class LocalyticsSession
                         result.put(JsonObjects.OptEvent.KEY_WALL_TIME_SECONDS, Math.round((double) cursor.getLong(cursor.getColumnIndex(EventsDbColumns.WALL_TIME))
                                 / DateUtils.SECOND_IN_MILLIS));
                     }
-                    else if (FLOW_EVENT.equals(eventName))
+                    else if (FLOW_EVENT.equals(eventName)) // Flow Event, gets created once as soon as first event is added to session
                     {
                         result.put(JsonObjects.EventFlow.KEY_DATA_TYPE, JsonObjects.EventFlow.VALUE_DATA_TYPE);
                         result.put(JsonObjects.EventFlow.KEY_EVENT_UUID, cursor.getString(cursor.getColumnIndexOrThrow(EventsDbColumns.UUID)));
@@ -2735,7 +2753,7 @@ public final class LocalyticsSession
                         result.put(JsonObjects.SessionEvent.KEY_SESSION_UUID, sessionUuid);
                         result.put(JsonObjects.SessionEvent.KEY_NAME, eventName.substring(context.getPackageName().length() + 1, eventName.length()));
 
-                        final JSONObject attributes = convertAttributesToJson(provider, eventId);
+                        final JSONArray attributes = convertAttributesToJson(provider, eventId);
 
                         if (null != attributes)
                         {
@@ -2873,8 +2891,9 @@ public final class LocalyticsSession
          *         change from call to call of this method. If the event has no attributes, returns null.
          * @throws JSONException if an error occurs converting the attributes to JSON
          */
-        /* package */static JSONObject convertAttributesToJson(final LocalyticsProvider provider, final long eventId) throws JSONException
+        /* package */static JSONArray convertAttributesToJson(final LocalyticsProvider provider, final long eventId) throws JSONException
         {
+        	// TODO(mlerner): change this to return a JSONArray of [{"key":"foo", "value":"bar"}, {}, {}]
             Cursor cursor = null;
             try
             {
@@ -2885,13 +2904,18 @@ public final class LocalyticsSession
                     return null;
                 }
 
-                final JSONObject attributes = new JSONObject();
+                final JSONArray attributes = new JSONArray();
 
                 final int keyColumn = cursor.getColumnIndexOrThrow(AttributesDbColumns.ATTRIBUTE_KEY);
                 final int valueColumn = cursor.getColumnIndexOrThrow(AttributesDbColumns.ATTRIBUTE_VALUE);
+                // TODO(mlerner): Test this, here is where we wrap each attrib in their own JSON object
                 while (cursor.moveToNext())
                 {
-                    attributes.put(cursor.getString(keyColumn), cursor.getString(valueColumn));
+                	//TODO(mlerner): move these strings somewhere better, such as Constants.java
+                	JSONObject obj = new JSONObject();
+                	obj.put("key", cursor.getString(keyColumn));
+                	obj.put("value", cursor.getString(valueColumn));
+                    attributes.put(obj);
                 }
 
                 return attributes;
