@@ -2,7 +2,7 @@ package edu.channel4.mm.db.android.activity;
 
 import java.util.List;
 
-import edu.channel4.mm.db.android.model.AppData;
+import edu.channel4.mm.db.android.model.AppDescription;
 
 public interface IAppListObserver {
 
@@ -11,5 +11,5 @@ public interface IAppListObserver {
 	 * 
 	 * @param appList
 	 */
-	public void updateAppList(List<AppData> appList);
+	public void updateAppList(List<AppDescription> appList);
 }

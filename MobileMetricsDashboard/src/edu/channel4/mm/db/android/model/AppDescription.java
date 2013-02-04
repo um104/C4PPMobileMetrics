@@ -9,27 +9,27 @@ import org.json.JSONObject;
 
 import edu.channel4.mm.db.android.util.Keys;
 
-public class AppData implements Comparable<AppData> {
-	String appName;
+public class AppDescription implements Comparable<AppDescription> {
+	String appLabel;
 	String packageName;
-	Integer versionNumber;
+	String versionNumber;
 
-	public AppData(String appName, String packageName, Integer versionNumber) {
+	public AppDescription(String appLabel, String packageName, String version) {
 		super();
-		this.appName = appName;
+		this.appLabel = appLabel;
 		this.packageName = packageName;
-		this.versionNumber = versionNumber;
+		this.versionNumber = version;
 	}
 
 	public String getAppName() {
-		return appName;
+		return appLabel;
 	}
 
 	public String getPackageName() {
 		return packageName;
 	}
 
-	public Integer getVersionNumber() {
+	public String getVersionNumber() {
 		return versionNumber;
 	}
 
@@ -40,19 +40,20 @@ public class AppData implements Comparable<AppData> {
 	 * @return
 	 * @throws JSONException
 	 */
-	public static List<AppData> parseList(String appDataListString)
+	public static List<AppDescription> parseList(String appDataListString)
 			throws JSONException {
-		List<AppData> appDataList = new ArrayList<AppData>();
+		List<AppDescription> appDataList = new ArrayList<AppDescription>();
 
 		JSONArray appDataArray = new JSONArray(appDataListString);
 
 		for (int i = 0; i < appDataArray.length(); i++) {
 			JSONObject appDataObject = appDataArray.getJSONObject(i);
 
-			Integer appID = appDataObject.getInt(Keys.APP_ID);
-			String appName = appDataObject.getString(Keys.APP_NAME);
+			String appLabel = appDataObject.getString(Keys.APP_LABEL);
+			String packageName = appDataObject.getString(Keys.PACKAGE_NAME);
+			String version = appDataObject.getString(Keys.VERSION);
 
-			AppData appData = new AppData(appName, null, appID);
+			AppDescription appData = new AppDescription(appLabel, packageName, version);
 			appDataList.add(appData);
 		}
 
@@ -63,7 +64,7 @@ public class AppData implements Comparable<AppData> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((appName == null) ? 0 : appName.hashCode());
+		result = prime * result + ((appLabel == null) ? 0 : appLabel.hashCode());
 		result = prime * result
 				+ ((packageName == null) ? 0 : packageName.hashCode());
 		result = prime * result
@@ -79,11 +80,11 @@ public class AppData implements Comparable<AppData> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AppData other = (AppData) obj;
-		if (appName == null) {
-			if (other.appName != null)
+		AppDescription other = (AppDescription) obj;
+		if (appLabel == null) {
+			if (other.appLabel != null)
 				return false;
-		} else if (!appName.equals(other.appName))
+		} else if (!appLabel.equals(other.appLabel))
 			return false;
 		if (packageName == null) {
 			if (other.packageName != null)
@@ -99,9 +100,9 @@ public class AppData implements Comparable<AppData> {
 	}
 
 	@Override
-	public int compareTo(AppData another) {
-		if (!this.appName.equals(another.appName)) {
-			return this.appName.compareTo(another.appName);
+	public int compareTo(AppDescription another) {
+		if (!this.appLabel.equals(another.appLabel)) {
+			return this.appLabel.compareTo(another.appLabel);
 		} else if (!this.versionNumber.equals(another.versionNumber)) {
 			return this.versionNumber.compareTo(another.versionNumber);
 		} else {
