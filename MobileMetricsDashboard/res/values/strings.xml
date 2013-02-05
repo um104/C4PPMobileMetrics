@@ -7,5 +7,6 @@
     <string name="this_is_an_android_app">This is an Android app</string>
     <string name="our_package_name">edu.channel4.mobilemetrics.dashboard.android</string>
     <string name="refresh_app_list">Refresh</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
 
 </resources>

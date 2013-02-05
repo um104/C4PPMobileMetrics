@@ -22,6 +22,7 @@ import edu.channel4.mm.db.android.util.Keys;
  */
 public class LoginActivity extends Activity {
 	private static final String TAG = LoginActivity.class.getSimpleName();
+	//TODO(mlerner): CLIENT_ID changes based on what ORG is hosting the app! Fix this so that it doesn't use CLIENT_ID!
 	private static final String CLIENT_ID = "3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4";
 	private static final String REDIRECT_URI = "mobilemetrics://callback";
 	private static final String STATE = "mystate";

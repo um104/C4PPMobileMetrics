@@ -6,12 +6,14 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.AppDescription;
 import edu.channel4.mm.db.android.network.SalesforceConn;
+import edu.channel4.mm.db.android.util.Keys;
 
 public class AppListActivity extends Activity implements IAppListObserver {
 	private static final String TAG = AppListActivity.class.getSimpleName();
@@ -41,6 +44,22 @@ public class AppListActivity extends Activity implements IAppListObserver {
 		// Setup ListView
 		listViewAppList = (ListView) findViewById(R.id.listViewAppList);
 		arrayAdapter = new AppDataArrayAdapater(this, R.id.cellAppList);
+		listViewAppList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				String appName = ((AppDescription)parent.getAdapter().getItem(position)).getAppName();
+				String packageName = ((AppDescription)parent.getAdapter().getItem(position)).getPackageName();
+				String version = ((AppDescription)parent.getAdapter().getItem(position)).getVersionNumber();
+				
+				Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+				intent.putExtra(Keys.APP_LABEL, appName);
+				intent.putExtra(Keys.PACKAGE_NAME, packageName);
+				intent.putExtra(Keys.VERSION, version);
+				
+				startActivity(intent);
+			}
+		});
 
 		// Hook up the array adapter to the ListView
 		listViewAppList.setAdapter(arrayAdapter);
