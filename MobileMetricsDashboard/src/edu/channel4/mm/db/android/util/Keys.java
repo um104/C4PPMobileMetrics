@@ -15,9 +15,11 @@ public class Keys {
 
 	public static final String INSTANCE_URL = "instance_url";
 
-	public static final String APP_ID = "AppId__c";
+	public static final String APP_LABEL = "AppLabel__c";
 
-	public static final String APP_NAME = "AppName__c";
+	public static final String VERSION = "Version__c";
+	
+	public static final String PACKAGE_NAME = "PackageName__c";
 
 	/**
 	 * The {@link SharedPreferences} namespace that we should use throughout the

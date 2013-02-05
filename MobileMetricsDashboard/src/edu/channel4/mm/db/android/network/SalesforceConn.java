@@ -11,7 +11,7 @@ import org.json.JSONException;
 import android.content.Context;
 import android.util.Log;
 import edu.channel4.mm.db.android.activity.IAppListObserver;
-import edu.channel4.mm.db.android.model.AppData;
+import edu.channel4.mm.db.android.model.AppDescription;
 import edu.channel4.mm.db.android.util.BaseAsyncTask;
 import edu.channel4.mm.db.android.util.Keys;
 
@@ -73,9 +73,9 @@ public class SalesforceConn {
 			Log.d(TAG, "Got JSON result: " + responseString);
 
 			// Try to parse the resulting JSON
-			List<AppData> appList = null;
+			List<AppDescription> appList = null;
 			try {
-				appList = AppData.parseList(responseString);
+				appList = AppDescription.parseList(responseString);
 			} catch (JSONException e) {
 				Log.e(TAG, e.getMessage());
 				return null;

@@ -17,12 +17,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.model.AppData;
+import edu.channel4.mm.db.android.model.AppDescription;
 import edu.channel4.mm.db.android.network.SalesforceConn;
 
 public class AppListActivity extends Activity implements IAppListObserver {
 	private static final String TAG = AppListActivity.class.getSimpleName();
-	protected List<AppData> appList;
+	protected List<AppDescription> appList;
 	protected ListView listViewAppList;
 	protected AppDataArrayAdapater arrayAdapter;
 	protected SalesforceConn sfConn;
@@ -36,7 +36,7 @@ public class AppListActivity extends Activity implements IAppListObserver {
 		sfConn = new SalesforceConn(getApplicationContext());
 
 		// Fill up appList with fakes
-		appList = new ArrayList<AppData>();
+		appList = new ArrayList<AppDescription>();
 
 		// Setup ListView
 		listViewAppList = (ListView) findViewById(R.id.listViewAppList);
@@ -76,7 +76,7 @@ public class AppListActivity extends Activity implements IAppListObserver {
 		sfConn.getAppList(appListObservers);
 	}
 
-	private class AppDataArrayAdapater extends ArrayAdapter<AppData> {
+	private class AppDataArrayAdapater extends ArrayAdapter<AppDescription> {
 
 		public AppDataArrayAdapater(Context context, int textViewResourceId) {
 			super(context, textViewResourceId, appList);
@@ -91,7 +91,7 @@ public class AppListActivity extends Activity implements IAppListObserver {
 			}
 
 			// Grab the pertinent AppData object
-			AppData appData = appList.get(position);
+			AppDescription appData = appList.get(position);
 
 			// If it's the first time loading this cell
 			if (convertView == null) {
@@ -117,13 +117,13 @@ public class AppListActivity extends Activity implements IAppListObserver {
 	}
 
 	@Override
-	public void updateAppList(final List<AppData> appList) {
+	public void updateAppList(final List<AppDescription> appList) {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				AppListActivity.this.appList.clear();
 
-				for (AppData appData : appList) {
+				for (AppDescription appData : appList) {
 					AppListActivity.this.appList.add(appData);
 				}
 
