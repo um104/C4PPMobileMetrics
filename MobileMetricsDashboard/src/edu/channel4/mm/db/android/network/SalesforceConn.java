@@ -16,7 +16,7 @@ import edu.channel4.mm.db.android.util.BaseAsyncTask;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class SalesforceConn {
-	protected static final String SALESFORCE_URL = "https://na9.salesforce.com/services/apexrest/channel4_apps/";
+	protected static final String SALESFORCE_URL = "%s/services/apexrest/channel4_apps/";
 	private Context context;
 	protected HttpClient client;
 	protected List<IAppListObserver> appListObservers;
@@ -54,13 +54,14 @@ public class SalesforceConn {
 
 			String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
 					.getString(Keys.ACCESS_TOKEN, null);
+			String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0).getString(Keys.INSTANCE_URL, null);
 
 			if (accessToken == null) {
 				Log.e(TAG, "No access token currently saved");
 				return null;
 			}
 
-			HttpGet get = new HttpGet(SALESFORCE_URL);
+			HttpGet get = new HttpGet(String.format(SALESFORCE_URL, instanceUrl));
 			get.setHeader("Authorization", "Bearer " + accessToken);
 
 			try {
