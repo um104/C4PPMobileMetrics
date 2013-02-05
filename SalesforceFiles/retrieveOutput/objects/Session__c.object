@@ -59,7 +59,7 @@
         <fullName>App_Package_Name__c</fullName>
         <externalId>false</externalId>
         <label>App_Package_Name</label>
-        <length>20</length>
+        <length>255</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>

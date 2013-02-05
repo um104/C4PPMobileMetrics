@@ -11,12 +11,8 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>AppId__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
-                <field>AppName__c</field>
+                <field>AppLabel__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -24,7 +20,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>VersionName__c</field>
+                <field>Version__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

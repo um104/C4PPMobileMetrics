@@ -39,19 +39,9 @@
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
     <fields>
-        <fullName>AppId__c</fullName>
-        <externalId>true</externalId>
-        <label>AppId</label>
-        <precision>18</precision>
-        <required>true</required>
-        <scale>0</scale>
-        <type>Number</type>
-        <unique>true</unique>
-    </fields>
-    <fields>
-        <fullName>AppName__c</fullName>
+        <fullName>AppLabel__c</fullName>
         <externalId>false</externalId>
-        <label>AppName</label>
+        <label>AppLabel</label>
         <length>100</length>
         <required>false</required>
         <type>Text</type>
@@ -68,10 +58,10 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>VersionName__c</fullName>
+        <fullName>Version__c</fullName>
         <description>The string name of the version of the current app.</description>
         <externalId>false</externalId>
-        <label>VersionName</label>
+        <label>Version</label>
         <length>255</length>
         <required>false</required>
         <type>Text</type>

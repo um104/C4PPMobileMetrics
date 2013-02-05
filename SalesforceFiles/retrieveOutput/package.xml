@@ -5,7 +5,6 @@
     <types>
         <members>AppRestResource</members>
         <members>SessionRestResource</members>
-        <members>SessionRestResourceTest</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -13,39 +12,61 @@
         <name>ApexPage</name>
     </types>
     <types>
-        <members>AppTable__c.AppId__c</members>
-        <members>AppTable__c.AppName__c</members>
+        <members>AppTable__c.AppLabel__c</members>
         <members>AppTable__c.PackageName__c</members>
-        <members>AppTable__c.VersionName__c</members>
-        <members>Session__c.Android_ID_SHA__c</members>
+        <members>AppTable__c.Version__c</members>
+        <members>Attribute__c.Event__c</members>
+        <members>Attribute__c.Key__c</members>
+        <members>Attribute__c.Value__c</members>
+        <members>Event__c.Data_Type__c</members>
+        <members>Event__c.Event_Name__c</members>
+        <members>Event__c.Event_UUID__c</members>
+        <members>Event__c.Session_UUID__c</members>
+        <members>Event__c.Session__c</members>
+        <members>Event__c.Wall_Time_Seconds__c</members>
+        <members>Session__c.Android_ID_Hash__c</members>
+        <members>Session__c.App_Label__c</members>
+        <members>Session__c.App_Package_Name__c</members>
         <members>Session__c.App_Version__c</members>
         <members>Session__c.Data_Connection_Type__c</members>
+        <members>Session__c.Data_Type__c</members>
         <members>Session__c.Device_Country__c</members>
         <members>Session__c.Device_Manufacturer__c</members>
         <members>Session__c.Device_Model__c</members>
+        <members>Session__c.Device_Serial_Hash__c</members>
         <members>Session__c.Device_Type__c</members>
         <members>Session__c.Epoch_time__c</members>
         <members>Session__c.Language_Locale__c</members>
         <members>Session__c.Locale_Country_Code__c</members>
+        <members>Session__c.Localytics_Api_Key__c</members>
+        <members>Session__c.Localytics_Library_Version__c</members>
         <members>Session__c.Network_Carrier__c</members>
         <members>Session__c.Network_Country_Code__c</members>
         <members>Session__c.OS_Version__c</members>
+        <members>Session__c.Persistent_Storage_Creation_Time_Seconds__c</members>
         <members>Session__c.SDK_Compatibility__c</members>
+        <members>Session__c.Session_Length_Seconds__c</members>
         <members>Session__c.UUID__c</members>
         <name>CustomField</name>
     </types>
     <types>
         <members>AppTable__c</members>
+        <members>Attribute__c</members>
+        <members>Event__c</members>
         <members>Session__c</members>
         <name>CustomObject</name>
     </types>
     <types>
         <members>AppTable__c-DatabaseTable Layout</members>
+        <members>Attribute__c-Attribute Layout</members>
+        <members>Event__c-Event Layout</members>
         <members>Session__c-Session Layout</members>
         <name>Layout</name>
     </types>
     <types>
         <members>AppTable__c.All</members>
+        <members>Attribute__c.All</members>
+        <members>Event__c.All</members>
         <members>Session__c.All</members>
         <name>ListView</name>
     </types>
