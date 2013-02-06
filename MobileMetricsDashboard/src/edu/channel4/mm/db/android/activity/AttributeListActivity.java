@@ -27,7 +27,7 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 	
 	private AppDescription appDescription;
 	private GraphType graphType;
-	private SalesforceConn sfconn;
+	private SalesforceConn sfConn;
 	private ListView attribListView;
 	private List<String> attribList;
 	private ArrayAdapter<String> attribAdapter;
@@ -52,23 +52,19 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 		appDescription = intent.getParcelableExtra(Keys.PREFS_NS + Keys.APP_DESC);
 		graphType = (GraphType) intent.getSerializableExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE);
 		
-		// Instantiate SalesforceConn and get attributes
-		sfconn = SalesforceConn.getInstance(getApplicationContext());
+		// Instantiate SalesforceConn
+		sfConn = SalesforceConn.getInstance(getApplicationContext());
 		
 		// Set up ListView
 		attribListView = (ListView) findViewById(R.id.listViewAttribList);
 		
 		attribListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override // When app clicked, start Dashboard for that app.
+			@Override 				// When attribute clicked, send Intent to GraphViewerActivity
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent;
-				switch (graphType) {
-				case PieGraph:
-					intent = new Intent(getApplicationContext(), PieGraphActivity.class);
-				default:
-					// should never happen
-					intent = new Intent(getApplicationContext(), PieGraphActivity.class);
-				}
+				//TODO(mlerner): Change this in the event that the desired graph is a two-variable graph
+				Intent intent = new Intent(getApplicationContext(), GraphViewerActivity.class);
+				
+				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, graphType);
 				intent.putExtra(Keys.PREFS_NS + Keys.APP_DESC, appDescription);
 				intent.putExtra(Keys.PREFS_NS + Keys.ATTRIB_NAME, (String)parent.getAdapter().getItem(position));
 								
@@ -109,6 +105,7 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 		super.onResume();
 		
 		// Retrieve attrib list from Salesforce. Gets called on start of activity, too.
+		// TODO: should this be put in onCreate() so it only happens once? No need to reload every single time
 		getAttribList();
 	}
 	
@@ -124,7 +121,7 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 		attribListObservers.add(this);
 
 		// Execute the getAttribList method asynchronously
-		sfconn.getAttribList(attribListObservers, appDescription, graphType);
+		sfConn.getAttribList(attribListObservers, appDescription, graphType);
 	}
 
 	// Method called once attrib list is retreived
@@ -145,6 +142,5 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 			}
 		});
 	}
-		
-	}
 }
+

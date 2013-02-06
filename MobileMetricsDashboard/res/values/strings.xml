@@ -11,5 +11,7 @@
     <string name="generate_pie_graph">Generate Pie Graph</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_attribute_list">AttributeListActivity</string>
+    <string name="title_activity_pie_graph">PieGraphActivity</string>
+    <string name="title_activity_graph_viewer">GraphViewerActivity</string>
 
 </resources>
