@@ -35,6 +35,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.ch4verticalproto.AppList" />
         </activity>
+        <activity
+            android:name="edu.channel4.mm.db.android.AttributeListActivity"
+            android:label="@string/title_activity_attribute_list"
+            android:parentActivityName="edu.channel4.mm.db.android.activity.DashboardActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.channel4.mm.db.android.activity.DashboardActivity" />
+        </activity>
     </application>
 
 </manifest>

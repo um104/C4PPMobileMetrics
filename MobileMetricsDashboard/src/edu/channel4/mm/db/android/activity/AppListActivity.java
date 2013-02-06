@@ -24,6 +24,7 @@ import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class AppListActivity extends Activity implements IAppListObserver {
+	
 	private static final String TAG = AppListActivity.class.getSimpleName();
 	protected List<AppDescription> appList;
 	protected ListView listViewAppList;
@@ -45,18 +46,11 @@ public class AppListActivity extends Activity implements IAppListObserver {
 		listViewAppList = (ListView) findViewById(R.id.listViewAppList);
 		arrayAdapter = new AppDataArrayAdapater(this, R.id.cellAppList);
 		listViewAppList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
+			@Override // When app clicked, start Dashboard for that app.
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO Auto-generated method stub
-				String appName = ((AppDescription)parent.getAdapter().getItem(position)).getAppName();
-				String packageName = ((AppDescription)parent.getAdapter().getItem(position)).getPackageName();
-				String version = ((AppDescription)parent.getAdapter().getItem(position)).getVersionNumber();
-				
 				Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-				intent.putExtra(Keys.PREFS_NS + Keys.APP_LABEL, appName);
-				intent.putExtra(Keys.PREFS_NS + Keys.PACKAGE_NAME, packageName);
-				intent.putExtra(Keys.PREFS_NS + Keys.VERSION, version);
-				
+				intent.putExtra(Keys.PREFS_NS + Keys.APP_DESC, (AppDescription)parent.getAdapter().getItem(position));
+								
 				startActivity(intent);
 			}
 		});

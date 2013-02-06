@@ -9,5 +9,7 @@
     <string name="refresh_app_list">Refresh</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="generate_pie_graph">Generate Pie Graph</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_attribute_list">AttributeListActivity</string>
 
 </resources>

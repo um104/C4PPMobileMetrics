@@ -11,8 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.AppDescription;
-import edu.channel4.mm.db.android.network.SalesforceConn;
-import edu.channel4.mm.db.android.util.GraphTypes;
+import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;
 
 
@@ -34,10 +33,7 @@ public class DashboardActivity extends Activity {
 
 		Intent intent = getIntent();
 		
-		String appLabel = intent.getStringExtra(Keys.PREFS_NS + Keys.APP_LABEL);
-		String packageName = intent.getStringExtra(Keys.PREFS_NS + Keys.PACKAGE_NAME);
-		String version = intent.getStringExtra(Keys.PREFS_NS + Keys.VERSION);
-		appDescription = new AppDescription(appLabel, packageName, version);
+		appDescription = intent.getParcelableExtra(Keys.PREFS_NS + Keys.APP_DESC);
 		
 		//TODO(mlerner): Make call to APEX to get favorite graphs, recent graphs, other info to display.
 	}
@@ -74,7 +70,7 @@ public class DashboardActivity extends Activity {
 		
 		switch (view.getId()) {
 			case R.id.genPieGraph:
-				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, GraphTypes.PieGraph);
+				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, GraphType.PieGraph);
 		}
 		
 		startActivity(intent);

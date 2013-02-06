@@ -1,6 +1,6 @@
 package edu.channel4.mm.db.android.util;
 
-public enum GraphTypes {
+public enum GraphType {
 	PieGraph,
 	BarGraph,
 	HistographGraph,
