@@ -9,5 +9,5 @@ public interface IAttributeListObserver {
 	 * 
 	 * @param attribList
 	 */
-	public void updateAppList(List<String> attribList);
+	public void updateAttributeList(List<String> attribList);
 }

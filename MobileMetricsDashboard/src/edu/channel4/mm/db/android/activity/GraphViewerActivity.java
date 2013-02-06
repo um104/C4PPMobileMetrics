@@ -49,18 +49,18 @@ public class GraphViewerActivity extends Activity {
 		
 		// Construct Graph Request JSON Object
 		//TODO(mlerner): Finish building graph type. Make it dependent on graphType (for number of attribs)
-		JSONObject graphRequest = null;
+		JSONObject graphRequest = new JSONObject();
 		try {
-			graphRequest = new JSONObject();
 			graphRequest.put("type",graphType.name());
 			graphRequest.put("attrib1", attributeName);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			// TODO(mlerner): Make this a real error message
 			Log.e("BadStuff", "JSONException when making GraphType", e);
 		}
 		
 		// Send Graph Request to Salesforce.com
 		// TODO(mlerner): Put code in SalesforceConn to send graphrequest to APEX
+		// Apply an interface to this class that lets sfConn change where the webview points to
 	}
 
 	@Override

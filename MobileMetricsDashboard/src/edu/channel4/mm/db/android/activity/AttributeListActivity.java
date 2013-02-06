@@ -45,8 +45,8 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
         }
         
         // create a new simple String adapter
-        attribAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, (String[]) attribList.toArray());
-		
+        attribAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, attribList);
+        		
         // Get intent and accompanying data
 		Intent intent = getIntent();
 		appDescription = intent.getParcelableExtra(Keys.PREFS_NS + Keys.APP_DESC);
@@ -124,10 +124,9 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 		sfConn.getAttribList(attribListObservers, appDescription, graphType);
 	}
 
-	// Method called once attrib list is retreived
+	// Method called once attrib list is retrieved
 	@Override
-	public void updateAppList(final List<String> attribList) {
-		// TODO Auto-generated method stub
+	public void updateAttributeList(final List<String> attribList) {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {

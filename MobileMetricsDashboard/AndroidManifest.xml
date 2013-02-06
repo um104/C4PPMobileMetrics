@@ -44,14 +44,6 @@
                 android:value="edu.channel4.mm.db.android.activity.DashboardActivity" />
         </activity>
         <activity
-            android:name="edu.channel4.mm.db.android.PieGraphActivity"
-            android:label="@string/title_activity_pie_graph"
-            android:parentActivityName="edu.channel4.mm.db.android.activity.DashboardActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.channel4.mm.db.android.activity.DashboardActivity" />
-        </activity>
-        <activity
             android:name="edu.channel4.mm.db.android.GraphViewerActivity"
             android:label="@string/title_activity_graph_viewer"
             android:parentActivityName="edu.channel4.mm.db.android.activity.DashboardActivity" >

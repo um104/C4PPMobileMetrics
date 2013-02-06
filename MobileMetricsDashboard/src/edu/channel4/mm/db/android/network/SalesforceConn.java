@@ -90,15 +90,14 @@ public class SalesforceConn {
 			HttpGet get = new HttpGet(String.format(SALESFORCE_URL, instanceUrl));
 			get.setHeader("Authorization", "Bearer " + accessToken);
 			get.setHeader("GraphType", graphType.name());
-			// are the below needed? Can we replace them with a unique AppID generated server side?
+			// TODO(mlerner): are the below needed? Can we replace them with a unique AppID generated server side?
 			get.setHeader("AppLabel", appDescription.getAppName());
 			get.setHeader("PackageName", appDescription.getPackageName());
 			get.setHeader("VersionName", appDescription.getVersionNumber());
 
 			try {
 				// Get the response string, the Attribute List in JSON form
-				responseString = EntityUtils.toString(client.execute(get)
-						.getEntity());
+				responseString = EntityUtils.toString(client.execute(get).getEntity());
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage());
 			}
@@ -106,10 +105,8 @@ public class SalesforceConn {
 			Log.d(TAG, "Got JSON result: " + responseString);
 
 			// Try to parse the resulting JSON
-			List<String> attribs = null;
+			List<String> attribs = new ArrayList<String>();
 			try {
-				attribs = new ArrayList<String>();
-				
 				JSONArray attribDataArray = new JSONArray(responseString);
 
 				for (int i = 0; i < attribDataArray.length(); i++) {
@@ -124,7 +121,7 @@ public class SalesforceConn {
 
 			// Tell each of the "observers" of the app list to update.
 			for (IAttributeListObserver obs : attribListObservers) {
-				obs.updateAppList(attribs);
+				obs.updateAttributeList(attribs);
 			}
 
 			return responseString;
