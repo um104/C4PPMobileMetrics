@@ -36,7 +36,7 @@ public class AppListActivity extends Activity implements IAppListObserver {
 		setContentView(R.layout.activity_app_list);
 
 		// Initialization
-		sfConn = new SalesforceConn(getApplicationContext());
+		sfConn = SalesforceConn.getInstance(getApplicationContext());
 
 		// Fill up appList with fakes
 		appList = new ArrayList<AppDescription>();
@@ -53,9 +53,9 @@ public class AppListActivity extends Activity implements IAppListObserver {
 				String version = ((AppDescription)parent.getAdapter().getItem(position)).getVersionNumber();
 				
 				Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-				intent.putExtra(Keys.APP_LABEL, appName);
-				intent.putExtra(Keys.PACKAGE_NAME, packageName);
-				intent.putExtra(Keys.VERSION, version);
+				intent.putExtra(Keys.PREFS_NS + Keys.APP_LABEL, appName);
+				intent.putExtra(Keys.PREFS_NS + Keys.PACKAGE_NAME, packageName);
+				intent.putExtra(Keys.PREFS_NS + Keys.VERSION, version);
 				
 				startActivity(intent);
 			}

@@ -13,18 +13,43 @@ import android.util.Log;
 import edu.channel4.mm.db.android.activity.IAppListObserver;
 import edu.channel4.mm.db.android.model.AppDescription;
 import edu.channel4.mm.db.android.util.BaseAsyncTask;
+import edu.channel4.mm.db.android.util.GraphTypes;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class SalesforceConn {
+	static private SalesforceConn instance;
 	protected static final String SALESFORCE_URL = "%s/services/apexrest/channel4_apps/";
 	private Context context;
 	protected HttpClient client;
 	protected List<IAppListObserver> appListObservers;
 
-	public SalesforceConn(Context context) {
+	private SalesforceConn(Context context) {
 		this.context = context;
 
 		client = new DefaultHttpClient();
+	}
+	
+	/**
+	 * Public instantiator for a SalesforceConn object. Ensures no more than one object exists.
+	 * @param context The application-level context.
+	 * @return A SalesforceConn operating within the given context.
+	 */
+	public static SalesforceConn getInstance(Context context) {
+		if(instance == null)
+			instance = new SalesforceConn(context);
+		else
+			instance.context = context;
+		return instance;
+	}
+	
+	/**
+	 * Gets the list of attributes valid for this particular type of graph
+	 * 
+	 * @param appDescription The description of the app we're getting attributes from
+	 * @param graph The graph that we're retrieving attributes for
+	 */
+	public void getAttribList(AppDescription appDescription, GraphTypes graph) {
+		
 	}
 
 	/**

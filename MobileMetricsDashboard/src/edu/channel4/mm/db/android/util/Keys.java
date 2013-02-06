@@ -20,6 +20,10 @@ public class Keys {
 	public static final String VERSION = "Version__c";
 	
 	public static final String PACKAGE_NAME = "PackageName__c";
+	
+	public static final String GRAPH_TYPE = "graph_type";
+	
+	public static final String APP_DESC = "app_description";
 
 	/**
 	 * The {@link SharedPreferences} namespace that we should use throughout the

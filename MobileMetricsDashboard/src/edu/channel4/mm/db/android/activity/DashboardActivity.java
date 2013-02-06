@@ -10,15 +10,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.model.AppDescription;
+import edu.channel4.mm.db.android.network.SalesforceConn;
+import edu.channel4.mm.db.android.util.GraphTypes;
 import edu.channel4.mm.db.android.util.Keys;
 
 
 public class DashboardActivity extends Activity {
 	
-	private String appLabel;
-	private String packageName;
-	private String version;
-	
+	private AppDescription appDescription;
+		
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,11 @@ public class DashboardActivity extends Activity {
         }
 
 		Intent intent = getIntent();
-		this.appLabel = intent.getStringExtra(Keys.APP_LABEL);
-		this.packageName = intent.getStringExtra(Keys.PACKAGE_NAME);
-		this.version = intent.getStringExtra(Keys.VERSION);
+		
+		String appLabel = intent.getStringExtra(Keys.PREFS_NS + Keys.APP_LABEL);
+		String packageName = intent.getStringExtra(Keys.PREFS_NS + Keys.PACKAGE_NAME);
+		String version = intent.getStringExtra(Keys.PREFS_NS + Keys.VERSION);
+		appDescription = new AppDescription(appLabel, packageName, version);
 		
 		//TODO(mlerner): Make call to APEX to get favorite graphs, recent graphs, other info to display.
 	}
@@ -64,19 +67,15 @@ public class DashboardActivity extends Activity {
 	}
 	
 	public void genGraph(View view) {
-		String[] attribList;
-		//TODO(mlerner): Make Salesforce call to get attrib list based on graph type
-		if (view.getId() == (R.id.genPieGraph)) { //change this to a case once we get more graph types
-		}
-		
-		//TODO(mlerner): parse attrib list into String[] array
-		
-		Bundle args = new Bundle();
-		args.putStringArray("attribs", attribList);
-		
+		// Start up an Attribute Activity with the correct info on the app and the graph type
 		Intent intent = new Intent(getApplicationContext(), AttributeListActivity.class);
-		intent.putExtras(args);
-		intent.putExtra("graphTypeButtonId", view.getId());
+		
+		intent.putExtra(Keys.PREFS_NS + Keys.APP_DESC, appDescription);
+		
+		switch (view.getId()) {
+			case R.id.genPieGraph:
+				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, GraphTypes.PieGraph);
+		}
 		
 		startActivity(intent);
 	}

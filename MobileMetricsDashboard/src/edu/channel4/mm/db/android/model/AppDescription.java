@@ -7,9 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import edu.channel4.mm.db.android.util.Keys;
 
-public class AppDescription implements Comparable<AppDescription> {
+public class AppDescription implements Comparable<AppDescription>, Parcelable {
 	String appLabel;
 	String packageName;
 	String versionNumber;
@@ -34,7 +37,7 @@ public class AppDescription implements Comparable<AppDescription> {
 	}
 
 	/**
-	 * Parses a JSON List of AppData into a proper List<AppData>
+	 * Parses a JSON List of AppDescription into a proper List<AppDescription>
 	 * 
 	 * @param appDataListString
 	 * @return
@@ -53,7 +56,8 @@ public class AppDescription implements Comparable<AppDescription> {
 			String packageName = appDataObject.getString(Keys.PACKAGE_NAME);
 			String version = appDataObject.getString(Keys.VERSION);
 
-			AppDescription appData = new AppDescription(appLabel, packageName, version);
+			AppDescription appData = new AppDescription(appLabel, packageName,
+					version);
 			appDataList.add(appData);
 		}
 
@@ -64,7 +68,8 @@ public class AppDescription implements Comparable<AppDescription> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((appLabel == null) ? 0 : appLabel.hashCode());
+		result = prime * result
+				+ ((appLabel == null) ? 0 : appLabel.hashCode());
 		result = prime * result
 				+ ((packageName == null) ? 0 : packageName.hashCode());
 		result = prime * result
@@ -110,4 +115,36 @@ public class AppDescription implements Comparable<AppDescription> {
 		}
 	}
 
+	/* Everything from here down is for implementing the Parcelable interface */
+	@Override
+	public int describeContents() {
+		// Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// Note: Parcel data is read in a FIFO manner.
+		dest.writeString(appLabel);
+		dest.writeString(packageName);
+		dest.writeString(versionNumber);
+	}
+
+	public static final Parcelable.Creator<AppDescription> CREATOR = new Parcelable.Creator<AppDescription>() {
+		public AppDescription createFromParcel(Parcel in) {
+			return new AppDescription(in);
+		}
+
+		@Override
+		public AppDescription[] newArray(int size) {
+			return new AppDescription[size];
+		}
+	};
+	
+	private AppDescription(Parcel in) {
+		//Note: Parcel data is read in a FIFO manner.
+		appLabel = in.readString();
+		packageName = in.readString();
+		versionNumber = in.readString();
+	}
 }
