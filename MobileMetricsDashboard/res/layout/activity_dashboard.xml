@@ -5,12 +5,12 @@
     tools:context=".DashboardActivity" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/genPieGraph"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Generate Pie Chart"
-        android:onClick="genPieGraph" />
+        android:onClick="genGraph"
+        android:text="@string/generate_pie_graph" />
 
 </RelativeLayout>

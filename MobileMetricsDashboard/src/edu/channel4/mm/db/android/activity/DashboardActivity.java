@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.fragments.AttributeListFragment;
 import edu.channel4.mm.db.android.util.Keys;
 
 
@@ -37,7 +36,7 @@ public class DashboardActivity extends Activity {
 		this.packageName = intent.getStringExtra(Keys.PACKAGE_NAME);
 		this.version = intent.getStringExtra(Keys.VERSION);
 		
-		//TODO(mlerner): Make call to APEX to get favorite graphs, recent graphs, other info to display
+		//TODO(mlerner): Make call to APEX to get favorite graphs, recent graphs, other info to display.
 	}
 
 	@Override
@@ -64,15 +63,22 @@ public class DashboardActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void genPieGraph(View view) {
-		AttributeListFragment attribList = new AttributeListFragment();
-		String[] attribArr;
-		// Make Salesforce call to get attrib list
-		// parse attrib list into String[] array
+	public void genGraph(View view) {
+		String[] attribList;
+		//TODO(mlerner): Make Salesforce call to get attrib list based on graph type
+		if (view.getId() == (R.id.genPieGraph)) { //change this to a case once we get more graph types
+		}
+		
+		//TODO(mlerner): parse attrib list into String[] array
 		
 		Bundle args = new Bundle();
-		args.putStringArray("attribs", attribArr);
-		attribList.setArguments(args);
+		args.putStringArray("attribs", attribList);
+		
+		Intent intent = new Intent(getApplicationContext(), AttributeListActivity.class);
+		intent.putExtras(args);
+		intent.putExtra("graphTypeButtonId", view.getId());
+		
+		startActivity(intent);
 	}
 
 }
