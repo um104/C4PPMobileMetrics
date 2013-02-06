@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.fragments.AttributeListFragment;
 import edu.channel4.mm.db.android.util.Keys;
 
 
@@ -60,6 +62,17 @@ public class DashboardActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void genPieGraph(View view) {
+		AttributeListFragment attribList = new AttributeListFragment();
+		String[] attribArr;
+		// Make Salesforce call to get attrib list
+		// parse attrib list into String[] array
+		
+		Bundle args = new Bundle();
+		args.putStringArray("attribs", attribArr);
+		attribList.setArguments(args);
 	}
 
 }
