@@ -25,7 +25,7 @@ public class SalesforceConn {
 	static private SalesforceConn instance;
 	protected static final String SALESFORCE_BASE_URL = "%s/services/apexrest/%s/";
 	protected static final String APPS_URL_SUFFIX = "channel4_apps";
-	protected static final String ATTRIBS_URL_SUFFIX = "channel4_attribs";
+	protected static final String ATTRIBS_URL_SUFFIX = "channel4_attributes";
 	private Context context;
 	protected HttpClient client;
 	protected List<IAppListObserver> appListObservers;

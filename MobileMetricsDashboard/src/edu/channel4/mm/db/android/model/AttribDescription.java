@@ -60,7 +60,7 @@ public class AttribDescription implements Comparable<AttribDescription>, Parcela
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
-		if (null != attribEventName) {
+		if (attribEventName.length() != 0) {
 			sb.append(attribEventName + " - ");
 		}
 		sb.append(attribName);
@@ -73,15 +73,20 @@ public class AttribDescription implements Comparable<AttribDescription>, Parcela
 		int retval;
 		
 		// Both are session attribs
-		if (null == attribEventName && null == attribDesc.getAttribEventName()) {
+		if (attribEventName.length() == 0 && attribDesc.getAttribEventName().length() == 0) {
 			retval = attribName.compareTo(attribDesc.getAttribName());
 		}
-		// both are event attribs
-		else if (null != attribEventName && null != attribDesc.getAttribEventName()) {
-			retval = attribEventName.compareTo(attribDesc.getAttribEventName());
+		// Both are event attribs
+		else if (attribEventName.length() != 0 && attribDesc.getAttribEventName().length() != 0) {
+			if (attribEventName.equals(attribDesc.getAttribEventName())) { // same event
+				retval = attribName.compareTo(attribDesc.getAttribName());
+			}
+			else {
+				retval = attribEventName.compareTo(attribDesc.getAttribEventName());
+			}
 		}
 		else { // either me or attribDesc is a session
-			retval = (null == attribEventName) ? 1 : -1;
+			retval = (attribEventName.length() == 0) ? 1 : -1;
 		}
 
 		return retval;
