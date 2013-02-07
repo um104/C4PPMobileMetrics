@@ -1,28 +1,31 @@
 package edu.channel4.mm.db.android.network;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Context;
 import android.util.Log;
 import edu.channel4.mm.db.android.activity.IAppListObserver;
 import edu.channel4.mm.db.android.activity.IAttributeListObserver;
 import edu.channel4.mm.db.android.model.AppDescription;
+import edu.channel4.mm.db.android.model.AttribDescription;
 import edu.channel4.mm.db.android.util.BaseAsyncTask;
 import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class SalesforceConn {
 	static private SalesforceConn instance;
-	protected static final String SALESFORCE_URL = "%s/services/apexrest/channel4_apps/";
+	protected static final String SALESFORCE_BASE_URL = "%s/services/apexrest/%s/";
+	protected static final String APPS_URL_SUFFIX = "channel4_apps";
+	protected static final String ATTRIBS_URL_SUFFIX = "channel4_attribs";
 	private Context context;
 	protected HttpClient client;
 	protected List<IAppListObserver> appListObservers;
@@ -87,7 +90,7 @@ public class SalesforceConn {
 
 			// Put together the HTTP Request to be sent to Salesforce for the Attibute list
 			// TODO(mlerner): should this URL changed based on what API we're calling now?
-			HttpGet get = new HttpGet(String.format(SALESFORCE_URL, instanceUrl));
+			HttpGet get = new HttpGet(String.format(SALESFORCE_BASE_URL, instanceUrl, ATTRIBS_URL_SUFFIX));
 			get.setHeader("Authorization", "Bearer " + accessToken);
 			get.setHeader("GraphType", graphType.name());
 			// TODO(mlerner): are the below needed? Can we replace them with a unique AppID generated server side?
@@ -98,22 +101,18 @@ public class SalesforceConn {
 			try {
 				// Get the response string, the Attribute List in JSON form
 				responseString = EntityUtils.toString(client.execute(get).getEntity());
-			} catch (Exception e) {
+			} catch (ClientProtocolException e) {
+				Log.e(TAG, e.getMessage());
+			} catch (IOException e) {
 				Log.e(TAG, e.getMessage());
 			}
 			
 			Log.d(TAG, "Got JSON result: " + responseString);
 
 			// Try to parse the resulting JSON
-			List<String> attribs = new ArrayList<String>();
+			List<AttribDescription> attribs = new ArrayList<AttribDescription>();
 			try {
-				JSONArray attribDataArray = new JSONArray(responseString);
-
-				for (int i = 0; i < attribDataArray.length(); i++) {
-					JSONObject attribDataObject = attribDataArray.getJSONObject(i);
-					String attribName = attribDataObject.getString(Keys.ATTRIB_NAME);
-					attribs.add(attribName);
-				}
+				attribs = AttribDescription.parseList(responseString);
 			} catch (JSONException e) {
 				Log.e(TAG, e.getMessage());
 				return null;
@@ -162,7 +161,7 @@ public class SalesforceConn {
 				return null;
 			}
 
-			HttpGet get = new HttpGet(String.format(SALESFORCE_URL, instanceUrl));
+			HttpGet get = new HttpGet(String.format(SALESFORCE_BASE_URL, instanceUrl, APPS_URL_SUFFIX));
 			get.setHeader("Authorization", "Bearer " + accessToken);
 
 			try {

@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.AppDescription;
+import edu.channel4.mm.db.android.model.AttribDescription;
 import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;
@@ -29,8 +30,8 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 	private GraphType graphType;
 	private SalesforceConn sfConn;
 	private ListView attribListView;
-	private List<String> attribList;
-	private ArrayAdapter<String> attribAdapter;
+	private List<AttribDescription> attribList;
+	private ArrayAdapter<AttribDescription> attribAdapter;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -44,9 +45,9 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         
-        // create a new simple String adapter
-        attribAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, attribList);
-        		
+        // create a new simple AttribDescription adapter
+        attribAdapter = new ArrayAdapter<AttribDescription>(this, android.R.layout.simple_list_item_1, attribList);
+                		
         // Get intent and accompanying data
 		Intent intent = getIntent();
 		appDescription = intent.getParcelableExtra(Keys.PREFS_NS + Keys.APP_DESC);
@@ -66,7 +67,8 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 				
 				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, graphType);
 				intent.putExtra(Keys.PREFS_NS + Keys.APP_DESC, appDescription);
-				intent.putExtra(Keys.PREFS_NS + Keys.ATTRIB_NAME, (String)parent.getAdapter().getItem(position));
+				//TODO(mlerner): Change this to send just the appId primary key
+				intent.putExtra(Keys.PREFS_NS + Keys.ATTRIB_DESC, (AttribDescription)(parent.getAdapter().getItem(position)));
 								
 				startActivity(intent);
 			}
@@ -74,6 +76,8 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 
 		// Hook up the array adapter to the ListView
 		attribListView.setAdapter(attribAdapter);
+		
+		getAttribList();
 	}
 
 	@Override
@@ -100,19 +104,9 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 		return super.onOptionsItemSelected(item);
 	}
 	
-	@Override
-	public void onResume() {
-		super.onResume();
-		
-		// Retrieve attrib list from Salesforce. Gets called on start of activity, too.
-		// TODO: should this be put in onCreate() so it only happens once? No need to reload every single time
-		getAttribList();
-	}
-	
 	public void getAttribList() {
 		Toast.makeText(getApplicationContext(),
-				"Retrieving attrib list from Salesforce", Toast.LENGTH_SHORT)
-				.show();
+				"Retrieving attrib list from Salesforce", Toast.LENGTH_SHORT).show();
 
 		// Construct a list of classes that care about the getAttribList callback
 		List<IAttributeListObserver> attribListObservers = new ArrayList<IAttributeListObserver>();
@@ -126,20 +120,21 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 
 	// Method called once attrib list is retrieved
 	@Override
-	public void updateAttributeList(final List<String> attribList) {
+	public void updateAttributeList(final List<AttribDescription> attribList) {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				AttributeListActivity.this.attribList.clear();
-
-				for (String attribute : attribList) {
-					AttributeListActivity.this.attribList.add(attribute);
+				
+				for (AttribDescription attribDesc : attribList) {
+					AttributeListActivity.this.attribList.add(attribDesc);
 				}
-
+				
 				Collections.sort(AttributeListActivity.this.attribList);
 				attribAdapter.notifyDataSetChanged();
 			}
 		});
+		
 	}
 }
 

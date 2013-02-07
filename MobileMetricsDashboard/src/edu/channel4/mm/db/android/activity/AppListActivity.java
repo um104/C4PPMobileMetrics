@@ -49,6 +49,7 @@ public class AppListActivity extends Activity implements IAppListObserver {
 			@Override // When app clicked, start Dashboard for that app.
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+				//TODO(mlerner): Change this to send just the appId primary key
 				intent.putExtra(Keys.PREFS_NS + Keys.APP_DESC, (AppDescription)parent.getAdapter().getItem(position));
 								
 				startActivity(intent);
@@ -123,6 +124,7 @@ public class AppListActivity extends Activity implements IAppListObserver {
 			} else {
 				// If it's not the first time loading this cell, attempt
 				// to reuse the cell.
+				//TODO: Can we get rid of the "else" block? Or was something supposed to go here besides a comment
 			}
 
 			return convertView;
@@ -131,6 +133,7 @@ public class AppListActivity extends Activity implements IAppListObserver {
 
 	@Override
 	public void updateAppList(final List<AppDescription> appList) {
+		// TOD(mlerner): Why does this need to run on the UI thread rather than the current one?
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {

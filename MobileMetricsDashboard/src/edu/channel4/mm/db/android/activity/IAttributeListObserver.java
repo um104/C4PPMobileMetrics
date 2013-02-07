@@ -1,6 +1,7 @@
 package edu.channel4.mm.db.android.activity;
 
 import java.util.List;
+import edu.channel4.mm.db.android.model.AttribDescription;
 
 public interface IAttributeListObserver {
 
@@ -9,5 +10,5 @@ public interface IAttributeListObserver {
 	 * 
 	 * @param attribList
 	 */
-	public void updateAttributeList(List<String> attribList);
+	public void updateAttributeList(List<AttribDescription> attribList);
 }

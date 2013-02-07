@@ -30,7 +30,7 @@ public class AttribDescription implements Comparable<AttribDescription>, Parcela
 	}
 	
 	/**
-	 * Parses a JSON List of AppDescription into a proper List<{@code AppDescription}>
+	 * Parses a JSON List of AttribDescription into a proper List<{@code AttribDescription}>
 	 * 
 	 * @param appDataListString
 	 * @return
@@ -54,6 +54,18 @@ public class AttribDescription implements Comparable<AttribDescription>, Parcela
 		}
 
 		return attribDataList;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		if (null != attribEventName) {
+			sb.append(attribEventName + " - ");
+		}
+		sb.append(attribName);
+		
+		return sb.toString();
 	}
 
 	@Override

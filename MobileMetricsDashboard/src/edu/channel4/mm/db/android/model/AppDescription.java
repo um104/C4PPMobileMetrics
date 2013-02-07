@@ -16,7 +16,7 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 	String appLabel;
 	String packageName;
 	String versionNumber;
-	//TODO(mlerner): add in an AppID, generated server side. Primary key style
+	//TODO(mlerner): add in an AppID, generated server side. Primary key style. Change parseList, equal, and parcel methods
 
 	public AppDescription(String appLabel, String packageName, String version) {
 		this.appLabel = appLabel;
