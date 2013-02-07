@@ -16,9 +16,9 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 	String appLabel;
 	String packageName;
 	String versionNumber;
+	//TODO(mlerner): add in an AppID, generated server side. Primary key style
 
 	public AppDescription(String appLabel, String packageName, String version) {
-		super();
 		this.appLabel = appLabel;
 		this.packageName = packageName;
 		this.versionNumber = version;
@@ -37,7 +37,7 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 	}
 
 	/**
-	 * Parses a JSON List of AppDescription into a proper List<AppDescription>
+	 * Parses a JSON List of AppDescription into a proper List<{@code AppDescription}>
 	 * 
 	 * @param appDataListString
 	 * @return

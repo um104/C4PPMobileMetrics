@@ -26,6 +26,10 @@ public class Keys {
 	public static final String APP_DESC = "app_description";
 	
 	public static final String ATTRIB_NAME = "attribute_name";
+	
+	public static final String SESSION_ATTRIBS = "session_attribs";
+	
+	public static final String EVENT_NAME = "event_name";
 
 	/**
 	 * The {@link SharedPreferences} namespace that we should use throughout the
