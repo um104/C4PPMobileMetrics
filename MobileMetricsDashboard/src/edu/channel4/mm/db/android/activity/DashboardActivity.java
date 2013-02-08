@@ -10,14 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.model.AppDescription;
 import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;
 
 
 public class DashboardActivity extends Activity {
 	
-	private AppDescription appDescription;
+	private String appId;
 		
 	@SuppressLint("NewApi")
 	@Override
@@ -33,8 +32,8 @@ public class DashboardActivity extends Activity {
 
 		Intent intent = getIntent();
 		
-		appDescription = intent.getParcelableExtra(Keys.PREFS_NS + Keys.APP_DESC);
-		
+		appId = intent.getStringExtra(Keys.PREFS_NS + Keys.APP_ID);
+				
 		//TODO(mlerner): Make call to APEX to get favorite graphs, recent graphs, other info to display.
 	}
 
@@ -66,7 +65,7 @@ public class DashboardActivity extends Activity {
 		// Start up an Attribute Activity with the correct info on the app and the graph type
 		Intent intent = new Intent(getApplicationContext(), AttributeListActivity.class);
 		
-		intent.putExtra(Keys.PREFS_NS + Keys.APP_DESC, appDescription);
+		intent.putExtra(Keys.PREFS_NS + Keys.APP_ID, appId);
 		
 		switch (view.getId()) {
 			case R.id.genPieGraph:

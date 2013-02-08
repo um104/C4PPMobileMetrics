@@ -16,12 +16,13 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 	String appLabel;
 	String packageName;
 	String versionNumber;
-	//TODO(mlerner): add in an AppID, generated server side. Primary key style. Change parseList, equal, and parcel methods
+	String appId;
 
-	public AppDescription(String appLabel, String packageName, String version) {
+	public AppDescription(String appLabel, String packageName, String version, String appId) {
 		this.appLabel = appLabel;
 		this.packageName = packageName;
 		this.versionNumber = version;
+		this.appId = appId;
 	}
 
 	public String getAppName() {
@@ -34,6 +35,10 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 
 	public String getVersionNumber() {
 		return versionNumber;
+	}
+	
+	public String getAppId() {
+		return appId;
 	}
 
 	/**
@@ -55,9 +60,9 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 			String appLabel = appDataObject.getString(Keys.APP_LABEL);
 			String packageName = appDataObject.getString(Keys.PACKAGE_NAME);
 			String version = appDataObject.getString(Keys.VERSION);
+			String appId = appDataObject.getString(Keys.APP_ID);
 
-			AppDescription appData = new AppDescription(appLabel, packageName,
-					version);
+			AppDescription appData = new AppDescription(appLabel, packageName, version, appId);
 			appDataList.add(appData);
 		}
 
@@ -86,6 +91,10 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 		if (getClass() != obj.getClass())
 			return false;
 		AppDescription other = (AppDescription) obj;
+		if (appId == null && other.appId == null)
+			return false;
+		else if (!appId.equals(other.appId))
+			return false;
 		if (appLabel == null) {
 			if (other.appLabel != null)
 				return false;
@@ -128,6 +137,7 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 		dest.writeString(appLabel);
 		dest.writeString(packageName);
 		dest.writeString(versionNumber);
+		dest.writeString(appId);
 	}
 
 	public static final Parcelable.Creator<AppDescription> CREATOR = new Parcelable.Creator<AppDescription>() {
@@ -143,8 +153,9 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 	
 	private AppDescription(Parcel in) {
 		//Note: Parcel data is read in a FIFO manner.
-		appLabel = in.readString();
-		packageName = in.readString();
-		versionNumber = in.readString();
+		this.appLabel = in.readString();
+		this.packageName = in.readString();
+		this.versionNumber = in.readString();
+		this.appId = in.readString();
 	}
 }

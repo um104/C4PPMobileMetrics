@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="edu.channel4.mm.db.android.DashboardActivity"
+            android:name="edu.channel4.mm.db.android.activity.DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:parentActivityName="com.example.ch4verticalproto.AppList" >
             <meta-data
@@ -36,7 +36,7 @@
                 android:value="com.example.ch4verticalproto.AppList" />
         </activity>
         <activity
-            android:name="edu.channel4.mm.db.android.AttributeListActivity"
+            android:name="edu.channel4.mm.db.android.activity.AttributeListActivity"
             android:label="@string/title_activity_attribute_list"
             android:parentActivityName="edu.channel4.mm.db.android.activity.DashboardActivity" >
             <meta-data
@@ -44,7 +44,7 @@
                 android:value="edu.channel4.mm.db.android.activity.DashboardActivity" />
         </activity>
         <activity
-            android:name="edu.channel4.mm.db.android.GraphViewerActivity"
+            android:name="edu.channel4.mm.db.android.activity.GraphViewerActivity"
             android:label="@string/title_activity_graph_viewer"
             android:parentActivityName="edu.channel4.mm.db.android.activity.DashboardActivity" >
             <meta-data

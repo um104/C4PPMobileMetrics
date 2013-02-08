@@ -32,7 +32,7 @@ public class SalesforceConn {
 	protected HttpClient client;
 	protected List<IAppListObserver> appListObservers;
 	protected List<IAttributeListObserver> attribListObservers;
-	private AppDescription appDescription;
+	private String appId;
 	private GraphType graphType;
 
 	private SalesforceConn(Context context) {
@@ -71,9 +71,9 @@ public class SalesforceConn {
 	 * @param appDescription The description of the app we're getting attributes from
 	 * @param graph The graph that we're retrieving attributes for
 	 */
-	public void getAttribList(List<IAttributeListObserver> attribListObservers, AppDescription appDescription, GraphType graph) {
+	public void getAttribList(List<IAttributeListObserver> attribListObservers, String appId, GraphType graph) {
 		this.attribListObservers = attribListObservers;
-		this.appDescription = appDescription;
+		this.appId = appId;
 		this.graphType = graph;
 		
 		new GetAttribListTask(context).execute();
@@ -105,11 +105,10 @@ public class SalesforceConn {
 			// TODO(mlerner): should this URL changed based on what API we're calling now?
 			HttpGet get = new HttpGet(String.format(SALESFORCE_BASE_REST_URL, instanceUrl, ATTRIBS_URL_SUFFIX));
 			get.setHeader("Authorization", "Bearer " + accessToken);
-			get.setHeader("GraphType", graphType.name());
-			// TODO(mlerner): are the below needed? Can we replace them with a unique AppID generated server side?
-			get.setHeader("AppLabel", appDescription.getAppName());
-			get.setHeader("PackageName", appDescription.getPackageName());
-			get.setHeader("VersionName", appDescription.getVersionNumber());
+			
+			//TODO(mlerner): find a way to pass these so that the request is personalized
+			//get.setHeader("GraphType", graphType.name());
+			//get.setHeader("appId", appId);
 
 			try {
 				// Get the response string, the Attribute List in JSON form

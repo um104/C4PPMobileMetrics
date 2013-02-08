@@ -22,9 +22,8 @@ import edu.channel4.mm.db.android.util.Keys;
 
 public class GraphViewerActivity extends Activity {
 	
-	//TODO(mlerner): Make this use a WebActivity as its main form of display. See VertProto for example.
 	private GraphType graphType;
-	private AppDescription appDescription; //TODO(mlerner): Change this to be appId
+	private String appId;
 	private AttribDescription attribDescription;
 
 
@@ -42,7 +41,7 @@ public class GraphViewerActivity extends Activity {
         
         // Get intent and accompanying data
 		Intent intent = getIntent();
-		appDescription = intent.getParcelableExtra(Keys.PREFS_NS + Keys.APP_DESC);
+		appId = intent.getStringExtra(Keys.PREFS_NS + Keys.APP_ID);
 		graphType = (GraphType) intent.getSerializableExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE);
 		attribDescription = intent.getParcelableExtra(Keys.PREFS_NS + Keys.ATTRIB_DESC);
 		
@@ -56,7 +55,7 @@ public class GraphViewerActivity extends Activity {
         urlParams.put(Keys.GRAPH_TYPE, graphType.name());
         urlParams.put(Keys.ATTRIB_NAME, attribDescription.getAttribName());
         urlParams.put(Keys.EVENT_NAME, attribDescription.getAttribEventName());
-        //TODO(mlerner): urlParams.put(Keys.APP_ID, appId);
+        urlParams.put(Keys.APP_ID, appId);
         //TODO(mlerner): urlParams.put(Keys.START_TIME, startTime);
         //TODO(mlerner): urlParams.put(Keys.STOP_TIME, stopTime);
         

@@ -49,8 +49,9 @@ public class AppListActivity extends Activity implements IAppListObserver {
 			@Override // When app clicked, start Dashboard for that app.
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-				//TODO(mlerner): Change this to send just the appId primary key
-				intent.putExtra(Keys.PREFS_NS + Keys.APP_DESC, (AppDescription)parent.getAdapter().getItem(position));
+				// Change this to get appId from appList rather than parent.get... ?
+				intent.putExtra(Keys.PREFS_NS + Keys.APP_ID, ((AppDescription)parent.getAdapter().getItem(position)).getAppId());
+				
 								
 				startActivity(intent);
 			}

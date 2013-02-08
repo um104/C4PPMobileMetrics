@@ -26,7 +26,8 @@ import edu.channel4.mm.db.android.util.Keys;
 
 public class AttributeListActivity extends Activity implements IAttributeListObserver {
 	
-	private AppDescription appDescription;
+	//private AppDescription appDescription;
+	private String appId;
 	private GraphType graphType;
 	private SalesforceConn sfConn;
 	private ListView attribListView;
@@ -50,7 +51,7 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
                 		
         // Get intent and accompanying data
 		Intent intent = getIntent();
-		appDescription = intent.getParcelableExtra(Keys.PREFS_NS + Keys.APP_DESC);
+		appId = intent.getStringExtra(Keys.PREFS_NS + Keys.APP_ID);
 		graphType = (GraphType) intent.getSerializableExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE);
 		
 		// Instantiate SalesforceConn
@@ -66,8 +67,8 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 				Intent intent = new Intent(getApplicationContext(), GraphViewerActivity.class);
 				
 				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, graphType);
-				intent.putExtra(Keys.PREFS_NS + Keys.APP_DESC, appDescription);
-				//TODO(mlerner): Change this to send just the appId primary key
+				intent.putExtra(Keys.PREFS_NS + Keys.APP_ID, appId);
+
 				intent.putExtra(Keys.PREFS_NS + Keys.ATTRIB_DESC, (AttribDescription)(parent.getAdapter().getItem(position)));
 								
 				startActivity(intent);
@@ -115,7 +116,7 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 		attribListObservers.add(this);
 
 		// Execute the getAttribList method asynchronously
-		sfConn.getAttribList(attribListObservers, appDescription, graphType);
+		sfConn.getAttribList(attribListObservers, appId, graphType);
 	}
 
 	// Method called once attrib list is retrieved
