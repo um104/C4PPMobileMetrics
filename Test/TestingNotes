@@ -1,0 +1,23 @@
+Author: Ray Tam
+Testing from the commandline, eventually this will be put into a script
+This will run a fake test
+
+#Start Emulator
+
+emulator -no-window -no-boot-anim -avd reviLace
+
+#Main project
+#Ignore the subproject flag suggestion, it causes the test project to break when running
+#ant debug
+
+android update project --target android-16 --path .
+ant debug
+
+#Test project
+
+android update test-project --path . --main ../../MobileMetricsDashboard/
+ant debug install
+
+#Run test
+ant test
+#adb shell am instrument -w edu.channel4.mm.db.android.test/android.test.InstrumentationTestRunner
