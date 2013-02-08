@@ -57,6 +57,8 @@ public class GraphViewerActivity extends Activity {
         urlParams.put(Keys.ATTRIB_NAME, attribDescription.getAttribName());
         urlParams.put(Keys.EVENT_NAME, attribDescription.getAttribEventName());
         //TODO(mlerner): urlParams.put(Keys.APP_ID, appId);
+        //TODO(mlerner): urlParams.put(Keys.START_TIME, startTime);
+        //TODO(mlerner): urlParams.put(Keys.STOP_TIME, stopTime);
         
         // get graph URL
         SalesforceConn sfConn = SalesforceConn.getInstance(getApplicationContext());
