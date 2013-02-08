@@ -23,9 +23,11 @@ import edu.channel4.mm.db.android.util.Keys;
 
 public class SalesforceConn {
 	static private SalesforceConn instance;
-	protected static final String SALESFORCE_BASE_URL = "%s/services/apexrest/%s/";
+	protected static final String SALESFORCE_BASE_REST_URL = "%s/services/apexrest/%s/";
 	protected static final String APPS_URL_SUFFIX = "channel4_apps";
 	protected static final String ATTRIBS_URL_SUFFIX = "channel4_attributes";
+	protected static final String GRAPH_VIEW_BASE_URL = "%s/apex/graphView";
+
 	private Context context;
 	protected HttpClient client;
 	protected List<IAppListObserver> appListObservers;
@@ -50,6 +52,17 @@ public class SalesforceConn {
 		else
 			instance.context = context;
 		return instance;
+	}
+	
+	public String getGraphViewingURL() {
+		//TODO(mlerner): How do we gain access to a VisualForce page using the accessToken? Send it in the request?
+		String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
+				.getString(Keys.ACCESS_TOKEN, null);
+		String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0).getString(Keys.INSTANCE_URL, null);
+
+		String url = String.format(GRAPH_VIEW_BASE_URL, instanceUrl);
+		
+		return url;
 	}
 	
 	/**
@@ -90,7 +103,7 @@ public class SalesforceConn {
 
 			// Put together the HTTP Request to be sent to Salesforce for the Attibute list
 			// TODO(mlerner): should this URL changed based on what API we're calling now?
-			HttpGet get = new HttpGet(String.format(SALESFORCE_BASE_URL, instanceUrl, ATTRIBS_URL_SUFFIX));
+			HttpGet get = new HttpGet(String.format(SALESFORCE_BASE_REST_URL, instanceUrl, ATTRIBS_URL_SUFFIX));
 			get.setHeader("Authorization", "Bearer " + accessToken);
 			get.setHeader("GraphType", graphType.name());
 			// TODO(mlerner): are the below needed? Can we replace them with a unique AppID generated server side?
@@ -161,7 +174,7 @@ public class SalesforceConn {
 				return null;
 			}
 
-			HttpGet get = new HttpGet(String.format(SALESFORCE_BASE_URL, instanceUrl, APPS_URL_SUFFIX));
+			HttpGet get = new HttpGet(String.format(SALESFORCE_BASE_REST_URL, instanceUrl, APPS_URL_SUFFIX));
 			get.setHeader("Authorization", "Bearer " + accessToken);
 
 			try {

@@ -1,7 +1,7 @@
 package edu.channel4.mm.db.android.activity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -9,11 +9,13 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.AppDescription;
+import edu.channel4.mm.db.android.model.AttribDescription;
 import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;
@@ -22,11 +24,11 @@ public class GraphViewerActivity extends Activity {
 	
 	//TODO(mlerner): Make this use a WebActivity as its main form of display. See VertProto for example.
 	private GraphType graphType;
-	private AppDescription appDescription;
-	private String attributeName;
-	private SalesforceConn sfConn;
+	private AppDescription appDescription; //TODO(mlerner): Change this to be appId
+	private AttribDescription attribDescription;
 
-	@SuppressLint("NewApi")
+
+	@SuppressLint({ "NewApi", "SetJavaScriptEnabled" })
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,25 +44,26 @@ public class GraphViewerActivity extends Activity {
 		Intent intent = getIntent();
 		appDescription = intent.getParcelableExtra(Keys.PREFS_NS + Keys.APP_DESC);
 		graphType = (GraphType) intent.getSerializableExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE);
-		attributeName = intent.getStringExtra(Keys.PREFS_NS + Keys.ATTRIB_NAME);
+		attribDescription = intent.getParcelableExtra(Keys.PREFS_NS + Keys.ATTRIB_DESC);
 		
-		// Instantiate SalesforceConn
-		sfConn = SalesforceConn.getInstance(getApplicationContext());
-		
-		// Construct Graph Request JSON Object
-		//TODO(mlerner): Finish building graph type. Make it dependent on graphType (for number of attribs)
-		JSONObject graphRequest = new JSONObject();
-		try {
-			graphRequest.put("type",graphType.name());
-			graphRequest.put("attrib1", attributeName);
-		} catch (JSONException e) {
-			// TODO(mlerner): Make this a real error message
-			Log.e("BadStuff", "JSONException when making GraphType", e);
-		}
-		
-		// Send Graph Request to Salesforce.com
-		// TODO(mlerner): Put code in SalesforceConn to send graphrequest to APEX
-		// Apply an interface to this class that lets sfConn change where the webview points to
+		// get WebView object and set settings
+        WebView wView = (WebView) findViewById(R.id.webView1);
+        wView.setWebViewClient(new WebViewClient());
+        wView.getSettings().setJavaScriptEnabled(true);
+        
+        // construct URL parameters
+        Map<String,String> urlParams = new HashMap<String,String>();
+        urlParams.put(Keys.GRAPH_TYPE, graphType.name());
+        urlParams.put(Keys.ATTRIB_NAME, attribDescription.getAttribName());
+        urlParams.put(Keys.EVENT_NAME, attribDescription.getAttribEventName());
+        //TODO(mlerner): urlParams.put(Keys.APP_ID, appId);
+        
+        // get graph URL
+        SalesforceConn sfConn = SalesforceConn.getInstance(getApplicationContext());
+        String url = sfConn.getGraphViewingURL();
+
+        // point WebView to Graph URL with correct params
+        wView.loadUrl(url, urlParams);
 	}
 
 	@Override
