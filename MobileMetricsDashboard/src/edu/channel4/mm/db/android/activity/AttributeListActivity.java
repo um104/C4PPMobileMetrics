@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.model.AppDescription;
 import edu.channel4.mm.db.android.model.AttribDescription;
 import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.GraphType;
@@ -45,6 +44,9 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        
+        // initialize attribute list
+        attribList = new ArrayList<AttribDescription>();
         
         // create a new simple AttribDescription adapter
         attribAdapter = new ArrayAdapter<AttribDescription>(this, android.R.layout.simple_list_item_1, attribList);

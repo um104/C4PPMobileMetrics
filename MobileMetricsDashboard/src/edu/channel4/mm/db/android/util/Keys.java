@@ -27,7 +27,7 @@ public class Keys {
 	
 	public static final String ATTRIB_DESC = "attrib_description";
 	
-	public static final String ATTRIB_NAME = "attribute_name";
+	public static final String ATTRIB_NAME = "attrib_name";
 	
 	public static final String SESSION_ATTRIBS = "session_attribs";
 	
