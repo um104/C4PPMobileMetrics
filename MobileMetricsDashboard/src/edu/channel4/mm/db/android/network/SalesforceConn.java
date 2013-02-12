@@ -102,7 +102,6 @@ public class SalesforceConn {
 			}
 
 			// Put together the HTTP Request to be sent to Salesforce for the Attibute list
-			// TODO(mlerner): should this URL changed based on what API we're calling now?
 			HttpGet get = new HttpGet(String.format(SALESFORCE_BASE_REST_URL, instanceUrl, ATTRIBS_URL_SUFFIX));
 			get.setHeader("Authorization", "Bearer " + accessToken);
 			

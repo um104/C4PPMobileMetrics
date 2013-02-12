@@ -103,7 +103,7 @@ public class AttribDescription implements Comparable<AttribDescription>, Parcela
 	
 	@Override
 	public int describeContents() {
-		// TODO Auto-generated method stub
+		// Leave as is
 		return 0;
 	}
 	
