@@ -1,7 +1,11 @@
 package edu.channel4.mm.db.android.activity;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.message.BasicNameValuePair;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -9,12 +13,14 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.ConsoleMessage;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.model.AppDescription;
 import edu.channel4.mm.db.android.model.AttribDescription;
 import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.GraphType;
@@ -50,21 +56,55 @@ public class GraphViewerActivity extends Activity {
         wView.setWebViewClient(new WebViewClient());
         wView.getSettings().setJavaScriptEnabled(true);
         
-        // construct URL parameters
-        Map<String,String> urlParams = new HashMap<String,String>();
-        urlParams.put(Keys.GRAPH_TYPE, graphType.name());
-        urlParams.put(Keys.ATTRIB_NAME, attribDescription.getAttribName());
-        urlParams.put(Keys.EVENT_NAME, attribDescription.getAttribEventName());
-        urlParams.put(Keys.APP_ID, appId);
-        //TODO(mlerner): urlParams.put(Keys.START_TIME, startTime);
-        //TODO(mlerner): urlParams.put(Keys.STOP_TIME, stopTime);
+        wView.setWebChromeClient(new WebChromeClient() {
+        	  public boolean onConsoleMessage(ConsoleMessage cm) {
+        	    Log.d("MyApplication", cm.message() + " -- From line "
+        	                         + cm.lineNumber() + " of "
+        	                         + cm.sourceId() );
+        	    return true;
+        	  }
+        	});
+        
+        wView.setWebViewClient(new WebViewClient() {
+        	public boolean shouldOverrideUrlLoading (WebView view, String url) {
+        		
+        		Log.e("Oh noooo", "" + url);
+        		
+        		return true;
+        	}
+        });
         
         // get graph URL
         SalesforceConn sfConn = SalesforceConn.getInstance(getApplicationContext());
         String url = sfConn.getGraphViewingURL();
+        
+        // construct URL parameters
+        url = addParamsToUrl(url);
 
         // point WebView to Graph URL with correct params
-        wView.loadUrl(url, urlParams);
+        wView.loadUrl(url);
+        
+        Log.e("ohno!", "" + wView.getUrl());
+        Log.e("nooh!", "" + wView.getOriginalUrl());
+	}
+	
+	protected String addParamsToUrl(String url){
+	    if(!url.endsWith("?"))
+	        url += "?";
+
+	    List<NameValuePair> params = new ArrayList<NameValuePair>();
+	    
+	    params.add(new BasicNameValuePair(Keys.GRAPH_TYPE, graphType.name()));
+	    params.add(new BasicNameValuePair(Keys.ATTRIB_NAME, attribDescription.getAttribName()));
+	    params.add(new BasicNameValuePair(Keys.EVENT_NAME, attribDescription.getAttribEventName()));
+	    params.add(new BasicNameValuePair(Keys.APP_ID, appId));
+        //TODO(mlerner): urlParams.put(Keys.START_TIME, startTime);
+        //TODO(mlerner): urlParams.put(Keys.STOP_TIME, stopTime);
+
+	    String paramString = URLEncodedUtils.format(params, "utf-8");
+
+	    url += paramString;
+	    return url;
 	}
 
 	@Override
