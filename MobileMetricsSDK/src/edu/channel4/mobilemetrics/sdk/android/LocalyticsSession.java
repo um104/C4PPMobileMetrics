@@ -606,6 +606,46 @@ public final class LocalyticsSession
     {
         mSessionHandler.sendMessage(mSessionHandler.obtainMessage(SessionHandler.MESSAGE_UPLOAD, null));
     }
+    
+    /**
+     * Creates a MobileMetricsEvent object with the given name. Load this Event object with attributes, and use its 
+     * {@code tagEvent()} method to submit it to the session as an event to be tagged. Create a new MobileMetricsEvent
+     * every time a significant event should be recorded.<br><br>
+     * 
+     * For example, if a view has three buttons, it might make sense to tag each button with the name of the button which was clicked.
+     * For another example, in a game with many levels it might be valuable to create a new tag every time the user gets to a new
+     * level in order to determine how far the average user is progressing in the game.<br><br>
+     * 
+     * <strong>Tagging Best Practices</strong>
+     * <ul>
+     * <li>DO NOT use tags to record personally identifiable information.</li>
+     * <li>The best way to use tags is to create all the tag strings as predefined constants and only use those. This is more
+     * efficient and removes the risk of collecting personal information.</li>
+     * <li>Do not set tags inside loops or any other place which gets called frequently. This can cause a lot of data to be stored
+     * and uploaded.</li>
+     * </ul>
+     * 
+     * @param eventName The name of the event.
+     * @return A new MobileMetricsEvent, with the given name, and with no attributes.
+     * @throws IllegalArgumentException if {@code event} is null.
+     * @throws IllegalArgumentException if {@code event} is empty.
+     */
+    public MobileMetricsEvent getNewEvent(String eventName)
+    {
+    	if (Constants.ENABLE_PARAMETER_CHECKING)
+        {
+            if (null == eventName)
+            {
+                throw new IllegalArgumentException("event cannot be null"); //$NON-NLS-1$
+            }
+
+            if (0 == eventName.length())
+            {
+                throw new IllegalArgumentException("event cannot be empty"); //$NON-NLS-1$
+            }
+        }
+    	return new MobileMetricsEvent(this, eventName);
+    }
 
     /*
      * This is useful, but not necessarily needed for the public API. If so desired, someone can uncomment this out.
@@ -726,6 +766,8 @@ public final class LocalyticsSession
         }
         return bucket;
     }
+    
+
 
     /**
      * Helper class to handle session-related work on the {@link LocalyticsSession#sSessionHandlerThread}.
@@ -3054,10 +3096,34 @@ public final class LocalyticsSession
     	 * 
     	 * @param attributeName The name of the attribute
     	 * @param attribute The attribute to be added to the event
+    	 * @throws IllegalArgumentException if {@code attributeName} is null
+    	 * @throws IllegalArgumentException if {@code attributeName} is empty
+    	 * @throws IllegalArgumentException if {@code attribute} is null
+    	 * @throws IllegalArgumentException if {@code attribute} is empty
+    	 * 
     	 */
     	public void addAttribute(String attributeName, String attribute) {
     		if (null != eventName)
+    		{
+    			if (null == attributeName)
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain null keys"); //$NON-NLS-1$
+    			}
+    			if (null == attribute)
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain null values"); //$NON-NLS-1$
+    			}
+    			if (0 == attributeName.length())
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain empty keys"); //$NON-NLS-1$
+    			}
+    			if (0 == attribute.length())
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain empty values"); //$NON-NLS-1$
+    			}
+
     			attribsMap.put(PREFIX_STRING + attributeName, attribute);
+    		}
     	}
     	
     	/**
@@ -3068,10 +3134,24 @@ public final class LocalyticsSession
     	 * 
     	 * @param attributeName The name of the attribute
     	 * @param attribute The attribute to be added to the event
+    	 * @throws IllegalArgumentException if {@code attributeName} is null
+    	 * @throws IllegalArgumentException if {@code attributeName} is empty
     	 */
     	public void addAttribute(String attributeName, int attribute) {
     		if (null != eventName)
+    		{
+    			if (null == attributeName)
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain null keys"); //$NON-NLS-1$
+    			}
+    			
+    			if (0 == attributeName.length())
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain empty keys"); //$NON-NLS-1$
+    			}
+    			
     			attribsMap.put(PREFIX_NUM + attributeName, Integer.toString(attribute));
+    		}
     	}
     	/**
     	 * Add an attribute to this event. This method is overloaded for your convenience.
@@ -3081,10 +3161,23 @@ public final class LocalyticsSession
     	 * 
     	 * @param attributeName The name of the attribute
     	 * @param attribute The attribute to be added to the event
+    	 * @throws IllegalArgumentException if {@code attributeName} is null
+    	 * @throws IllegalArgumentException if {@code attributeName} is empty
     	 */
     	public void addAttribute(String attributeName, double attribute) {
     		if (null != eventName)
+    		{
+    			if (null == attributeName)
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain null keys"); //$NON-NLS-1$
+    			}
+    			
+    			if (0 == attributeName.length())
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain empty keys"); //$NON-NLS-1$
+    			}
     			attribsMap.put(PREFIX_NUM + attributeName, Double.toString(attribute));
+    		}
     	}
     	
     	/**
@@ -3095,10 +3188,23 @@ public final class LocalyticsSession
     	 * 
     	 * @param attributeName The name of the attribute
     	 * @param attribute The attribute to be added to the event
+    	 * @throws IllegalArgumentException if {@code attributeName} is null
+    	 * @throws IllegalArgumentException if {@code attributeName} is empty
     	 */
     	public void addAttribute(String attributeName, float attribute) {
     		if (null != eventName)
+    		{
+    			if (null == attributeName)
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain null keys"); //$NON-NLS-1$
+    			}
+    			
+    			if (0 == attributeName.length())
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain empty keys"); //$NON-NLS-1$
+    			}
     			attribsMap.put(PREFIX_NUM + attributeName, Float.toString(attribute));
+    		}
     	}
     	
     	/**
@@ -3109,10 +3215,23 @@ public final class LocalyticsSession
     	 * 
     	 * @param attributeName The name of the attribute
     	 * @param attribute The attribute to be added to the event
+    	 * @throws IllegalArgumentException if {@code attributeName} is null
+    	 * @throws IllegalArgumentException if {@code attributeName} is empty
     	 */
     	public void addAttribute(String attributeName, short attribute) {
     		if (null != eventName)
+    		{
+    			if (null == attributeName)
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain null keys"); //$NON-NLS-1$
+    			}
+    			
+    			if (0 == attributeName.length())
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain empty keys"); //$NON-NLS-1$
+    			}
     			attribsMap.put(PREFIX_NUM + attributeName, Short.toString(attribute));
+    		}
     	}
 
     	/**
@@ -3123,10 +3242,23 @@ public final class LocalyticsSession
     	 * 
     	 * @param attributeName The name of the attribute
     	 * @param attribute The attribute to be added to the event
+    	 * @throws IllegalArgumentException if {@code attributeName} is null
+    	 * @throws IllegalArgumentException if {@code attributeName} is empty
     	 */
     	public void addAttribute(String attributeName, long attribute) {
     		if (null != eventName)
+    		{
+    			if (null == attributeName)
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain null keys"); //$NON-NLS-1$
+    			}
+    			
+    			if (0 == attributeName.length())
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain empty keys"); //$NON-NLS-1$
+    			}
     			attribsMap.put(PREFIX_NUM + attributeName, Long.toString(attribute));
+    		}
     	}
     	
     	/**
@@ -3137,10 +3269,23 @@ public final class LocalyticsSession
     	 * 
     	 * @param attributeName The name of the attribute
     	 * @param attribute The attribute to be added to the event
+    	 * @throws IllegalArgumentException if {@code attributeName} is null
+    	 * @throws IllegalArgumentException if {@code attributeName} is empty
     	 */
     	public void addAttribute(String attributeName, char attribute) {
     		if (null != eventName)
+    		{
+    			if (null == attributeName)
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain null keys"); //$NON-NLS-1$
+    			}
+    			
+    			if (0 == attributeName.length())
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain empty keys"); //$NON-NLS-1$
+    			}
     			attribsMap.put(PREFIX_CHAR + attributeName, Character.toString(attribute));
+    		}
     	}
     	
     	/**
@@ -3151,10 +3296,23 @@ public final class LocalyticsSession
     	 * 
     	 * @param attributeName The name of the attribute
     	 * @param attribute The attribute to be added to the event
+    	 * @throws IllegalArgumentException if {@code attributeName} is null
+    	 * @throws IllegalArgumentException if {@code attributeName} is empty
     	 */
     	public void addAttribute(String attributeName, boolean attribute) {
     		if (null != eventName)
+    		{
+    			if (null == attributeName)
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain null keys"); //$NON-NLS-1$
+    			}
+    			
+    			if (0 == attributeName.length())
+    			{
+    				throw new IllegalArgumentException("attributes cannot contain empty keys"); //$NON-NLS-1$
+    			}
     			attribsMap.put(PREFIX_BOOL + attributeName, Boolean.toString(attribute));
+    		}
     	}
     	
     	/**
