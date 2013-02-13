@@ -1,0 +1,65 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1355" measuredH="530" mockupW="901" mockupH="510">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="454" y="20" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bgPattern>allWhite</bgPattern>
+        <topBar>false</topBar>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Button" x="625" y="398" w="-1" h="-1" measuredW="75" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>export_graph%26bm%3Bexport_graph.bmml%26bm%3Bexport_graph.bmml%26bm%3Bexport_graph.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22171%2C378%2C246%2C405%22%20href%3D%22export_graph.bmml%22%20alt%3D%22export_graph%22%20id%3D%221%22/%3E</map>
+        <size>18</size>
+        <text>Export</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="499" y="398" w="-1" h="-1" measuredW="54" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>primary_attribute%26bm%3Bprimary_attribute.bmml%26bm%3Bprimary_attribute.bmml%26bm%3Bprimary_attribute.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2245%2C378%2C99%2C405%22%20href%3D%22primary_attribute.bmml%22%20alt%3D%22primary_attribute%22%20id%3D%222%22/%3E</map>
+        <size>18</size>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::HRule" x="486" y="155" w="216" h="-1" measuredW="100" measuredH="10" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::PieChart" x="1175" y="171" w="-1" h="-1" measuredW="180" measuredH="180" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::ColumnChart" x="751" y="171" w="-1" h="-1" measuredW="187" measuredH="175" zOrder="5" locked="false" isInGroup="-1"/>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::LineChart" x="963" y="171" w="-1" h="-1" measuredW="187" measuredH="175" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::HorizontalScrollBar" x="498" y="357" w="857" h="-1" measuredW="100" measuredH="16" zOrder="7" locked="false" isInGroup="-1"/>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::BarChart" x="498" y="171" w="-1" h="-1" measuredW="187" measuredH="175" zOrder="8" locked="false" isInGroup="-1"/>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Icon" x="674" y="111" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>custom_graph_text_number%26bm%3Bcustom_graph_text_number.bmml%26bm%3Bcustom_graph_text_number.bmml%26bm%3Bcustom_graph_text_number.bmml</href>
+        <icon>PencilIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22220%2C91%2C244%2C115%22%20href%3D%22custom_graph_text_number.bmml%22%20alt%3D%22custom_graph_text_number%22%20id%3D%2210%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Label" x="502" y="140" w="-1" h="-1" measuredW="188" measuredH="17" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>newFriend%20%28Text%29%20vs%20messages%20%28Number%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::PointyButton" x="486" y="110" w="-1" h="-1" measuredW="45" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>left</direction>
+        <href>home_activity%26bm%3Bhome_activity.bmml%26bm%3Bhome_activity.bmml%26bm%3Bhome_activity.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2232%2C90%2C77%2C117%22%20href%3D%22home_activity.bmml%22%20alt%3D%22home_activity%22%20id%3D%2212%22/%3E</map>
+        <size>11</size>
+        <text>Back</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::TextInput" x="538" y="106" w="-1" h="-1" measuredW="127" measuredH="34" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>New%20Graph%201</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::iPhoneKeyboard" x="482" y="288" w="-1" h="-1" measuredW="227" measuredH="160" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <orientation>portrait</orientation>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
