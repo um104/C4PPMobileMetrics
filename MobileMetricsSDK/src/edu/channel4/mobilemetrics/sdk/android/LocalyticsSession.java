@@ -319,7 +319,7 @@ public final class LocalyticsSession
      * 
      * @author mlerner
      */
-    private class AuthenticateSalesforceTask extends AsyncTask<Void, Void, Void>
+    public class AuthenticateSalesforceTask extends AsyncTask<Void, Void, String>
     {
         private final static String LOGIN_URL = "https://login.salesforce.com/services/oauth2/token";
     	
@@ -330,11 +330,10 @@ public final class LocalyticsSession
     	}
 
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected String doInBackground(Void... params) {
 			
 	        HttpClient client = new DefaultHttpClient();
 	        HttpPost post = new HttpPost(LOGIN_URL);
-	        
 	        
 	        try {
 	            // Create a nameValuePairs list to store HTTP parameters
@@ -373,6 +372,7 @@ public final class LocalyticsSession
 	            	Log.d("Instance_url", instance_url);
 	            }
 	            
+	            return response;
 	        } catch (ClientProtocolException e) {
 	        	if (Constants.IS_LOGGABLE) {
 	        		Log.e("Error Message: ClientProtocolException\n", e.toString());
@@ -395,10 +395,10 @@ public final class LocalyticsSession
 		}
 		
 		@Override
-		protected void onPostExecute(Void result)
+		protected void onPostExecute(String result)
 		{
 			if (Constants.IS_LOGGABLE) {
-				Log.d(Constants.LOG_TAG, "End process");
+				Log.d(Constants.LOG_TAG, "End process with result: " + result);
 			}
 		}
     }
