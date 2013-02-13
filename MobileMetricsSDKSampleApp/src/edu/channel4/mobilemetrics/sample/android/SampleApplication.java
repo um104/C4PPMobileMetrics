@@ -1,4 +1,4 @@
-package edu.channel4.mobilemetrics.sdk.android.test;
+package edu.channel4.mobilemetrics.sample.android;
 
 import java.util.HashMap;
 import java.util.Map;
