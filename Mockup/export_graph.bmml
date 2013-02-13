@@ -42,10 +42,10 @@
         <text>555-555-1337</text>
       </controlProperties>
     </control>
-    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="454" y="129" w="205" h="28" measuredW="101" measuredH="28" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="454" y="129" w="205" h="28" measuredW="123" measuredH="28" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <size>20</size>
-        <text>Send%20Data</text>
+        <text>Export%20Graph</text>
       </controlProperties>
     </control>
     <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="517" y="407" w="-1" h="-1" measuredW="77" measuredH="27" zOrder="9" locked="false" isInGroup="-1">

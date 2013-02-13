@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
@@ -40,50 +41,60 @@ public class SalesforceConn {
 
 		client = new DefaultHttpClient();
 	}
-	
+
 	/**
-	 * Public instantiator for a SalesforceConn object. Ensures no more than one object exists.
-	 * @param context The application-level context.
+	 * Public instantiator for a SalesforceConn object. Ensures no more than one
+	 * object exists.
+	 * 
+	 * @param context
+	 *            The application-level context.
 	 * @return A SalesforceConn operating within the given context.
 	 */
+	// TODO(Girum): Remove singletons.
+	// http://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons
+	// http://blogs.msdn.com/b/scottdensmore/archive/2004/05/25/140827.aspx
 	public static SalesforceConn getInstance(Context context) {
-		if(instance == null)
+		if (instance == null)
 			instance = new SalesforceConn(context);
 		else
 			instance.context = context;
 		return instance;
 	}
-	
+
 	public String getGraphViewingURL() {
-		//TODO(mlerner): How do we gain access to a VisualForce page using the accessToken? Send it in the request?
+		// TODO(mlerner): How do we gain access to a VisualForce page using the
+		// accessToken? Send it in the request?
 		String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
 				.getString(Keys.ACCESS_TOKEN, null);
-		String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0).getString(Keys.INSTANCE_URL, null);
+		String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0)
+				.getString(Keys.INSTANCE_URL, null);
 
 		String url = String.format(GRAPH_VIEW_BASE_URL, instanceUrl);
-		
+
 		return url;
 	}
-	
+
 	/**
 	 * Gets the list of attributes valid for this particular type of graph
 	 * 
-	 * @param appDescription The description of the app we're getting attributes from
-	 * @param graph The graph that we're retrieving attributes for
+	 * @param appDescription
+	 *            The description of the app we're getting attributes from
+	 * @param graph
+	 *            The graph that we're retrieving attributes for
 	 */
-	public void getAttribList(List<IAttributeListObserver> attribListObservers, String appId, GraphType graph) {
+	public void getAttribList(List<IAttributeListObserver> attribListObservers,
+			String appId, GraphType graph) {
 		this.attribListObservers = attribListObservers;
 		this.appId = appId;
 		this.graphType = graph;
-		
+
 		new GetAttribListTask(context).execute();
 	}
-	
+
 	protected class GetAttribListTask extends BaseAsyncTask {
 		private String responseString = null;
 		private final String TAG = GetAppListTask.class.getSimpleName();
 
-		
 		public GetAttribListTask(Context context) {
 			super(context);
 		}
@@ -94,30 +105,35 @@ public class SalesforceConn {
 
 			String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
 					.getString(Keys.ACCESS_TOKEN, null);
-			String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0).getString(Keys.INSTANCE_URL, null);
+			String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0)
+					.getString(Keys.INSTANCE_URL, null);
 
 			if (accessToken == null) {
 				Log.e(TAG, "No access token currently saved");
 				return null;
 			}
 
-			// Put together the HTTP Request to be sent to Salesforce for the Attibute list
-			HttpGet get = new HttpGet(String.format(SALESFORCE_BASE_REST_URL, instanceUrl, ATTRIBS_URL_SUFFIX));
-			get.setHeader("Authorization", "Bearer " + accessToken);
-			
-			//TODO(mlerner): find a way to pass these so that the request is personalized
-			//get.setHeader("GraphType", graphType.name());
-			//get.setHeader("appId", appId);
+			// Put together the HTTP Request to be sent to Salesforce for the
+			// Attibute list
+			HttpUriRequest getRequest = new HttpGet(String.format(SALESFORCE_BASE_REST_URL,
+					instanceUrl, ATTRIBS_URL_SUFFIX));
+			getRequest.setHeader("Authorization", "Bearer " + accessToken);
+
+			// TODO(mlerner): find a way to pass these so that the request is
+			// personalized
+			// get.setHeader("GraphType", graphType.name());
+			// get.setHeader("appId", appId);
 
 			try {
 				// Get the response string, the Attribute List in JSON form
-				responseString = EntityUtils.toString(client.execute(get).getEntity());
+				responseString = EntityUtils.toString(client.execute(getRequest)
+						.getEntity());
 			} catch (ClientProtocolException e) {
 				Log.e(TAG, e.getMessage());
 			} catch (IOException e) {
 				Log.e(TAG, e.getMessage());
 			}
-			
+
 			Log.d(TAG, "Got JSON result: " + responseString);
 
 			// Try to parse the resulting JSON
@@ -165,23 +181,28 @@ public class SalesforceConn {
 
 			String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
 					.getString(Keys.ACCESS_TOKEN, null);
-			String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0).getString(Keys.INSTANCE_URL, null);
+			String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0)
+					.getString(Keys.INSTANCE_URL, null);
 
 			if (accessToken == null) {
 				Log.e(TAG, "No access token currently saved");
 				return null;
 			}
 
-			HttpGet get = new HttpGet(String.format(SALESFORCE_BASE_REST_URL, instanceUrl, APPS_URL_SUFFIX));
-			get.setHeader("Authorization", "Bearer " + accessToken);
+			Log.d(TAG, "Access token: " + accessToken);
+			Log.d(TAG, "Instance URL: " + instanceUrl);
+
+			HttpUriRequest getRequest = new HttpGet(String.format(SALESFORCE_BASE_REST_URL,
+					instanceUrl, APPS_URL_SUFFIX));
+			getRequest.setHeader("Authorization", "Bearer " + accessToken);
 
 			try {
-				responseString = EntityUtils.toString(client.execute(get)
+				responseString = EntityUtils.toString(client.execute(getRequest)
 						.getEntity());
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage());
 			}
-			
+
 			Log.d(TAG, "Got JSON result: " + responseString);
 
 			// Try to parse the resulting JSON
@@ -205,7 +226,6 @@ public class SalesforceConn {
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
 
-			
 		}
 	}
 
