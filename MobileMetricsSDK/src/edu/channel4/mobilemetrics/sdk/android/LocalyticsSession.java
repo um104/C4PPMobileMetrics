@@ -3023,4 +3023,155 @@ public final class LocalyticsSession
             this.second = second;
         }
     }
+    
+    /**
+     * Event class that allows users of the SDK to add multiple types of attributes to the same event.
+     * @author mlerner
+     */
+    public static final class MobileMetricsEvent {
+    	
+    	private static final String PREFIX_STRING = "mm.string.";
+    	private static final String PREFIX_NUM = "mm.num.";
+    	private static final String PREFIX_BOOL = "mm.bool.";
+    	private static final String PREFIX_CHAR = "mm.char.";
+    	private LocalyticsSession session;		//TODO(mlerner): is this needed, or can I get around it? 
+    	
+    	/*package*/ Map<String, String> attribsMap;
+    	/*package*/ String eventName;
+    	
+    	/*package*/ MobileMetricsEvent(LocalyticsSession session, String eventName) {
+    		this.session = session;
+    		this.eventName = eventName;
+    		attribsMap = new HashMap<String, String>();
+    	}
+    	
+    	//TODO(mlerner): is there a way for JavaDoc to just copy from one method rather than literally copy-paste?
+    	/**
+    	 * Add an attribute to this event. This method is overloaded for your convenience.
+    	 * You can add whatever type of information you'd like to the event, as long as 
+    	 * there is a method to add said tpye. If not, use the addAttribute(String, String)
+    	 * method and use a string representation of the data.
+    	 * 
+    	 * @param attributeName The name of the attribute
+    	 * @param attribute The attribute to be added to the event
+    	 */
+    	public void addAttribute(String attributeName, String attribute) {
+    		if (null != eventName)
+    			attribsMap.put(PREFIX_STRING + attributeName, attribute);
+    	}
+    	
+    	/**
+    	 * Add an attribute to this event. This method is overloaded for your convenience.
+    	 * You can add whatever type of information you'd like to the event, as long as 
+    	 * there is a method to add said tpye. If not, use the addAttribute(String, String)
+    	 * method and use a string representation of the data.
+    	 * 
+    	 * @param attributeName The name of the attribute
+    	 * @param attribute The attribute to be added to the event
+    	 */
+    	public void addAttribute(String attributeName, int attribute) {
+    		if (null != eventName)
+    			attribsMap.put(PREFIX_NUM + attributeName, Integer.toString(attribute));
+    	}
+    	/**
+    	 * Add an attribute to this event. This method is overloaded for your convenience.
+    	 * You can add whatever type of information you'd like to the event, as long as 
+    	 * there is a method to add said tpye. If not, use the addAttribute(String, String)
+    	 * method and use a string representation of the data.
+    	 * 
+    	 * @param attributeName The name of the attribute
+    	 * @param attribute The attribute to be added to the event
+    	 */
+    	public void addAttribute(String attributeName, double attribute) {
+    		if (null != eventName)
+    			attribsMap.put(PREFIX_NUM + attributeName, Double.toString(attribute));
+    	}
+    	
+    	/**
+    	 * Add an attribute to this event. This method is overloaded for your convenience.
+    	 * You can add whatever type of information you'd like to the event, as long as 
+    	 * there is a method to add said tpye. If not, use the addAttribute(String, String)
+    	 * method and use a string representation of the data.
+    	 * 
+    	 * @param attributeName The name of the attribute
+    	 * @param attribute The attribute to be added to the event
+    	 */
+    	public void addAttribute(String attributeName, float attribute) {
+    		if (null != eventName)
+    			attribsMap.put(PREFIX_NUM + attributeName, Float.toString(attribute));
+    	}
+    	
+    	/**
+    	 * Add an attribute to this event. This method is overloaded for your convenience.
+    	 * You can add whatever type of information you'd like to the event, as long as 
+    	 * there is a method to add said tpye. If not, use the addAttribute(String, String)
+    	 * method and use a string representation of the data.
+    	 * 
+    	 * @param attributeName The name of the attribute
+    	 * @param attribute The attribute to be added to the event
+    	 */
+    	public void addAttribute(String attributeName, short attribute) {
+    		if (null != eventName)
+    			attribsMap.put(PREFIX_NUM + attributeName, Short.toString(attribute));
+    	}
+
+    	/**
+    	 * Add an attribute to this event. This method is overloaded for your convenience.
+    	 * You can add whatever type of information you'd like to the event, as long as 
+    	 * there is a method to add said tpye. If not, use the addAttribute(String, String)
+    	 * method and use a string representation of the data.
+    	 * 
+    	 * @param attributeName The name of the attribute
+    	 * @param attribute The attribute to be added to the event
+    	 */
+    	public void addAttribute(String attributeName, long attribute) {
+    		if (null != eventName)
+    			attribsMap.put(PREFIX_NUM + attributeName, Long.toString(attribute));
+    	}
+    	
+    	/**
+    	 * Add an attribute to this event. This method is overloaded for your convenience.
+    	 * You can add whatever type of information you'd like to the event, as long as 
+    	 * there is a method to add said tpye. If not, use the addAttribute(String, String)
+    	 * method and use a string representation of the data.
+    	 * 
+    	 * @param attributeName The name of the attribute
+    	 * @param attribute The attribute to be added to the event
+    	 */
+    	public void addAttribute(String attributeName, char attribute) {
+    		if (null != eventName)
+    			attribsMap.put(PREFIX_CHAR + attributeName, Character.toString(attribute));
+    	}
+    	
+    	/**
+    	 * Add an attribute to this event. This method is overloaded for your convenience.
+    	 * You can add whatever type of information you'd like to the event, as long as 
+    	 * there is a method to add said tpye. If not, use the addAttribute(String, String)
+    	 * method and use a string representation of the data.
+    	 * 
+    	 * @param attributeName The name of the attribute
+    	 * @param attribute The attribute to be added to the event
+    	 */
+    	public void addAttribute(String attributeName, boolean attribute) {
+    		if (null != eventName)
+    			attribsMap.put(PREFIX_BOOL + attributeName, Boolean.toString(attribute));
+    	}
+    	
+    	/**
+    	 * Marks this event as "tagged" within the session. This will set in stone the 
+    	 * attributes to be recorded with this event. Afterwards, this event object will be
+    	 * useless -- it will have no name, and no attributes. Do not call this method twice.
+    	 * Do not add attributes to this event after calling this method.
+    	 */
+    	public void tagEvent() {
+    		if (null == eventName)
+    			return;
+    		if (attribsMap.isEmpty())
+    			session.tagEvent(eventName);
+    		else
+    			session.tagEvent(eventName, attribsMap);
+    		eventName = null;
+    		attribsMap.clear();
+    	}
+    }
 }
