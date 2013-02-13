@@ -375,19 +375,19 @@ public final class LocalyticsSession
 	            
 	        } catch (ClientProtocolException e) {
 	        	if (Constants.IS_LOGGABLE) {
-	        		Log.d("Error Message: ClientProtocolException\n", e.toString());
+	        		Log.e("Error Message: ClientProtocolException\n", e.toString());
 	        	}
 	        } catch (IOException e) {
 	        	if (Constants.IS_LOGGABLE) {
-	        		Log.d("Error Message: IOException\n", e.toString());
+	        		Log.e("Error Message: IOException\n", e.toString());
 	        	}
 	        } catch (JSONException e) {
 	        	if (Constants.IS_LOGGABLE) {
-	        		Log.d("Error Message: JSONException\n", e.toString());
+	        		Log.e("Error Message: JSONException\n", e.toString());
 	        	}
 	        } catch (Resources.NotFoundException e) {
 	        	if (Constants.IS_LOGGABLE) {
-	        		Log.d("Error Message: ResourceNotFoundException\n", e.toString());
+	        		Log.e("Error Message: ResourceNotFoundException\n", e.toString());
 	        	}
 	        }
 	        
