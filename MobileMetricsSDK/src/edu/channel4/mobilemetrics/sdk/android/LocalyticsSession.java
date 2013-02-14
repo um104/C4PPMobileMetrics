@@ -3072,10 +3072,10 @@ public final class LocalyticsSession
      */
     public static final class MobileMetricsEvent {
     	
-    	private static final String PREFIX_STRING = "mm.string.";
+    	private static final String PREFIX_STRING = "mm.str.";
     	private static final String PREFIX_NUM = "mm.num.";
-    	private static final String PREFIX_BOOL = "mm.bool.";
-    	private static final String PREFIX_CHAR = "mm.char.";
+    	private static final String PREFIX_BOOL = "mm.boo.";
+    	private static final String PREFIX_CHAR = "mm.chr.";
     	private LocalyticsSession session;		//TODO(mlerner): is this needed, or can I get around it? 
     	
     	/*package*/ Map<String, String> attribsMap;
