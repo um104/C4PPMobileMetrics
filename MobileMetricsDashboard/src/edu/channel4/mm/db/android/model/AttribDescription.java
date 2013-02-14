@@ -41,13 +41,13 @@ public class AttribDescription implements Comparable<AttribDescription>, Parcela
 		List<AttribDescription> attribDataList = new ArrayList<AttribDescription>();
 
 		// definitely keep 5. Test the others.
-		String fixedJson1 = attribDataListString.replace("\\n", "");
-		String fixedJson2 = fixedJson1.replace("\n", "");
-		String fixedJson3 = fixedJson2.replace("\\\\", "");
-		String fixedJson4 = fixedJson3.replace("\\", "");
-		String fixedJson5 = fixedJson4.substring(1, fixedJson4.length() - 1);
+		//String fixedJson1 = attribDataListString.replace("\\n", "");
+		//String fixedJson2 = fixedJson1.replace("\n", "");
+		//String fixedJson3 = fixedJson2.replace("\\\\", "");
+		//String fixedJson4 = fixedJson3.replace("\\", "");
+		//String fixedJson5 = fixedJson4.substring(1, fixedJson4.length() - 1);
 		
-		JSONArray attribDataArray = new JSONArray(fixedJson5);
+		JSONArray attribDataArray = new JSONArray(attribDataListString);
 
 		for (int i = 0; i < attribDataArray.length(); i++) {
 			JSONObject attribDataObject = attribDataArray.getJSONObject(i);
