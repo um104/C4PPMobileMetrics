@@ -204,6 +204,11 @@ public class SalesforceConn {
 			}
 
 			Log.d(TAG, "Got JSON result: " + responseString);
+			
+			responseString = responseString.substring(1, responseString.length() - 1);
+			//TODO(mlerner): Figure out how to get Salesforce to send a reasonable JSON object, and not one
+			// that we have to parse and modify every damn time.
+			responseString = responseString.replace("\\", "");
 
 			// Try to parse the resulting JSON
 			List<AppDescription> appList = null;

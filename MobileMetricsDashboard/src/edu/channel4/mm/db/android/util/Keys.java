@@ -15,7 +15,7 @@ public class Keys {
 
 	public static final String INSTANCE_URL = "instance_url";
 
-	public static final String APP_LABEL = "AppLabel__c";
+	public static final String APP_LABEL = "Label__c";
 
 	public static final String VERSION = "Version__c";
 	

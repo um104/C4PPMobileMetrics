@@ -70,7 +70,7 @@ public class GraphViewerActivity extends Activity {
         		
         		Log.e("Oh noooo", "" + url);
         		
-        		return true;
+        		return false;
         	}
         });
         
