@@ -471,7 +471,7 @@ public final class LocalyticsSession
      * @throws IllegalArgumentException if {@code event} is null.
      * @throws IllegalArgumentException if {@code event} is empty.
      */
-    public void tagEvent(final String event)
+    /*package*/ void tagEvent(final String event)
     {
         tagEvent(event, null);
     }
@@ -499,7 +499,7 @@ public final class LocalyticsSession
      * @throws IllegalArgumentException if {@code event} is empty.
      * @throws IllegalArgumentException if {@code attributes} contains null keys, empty keys, null values, or empty values.
      */
-    public void tagEvent(final String event, final Map<String, String> attributes)
+    /*package*/ void tagEvent(final String event, final Map<String, String> attributes)
     {
         if (Constants.ENABLE_PARAMETER_CHECKING)
         {
@@ -582,7 +582,7 @@ public final class LocalyticsSession
      * @throws IllegalArgumentException if {@code event} is null.
      * @throws IllegalArgumentException if {@code event} is empty.
      */
-    public void tagScreen(final String screen)
+    /*package*/ void tagScreen(final String screen)
     {
         if (null == screen)
         {
