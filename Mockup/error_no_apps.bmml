@@ -1,4 +1,4 @@
-<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="652" measuredH="542" mockupW="282" mockupH="510">
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="832" measuredH="542" mockupW="462" mockupH="510">
   <controls>
     <control controlID="1" controlTypeID="com.balsamiq.mockups::iPhone" x="370" y="32" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
@@ -11,6 +11,11 @@
         <hrefs>%2Capp_list%26bm%3Bapp_list.bmml%26bm%3Bapp_list.bmml%26bm%3Bapp_list.bmml%2C</hrefs>
         <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22146%2C317%2C231%2C357%22%20href%3D%22app_list.bmml%22%20alt%3D%22app_list%22%20id%3D%222_0%22/%3E%0A</map>
         <text>Got%20Apps%3F%0ASorry%20-%20it%20doesn%27t%20seem%20like%20you%27ve%20started%20collecting%20data%20on%20your%20mobile%20applications%20yet%21%20Please%20see%20www.example.com%20for%20details%20on%20how%20you%20can%20get%20started.%0AGo%20to%20Help%2C%20OK</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::StickyNote" x="723" y="167" w="-1" h="-1" measuredW="109" measuredH="123" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>This%20screen%20shouldn%27t%20exist%20--%20instead%2C%20the%20ListView%20should%20have%20logic%20that%20checks%20if%20the%20List%20is%20empty%2C%20and%20then%20show%20this%20message%20wthin%20the%20list.</text>
       </controlProperties>
     </control>
   </controls>

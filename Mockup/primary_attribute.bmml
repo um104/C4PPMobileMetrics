@@ -1,4 +1,4 @@
-<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="675" measuredH="559" mockupW="282" mockupH="510">
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1032" measuredH="559" mockupW="639" mockupH="510">
   <controls>
     <control controlID="13" controlTypeID="com.balsamiq.mockups::iPhone" x="393" y="49" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
@@ -39,6 +39,11 @@
         <hrefs>secondary_attribute%26bm%3Bsecondary_attribute.bmml%26bm%3Bsecondary_attribute.bmml%26bm%3Bsecondary_attribute.bmml%2C%2C%2C%2C</hrefs>
         <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2233%2C172%2C248%2C209%22%20href%3D%22secondary_attribute.bmml%22%20alt%3D%22secondary_attribute%22%20id%3D%2235_0%22/%3E%0A</map>
         <text>_%20newFriend%5Cr%20%28Text%29%2C%20%3E%0A_%20messages%5Cr%20%28Number%29%2C%20%3E%0A_%20nudgeToFriend%5Cr%20%28Text%29%2C%20%3E%0A_%20groupChatMessages%5Cr%20%28Number%29%2C%20%3E%0A_%20friendRequestSent%5Cr%20%28Number%29%2C%20%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::StickyNote" x="794" y="68" w="238" h="212" measuredW="109" measuredH="123" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>On%20this%20list%20of%20a%20Custom%20Graph%2C%20we%20have%20Events%20written%20in%20the%20list%2C%20as%20opposed%20to%20the%20Event.Attribute%20that%20it%20*should*%20be.%20%20Fix%20this%21</text>
       </controlProperties>
     </control>
   </controls>

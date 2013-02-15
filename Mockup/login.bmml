@@ -1,4 +1,4 @@
-<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="670" measuredH="536" mockupW="282" mockupH="510">
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="910" measuredH="536" mockupW="522" mockupH="510">
   <controls>
     <control controlID="1" controlTypeID="com.balsamiq.mockups::iPhone" x="388" y="26" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
@@ -59,6 +59,11 @@
     <control controlID="15" controlTypeID="com.balsamiq.mockups::Image" x="492" y="113" w="74" h="51" measuredW="500" measuredH="392" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <src>./assets/salesforce-logo.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::StickyNote" x="801" y="98" w="-1" h="-1" measuredW="109" measuredH="123" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>We%20should%20move%20away%20from%20using%20Salesforce%20WebView%20login%2C%20since%20it%27s%20so%20buggy%20and%20unnatural%20to%20the%20NATIVE%20app%20that%20we%27re%20building.</text>
       </controlProperties>
     </control>
   </controls>

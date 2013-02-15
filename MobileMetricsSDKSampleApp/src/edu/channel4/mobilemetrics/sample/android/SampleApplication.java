@@ -34,7 +34,7 @@ public class SampleApplication extends Activity {
 		stringMap.put("name", editTextName.getText().toString());
 		stringMap.put("age", editTextAge.getText().toString());
 
-		localyticsSession.tagEvent("Tag user name and age", stringMap);
+		// localyticsSession.tagEvent("Tag user name and age", stringMap);
 	}
 
 	public void upload(View v) {

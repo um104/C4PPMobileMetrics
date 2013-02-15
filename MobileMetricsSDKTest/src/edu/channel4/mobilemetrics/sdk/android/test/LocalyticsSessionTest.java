@@ -9,8 +9,13 @@ import android.util.Log;
 import edu.channel4.mobilemetrics.sample.android.SampleApplication;
 import edu.channel4.mobilemetrics.sdk.android.LocalyticsSession;
 
+// TODO: To deal with class and variable scope, try making things in LocalyticsSession
+// package scope.
 public class LocalyticsSessionTest extends
 		ActivityInstrumentationTestCase2<SampleApplication> {
+	private static final String TAG = "TestLocalytics";
+	private LocalyticsSession localyticsSession;
+	private static final String LOCALYTICS_KEY = "sample_key";
 
 	/**
 	 * The number of seconds you want to wait for the network before timing out.
@@ -25,15 +30,9 @@ public class LocalyticsSessionTest extends
 		super(activityClass);
 	}
 
-	private static final String TAG = "TestLocalytics";
-	private LocalyticsSession localyticsSession;
-	private static final String LOCALYTICS_KEY = "sample_key";
-
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		Log.d(TAG, "Setting up LocalyticsSession once more");
-
 		localyticsSession = new LocalyticsSession(getActivity(), LOCALYTICS_KEY);
 		localyticsSession.open();
 	}
@@ -49,7 +48,7 @@ public class LocalyticsSessionTest extends
 	 * changing these will break our APEX.
 	 */
 	public void testJSONObjectsBlobHeader() {
-		
+
 	}
 
 	/**
@@ -107,7 +106,7 @@ public class LocalyticsSessionTest extends
 		Log.i(TAG, "Access token: " + accessToken);
 		Log.i(TAG, "Instance URL: " + instanceURL);
 
-		// Ensure that the access token and URL are not null
+		// Ensure that the access token and URL are not empty strings or null
 		assertFalse(accessToken.trim().equals(""));
 		assertFalse(instanceURL.trim().equals(""));
 	}
