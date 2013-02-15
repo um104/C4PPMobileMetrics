@@ -33,64 +33,51 @@
         <type>Default</type>
     </actionOverrides>
     <deploymentStatus>Deployed</deploymentStatus>
+    <description>Database table that stores information on apps</description>
     <enableActivities>false</enableActivities>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
     <fields>
-        <fullName>Event__c</fullName>
+        <fullName>Label__c</fullName>
         <externalId>false</externalId>
-        <label>Event</label>
-        <referenceTo>Event__c</referenceTo>
-        <relationshipLabel>Attributes</relationshipLabel>
-        <relationshipName>Attributes</relationshipName>
-        <relationshipOrder>0</relationshipOrder>
-        <reparentableMasterDetail>false</reparentableMasterDetail>
-        <type>MasterDetail</type>
-        <writeRequiresMasterRead>false</writeRequiresMasterRead>
-    </fields>
-    <fields>
-        <fullName>Key__c</fullName>
-        <externalId>false</externalId>
-        <label>Key</label>
+        <label>Label</label>
         <length>100</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Type__c</fullName>
+        <fullName>PackageName__c</fullName>
+        <description>Name of the package in which the user&apos;s app is being developed.</description>
         <externalId>false</externalId>
-        <label>Type</label>
-        <length>3</length>
+        <label>PackageName</label>
+        <length>255</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Value__c</fullName>
+        <fullName>Version__c</fullName>
+        <description>The string name of the version of the current app.</description>
         <externalId>false</externalId>
-        <label>Value</label>
-        <length>100</length>
+        <label>Version</label>
+        <length>255</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
-    <label>Attribute</label>
+    <label>App</label>
     <listViews>
         <fullName>All</fullName>
-        <columns>Key__c</columns>
-        <columns>Value__c</columns>
-        <columns>NAME</columns>
-        <columns>Event__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
     <nameField>
-        <label>Attribute Name</label>
+        <label>App Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Attributes</pluralLabel>
+    <pluralLabel>Apps</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ControlledByParent</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
 </CustomObject>

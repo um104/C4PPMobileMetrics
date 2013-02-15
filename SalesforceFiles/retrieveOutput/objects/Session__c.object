@@ -38,109 +38,94 @@
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
     <fields>
-        <fullName>Android_ID_Hash__c</fullName>
+        <fullName>AndroidIDHash__c</fullName>
         <externalId>false</externalId>
-        <label>Android_ID_Hash</label>
+        <label>AndroidIDHash</label>
         <length>100</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>App_Label__c</fullName>
+        <fullName>App__c</fullName>
         <externalId>false</externalId>
-        <label>App_Label</label>
-        <length>20</length>
-        <required>false</required>
-        <type>Text</type>
-        <unique>false</unique>
+        <label>App</label>
+        <referenceTo>App__c</referenceTo>
+        <relationshipLabel>Sessions</relationshipLabel>
+        <relationshipName>Sessions</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
-        <fullName>App_Package_Name__c</fullName>
+        <fullName>DataConnectionType__c</fullName>
         <externalId>false</externalId>
-        <label>App_Package_Name</label>
-        <length>255</length>
-        <required>false</required>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>App_Version__c</fullName>
-        <externalId>false</externalId>
-        <label>App Version</label>
-        <length>10</length>
-        <required>false</required>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Data_Connection_Type__c</fullName>
-        <externalId>false</externalId>
-        <label>Data Connection Type</label>
+        <label>DataConnectionType</label>
         <length>40</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Data_Type__c</fullName>
+        <fullName>DataType__c</fullName>
         <externalId>false</externalId>
-        <label>Data_Type</label>
+        <label>DataType</label>
         <length>100</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Device_Country__c</fullName>
+        <fullName>DeviceCountry__c</fullName>
         <description>Country Code</description>
         <externalId>false</externalId>
-        <label>Device Country</label>
+        <label>DeviceCountry</label>
         <length>10</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Device_Manufacturer__c</fullName>
+        <fullName>DeviceManufacturer__c</fullName>
         <externalId>false</externalId>
-        <label>Device Manufacturer</label>
+        <label>DeviceManufacturer</label>
         <length>20</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Device_Model__c</fullName>
+        <fullName>DeviceModel__c</fullName>
         <externalId>false</externalId>
-        <label>Device Model</label>
+        <label>DeviceModel</label>
         <length>30</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Device_Serial_Hash__c</fullName>
+        <fullName>DeviceSerialHash__c</fullName>
         <externalId>false</externalId>
-        <label>Device_Serial_Hash</label>
+        <label>DeviceSerialHash</label>
         <length>100</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Device_Type__c</fullName>
+        <fullName>DeviceType__c</fullName>
         <externalId>false</externalId>
-        <label>Device Type</label>
+        <label>DeviceType</label>
         <length>20</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Epoch_time__c</fullName>
+        <fullName>EpochTime__c</fullName>
         <externalId>false</externalId>
-        <label>Epoch time</label>
+        <label>EpochTime</label>
         <precision>10</precision>
         <required>false</required>
         <scale>0</scale>
@@ -148,72 +133,72 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Language_Locale__c</fullName>
+        <fullName>LanguageLocale__c</fullName>
         <externalId>false</externalId>
-        <label>Language Locale</label>
+        <label>LanguageLocale</label>
         <length>10</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Locale_Country_Code__c</fullName>
+        <fullName>LocaleCountryCode__c</fullName>
         <externalId>false</externalId>
-        <label>Locale Country Code</label>
+        <label>LocaleCountryCode</label>
         <length>10</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Localytics_Api_Key__c</fullName>
+        <fullName>LocalyticsApiKey__c</fullName>
         <externalId>false</externalId>
-        <label>Localytics_Api_Key</label>
+        <label>LocalyticsApiKey</label>
         <length>100</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Localytics_Library_Version__c</fullName>
+        <fullName>LocalyticsLibraryVersion__c</fullName>
         <externalId>false</externalId>
-        <label>Localytics_Library_Version</label>
+        <label>LocalyticsLibraryVersion</label>
         <length>20</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Network_Carrier__c</fullName>
+        <fullName>NetworkCarrier__c</fullName>
         <externalId>false</externalId>
-        <label>Network Carrier</label>
+        <label>NetworkCarrier</label>
         <length>20</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Network_Country_Code__c</fullName>
+        <fullName>NetworkCountryCode__c</fullName>
         <externalId>false</externalId>
-        <label>Network Country Code</label>
+        <label>NetworkCountryCode</label>
         <length>10</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>OS_Version__c</fullName>
+        <fullName>OSVersion__c</fullName>
         <externalId>false</externalId>
-        <label>OS Version</label>
+        <label>OSVersion</label>
         <length>10</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Persistent_Storage_Creation_Time_Seconds__c</fullName>
+        <fullName>PersistentStorageCreationTimeSeconds__c</fullName>
         <externalId>false</externalId>
-        <label>Persistent_Storage_Creation_Time_Seconds</label>
+        <label>PersistentStorageCreationTimeSeconds</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
@@ -221,18 +206,18 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>SDK_Compatibility__c</fullName>
+        <fullName>SDKCompatibility__c</fullName>
         <externalId>false</externalId>
-        <label>SDK Compatibility</label>
+        <label>SDKCompatibility</label>
         <length>10</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Session_Length_Seconds__c</fullName>
+        <fullName>SessionLengthSeconds__c</fullName>
         <externalId>false</externalId>
-        <label>Session_Length_Seconds</label>
+        <label>SessionLengthSeconds</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
@@ -252,20 +237,17 @@
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
-        <columns>Android_ID_Hash__c</columns>
-        <columns>App_Version__c</columns>
-        <columns>Data_Connection_Type__c</columns>
-        <columns>Device_Country__c</columns>
-        <columns>Device_Manufacturer__c</columns>
-        <columns>Device_Model__c</columns>
-        <columns>Device_Type__c</columns>
-        <columns>Epoch_time__c</columns>
-        <columns>Language_Locale__c</columns>
-        <columns>Locale_Country_Code__c</columns>
-        <columns>Network_Carrier__c</columns>
-        <columns>Network_Country_Code__c</columns>
-        <columns>OS_Version__c</columns>
-        <columns>SDK_Compatibility__c</columns>
+        <columns>AndroidIDHash__c</columns>
+        <columns>DataConnectionType__c</columns>
+        <columns>DeviceCountry__c</columns>
+        <columns>DeviceManufacturer__c</columns>
+        <columns>DeviceModel__c</columns>
+        <columns>DeviceType__c</columns>
+        <columns>EpochTime__c</columns>
+        <columns>LanguageLocale__c</columns>
+        <columns>LocaleCountryCode__c</columns>
+        <columns>NetworkCarrier__c</columns>
+        <columns>NetworkCountryCode__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -275,5 +257,5 @@
     </nameField>
     <pluralLabel>Sessions</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
 </CustomObject>

@@ -9,49 +9,45 @@ global class SessionRestResource
         {
             for(SessionClass s : sessions) 
             {
+                App__c app = new App__c();
+                app.Label__c = s.an;
+                app.PackageName__c = s.pn;
+                app.Version__c = s.av;
+                
+                insert app;
+                
                 Session__c session = new Session__c();
-                session.Android_ID_Hash__c = s.du;
-                session.App_Label__c = s.an;
-                session.App_Package_Name__c = s.pn;
-                session.App_Version__c = s.av;
-                session.Data_Type__c = s.dt;
-                session.Data_Connection_Type__c = s.dac;
-                session.Device_Serial_Hash__c = s.dms;
-                session.Device_Country__c = s.dc;
-                session.Device_Manufacturer__c = s.dma;
-                session.Device_Model__c = s.dmo;
-                session.Device_Type__c = s.dp;
-                session.Epoch_time__c = s.ct;
-                session.Language_Locale__c = s.dll;
-                session.Locale_Country_Code__c = s.dlc;
-                session.Localytics_Api_Key__c = s.au;
-                session.Localytics_Library_Version__c = s.lv;
-                session.Network_Carrier__c = s.nca;
-                session.Network_Country_Code__c = s.nc;
-                session.OS_Version__c = s.dov;
-                session.Persistent_Storage_Creation_Time_Seconds__c = s.pa;
-                session.SDK_Compatibility__c = s.dsdk;
-                session.Session_Length_Seconds__c = s.ctl;
+                session.AndroidIDHash__c = s.du;
+                session.App__c = app.id;
+                session.DataType__c = s.dt;
+                session.DataConnectionType__c = s.dac;
+                session.DeviceSerialHash__c = s.dms;
+                session.DeviceCountry__c = s.dc;
+                session.DeviceManufacturer__c = s.dma;
+                session.DeviceModel__c = s.dmo;
+                session.DeviceType__c = s.dp;
+                session.EpochTime__c = s.ct;
+                session.LanguageLocale__c = s.dll;
+                session.LocaleCountryCode__c = s.dlc;
+                session.LocalyticsApiKey__c = s.au;
+                session.LocalyticsLibraryVersion__c = s.lv;
+                session.NetworkCarrier__c = s.nca;
+                session.NetworkCountryCode__c = s.nc;
+                session.OSVersion__c = s.dov;
+                session.PersistentStorageCreationTimeSeconds__c = s.pa;
+                session.SDKCompatibility__c = s.dsdk;
+                session.SessionLengthSeconds__c = s.ctl;
                 session.UUID__c = s.u;
                             
                 insert session;
-                
-                AppTable__c appTable = new AppTable__c();
-                appTable.AppLabel__c = s.an;
-                appTable.PackageName__c = s.pn;
-                appTable.Version__c = s.av;
-                
-                insert appTable;
             
                 for(EventClass e : s.events)
                 {
                     Event__c event = new Event__c();
                     event.Session__c = session.id;
-                    event.Data_Type__c = e.dt;
-                    event.Event_Name__c = e.n;
-                    event.Event_UUID__c = e.u;
-                    event.Session_UUID__c = e.su;
-                    event.Wall_Time_Seconds__c = e.ct;
+                    event.EventName__c = e.n;
+                    event.EventUUID__c = e.u;
+                    event.WallTimeSeconds__c = e.ct;
                 
                     insert event;
             

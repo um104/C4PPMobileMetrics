@@ -38,37 +38,18 @@
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
     <fields>
-        <fullName>Data_Type__c</fullName>
+        <fullName>EventName__c</fullName>
         <externalId>false</externalId>
-        <label>Data_Type</label>
+        <label>EventName</label>
         <length>100</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Event_Name__c</fullName>
-        <caseSensitive>false</caseSensitive>
+        <fullName>EventUUID__c</fullName>
         <externalId>false</externalId>
-        <label>Event_Name</label>
-        <length>100</length>
-        <required>true</required>
-        <type>Text</type>
-        <unique>true</unique>
-    </fields>
-    <fields>
-        <fullName>Event_UUID__c</fullName>
-        <externalId>false</externalId>
-        <label>Event_UUID</label>
-        <length>100</length>
-        <required>false</required>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Session_UUID__c</fullName>
-        <externalId>false</externalId>
-        <label>Session_UUID</label>
+        <label>EventUUID</label>
         <length>100</length>
         <required>false</required>
         <type>Text</type>
@@ -87,9 +68,9 @@
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
-        <fullName>Wall_Time_Seconds__c</fullName>
+        <fullName>WallTimeSeconds__c</fullName>
         <externalId>false</externalId>
-        <label>Wall_Time_Seconds</label>
+        <label>WallTimeSeconds</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
@@ -99,11 +80,9 @@
     <label>Event</label>
     <listViews>
         <fullName>All</fullName>
-        <columns>Data_Type__c</columns>
-        <columns>Event_Name__c</columns>
-        <columns>Event_UUID__c</columns>
-        <columns>Session_UUID__c</columns>
-        <columns>Wall_Time_Seconds__c</columns>
+        <columns>EventName__c</columns>
+        <columns>EventUUID__c</columns>
+        <columns>WallTimeSeconds__c</columns>
         <columns>Session__c</columns>
         <columns>NAME</columns>
         <columns>OBJECT_ID</columns>

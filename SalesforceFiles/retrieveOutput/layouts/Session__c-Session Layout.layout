@@ -16,99 +16,86 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Epoch_time__c</field>
+                <field>EpochTime__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Device_Country__c</field>
+                <field>DeviceCountry__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Data_Connection_Type__c</field>
+                <field>DataConnectionType__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Android_ID_Hash__c</field>
+                <field>AndroidIDHash__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Device_Model__c</field>
+                <field>DeviceModel__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Locale_Country_Code__c</field>
+                <field>LocaleCountryCode__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Device_Manufacturer__c</field>
+                <field>DeviceManufacturer__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>OS_Version__c</field>
+                <field>OSVersion__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>App_Version__c</field>
+                <field>NetworkCarrier__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Network_Carrier__c</field>
+                <field>NetworkCountryCode__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Network_Country_Code__c</field>
+                <field>LanguageLocale__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Language_Locale__c</field>
+                <field>SDKCompatibility__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>SDK_Compatibility__c</field>
+                <field>DeviceType__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Device_Type__c</field>
+                <field>DataType__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Data_Type__c</field>
+                <field>SessionLengthSeconds__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Session_Length_Seconds__c</field>
+                <field>LocalyticsLibraryVersion__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Localytics_Library_Version__c</field>
+                <field>DeviceSerialHash__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Device_Serial_Hash__c</field>
+                <field>LocalyticsApiKey__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Localytics_Api_Key__c</field>
+                <field>PersistentStorageCreationTimeSeconds__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Persistent_Storage_Creation_Time_Seconds__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>App_Label__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>App_Package_Name__c</field>
+                <behavior>Required</behavior>
+                <field>App__c</field>
             </layoutItems>
         </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>OwnerId</field>
-            </layoutItems>
-        </layoutColumns>
+        <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>

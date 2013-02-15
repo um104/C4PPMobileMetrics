@@ -15,24 +15,16 @@
                 <field>Session__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>Event_Name__c</field>
+                <behavior>Edit</behavior>
+                <field>EventName__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Session_UUID__c</field>
+                <field>EventUUID__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Data_Type__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Event_UUID__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Wall_Time_Seconds__c</field>
+                <field>WallTimeSeconds__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>
