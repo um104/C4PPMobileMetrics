@@ -6,8 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
-import edu.channel4.mobilemetrics.sample.android.SampleApplication;
-import edu.channel4.mobilemetrics.sdk.android.LocalyticsSession;
 
 // TODO: To deal with class and variable scope, try making things in LocalyticsSession
 // package scope.

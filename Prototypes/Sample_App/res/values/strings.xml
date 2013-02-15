@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My First App</string>
+    <string name="name_message">Enter your name</string>
+    <string name="age_message">Enter your age</string>
+    <string name="upload_event">Upload Event</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string-array name="MobileMetricsCredentials">
+        <item>3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4</item>
+        <item>603269615811711635</item>
+        <item>channel4pp@calpoly.edu</item>
+        <item>iceland006</item>
+        <item>pWHcgxT1zbYhGfqkm5BiXJWJV</item>
+    </string-array>
+
+</resources>
