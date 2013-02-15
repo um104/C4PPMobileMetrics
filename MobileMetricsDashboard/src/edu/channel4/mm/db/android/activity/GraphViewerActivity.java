@@ -78,9 +78,11 @@ public class GraphViewerActivity extends Activity {
         
         // Set cookies within web view to prevent double login
         String accessToken = getApplicationContext().getSharedPreferences(Keys.PREFS_NS, 0).getString(Keys.ACCESS_TOKEN, null);
+        String refreshToken = getApplicationContext().getSharedPreferences(Keys.PREFS_NS, 0).getString("refresh_token", null);
         
         CookieManager cookieManager = CookieManager.getInstance();
-        cookieManager.setCookie("c.na9.visual.force.com", "sid=" + accessToken + "; domain=c.na9.visual.force.com");
+        //cookieManager.setCookie("c.na9.visual.force.com", "sid=" + accessToken + "; domain=c.na9.visual.force.com");
+        cookieManager.setCookie("c.na9.visual.force.com", "sid=" + refreshToken + "; domain=c.na9.visual.force.com");
         CookieSyncManager.getInstance().sync();
         
         // get graph URL
