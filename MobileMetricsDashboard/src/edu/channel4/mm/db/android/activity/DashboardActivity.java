@@ -69,7 +69,7 @@ public class DashboardActivity extends Activity {
 		
 		switch (view.getId()) {
 			case R.id.genPieGraph:
-				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, GraphType.PieGraph);
+				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, GraphType.Pie);
 		}
 		
 		startActivity(intent);
