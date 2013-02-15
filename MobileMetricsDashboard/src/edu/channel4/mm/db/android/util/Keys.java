@@ -33,7 +33,7 @@ public class Keys {
 	
 	public static final String EVENT_NAME = "event_name";
 	
-	public static final String APP_ID = "Id";
+	public static final String APP_ID = "Name";
 
 	/**
 	 * The {@link SharedPreferences} namespace that we should use throughout the

@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import edu.channel4.mm.db.android.R;
@@ -54,8 +55,13 @@ public class LoginActivity extends Activity {
 			// back the "successful login" callback URI
 			if (uriString.contains(REDIRECT_URI)) {
 
+				// Store all cookies received by the WebView
+				CookieManager cookieManager = CookieManager.getInstance();
+				String cookie = cookieManager.getCookie(uriString);
+				String cookie2 = cookieManager.getCookie(SALESFORCE_LOGIN_URL);
+				String cookie3 = cookieManager.getCookie("https://login.salesforce.com/services/oauth2/authorize");
+				
 				// Parse the access token and refresh token from the URI
-
 				List<NameValuePair> uriParams = null;
 				try {
 					uriParams = URLEncodedUtils.parse(
