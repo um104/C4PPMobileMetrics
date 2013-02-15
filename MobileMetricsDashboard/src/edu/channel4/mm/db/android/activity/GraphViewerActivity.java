@@ -67,14 +67,14 @@ public class GraphViewerActivity extends Activity {
         	  }
         	});
         
-        wView.setWebViewClient(new WebViewClient() {
+/*        wView.setWebViewClient(new WebViewClient() {
         	public boolean shouldOverrideUrlLoading (WebView view, String url) {
         		
         		Log.e("Oh noooo", "" + url);
         		
         		return false;
         	}
-        });
+        });*/
         
         // Set cookies within web view to prevent double login
         String accessToken = getApplicationContext().getSharedPreferences(Keys.PREFS_NS, 0).getString(Keys.ACCESS_TOKEN, null);
