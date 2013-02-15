@@ -298,7 +298,7 @@ public final class LocalyticsSession
         /**
          *  Start the process of swapping credentials for an access token to load data into the Salesforce.com database.
          */
-        new AuthenticateSalesforceTask().execute(new Void[0]);
+        new AuthenticateSalesforceTask().execute();
 
         mSessionHandler = new SessionHandler(mContext, mLocalyticsKey, sSessionHandlerThread.getLooper());
 
