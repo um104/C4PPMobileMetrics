@@ -44,8 +44,8 @@
     <control controlID="12" controlTypeID="com.balsamiq.mockups::PointyButton" x="486" y="110" w="-1" h="-1" measuredW="45" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
         <direction>left</direction>
-        <href>home_activity%26bm%3Bhome_activity.bmml%26bm%3Bhome_activity.bmml%26bm%3Bhome_activity.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2232%2C90%2C77%2C117%22%20href%3D%22home_activity.bmml%22%20alt%3D%22home_activity%22%20id%3D%2212%22/%3E</map>
+        <href>usage_activity%26bm%3Busage_activity.bmml%26bm%3Busage_activity.bmml%26bm%3Busage_activity.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2232%2C90%2C77%2C117%22%20href%3D%22usage_activity.bmml%22%20alt%3D%22usage_activity%22%20id%3D%2212%22/%3E</map>
         <size>11</size>
         <text>Back</text>
       </controlProperties>

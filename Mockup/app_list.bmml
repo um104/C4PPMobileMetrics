@@ -6,9 +6,9 @@
         <topBar>false</topBar>
       </controlProperties>
     </control>
-    <control controlID="2" controlTypeID="com.balsamiq.mockups::IconLabel" x="436" y="253" w="61" h="-1" measuredW="48" measuredH="69" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::IconLabel" x="427" y="253" w="76" h="-1" measuredW="69" measuredH="69" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>hang</text>
+        <text>Angry%20Birds</text>
       </controlProperties>
     </control>
     <control controlID="3" controlTypeID="com.balsamiq.mockups::IconLabel" x="442" y="163" w="-1" h="-1" measuredW="48" measuredH="69" zOrder="2" locked="false" isInGroup="-1">
@@ -36,8 +36,8 @@
       <controlProperties>
         <backgroundAlpha>0</backgroundAlpha>
         <borderStyle>none</borderStyle>
-        <href>home_activity%26bm%3Bhome_activity.bmml%26bm%3Bhome_activity.bmml%26bm%3Bhome_activity.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2230%2C115%2C247%2C191%22%20href%3D%22home_activity.bmml%22%20alt%3D%22home_activity%22%20id%3D%2213%22/%3E</map>
+        <href>home_dashboard%26bm%3Bhome_dashboard.bmml%26bm%3Bhome_dashboard.bmml%26bm%3Bhome_dashboard.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2230%2C115%2C247%2C191%22%20href%3D%22home_dashboard.bmml%22%20alt%3D%22home_dashboard%22%20id%3D%2213%22/%3E</map>
       </controlProperties>
     </control>
     <control controlID="16" controlTypeID="com.balsamiq.mockups::Label" x="503" y="131" w="-1" h="-1" measuredW="70" measuredH="26" zOrder="9" locked="false" isInGroup="-1">
@@ -68,12 +68,12 @@
     <control controlID="20" controlTypeID="com.balsamiq.mockups::Label" x="503" y="253" w="-1" h="-1" measuredW="145" measuredH="18" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
         <size>11</size>
-        <text>Current%20Version%3A%20Version%201.1</text>
+        <text>Current%20Version%3A%20Version%201.0</text>
       </controlProperties>
     </control>
-    <control controlID="21" controlTypeID="com.balsamiq.mockups::Label" x="503" y="277" w="-1" h="-1" measuredW="124" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::Label" x="503" y="277" w="-1" h="-1" measuredW="83" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>com.hangapp.android</text>
+        <text>com.example</text>
       </controlProperties>
     </control>
     <control controlID="22" controlTypeID="com.balsamiq.mockups::StickyNote" x="849" y="74" w="-1" h="-1" measuredW="109" measuredH="123" zOrder="15" locked="false" isInGroup="-1">

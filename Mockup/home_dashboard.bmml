@@ -1,0 +1,56 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="707" measuredH="556" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="425" y="46" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::IconLabel" x="487" y="208" w="-1" h="-1" measuredW="48" measuredH="69" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>usage_activity%26bm%3Busage_activity.bmml%26bm%3Busage_activity.bmml%26bm%3Busage_activity.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2262%2C162%2C110%2C231%22%20href%3D%22usage_activity.bmml%22%20alt%3D%22usage_activity%22%20id%3D%222%22/%3E</map>
+        <text>Usage</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::IconLabel" x="591" y="208" w="-1" h="-1" measuredW="57" measuredH="69" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>audience_activity%26bm%3Baudience_activity.bmml%26bm%3Baudience_activity.bmml%26bm%3Baudience_activity.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22166%2C162%2C223%2C231%22%20href%3D%22audience_activity.bmml%22%20alt%3D%22audience_activity%22%20id%3D%223%22/%3E</map>
+        <text>Audience</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::IconLabel" x="469" y="309" w="-1" h="-1" measuredW="85" measuredH="69" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>event_funnels_activity%26bm%3Bevent_funnels_activity.bmml%26bm%3Bevent_funnels_activity.bmml%26bm%3Bevent_funnels_activity.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2244%2C263%2C129%2C332%22%20href%3D%22event_funnels_activity.bmml%22%20alt%3D%22event_funnels_activity%22%20id%3D%224%22/%3E</map>
+        <text>Event%20Funnels</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::IconLabel" x="573" y="309" w="-1" h="-1" measuredW="92" measuredH="69" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>custom_graph_activity%26bm%3Bcustom_graph_activity.bmml%26bm%3Bcustom_graph_activity.bmml%26bm%3Bcustom_graph_activity.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22148%2C263%2C240%2C332%22%20href%3D%22custom_graph_activity.bmml%22%20alt%3D%22custom_graph_activity%22%20id%3D%225%22/%3E</map>
+        <text>Custom%20Graphs</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::HRule" x="453" y="183" w="227" h="-1" measuredW="100" measuredH="10" zOrder="5" locked="false" isInGroup="-1"/>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextArea" x="537" y="150" w="58" h="29" measuredW="200" measuredH="140" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>16777215</borderColor>
+        <size>18</size>
+        <text>Hang</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::PointyButton" x="459" y="152" w="-1" h="-1" measuredW="45" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>left</direction>
+        <href>app_list%26bm%3Bapp_list.bmml%26bm%3Bapp_list.bmml%26bm%3Bapp_list.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2234%2C106%2C79%2C133%22%20href%3D%22app_list.bmml%22%20alt%3D%22app_list%22%20id%3D%228%22/%3E</map>
+        <size>11</size>
+        <text>Back</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="626" y="151" w="-1" h="-1" measuredW="46" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
