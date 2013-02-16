@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.ConsoleMessage;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -65,14 +67,23 @@ public class GraphViewerActivity extends Activity {
         	  }
         	});
         
-        wView.setWebViewClient(new WebViewClient() {
+/*        wView.setWebViewClient(new WebViewClient() {
         	public boolean shouldOverrideUrlLoading (WebView view, String url) {
         		
         		Log.e("Oh noooo", "" + url);
         		
         		return false;
         	}
-        });
+        });*/
+        
+        // Set cookies within web view to prevent double login
+        String accessToken = getApplicationContext().getSharedPreferences(Keys.PREFS_NS, 0).getString(Keys.ACCESS_TOKEN, null);
+        String refreshToken = getApplicationContext().getSharedPreferences(Keys.PREFS_NS, 0).getString("refresh_token", null);
+        
+        CookieManager cookieManager = CookieManager.getInstance();
+        //cookieManager.setCookie("c.na9.visual.force.com", "sid=" + accessToken + "; domain=c.na9.visual.force.com");
+        cookieManager.setCookie("c.na9.visual.force.com", "sid=" + refreshToken + "; domain=c.na9.visual.force.com");
+        CookieSyncManager.getInstance().sync();
         
         // get graph URL
         SalesforceConn sfConn = SalesforceConn.getInstance(getApplicationContext());
