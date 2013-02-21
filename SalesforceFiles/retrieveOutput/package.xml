@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ClassAndPage</fullName>
-    <description>This package contains SessionRestResources and the VertProto Visualforce page</description>
+    <fullName>MobileMetrics</fullName>
+    <description>Channel4++ Mobile Metrics Application.</description>
     <types>
         <members>AppRestResource</members>
+        <members>AppRestResourceTest</members>
+        <members>AttrDescList</members>
+        <members>AttributeRestResource</members>
+        <members>AttributeRestResourceTest</members>
+        <members>Datatable</members>
+        <members>DatatableTest</members>
+        <members>EventDesc</members>
+        <members>GraphCreator</members>
+        <members>GraphRequest</members>
+        <members>GraphRequestHandler</members>
+        <members>GraphRequestHandlerTest</members>
+        <members>LineGraphCreator</members>
+        <members>PieGraphCreator</members>
+        <members>PieGraphCreatorTest</members>
         <members>SessionRestResource</members>
+        <members>SessionRestResourceTest</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>VertProto</members>
+        <members>graphView</members>
         <name>ApexPage</name>
     </types>
     <types>
@@ -66,6 +81,12 @@
         <members>Event__c.All</members>
         <members>Session__c.All</members>
         <name>ListView</name>
+    </types>
+    <types>
+        <members>jBBQ</members>
+        <members>jQuery</members>
+        <members>json2</members>
+        <name>StaticResource</name>
     </types>
     <version>26.0</version>
 </Package>
