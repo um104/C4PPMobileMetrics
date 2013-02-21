@@ -17,19 +17,22 @@
     <string name="logout">Logout</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="developers">Developers:</string>
+
     <string-array name="developer_names">
-        <item >Bittah Prophet</item>
-        <item >Phantom Specialist</item> 
-        <item >Ray Tam</item>
-        <item >Profound Pupil</item>
-        <item >Violent King</item>
+        <item>Bittah Prophet</item>
+        <item>Phantom Specialist</item>
+        <item>Ray Tam</item>
+        <item>Profound Pupil</item>
+        <item>Violent King</item>
     </string-array>
+
     <string name="usage">Usage</string>
     <string name="audience">Audience</string>
     <string name="event_funnels">Event Funnels</string>
     <string name="custom_graphs">Custom Graphs</string>
-	
-    
-
+    <string name="title_activity_usage">UsageActivity</string>
+    <string name="title_activity_audience">AudienceActivity</string>
+    <string name="title_activity_event_funnels">EventFunnelsActivity</string>
+    <string name="title_activity_custom_graph">CustomGraphActivity</string>
 
 </resources>

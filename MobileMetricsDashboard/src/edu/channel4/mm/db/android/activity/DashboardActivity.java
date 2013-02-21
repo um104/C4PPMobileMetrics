@@ -17,7 +17,6 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.util.Keys;
 
@@ -29,7 +28,7 @@ public class DashboardActivity extends Activity {
 
 	/**
 	 * Helper class that aggregates details on the Activities you want to enter.
-	 * Displayed by the ImageAdapter
+	 * These are presented to the user by the GridViewAdapter
 	 */
 	static class SubactivityDetails {
 		private Integer iconID;
@@ -45,20 +44,22 @@ public class DashboardActivity extends Activity {
 	}
 
 	/**
-	 * Adapter for the GridView.
+	 * Helper adapter for the GridView.
 	 */
 	class GridViewAdapter extends BaseAdapter {
 		protected final SubactivityDetails[] subactivityDetails = new SubactivityDetails[] {
 				// TODO: Put the actual Activity class objects in here once we
 				// make them.
 				new SubactivityDetails(R.drawable.ic_launcher, getResources()
-						.getString(R.string.usage), null),
+						.getString(R.string.usage), UsageActivity.class),
 				new SubactivityDetails(R.drawable.ic_launcher, getResources()
-						.getString(R.string.audience), null),
+						.getString(R.string.audience), AudienceActivity.class),
 				new SubactivityDetails(R.drawable.ic_launcher, getResources()
-						.getString(R.string.event_funnels), null),
+						.getString(R.string.event_funnels),
+						EventFunnelsActivity.class),
 				new SubactivityDetails(R.drawable.ic_launcher, getResources()
-						.getString(R.string.custom_graphs), null) };
+						.getString(R.string.custom_graphs),
+						CustomGraphActivity.class) };
 
 		public GridViewAdapter() {
 		}
@@ -89,7 +90,7 @@ public class DashboardActivity extends Activity {
 				icon = (ImageView) gridViewCell
 						.findViewById(R.id.imageViewDashboardCellIcon);
 
-//				icon.setLayoutParams(new GridView.LayoutParams(85, 85));
+				// icon.setLayoutParams(new GridView.LayoutParams(85, 85));
 				icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
 				icon.setPadding(8, 8, 8, 8);
 			} else {
@@ -123,11 +124,14 @@ public class DashboardActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				Toast.makeText(
-						getApplicationContext(),
-						"NOT starting activity: "
-								+ adapter.subactivityDetails[position].displayName,
-						Toast.LENGTH_SHORT).show();
+				// Toast.makeText(
+				// getApplicationContext(),
+				// "NOT starting activity: "
+				// + adapter.subactivityDetails[position].displayName,
+				// Toast.LENGTH_SHORT).show();
+				Class newActivityClass = adapter.subactivityDetails[position].activityClass;
+				startActivity(new Intent(getApplicationContext(),
+						newActivityClass));
 			}
 		});
 
