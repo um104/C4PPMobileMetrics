@@ -1,18 +1,27 @@
 package edu.channel4.mm.db.android.activity;
 
-import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.R.layout;
-import edu.channel4.mm.db.android.R.menu;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ListView;
+import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.model.UsageGraphRequest;
+import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
 
 public class UsageActivity extends Activity {
+
+	private ListView listView;
+	private GraphRequestArrayAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_usage);
+
+		ListView listView = (ListView) findViewById(R.id.listviewUsageActivity);
+		adapter = new GraphRequestArrayAdapter(getApplicationContext(),
+				UsageGraphRequest.values());
+		listView.setAdapter(adapter);
 	}
 
 	@Override

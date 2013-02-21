@@ -55,21 +55,13 @@
             android:name="edu.channel4.mm.db.android.activity.AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
-        <activity
-            android:name="edu.channel4.mm.db.android.activity.UsageActivity"
-            android:label="@string/title_activity_usage" >
+        <activity android:name="edu.channel4.mm.db.android.activity.UsageActivity" >
         </activity>
-        <activity
-            android:name="edu.channel4.mm.db.android.activity.AudienceActivity"
-            android:label="@string/title_activity_audience" >
+        <activity android:name="edu.channel4.mm.db.android.activity.AudienceActivity" >
         </activity>
-        <activity
-            android:name="edu.channel4.mm.db.android.activity.EventFunnelsActivity"
-            android:label="@string/title_activity_event_funnels" >
+        <activity android:name="edu.channel4.mm.db.android.activity.EventFunnelsActivity" >
         </activity>
-        <activity
-            android:name="edu.channel4.mm.db.android.activity.CustomGraphActivity"
-            android:label="@string/title_activity_custom_graph" >
+        <activity android:name="edu.channel4.mm.db.android.activity.CustomGraphActivity" >
         </activity>
     </application>
 

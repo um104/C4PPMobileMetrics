@@ -56,10 +56,13 @@ public class AppListActivity extends Activity implements
 								DashboardActivity.class);
 						// Change this to get appId from appList rather than
 						// parent.get... ?
-						intent.putExtra(
-								Keys.PREFS_NS + Keys.APP_ID,
-								((AppDescription) parent.getAdapter().getItem(
-										position)).getAppId());
+						// intent.putExtra(
+						// Keys.PREFS_NS + Keys.APP_ID,
+						// ((AppDescription) parent.getAdapter().getItem(
+						// position)).getAppId());
+
+						AppDescription appDescription = appList.get(position);
+						intent.putExtra(Keys.APP_DESC, appDescription);
 
 						startActivity(intent);
 					}

@@ -30,9 +30,13 @@
     <string name="audience">Audience</string>
     <string name="event_funnels">Event Funnels</string>
     <string name="custom_graphs">Custom Graphs</string>
-    <string name="title_activity_usage">UsageActivity</string>
-    <string name="title_activity_audience">AudienceActivity</string>
-    <string name="title_activity_event_funnels">EventFunnelsActivity</string>
-    <string name="title_activity_custom_graph">CustomGraphActivity</string>
+
+    <string-array name="usage_graph_requests">
+        <item>Session Length over Time</item>
+        <item>Number of Sessions over Time</item>
+        <item>Event Count over Time</item>
+        <item>Active Users</item>
+        <item>Time of Day Distribution</item>
+    </string-array>
 
 </resources>
