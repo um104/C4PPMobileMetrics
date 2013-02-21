@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Mobile Metrics version 1</string>
+    <string name="app_name">Salesforce Mobile Metrics</string>
     <string name="select_app">Select an App</string>
     <string name="menu_settings">Settings</string>
     <string name="this_is_an_android_app">This is an Android app</string>
@@ -13,5 +13,23 @@
     <string name="title_activity_attribute_list">AttributeListActivity</string>
     <string name="title_activity_pie_graph">PieGraphActivity</string>
     <string name="title_activity_graph_viewer">GraphViewerActivity</string>
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="developers">Developers:</string>
+    <string-array name="developer_names">
+        <item >Bittah Prophet</item>
+        <item >Phantom Specialist</item> 
+        <item >Ray Tam</item>
+        <item >Profound Pupil</item>
+        <item >Violent King</item>
+    </string-array>
+    <string name="usage">Usage</string>
+    <string name="audience">Audience</string>
+    <string name="event_funnels">Event Funnels</string>
+    <string name="custom_graphs">Custom Graphs</string>
+	
+    
+
 
 </resources>

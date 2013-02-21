@@ -6,52 +6,59 @@
       </controlProperties>
     </control>
     <control controlID="3" controlTypeID="com.balsamiq.mockups::HRule" x="454" y="157" w="211" h="-1" measuredW="100" measuredH="10" zOrder="1" locked="false" isInGroup="-1"/>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="454" y="167" w="-1" h="-1" measuredW="60" measuredH="33" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="465" y="178" w="60" h="26" measuredW="60" measuredH="33" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <size>24</size>
         <text>Email</text>
       </controlProperties>
     </control>
-    <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="454" y="323" w="-1" h="-1" measuredW="87" measuredH="33" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="465" y="323" w="-1" h="-1" measuredW="87" measuredH="33" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <size>24</size>
         <text>Chatter</text>
       </controlProperties>
     </control>
-    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="454" y="248" w="67" h="20" measuredW="57" measuredH="33" zOrder="4" locked="false" isInGroup="-1">
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="465" y="252" w="67" h="20" measuredW="57" measuredH="33" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <size>24</size>
         <text>SMS</text>
       </controlProperties>
     </control>
-    <control controlID="7" controlTypeID="com.balsamiq.mockups::ComboBox" x="454" y="203" w="211" h="-1" measuredW="121" measuredH="28" zOrder="5" locked="false" isInGroup="-1">
-      <controlProperties>
-        <size>18</size>
-        <text>Enter%20Email</text>
-      </controlProperties>
-    </control>
-    <control controlID="8" controlTypeID="com.balsamiq.mockups::ComboBox" x="454" y="356" w="211" h="-1" measuredW="148" measuredH="26" zOrder="6" locked="false" isInGroup="-1">
-      <controlProperties>
-        <size>16</size>
-        <text>Enter%20Username</text>
-      </controlProperties>
-    </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::ComboBox" x="454" y="280" w="211" h="-1" measuredW="147" measuredH="28" zOrder="7" locked="false" isInGroup="-1">
-      <controlProperties>
-        <size>18</size>
-        <text>555-555-1337</text>
-      </controlProperties>
-    </control>
-    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="454" y="129" w="205" h="28" measuredW="123" measuredH="28" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="454" y="129" w="205" h="28" measuredW="123" measuredH="28" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <size>20</size>
         <text>Export%20Graph</text>
       </controlProperties>
     </control>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="517" y="407" w="-1" h="-1" measuredW="77" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="465" y="417" w="-1" h="-1" measuredW="65" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>custom_graph_text_number%26bm%3Bcustom_graph_text_number.bmml%26bm%3Bcustom_graph_text_number.bmml%26bm%3Bcustom_graph_text_number.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2244%2C378%2C109%2C405%22%20href%3D%22custom_graph_text_number.bmml%22%20alt%3D%22custom_graph_text_number%22%20id%3D%2211%22/%3E</map>
         <size>18</size>
-        <text>Submit</text>
+        <text>Send</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="580" y="417" w="-1" h="-1" measuredW="79" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>custom_graph_text_number%26bm%3Bcustom_graph_text_number.bmml%26bm%3Bcustom_graph_text_number.bmml%26bm%3Bcustom_graph_text_number.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22159%2C378%2C238%2C405%22%20href%3D%22custom_graph_text_number.bmml%22%20alt%3D%22custom_graph_text_number%22%20id%3D%2212%22/%3E</map>
+        <size>18</size>
+        <text>Cancel</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::TextInput" x="465" y="208" w="194" h="-1" measuredW="80" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Enter%20Email</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::TextInput" x="466" y="283" w="193" h="-1" measuredW="101" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>555-555-1337</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::TextInput" x="465" y="356" w="192" h="-1" measuredW="157" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Enter%20Chatter%20Username</text>
       </controlProperties>
     </control>
   </controls>

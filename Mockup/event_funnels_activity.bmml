@@ -29,5 +29,15 @@
         <text>Edit</text>
       </controlProperties>
     </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="477" y="150" w="-1" h="-1" measuredW="215" measuredH="184" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>_%20My%20Funnel%201%2C%20%3E%0A_%20My%20Funnel%202%2C%20%3E%0A_%0A_%0A_%0A_</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="477" y="396" w="213" h="33" measuredW="135" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Create%20New%20Funnel</text>
+      </controlProperties>
+    </control>
   </controls>
 </mockup>

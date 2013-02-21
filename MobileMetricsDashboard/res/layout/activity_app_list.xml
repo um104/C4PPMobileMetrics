@@ -3,29 +3,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="100"
     tools:context=".AppListActivity" >
 
     <TextView
         android:id="@+id/textViewSelectApp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
         android:layout_gravity="center_horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="5dp"
+        android:layout_weight="7"
         android:text="@string/select_app"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/buttonRefreshAppList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="10"
         android:onClick="getAppList"
         android:text="@string/refresh_app_list" />
 
     <ListView
         android:id="@+id/listViewAppList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="73" >
     </ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="10" >
+
+        <Button
+            android:id="@+id/buttonAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="about"
+            android:text="@string/about" />
+
+        <Button
+            android:id="@+id/buttonLogOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:onClick="logout"
+            android:text="@string/logout" />
+    </RelativeLayout>
 
 </LinearLayout>

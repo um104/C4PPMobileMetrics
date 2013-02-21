@@ -50,10 +50,10 @@
         <text>Back</text>
       </controlProperties>
     </control>
-    <control controlID="13" controlTypeID="com.balsamiq.mockups::TextInput" x="538" y="106" w="-1" h="-1" measuredW="127" measuredH="34" zOrder="12" locked="false" isInGroup="-1">
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::TextInput" x="538" y="106" w="121" h="-1" measuredW="113" measuredH="34" zOrder="12" locked="false" isInGroup="-1">
       <controlProperties>
         <size>20</size>
-        <text>New%20Graph%201</text>
+        <text>My%20Graph%201</text>
       </controlProperties>
     </control>
     <control controlID="14" controlTypeID="com.balsamiq.mockups::iPhoneKeyboard" x="482" y="288" w="-1" h="-1" measuredW="227" measuredH="160" zOrder="13" locked="false" isInGroup="-1">

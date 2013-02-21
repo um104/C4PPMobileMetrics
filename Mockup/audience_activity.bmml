@@ -24,9 +24,10 @@
         <text>Back</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="644" y="104" w="-1" h="-1" measuredW="46" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="477" y="150" w="-1" h="-1" measuredW="215" measuredH="155" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Edit</text>
+        <hrefs>%2C%2C%2C%2C</hrefs>
+        <text>_%20Geographic%2C%20%3E%0A_%20Device%20Type%2C%20%3E%0A_%20OS%20Version%2C%20%3E%0A_%20Language%20Locale%2C%20%3E%0A_%20Network%20Carrier%2C%20%3E</text>
       </controlProperties>
     </control>
   </controls>

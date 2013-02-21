@@ -9,20 +9,30 @@ import org.json.JSONObject;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import edu.channel4.mm.db.android.util.Keys;
 
 public class AppDescription implements Comparable<AppDescription>, Parcelable {
-	String appLabel;
-	String packageName;
-	String versionNumber;
-	String appId;
 
-	public AppDescription(String appLabel, String packageName, String version, String appId) {
+	private long id;
+	protected String appLabel;
+	protected String packageName;
+	protected String versionNumber;
+	protected String appId;
+
+	public AppDescription(String appLabel, String packageName, String version,
+			String appId) {
 		this.appLabel = appLabel;
 		this.packageName = packageName;
 		this.versionNumber = version;
 		this.appId = appId;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getAppName() {
@@ -36,13 +46,14 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 	public String getVersionNumber() {
 		return versionNumber;
 	}
-	
+
 	public String getAppId() {
 		return appId;
 	}
 
 	/**
-	 * Parses a JSON List of AppDescription into a proper List<{@code AppDescription}>
+	 * Parses a JSON List of AppDescription into a proper List<
+	 * {@code AppDescription}>
 	 * 
 	 * @param appDataListString
 	 * @return
@@ -62,7 +73,8 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 			String version = appDataObject.getString(Keys.VERSION);
 			String appId = appDataObject.getString(Keys.APP_ID);
 
-			AppDescription appData = new AppDescription(appLabel, packageName, version, appId);
+			AppDescription appData = new AppDescription(appLabel, packageName,
+					version, appId);
 			appDataList.add(appData);
 		}
 
@@ -150,9 +162,9 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 			return new AppDescription[size];
 		}
 	};
-	
+
 	private AppDescription(Parcel in) {
-		//Note: Parcel data is read in a FIFO manner.
+		// Note: Parcel data is read in a FIFO manner.
 		this.appLabel = in.readString();
 		this.packageName = in.readString();
 		this.versionNumber = in.readString();

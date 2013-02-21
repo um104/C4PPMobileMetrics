@@ -1,7 +1,6 @@
 package edu.channel4.mm.db.android.activity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -18,20 +17,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.model.AttribDescription;
+import edu.channel4.mm.db.android.model.AttributeDescription;
 import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;
 
-public class AttributeListActivity extends Activity implements IAttributeListObserver {
+public class AttributeListActivity extends Activity {
 	
 	//private AppDescription appDescription;
 	private String appId;
 	private GraphType graphType;
 	private SalesforceConn sfConn;
 	private ListView attribListView;
-	private List<AttribDescription> attribList;
-	private ArrayAdapter<AttribDescription> attribAdapter;
+	private List<AttributeDescription> attribList;
+	private ArrayAdapter<AttributeDescription> attribAdapter;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -46,10 +45,10 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
         }
         
         // initialize attribute list
-        attribList = new ArrayList<AttribDescription>();
+        attribList = new ArrayList<AttributeDescription>();
         
         // create a new simple AttribDescription adapter
-        attribAdapter = new ArrayAdapter<AttribDescription>(this, android.R.layout.simple_list_item_1, attribList);
+        attribAdapter = new ArrayAdapter<AttributeDescription>(this, android.R.layout.simple_list_item_1, attribList);
                 		
         // Get intent and accompanying data
 		Intent intent = getIntent();
@@ -71,7 +70,7 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, graphType);
 				intent.putExtra(Keys.PREFS_NS + Keys.APP_ID, appId);
 
-				intent.putExtra(Keys.PREFS_NS + Keys.ATTRIB_DESC, (AttribDescription)(parent.getAdapter().getItem(position)));
+				// intent.putExtra(Keys.PREFS_NS + Keys.ATTRIB_DESC, (AttributeDescription)(parent.getAdapter().getItem(position)));
 								
 				startActivity(intent);
 			}
@@ -111,33 +110,9 @@ public class AttributeListActivity extends Activity implements IAttributeListObs
 		Toast.makeText(getApplicationContext(),
 				"Retrieving attrib list from Salesforce", Toast.LENGTH_SHORT).show();
 
-		// Construct a list of classes that care about the getAttribList callback
-		List<IAttributeListObserver> attribListObservers = new ArrayList<IAttributeListObserver>();
-
-		// Add this activity to that list
-		attribListObservers.add(this);
-
 		// Execute the getAttribList method asynchronously
-		sfConn.getAttribList(attribListObservers, appId, graphType);
+		sfConn.getAttribList(appId, graphType);
 	}
 
-	// Method called once attrib list is retrieved
-	@Override
-	public void updateAttributeList(final List<AttribDescription> attribList) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				AttributeListActivity.this.attribList.clear();
-				
-				for (AttribDescription attribDesc : attribList) {
-					AttributeListActivity.this.attribList.add(attribDesc);
-				}
-				
-				Collections.sort(AttributeListActivity.this.attribList);
-				attribAdapter.notifyDataSetChanged();
-			}
-		});
-		
-	}
 }
 

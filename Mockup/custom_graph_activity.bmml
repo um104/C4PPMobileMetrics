@@ -1,4 +1,4 @@
-<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="725" measuredH="524" mockupW="604" mockupH="510">
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="725" measuredH="524" mockupW="282" mockupH="510">
   <controls>
     <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="443" y="14" w="282" h="510" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
@@ -19,7 +19,7 @@
       <controlProperties>
         <direction>left</direction>
         <href>home_dashboard%26bm%3Bhome_dashboard.bmml%26bm%3Bhome_dashboard.bmml%26bm%3Bhome_dashboard.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22356%2C91%2C401%2C118%22%20href%3D%22home_dashboard.bmml%22%20alt%3D%22home_dashboard%22%20id%3D%223%22/%3E</map>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2234%2C91%2C79%2C118%22%20href%3D%22home_dashboard.bmml%22%20alt%3D%22home_dashboard%22%20id%3D%223%22/%3E</map>
         <size>11</size>
         <text>Back</text>
       </controlProperties>
@@ -29,20 +29,17 @@
         <text>Edit</text>
       </controlProperties>
     </control>
-    <control controlID="5" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="121" y="75" w="-1" h="-1" measuredW="215" measuredH="389" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="477" y="150" w="-1" h="-1" measuredW="215" measuredH="184" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>A%20Simple%20Label%0A+%20Add%20and%20sub-menu%2C%20%3E%0A-%20Delete%5Cr%28Cancel%29%0ATwo%20Labels%5C%2C%20and%20a%20comma%2C%20yup%0Av%20A%20Checkmark%2C%20%28%3E%29%0A*%20A%20Bullet%2C%20%3D%0A_%20Space%20for%20an%20icon%0A__%20Space%20for%20a%20big%20icon%0AOn%20button%2C%20ON%0AOff%20button%2C%20OFF%0A%20%0Av%20An%20empty%20row%2C%20%28above%29</text>
-      </controlProperties>
-    </control>
-    <control controlID="6" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="477" y="150" w="-1" h="-1" measuredW="215" measuredH="184" zOrder="6" locked="false" isInGroup="-1">
-      <controlProperties>
+        <hrefs>custom_graph_text_number%26bm%3Bcustom_graph_text_number.bmml%26bm%3Bcustom_graph_text_number.bmml%26bm%3Bcustom_graph_text_number.bmml%2C%2C%2C%2C%2C</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2234%2C141%2C249%2C170%22%20href%3D%22custom_graph_text_number.bmml%22%20alt%3D%22custom_graph_text_number%22%20id%3D%226_0%22/%3E%0A</map>
         <text>_%20My%20Graph%201%2C%20%3E%0A_%20My%20Graph%202%2C%20%3E%0A_%0A_%0A_%0A_</text>
       </controlProperties>
     </control>
-    <control controlID="7" controlTypeID="com.balsamiq.mockups::Button" x="477" y="396" w="213" h="33" measuredW="133" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Button" x="477" y="396" w="213" h="33" measuredW="133" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <href>create_new_graph_activity%26bm%3Bcreate_new_graph_activity.bmml%26bm%3Bcreate_new_graph_activity.bmml%26bm%3Bcreate_new_graph_activity.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22356%2C382%2C569%2C415%22%20href%3D%22create_new_graph_activity.bmml%22%20alt%3D%22create_new_graph_activity%22%20id%3D%227%22/%3E</map>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2234%2C382%2C247%2C415%22%20href%3D%22create_new_graph_activity.bmml%22%20alt%3D%22create_new_graph_activity%22%20id%3D%227%22/%3E</map>
         <text>Create%20New%20Graph</text>
       </controlProperties>
     </control>

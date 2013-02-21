@@ -6,35 +6,143 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;
 
-
 public class DashboardActivity extends Activity {
-	
+
 	private String appId;
-		
+	private GridView gridView;
+	private GridViewAdapter adapter;
+
+	/**
+	 * Helper class that aggregates details on the Activities you want to enter.
+	 * Displayed by the ImageAdapter
+	 */
+	static class SubactivityDetails {
+		private Integer iconID;
+		private String displayName;
+		private Class activityClass;
+
+		public SubactivityDetails(Integer iconID, String displayName,
+				Class activityClass) {
+			this.iconID = iconID;
+			this.displayName = displayName;
+			this.activityClass = activityClass;
+		}
+	}
+
+	/**
+	 * Adapter for the GridView.
+	 */
+	class GridViewAdapter extends BaseAdapter {
+		protected final SubactivityDetails[] subactivityDetails = new SubactivityDetails[] {
+				// TODO: Put the actual Activity class objects in here once we
+				// make them.
+				new SubactivityDetails(R.drawable.ic_launcher, getResources()
+						.getString(R.string.usage), null),
+				new SubactivityDetails(R.drawable.ic_launcher, getResources()
+						.getString(R.string.audience), null),
+				new SubactivityDetails(R.drawable.ic_launcher, getResources()
+						.getString(R.string.event_funnels), null),
+				new SubactivityDetails(R.drawable.ic_launcher, getResources()
+						.getString(R.string.custom_graphs), null) };
+
+		public GridViewAdapter() {
+		}
+
+		public int getCount() {
+			return subactivityDetails.length;
+		}
+
+		public Object getItem(int position) {
+			return null;
+		}
+
+		public long getItemId(int position) {
+			return 0;
+		}
+
+		// create a new ImageView for each item referenced by the Adapter
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View gridViewCell;
+			ImageView icon;
+			if (convertView == null) { // if it's not recycled, initialize some
+										// attributes
+				LayoutInflater inflater = getLayoutInflater();
+				gridViewCell = inflater.inflate(
+						R.layout.cell_dashboard_gridview_piece, parent, false);
+
+				// gridViewCell = new ImageView(getApplicationContext());
+				icon = (ImageView) gridViewCell
+						.findViewById(R.id.imageViewDashboardCellIcon);
+
+//				icon.setLayoutParams(new GridView.LayoutParams(85, 85));
+				icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
+				icon.setPadding(8, 8, 8, 8);
+			} else {
+				gridViewCell = (View) convertView;
+				icon = (ImageView) gridViewCell
+						.findViewById(R.id.imageViewDashboardCellIcon);
+			}
+
+			// Set the icon to be the correct icon
+			icon.setImageResource(subactivityDetails[position].iconID);
+
+			// Set the label to have the right text
+			TextView label = (TextView) gridViewCell
+					.findViewById(R.id.textViewDashboardCellLabel);
+			label.setText(subactivityDetails[position].displayName);
+
+			return gridViewCell;
+		}
+	}
+
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dashboard);
-		
+
+		gridView = (GridView) findViewById(R.id.gridViewDashboard);
+		adapter = new GridViewAdapter();
+		gridView.setAdapter(adapter);
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				Toast.makeText(
+						getApplicationContext(),
+						"NOT starting activity: "
+								+ adapter.subactivityDetails[position].displayName,
+						Toast.LENGTH_SHORT).show();
+			}
+		});
+
 		// Make sure we're running on Honeycomb or higher to use ActionBar APIs
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // Show the Up button in the action bar.
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			// Show the Up button in the action bar.
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
 
 		Intent intent = getIntent();
-		
+
 		appId = intent.getStringExtra(Keys.PREFS_NS + Keys.APP_ID);
-				
-		//TODO(mlerner): Make call to APEX to get favorite graphs, recent graphs, other info to display.
+
+		// TODO(mlerner): Make call to APEX to get favorite graphs, recent
+		// graphs, other info to display.
 	}
 
 	@Override
@@ -60,19 +168,22 @@ public class DashboardActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void genGraph(View view) {
-		// Start up an Attribute Activity with the correct info on the app and the graph type
-		Intent intent = new Intent(getApplicationContext(), AttributeListActivity.class);
-		
-		intent.putExtra(Keys.PREFS_NS + Keys.APP_ID, appId);
-		
-		switch (view.getId()) {
-			case R.id.genPieGraph:
-				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, GraphType.Pie);
-		}
-		
-		startActivity(intent);
+		// // Start up an Attribute Activity with the correct info on the app
+		// and
+		// // the graph type
+		// Intent intent = new Intent(getApplicationContext(),
+		// AttributeListActivity.class);
+		//
+		// intent.putExtra(Keys.PREFS_NS + Keys.APP_ID, appId);
+		//
+		// switch (view.getId()) {
+		// case R.id.genPieGraph:
+		// intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, GraphType.Pie);
+		// }
+		//
+		// startActivity(intent);
 	}
 
 }

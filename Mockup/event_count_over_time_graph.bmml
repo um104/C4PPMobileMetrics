@@ -1,0 +1,25 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="707" measuredH="556" mockupW="282" mockupH="510">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="425" y="46" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::HRule" x="453" y="183" w="227" h="-1" measuredW="100" measuredH="10" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::TextArea" x="504" y="147" w="166" h="37" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <backgroundAlpha>0</backgroundAlpha>
+        <borderColor>16777215</borderColor>
+        <size>11</size>
+        <text>Hang%0A%22LevelUp%22%20Over%20Time</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::PointyButton" x="459" y="152" w="-1" h="-1" measuredW="45" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>left</direction>
+        <href>event_count_over_time%26bm%3Bevent_count_over_time.bmml%26bm%3Bevent_count_over_time.bmml%26bm%3Bevent_count_over_time.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2234%2C106%2C79%2C133%22%20href%3D%22event_count_over_time.bmml%22%20alt%3D%22event_count_over_time%22%20id%3D%223%22/%3E</map>
+        <size>11</size>
+        <text>Back</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::LineChart" x="473" y="193" w="-1" h="-1" measuredW="187" measuredH="175" zOrder="4" locked="false" isInGroup="-1"/>
+  </controls>
+</mockup>

@@ -1,7 +1,6 @@
 package edu.channel4.mm.db.android.network;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
@@ -14,10 +13,9 @@ import org.json.JSONException;
 
 import android.content.Context;
 import android.util.Log;
-import edu.channel4.mm.db.android.activity.IAppListObserver;
-import edu.channel4.mm.db.android.activity.IAttributeListObserver;
+import android.widget.Toast;
+import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.AppDescription;
-import edu.channel4.mm.db.android.model.AttribDescription;
 import edu.channel4.mm.db.android.util.BaseAsyncTask;
 import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;
@@ -31,8 +29,6 @@ public class SalesforceConn {
 
 	private Context context;
 	protected HttpClient client;
-	protected List<IAppListObserver> appListObservers;
-	protected List<IAttributeListObserver> attribListObservers;
 	private String appId;
 	private GraphType graphType;
 
@@ -50,7 +46,10 @@ public class SalesforceConn {
 	 *            The application-level context.
 	 * @return A SalesforceConn operating within the given context.
 	 */
-	// TODO(Girum): Remove singletons.
+	// TODO(Girum): Remove singletons. We shouldn't statically refer to a
+	// Context
+	// object, since the Context could potentially be different after a Force
+	// Close.
 	// http://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons
 	// http://blogs.msdn.com/b/scottdensmore/archive/2004/05/25/140827.aspx
 	public static SalesforceConn getInstance(Context context) {
@@ -82,9 +81,7 @@ public class SalesforceConn {
 	 * @param graph
 	 *            The graph that we're retrieving attributes for
 	 */
-	public void getAttribList(List<IAttributeListObserver> attribListObservers,
-			String appId, GraphType graph) {
-		this.attribListObservers = attribListObservers;
+	public void getAttribList(String appId, GraphType graph) {
 		this.appId = appId;
 		this.graphType = graph;
 
@@ -115,8 +112,8 @@ public class SalesforceConn {
 
 			// Put together the HTTP Request to be sent to Salesforce for the
 			// Attibute list
-			HttpUriRequest getRequest = new HttpGet(String.format(SALESFORCE_BASE_REST_URL,
-					instanceUrl, ATTRIBS_URL_SUFFIX));
+			HttpUriRequest getRequest = new HttpGet(String.format(
+					SALESFORCE_BASE_REST_URL, instanceUrl, ATTRIBS_URL_SUFFIX));
 			getRequest.setHeader("Authorization", "Bearer " + accessToken);
 
 			// TODO(mlerner): find a way to pass these so that the request is
@@ -126,8 +123,8 @@ public class SalesforceConn {
 
 			try {
 				// Get the response string, the Attribute List in JSON form
-				responseString = EntityUtils.toString(client.execute(getRequest)
-						.getEntity());
+				responseString = EntityUtils.toString(client
+						.execute(getRequest).getEntity());
 			} catch (ClientProtocolException e) {
 				Log.e(TAG, e.getMessage());
 			} catch (IOException e) {
@@ -136,21 +133,12 @@ public class SalesforceConn {
 
 			Log.d(TAG, "Got JSON result: " + responseString);
 
-			// Try to parse the resulting JSON
-			List<AttribDescription> attribs = new ArrayList<AttribDescription>();
-			try {
-				attribs = AttribDescription.parseList(responseString);
-			} catch (JSONException e) {
-				Log.e(TAG, e.getMessage());
-				return null;
-			}
-
-			// Tell each of the "observers" of the app list to update.
-			for (IAttributeListObserver obs : attribListObservers) {
-				obs.updateAttributeList(attribs);
-			}
-
 			return responseString;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
 		}
 	}
 
@@ -161,8 +149,7 @@ public class SalesforceConn {
 	 *            The list of Observers that you want to update themselves when
 	 *            this method is done retrieving the list of apps.
 	 */
-	public void getAppList(List<IAppListObserver> appListObservers) {
-		this.appListObservers = appListObservers;
+	public void getAppList() {
 
 		new GetAppListTask(context).execute();
 	}
@@ -192,32 +179,18 @@ public class SalesforceConn {
 			Log.d(TAG, "Access token: " + accessToken);
 			Log.d(TAG, "Instance URL: " + instanceUrl);
 
-			HttpUriRequest getRequest = new HttpGet(String.format(SALESFORCE_BASE_REST_URL,
-					instanceUrl, APPS_URL_SUFFIX));
+			HttpUriRequest getRequest = new HttpGet(String.format(
+					SALESFORCE_BASE_REST_URL, instanceUrl, APPS_URL_SUFFIX));
 			getRequest.setHeader("Authorization", "Bearer " + accessToken);
 
 			try {
-				responseString = EntityUtils.toString(client.execute(getRequest)
-						.getEntity());
+				responseString = EntityUtils.toString(client
+						.execute(getRequest).getEntity());
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage());
 			}
 
 			Log.d(TAG, "Got JSON result: " + responseString);
-			
-			// Try to parse the resulting JSON
-			List<AppDescription> appList = null;
-			try {
-				appList = AppDescription.parseList(responseString);
-			} catch (JSONException e) {
-				Log.e(TAG, e.getMessage());
-				return null;
-			}
-
-			// Tell each of the "observers" of the app list to update.
-			for (IAppListObserver appListObserver : appListObservers) {
-				appListObserver.updateAppList(appList);
-			}
 
 			return responseString;
 		}
@@ -225,6 +198,26 @@ public class SalesforceConn {
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
+
+			if (responseString == null) {
+				final String errorMessage = "ERROR: Attempted to parse null App list.";
+				Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT)
+						.show();
+				Log.e(TAG, errorMessage);
+				return;
+			}
+
+			// Try to parse the resulting JSON
+			List<AppDescription> appList = null;
+			try {
+				appList = AppDescription.parseList(responseString);
+
+				TempoDatabase tempoDatabase = TempoDatabase.getInstance();
+				tempoDatabase.setAppDescriptions(appList);
+			} catch (JSONException e) {
+				Log.e(TAG, e.getMessage());
+				return;
+			}
 
 		}
 	}

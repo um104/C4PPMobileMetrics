@@ -47,10 +47,5 @@
         <text>Back</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="626" y="151" w="-1" h="-1" measuredW="46" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Edit</text>
-      </controlProperties>
-    </control>
   </controls>
 </mockup>
