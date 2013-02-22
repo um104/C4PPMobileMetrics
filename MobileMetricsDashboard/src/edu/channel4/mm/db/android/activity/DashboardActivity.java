@@ -23,7 +23,6 @@ import edu.channel4.mm.db.android.util.Keys;
 
 public class DashboardActivity extends Activity {
 
-	private String appId;
 	private GridView gridView;
 	private GridViewAdapter adapter;
 	private TextView appLabel;
@@ -42,14 +41,8 @@ public class DashboardActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				// Toast.makeText(
-				// getApplicationContext(),
-				// "NOT starting activity: "
-				// + adapter.subactivityDetails[position].displayName,
-				// Toast.LENGTH_SHORT).show();
-				Class newActivityClass = adapter.subactivityDetails[position].activityClass;
 				startActivity(new Intent(getApplicationContext(),
-						newActivityClass));
+						 adapter.subactivityDetails[position].activityClass));
 			}
 		});
 
@@ -71,7 +64,7 @@ public class DashboardActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		// TODO(mlerner): Make call to APEX to get favorite graphs, recent
 		// graphs, other info to display.
 	}
@@ -124,10 +117,10 @@ public class DashboardActivity extends Activity {
 	static class SubactivityDetails {
 		private Integer iconID;
 		private String displayName;
-		private Class activityClass;
+		private Class<?> activityClass;
 
 		public SubactivityDetails(Integer iconID, String displayName,
-				Class activityClass) {
+				Class<?> activityClass) {
 			this.iconID = iconID;
 			this.displayName = displayName;
 			this.activityClass = activityClass;

@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.model.GraphRequest;
+import edu.channel4.mm.db.android.model.request.GraphRequest;
 
 public class GraphRequestArrayAdapter extends ArrayAdapter<GraphRequest> {
 

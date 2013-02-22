@@ -1,11 +1,9 @@
 package edu.channel4.mm.db.android.activity;
 
-import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.R.layout;
-import edu.channel4.mm.db.android.R.menu;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+import edu.channel4.mm.db.android.R;
 
 public class EventFunnelsActivity extends Activity {
 

@@ -27,7 +27,7 @@ public class Logger {
 	/**
 	 * Use Java reflection to autogenerate the TAG for this log. TAGs look like:
 	 * 
-	 * "methodCalled(): ClassName"
+	 * "ClassName.methodCalled()"
 	 */
 	private static String getTag() {
 		// Grab the StackTraceElement of the method that's calling this Log.
@@ -40,6 +40,6 @@ public class Logger {
 						stackTraceElement.getClassName().lastIndexOf('.') + 1);
 
 		// Pull out the Method name and class names into a String.
-		return stackTraceElement.getMethodName() + "(): " + shortClassName;
+		return shortClassName + "." + stackTraceElement.getMethodName();
 	}
 }

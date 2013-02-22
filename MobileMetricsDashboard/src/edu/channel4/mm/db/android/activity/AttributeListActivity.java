@@ -65,14 +65,14 @@ public class AttributeListActivity extends Activity {
 			@Override 				// When attribute clicked, send Intent to GraphViewerActivity
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				//TODO(mlerner): Change this in the event that the desired graph is a two-variable graph
-				Intent intent = new Intent(getApplicationContext(), GraphViewerActivity.class);
-				
-				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, graphType);
-				intent.putExtra(Keys.PREFS_NS + Keys.APP_ID, appId);
-
-				// intent.putExtra(Keys.PREFS_NS + Keys.ATTRIB_DESC, (AttributeDescription)(parent.getAdapter().getItem(position)));
-								
-				startActivity(intent);
+//				Intent intent = new Intent(getApplicationContext(), GraphViewerActivity.class);
+//				
+//				intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, graphType);
+//				intent.putExtra(Keys.PREFS_NS + Keys.APP_ID, appId);
+//
+//				// intent.putExtra(Keys.PREFS_NS + Keys.ATTRIB_DESC, (AttributeDescription)(parent.getAdapter().getItem(position)));
+//								
+//				startActivity(intent);
 			}
 		});
 

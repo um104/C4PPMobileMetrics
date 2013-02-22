@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import android.content.Context;
 import edu.channel4.mm.db.android.activity.OnAppDescriptionChangedListener;
 import edu.channel4.mm.db.android.model.AppDescription;
 

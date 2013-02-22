@@ -39,4 +39,6 @@
         <item>Time of Day Distribution</item>
     </string-array>
 
+    <string name="title_activity_event_picker">EventPickerActivity</string>
+
 </resources>
