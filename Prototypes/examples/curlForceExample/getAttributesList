@@ -1,0 +1,4 @@
+echo
+echo 'Be sure to change the <instance_name> and <access_token>!'
+echo
+curl https://na9.salesforce.com/services/apexrest/channel4_attributes/ -H 'Authorization: Bearer 00DE0000000dkGn!ARwAQBetSoYgkn0IX.Ma0EZ0ZvPMwH.5LwCoyjesr8EOQm4h5XVMXqop3pyx1Y3IQdVKFc1uyYgi_rejop4z95qCqvjMZlrQ'
