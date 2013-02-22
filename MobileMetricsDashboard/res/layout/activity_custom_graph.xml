@@ -26,6 +26,7 @@
         android:layout_alignLeft="@+id/listViewCustomGraphActivity"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:onClick="createNewCustomGraph"
         android:text="@string/create_new_custom_graph" />
 
 </RelativeLayout>

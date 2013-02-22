@@ -104,11 +104,11 @@
         <borderStyle>none</borderStyle>
       </controlProperties>
     </control>
-    <control controlID="23" controlTypeID="com.balsamiq.mockups::Button" x="494" y="398" w="186" h="27" measuredW="90" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Button" x="494" y="398" w="186" h="27" measuredW="167" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
         <href>custom_graph_text_number%26bm%3Bcustom_graph_text_number.bmml%26bm%3Bcustom_graph_text_number.bmml%26bm%3Bcustom_graph_text_number.bmml</href>
         <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2251%2C384%2C237%2C411%22%20href%3D%22custom_graph_text_number.bmml%22%20alt%3D%22custom_graph_text_number%22%20id%3D%2223%22/%3E</map>
-        <text>View%20Graph</text>
+        <text>View%20New%20Custom%20Graph</text>
       </controlProperties>
     </control>
     <control controlID="24" controlTypeID="com.balsamiq.mockups::StickyNote" x="781" y="102" w="193" h="209" measuredW="109" measuredH="123" zOrder="18" locked="false" isInGroup="-1">

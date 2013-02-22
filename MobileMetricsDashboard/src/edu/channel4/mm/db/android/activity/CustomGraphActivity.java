@@ -54,7 +54,7 @@ public class CustomGraphActivity extends Activity {
 		});
 
 		adapter = new GraphRequestArrayAdapter(getApplicationContext(),
-				new CustomGraphRequest[] { });
+				new CustomGraphRequest[] {});
 		listView.setAdapter(adapter);
 	}
 
@@ -63,6 +63,11 @@ public class CustomGraphActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_audience, menu);
 		return true;
+	}
+
+	public void createNewCustomGraph(View v) {
+		startActivity(new Intent(getApplicationContext(),
+				CreateNewCustomGraphActivity.class));
 	}
 
 }

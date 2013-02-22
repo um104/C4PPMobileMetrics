@@ -38,8 +38,14 @@
         <item>Active Users</item>
         <item>Time of Day Distribution</item>
     </string-array>
-    
+
     <string name="create_new_custom_graph">Create New Custom Graph</string>
-	<string name="no_custom_graphs">No Custom Graphs</string>
+    <string name="no_custom_graphs">No Custom Graphs</string>
+    <string name="not_yet_implemented">Not Yet Implemented</string>
+    <string name="title_activity_create_new_custom_graph">CreateNewCustomGraphActivity</string>
+    <string name="attribute1">Attribute 1: </string>
+    <string name="attribute2">Attribute 2 (optional): </string>
+    <string name="in_the_last">In the last: </string>
+    <string name="view_new_custom_graph">View New Custom Graph</string>
 
 </resources>
