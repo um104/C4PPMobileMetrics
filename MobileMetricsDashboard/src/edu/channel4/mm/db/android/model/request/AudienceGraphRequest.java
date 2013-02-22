@@ -4,22 +4,21 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
-import edu.channel4.mm.db.android.activity.EventPickerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Logger;
 
 // TODO: Don't use string literals:
 // http://stackoverflow.com/questions/9742050/is-there-an-enum-string-resource-lookup-pattern-for-android
-public enum UsageGraphRequest implements GraphRequest {
-	SESSION_LENGTH_OVER_TIME("Session Length over Time"), NUMBER_OF_SESSIONS_OVER_TIME(
-			"Number of Sesssions over Time"), EVENT_COUNT_OVER_TIME(
-			"Event Count over Time"), ACTIVE_USERS("Active Users"), TIME_OF_DAY_DIST(
-			"Time of Day Distribution");
+public enum AudienceGraphRequest implements GraphRequest {
+	GEOGRAHPIC("Geographic"), DEVICE_TYPE(
+			"Device Type"), OS_VERSION(
+			"OS Version"), LANGUAGE_LOCALE("Language Locale"), NETWORK_CARRIER(
+			"Network Carrier");
 
 	private final String displayName;
 	private Map<String, String> fields;
 
-	private UsageGraphRequest(String displayName) {
+	private AudienceGraphRequest(String displayName) {
 		this.displayName = displayName;
 	}
 
@@ -41,12 +40,12 @@ public enum UsageGraphRequest implements GraphRequest {
 	@Override
 	public Intent constructGraphRequestIntent(Context context) {
 		Intent intent = null;
-		UsageGraphRequest usageGraphRequest = null;
+		AudienceGraphRequest audienceGraphRequest = null;
 
 		// Try and cast the GraphRequest into a concrete UsageGraphRequest,
 		// returning null if it fails.
 		try {
-			usageGraphRequest = (UsageGraphRequest) this;
+			audienceGraphRequest = (AudienceGraphRequest) this;
 		} catch (ClassCastException classCastException) {
 			Logger.e(classCastException.getMessage()
 					+ ", will not construct Intent for "
@@ -56,24 +55,24 @@ public enum UsageGraphRequest implements GraphRequest {
 
 		// Construct the fields and the correct Activity to go to next based on
 		// the UsageGraphRequest you got.
-		switch (usageGraphRequest) {
-		case ACTIVE_USERS:
+		switch (audienceGraphRequest) {
+		case LANGUAGE_LOCALE:
 			// NYI
 			break;
-		case EVENT_COUNT_OVER_TIME:
-			intent = new Intent(context, EventPickerActivity.class);
-			break;
-		case NUMBER_OF_SESSIONS_OVER_TIME:
+		case OS_VERSION:
 			// NYI
 			break;
-		case SESSION_LENGTH_OVER_TIME:
+		case DEVICE_TYPE:
 			// NYI
 			break;
-		case TIME_OF_DAY_DIST:
+		case GEOGRAHPIC:
+			// NYI
+			break;
+		case NETWORK_CARRIER:
 			// NYI
 			break;
 		default:
-			Logger.e("Unknown UsageGraphRequest: " + usageGraphRequest);
+			Logger.e("Unknown UsageGraphRequest: " + audienceGraphRequest);
 			return null;
 		}
 
@@ -85,7 +84,7 @@ public enum UsageGraphRequest implements GraphRequest {
 		}
 
 		// Always put the GraphRequest type itself into the intent
-		intent.putExtra(Keys.GRAPH_REQUEST_TYPE, usageGraphRequest);
+		intent.putExtra(Keys.GRAPH_REQUEST_TYPE, audienceGraphRequest);
 
 		return intent;
 	}

@@ -48,5 +48,12 @@
         <text>newFriend%20%28Text%29%20vs%20messages%20%28Number%29</text>
       </controlProperties>
     </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Button" x="498" y="398" w="-1" h="-1" measuredW="46" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>create_new_graph_activity%26bm%3Bcreate_new_graph_activity.bmml%26bm%3Bcreate_new_graph_activity.bmml%26bm%3Bcreate_new_graph_activity.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2244%2C378%2C90%2C405%22%20href%3D%22create_new_graph_activity.bmml%22%20alt%3D%22create_new_graph_activity%22%20id%3D%2223%22/%3E</map>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
   </controls>
 </mockup>

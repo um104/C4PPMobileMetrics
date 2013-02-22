@@ -63,9 +63,7 @@
         </activity>
         <activity android:name="edu.channel4.mm.db.android.activity.CustomGraphActivity" >
         </activity>
-        <activity
-            android:name="edu.channel4.mm.db.android.EventPickerActivity"
-            android:label="@string/title_activity_event_picker" >
+        <activity android:name="edu.channel4.mm.db.android.activity.EventPickerActivity" >
         </activity>
     </application>
 

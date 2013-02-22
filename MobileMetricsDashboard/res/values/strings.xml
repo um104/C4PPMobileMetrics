@@ -38,7 +38,8 @@
         <item>Active Users</item>
         <item>Time of Day Distribution</item>
     </string-array>
-
-    <string name="title_activity_event_picker">EventPickerActivity</string>
+    
+    <string name="create_new_custom_graph">Create New Custom Graph</string>
+	<string name="no_custom_graphs">No Custom Graphs</string>
 
 </resources>

@@ -1,5 +1,8 @@
-package edu.channel4.mm.db.android;
+package edu.channel4.mm.db.android.activity;
 
+import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.R.layout;
+import edu.channel4.mm.db.android.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
