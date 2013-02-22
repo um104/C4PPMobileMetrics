@@ -81,6 +81,7 @@
         <fullName>All</fullName>
         <columns>Key__c</columns>
         <columns>Value__c</columns>
+        <columns>Type__c</columns>
         <columns>NAME</columns>
         <columns>Event__c</columns>
         <filterScope>Everything</filterScope>

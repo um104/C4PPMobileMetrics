@@ -10,15 +10,24 @@ global class SessionRestResource
             for(SessionClass s : sessions) 
             {
                 App__c app = new App__c();
-                app.Label__c = s.an;
-                app.PackageName__c = s.pn;
-                app.Version__c = s.av;
                 
-                insert app;
+                List<App__c> appList = [SELECT Id FROM App__c WHERE Label__c = :s.an AND PackageName__c = :s.pn AND Version__c = :s.av];
+                if(appList.size() == 0)
+                {
+                    app.Label__c = s.an;
+                    app.PackageName__c = s.pn;
+                    app.Version__c = s.av;
+                
+                    insert app;
+                }
+                else
+                {
+                    app = appList[0];
+                }
                 
                 Session__c session = new Session__c();
-                session.AndroidIDHash__c = s.du;
                 session.App__c = app.id;
+                session.AndroidIDHash__c = s.du;
                 session.DataType__c = s.dt;
                 session.DataConnectionType__c = s.dac;
                 session.DeviceSerialHash__c = s.dms;
@@ -55,8 +64,9 @@ global class SessionRestResource
                     {
                         Attribute__c attribute = new Attribute__c();
                         attribute.Event__c = event.id;
+                        attribute.Key__c = a.key.subString(4, a.key.length());
                         attribute.Value__c = a.value;
-                        attribute.Key__c = a.key;
+                        attribute.Type__c = a.key.subString(0, 3);
                        
                         insert attribute;
                     }

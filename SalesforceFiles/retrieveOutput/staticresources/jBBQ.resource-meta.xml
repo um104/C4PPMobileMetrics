@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>application/javascript</contentType>
+    <description>includes the library for $/jQuery.deparam.querystring to pull parameters off the url
+
+http://benalman.com/code/projects/jquery-bbq/examples/deparam/?a=true&amp;b=false&amp;c=undefined&amp;d=&amp;f=1&amp;g=2&amp;h=hello+world</description>
+</StaticResource>
