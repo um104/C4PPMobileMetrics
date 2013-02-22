@@ -17,7 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.model.AttributeDescription;
+import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;

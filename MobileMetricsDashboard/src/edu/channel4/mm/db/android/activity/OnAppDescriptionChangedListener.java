@@ -2,7 +2,7 @@ package edu.channel4.mm.db.android.activity;
 
 import java.util.List;
 
-import edu.channel4.mm.db.android.model.AppDescription;
+import edu.channel4.mm.db.android.model.description.AppDescription;
 
 public interface OnAppDescriptionChangedListener {
 

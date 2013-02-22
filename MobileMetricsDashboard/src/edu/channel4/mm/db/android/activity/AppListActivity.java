@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.database.TempoDatabase;
-import edu.channel4.mm.db.android.model.AppDescription;
+import edu.channel4.mm.db.android.model.description.AppDescription;
 import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.Keys;
 

@@ -18,7 +18,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.model.AppDescription;
+import edu.channel4.mm.db.android.model.description.AppDescription;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class DashboardActivity extends Activity {

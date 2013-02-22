@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import edu.channel4.mm.db.android.activity.OnAppDescriptionChangedListener;
-import edu.channel4.mm.db.android.model.AppDescription;
+import edu.channel4.mm.db.android.model.description.AppDescription;
 
 /**
  * BS temp database. This is just a singleton containing a bunch of ArrayLists

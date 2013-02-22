@@ -1,4 +1,4 @@
-package edu.channel4.mm.db.android.model;
+package edu.channel4.mm.db.android.model.description;
 
 import java.util.ArrayList;
 import java.util.List;
