@@ -1,0 +1,25 @@
+line graphs events over time line aspect of stuff happening over time
+most likely care about (massive marktet campeigh how much did this stuff happen growth of events ovet time most importatnt)
+
+predefine
+session data / time
+events / time
+
+counting sessions over time
+
+incorprate other data in time graph so it will be easy how offteen does this event /attrribute happen over
+
+ time
+
+
+
+graph event all different attribute can be displayed on the same graph.
+
+linegraphs for session for other evnt and attirbutes all oever time
+
+work on UI clean up, get other views on mockup. linegraphs make sure it fits in screen postitioned should be ok and landscape/portrait fine.
+
+Pie/Bar same datatable 
+Predefined graphs work well avoid extra custom graphs (stretch goal)
+
+sperate table of references to different sessions would be faster
