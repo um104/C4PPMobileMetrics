@@ -3,9 +3,12 @@ package edu.channel4.mm.db.android.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.NameValuePair;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,15 +57,11 @@ public class AppListActivity extends Activity implements
 							int position, long id) {
 						Intent intent = new Intent(getApplicationContext(),
 								DashboardActivity.class);
-						// Change this to get appId from appList rather than
-						// parent.get... ?
-						// intent.putExtra(
-						// Keys.PREFS_NS + Keys.APP_ID,
-						// ((AppDescription) parent.getAdapter().getItem(
-						// position)).getAppId());
 
-						AppDescription appDescription = appList.get(position);
-						intent.putExtra(Keys.APP_DESC, appDescription);
+						// Place chosen App Label into SharedPrefs for later access
+						SharedPreferences.Editor editor = getSharedPreferences(Keys.PREFS_NS, 0).edit();
+						editor.putString(Keys.APP_LABEL, appList.get(position).getAppName());
+						editor.commit();
 
 						startActivity(intent);
 					}

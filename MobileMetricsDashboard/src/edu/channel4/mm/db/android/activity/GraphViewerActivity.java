@@ -77,6 +77,7 @@ public class GraphViewerActivity extends Activity {
 		
 		//TOOD(mlerner): Get the URL parameters from the GraphRequest and add those to the url
 		
+		
 		// TODO FIXME: App Name is hardcoded right now
 		params.add(new BasicNameValuePair(Keys.APP_NAME, "a04E00000034dlH"));
 

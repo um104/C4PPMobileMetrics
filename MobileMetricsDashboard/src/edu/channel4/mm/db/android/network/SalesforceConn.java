@@ -102,7 +102,6 @@ public class SalesforceConn {
 			}
 
 			// Put together the HTTP Request to be sent to Salesforce for the Attibute list
-			
 			HttpPost attribRequest = new HttpPost(String.format(
 					SALESFORCE_BASE_REST_URL, instanceUrl, ATTRIBS_URL_SUFFIX));
 			attribRequest.setHeader("Authorization", "Bearer " + accessToken);

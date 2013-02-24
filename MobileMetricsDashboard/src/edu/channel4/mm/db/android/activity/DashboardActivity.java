@@ -25,7 +25,7 @@ public class DashboardActivity extends Activity {
 
 	private GridView gridView;
 	private GridViewAdapter adapter;
-	private TextView appLabel;
+	private TextView appLabelView;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -52,13 +52,10 @@ public class DashboardActivity extends Activity {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 
-		Intent intent = getIntent();
-		AppDescription appDescription = intent
-				.getParcelableExtra(Keys.APP_DESC);
+		String appLabel = getApplicationContext().getSharedPreferences(Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
 
-		appLabel = (TextView) findViewById(R.id.textViewDashboardTitle);
-		appLabel.setText(appDescription.getAppName() + " "
-				+ appDescription.getVersionNumber());
+		appLabelView = (TextView) findViewById(R.id.textViewDashboardTitle);
+		appLabelView.setText(appLabel);
 	}
 
 	@Override
