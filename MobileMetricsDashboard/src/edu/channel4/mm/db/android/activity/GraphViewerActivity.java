@@ -59,8 +59,7 @@ public class GraphViewerActivity extends Activity {
 
 	private void sendGraphRequest() {
 		// get graph URL
-		SalesforceConn sfConn = SalesforceConn
-				.getInstance(getApplicationContext());
+		SalesforceConn sfConn = SalesforceConn.getInstance(getApplicationContext());
 		String url = sfConn.getGraphViewingURL();
 
 		// construct URL parameters
@@ -68,9 +67,6 @@ public class GraphViewerActivity extends Activity {
 
 		// point WebView to Graph URL with correct params
 		webView.loadUrl(url);
-
-		Log.e("ohno!", "" + webView.getUrl());
-		Log.e("nooh!", "" + webView.getOriginalUrl());
 	}
 
 	protected String addParamsToUrl(String url) {

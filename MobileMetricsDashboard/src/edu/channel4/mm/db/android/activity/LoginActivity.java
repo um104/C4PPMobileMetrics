@@ -23,18 +23,18 @@ import edu.channel4.mm.db.android.util.Keys;
  */
 public class LoginActivity extends Activity {
 	private static final String TAG = LoginActivity.class.getSimpleName();
-	// TODO(mlerner): CLIENT_ID changes based on what ORG is hosting the app!
-	// Fix this so that it doesn't use CLIENT_ID!
 	private static final String CLIENT_ID = "3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4";
 	private static final String REDIRECT_URI = "mobilemetrics://callback";
 	private static final String STATE = "mystate";
 	private static final String RESPONSE_TYPE = "token";
-	private static final String SALESFORCE_LOGIN_URL = "https://login.salesforce.com/services/oauth2/authorize?response_type="
-			+ RESPONSE_TYPE
-			+ "&client_id="
-			+ CLIENT_ID
-			+ "&redirect_uri="
-			+ REDIRECT_URI + "&state" + STATE;
+	private static final String OAUTH_SCOPE = "visualforce";
+	private static final String SALESFORCE_LOGIN_BASE = "https://login.salesforce.com/services/oauth2/authorize";
+	private static final String SALESFORCE_LOGIN_URL = SALESFORCE_LOGIN_BASE + 
+			"?response_type=" + RESPONSE_TYPE
+			+ "&client_id="	+ CLIENT_ID
+			+ "&redirect_uri=" + REDIRECT_URI
+			+ "&state=" + STATE
+			+ "&scope=" + OAUTH_SCOPE;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,13 +55,6 @@ public class LoginActivity extends Activity {
 			// After intercepting each URL, check to verify that we were passed
 			// back the "successful login" callback URI
 			if (uriString.contains(REDIRECT_URI)) {
-
-				// Store all cookies received by the WebView
-				CookieManager cookieManager = CookieManager.getInstance();
-				String cookie = cookieManager.getCookie(uriString);
-				String cookie2 = cookieManager.getCookie(SALESFORCE_LOGIN_URL);
-				String cookie3 = cookieManager
-						.getCookie("https://login.salesforce.com/services/oauth2/authorize");
 
 				// Parse the access token and refresh token from the URI
 				List<NameValuePair> uriParams = null;
