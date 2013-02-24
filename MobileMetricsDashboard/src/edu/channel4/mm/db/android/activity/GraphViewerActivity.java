@@ -72,15 +72,13 @@ public class GraphViewerActivity extends Activity {
 	protected String addParamsToUrl(String url) {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 
-//		requestType=GEOCHART
-//		appName=a04E00000034dlH
-
+		//Should be "custom" "SessionOverTime", "EventOverTime", etc.
 		params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, graphRequest.getRestRequestType()));
+		
+		//TOOD(mlerner): Get the URL parameters from the GraphRequest and add those to the url
 		
 		// TODO FIXME: App Name is hardcoded right now
 		params.add(new BasicNameValuePair(Keys.APP_NAME, "a04E00000034dlH"));
-		// TODO(mlerner): urlParams.put(Keys.START_TIME, startTime);
-		// TODO(mlerner): urlParams.put(Keys.STOP_TIME, stopTime);
 
 		String paramString = URLEncodedUtils.format(params, "utf-8");
 
@@ -128,27 +126,6 @@ public class GraphViewerActivity extends Activity {
 // }
 // });
 //
-// /*
-// * wView.setWebViewClient(new WebViewClient() { public boolean
-// * shouldOverrideUrlLoading (WebView view, String url) {
-// *
-// * Log.e("Oh noooo", "" + url);
-// *
-// * return false; } });
-// */
-//
-// // Set cookies within web view to prevent double login
-// String accessToken = getApplicationContext().getSharedPreferences(
-// Keys.PREFS_NS, 0).getString(Keys.ACCESS_TOKEN, null);
-// String refreshToken = getApplicationContext().getSharedPreferences(
-// Keys.PREFS_NS, 0).getString("refresh_token", null);
-//
-// CookieManager cookieManager = CookieManager.getInstance();
-// // cookieManager.setCookie("c.na9.visual.force.com", "sid=" +
-// // accessToken + "; domain=c.na9.visual.force.com");
-// cookieManager.setCookie("c.na9.visual.force.com", "sid=" + refreshToken
-// + "; domain=c.na9.visual.force.com");
-// CookieSyncManager.getInstance().sync();
 //
 // // get graph URL
 // SalesforceConn sfConn = SalesforceConn
@@ -160,9 +137,6 @@ public class GraphViewerActivity extends Activity {
 //
 // // point WebView to Graph URL with correct params
 // wView.loadUrl(url);
-//
-// Log.e("ohno!", "" + wView.getUrl());
-// Log.e("nooh!", "" + wView.getOriginalUrl());
 // }
 //
 // protected String addParamsToUrl(String url) {
@@ -186,28 +160,5 @@ public class GraphViewerActivity extends Activity {
 // return url;
 // }
 //
-// @Override
-// public boolean onCreateOptionsMenu(Menu menu) {
-// // Inflate the menu; this adds items to the action bar if it is present.
-// getMenuInflater().inflate(R.menu.activity_graph_viewer, menu);
-// return true;
-// }
-//
-// @Override
-// public boolean onOptionsItemSelected(MenuItem item) {
-// switch (item.getItemId()) {
-// case android.R.id.home:
-// // This ID represents the Home or Up button. In the case of this
-// // activity, the Up button is shown. Use NavUtils to allow users
-// // to navigate up one level in the application structure. For
-// // more details, see the Navigation pattern on Android Design:
-// //
-// // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-// //
-// NavUtils.navigateUpFromSameTask(this);
-// return true;
-// }
-// return super.onOptionsItemSelected(item);
-// }
 //
 // }

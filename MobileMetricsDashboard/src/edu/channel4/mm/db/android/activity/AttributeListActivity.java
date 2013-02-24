@@ -23,6 +23,7 @@ import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class AttributeListActivity extends Activity {
+//TODO(mlerner): This class is no longer used. Delete it.
 	
 	//private AppDescription appDescription;
 	private String appId;

@@ -1,13 +1,18 @@
 package edu.channel4.mm.db.android.network;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
@@ -96,21 +101,22 @@ public class SalesforceConn {
 				return null;
 			}
 
-			// Put together the HTTP Request to be sent to Salesforce for the
-			// Attibute list
-			HttpUriRequest getRequest = new HttpGet(String.format(
+			// Put together the HTTP Request to be sent to Salesforce for the Attibute list
+			
+			HttpPost attribRequest = new HttpPost(String.format(
 					SALESFORCE_BASE_REST_URL, instanceUrl, ATTRIBS_URL_SUFFIX));
-			getRequest.setHeader("Authorization", "Bearer " + accessToken);
-
-			// TODO(mlerner): find a way to pass these so that the request is
-			// personalized
-			// get.setHeader("GraphType", graphType.name());
-			// get.setHeader("appId", appId);
+			attribRequest.setHeader("Authorization", "Bearer " + accessToken);
+			
+			// Add AppLabel parameter
+			String appLabel = context.getSharedPreferences(Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("appLabel", appLabel));
 
 			try {
+				attribRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 				// Get the response string, the Attribute List in JSON form
 				responseString = EntityUtils.toString(client
-						.execute(getRequest).getEntity());
+						.execute(attribRequest).getEntity());
 			} catch (ClientProtocolException e) {
 				Log.e(TAG, e.getMessage());
 			} catch (IOException e) {
