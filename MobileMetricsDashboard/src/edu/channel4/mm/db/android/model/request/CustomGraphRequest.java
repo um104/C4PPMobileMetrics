@@ -27,8 +27,7 @@ public class CustomGraphRequest implements GraphRequest {
 
 	@Override
 	public String getRestRequestType() {
-		// TODO Auto-generated method stub
-		return null;
+		return "CUSTOM";
 	}
 
 }
