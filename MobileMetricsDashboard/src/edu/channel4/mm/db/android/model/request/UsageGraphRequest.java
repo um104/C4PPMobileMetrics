@@ -89,4 +89,10 @@ public enum UsageGraphRequest implements GraphRequest {
 
 		return intent;
 	}
+
+	@Override
+	public String getRestRequestType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

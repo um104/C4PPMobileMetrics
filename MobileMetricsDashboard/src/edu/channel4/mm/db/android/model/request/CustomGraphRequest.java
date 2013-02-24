@@ -25,4 +25,10 @@ public class CustomGraphRequest implements GraphRequest {
 		return null;
 	}
 
+	@Override
+	public String getRestRequestType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -4,27 +4,33 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
+import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Logger;
 
 // TODO: Don't use string literals:
 // http://stackoverflow.com/questions/9742050/is-there-an-enum-string-resource-lookup-pattern-for-android
 public enum AudienceGraphRequest implements GraphRequest {
-	GEOGRAHPIC("Geographic"), DEVICE_TYPE(
-			"Device Type"), OS_VERSION(
-			"OS Version"), LANGUAGE_LOCALE("Language Locale"), NETWORK_CARRIER(
-			"Network Carrier");
+	GEOGRAHPIC("Geographic", Keys.GEOCHART), DEVICE_TYPE("Device Type", null), OS_VERSION(
+			"OS Version", null), LANGUAGE_LOCALE("Language Locale", null), NETWORK_CARRIER(
+			"Network Carrier", null);
 
 	private final String displayName;
+	private final String restRequestType;
 	private Map<String, String> fields;
 
-	private AudienceGraphRequest(String displayName) {
+	private AudienceGraphRequest(String displayName, String restRequestType) {
 		this.displayName = displayName;
+		this.restRequestType = restRequestType;
 	}
 
 	@Override
 	public final String toString() {
 		return displayName;
+	}
+	
+	public String getRestRequestType() {
+		return restRequestType;
 	}
 
 	@Override
@@ -48,8 +54,7 @@ public enum AudienceGraphRequest implements GraphRequest {
 			audienceGraphRequest = (AudienceGraphRequest) this;
 		} catch (ClassCastException classCastException) {
 			Logger.e(classCastException.getMessage()
-					+ ", will not construct Intent for "
-					+ this.toString());
+					+ ", will not construct Intent for " + this.toString());
 			return null;
 		}
 
@@ -66,7 +71,7 @@ public enum AudienceGraphRequest implements GraphRequest {
 			// NYI
 			break;
 		case GEOGRAHPIC:
-			// NYI
+			intent = new Intent(context, GraphViewerActivity.class);
 			break;
 		case NETWORK_CARRIER:
 			// NYI

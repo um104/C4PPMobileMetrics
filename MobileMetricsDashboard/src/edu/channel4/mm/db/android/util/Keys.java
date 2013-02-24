@@ -25,6 +25,8 @@ public class Keys {
 
 	public static final String GRAPH_REQUEST_TYPE = "graph_request_type";
 
+	public static final String REQUEST_TYPE = "requestType";
+
 	public static final String APP_DESC = "app_description";
 
 	public static final String ATTRIB_DESC = "attrib_description";
@@ -33,8 +35,6 @@ public class Keys {
 
 	public static final String SESSION_ATTRIBS = "session_attribs";
 
-	public static final String EVENT_NAME = "event_name";
-
 	public static final String APP_ID = "Name";
 
 	/**
@@ -42,4 +42,16 @@ public class Keys {
 	 * app.
 	 */
 	public static final String PREFS_NS = "edu.channel4.mm.db.android";
+
+	public static final String SESSION_ATTRIBUTE_DESCRIPTIONS = "sAttrs";
+
+	public static final String EVENT_DESCRIPTIONS = "eDescs";
+
+	public static final String EVENT_NAME = "name";
+
+	public static final String EVENT_ATTRIBUTES = "eAttrs";
+	
+	public static final String GEOCHART = "GEOCHART";
+	
+	public static final String APP_NAME = "appName";
 }

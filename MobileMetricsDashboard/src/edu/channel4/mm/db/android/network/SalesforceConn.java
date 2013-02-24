@@ -16,8 +16,8 @@ import android.util.Log;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.description.AppDescription;
+import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.util.BaseAsyncTask;
-import edu.channel4.mm.db.android.util.GraphType;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class SalesforceConn {
@@ -29,8 +29,6 @@ public class SalesforceConn {
 
 	private Context context;
 	protected HttpClient client;
-	private String appId;
-	private GraphType graphType;
 
 	private SalesforceConn(Context context) {
 		this.context = context;
@@ -75,16 +73,8 @@ public class SalesforceConn {
 
 	/**
 	 * Gets the list of attributes valid for this particular type of graph
-	 * 
-	 * @param appDescription
-	 *            The description of the app we're getting attributes from
-	 * @param graph
-	 *            The graph that we're retrieving attributes for
 	 */
-	public void getAttribList(String appId, GraphType graph) {
-		this.appId = appId;
-		this.graphType = graph;
-
+	public void getAttribList() {
 		new GetAttribListTask(context).execute();
 	}
 
@@ -139,18 +129,33 @@ public class SalesforceConn {
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
+			
+			if (responseString == null) {
+				final String errorMessage = "ERROR: Attempted to parse null App list.";
+				Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT)
+						.show();
+				Log.e(TAG, errorMessage);
+				return;
+			}
+
+			// Try to parse the resulting JSON
+			List<AttributeDescription> attributeList = null;
+			try {
+				attributeList = AttributeDescription.parseList(responseString);
+
+				TempoDatabase tempoDatabase = TempoDatabase.getInstance();
+				tempoDatabase.setAttributeDescriptions(attributeList);
+			} catch (JSONException e) {
+				Log.e(TAG, e.getMessage());
+				return;
+			}
 		}
 	}
 
 	/**
 	 * Gets the app list from Salesforce.
-	 * 
-	 * @param appListObservers
-	 *            The list of Observers that you want to update themselves when
-	 *            this method is done retrieving the list of apps.
 	 */
 	public void getAppList() {
-
 		new GetAppListTask(context).execute();
 	}
 

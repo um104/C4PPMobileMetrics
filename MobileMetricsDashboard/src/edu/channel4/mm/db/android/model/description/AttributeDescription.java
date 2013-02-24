@@ -1,10 +1,18 @@
 package edu.channel4.mm.db.android.model.description;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import edu.channel4.mm.db.android.util.Keys;
 
 public abstract class AttributeDescription {
 
 	private String name;
-	
+
 	public AttributeDescription(String name) {
 		this.name = name;
 	}
@@ -12,7 +20,63 @@ public abstract class AttributeDescription {
 	public String getName() {
 		return name;
 	}
-	
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
+	public static List<AttributeDescription> parseList(
+			String appDescriptionListString) throws JSONException {
+		List<AttributeDescription> attributeDescriptions = new ArrayList<AttributeDescription>();
+
+		JSONObject attribuDescListJSONObject = new JSONObject(
+				appDescriptionListString);
+
+		// Extract sessionAttributeDescriptions
+		JSONArray sessionAttributeDescriptions = attribuDescListJSONObject
+				.getJSONArray(Keys.SESSION_ATTRIBUTE_DESCRIPTIONS);
+		for (int i = 0; i < sessionAttributeDescriptions.length(); i++) {
+			String sessionAttributeDescriptionString = sessionAttributeDescriptions
+					.getString(i);
+
+			attributeDescriptions.add(new SessionAttributeDescription(
+					sessionAttributeDescriptionString));
+		}
+
+		// Extract eventAttributeDescriptions
+		JSONArray eventDescriptions = attribuDescListJSONObject
+				.getJSONArray(Keys.EVENT_DESCRIPTIONS);
+		for (int i = 0; i < eventDescriptions.length(); i++) {
+			JSONObject eventAttributeDescription = eventDescriptions
+					.getJSONObject(i);
+
+			// Pull the out the EventDescription and its
+			// EventAttributeDescriptionsJSONArray
+			String eventDescriptionString = eventAttributeDescription
+					.getString(Keys.EVENT_NAME);
+			JSONArray eventAttributesJSONArray = eventAttributeDescription
+					.getJSONArray(Keys.EVENT_ATTRIBUTES);
+
+			// Add all of the EventAttributeDescriptions to a POJO List
+			List<EventAttributeDescription> eventAttributeDescriptions = new ArrayList<EventAttributeDescription>();
+			for (int j = 0; j < eventAttributesJSONArray.length(); j++) {
+				String eventAttributeDescriptionString = eventAttributesJSONArray
+						.getString(j);
+				eventAttributeDescriptions.add(new EventAttributeDescription(
+						eventAttributeDescriptionString));
+			}
+
+			// Put the list of EventAttributeDescriptions in an EventDescription
+			EventDescription eventDescription = new EventDescription(
+					eventDescriptionString, eventAttributeDescriptions);
+			
+			// Put this EventDescription into the list of AttributeDescriptions
+			attributeDescriptions.add(eventDescription);
+		}
+
+		return attributeDescriptions;
+	}
 	// /**
 	// * Parses a JSON List of AttribDescription into a proper List<{@code
 	// AttribDescription}>

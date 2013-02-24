@@ -111,7 +111,7 @@ public class AttributeListActivity extends Activity {
 				"Retrieving attrib list from Salesforce", Toast.LENGTH_SHORT).show();
 
 		// Execute the getAttribList method asynchronously
-		sfConn.getAttribList(appId, graphType);
+		sfConn.getAttribList();
 	}
 
 }
