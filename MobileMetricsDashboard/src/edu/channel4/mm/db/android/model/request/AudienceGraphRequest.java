@@ -87,7 +87,7 @@ public enum AudienceGraphRequest implements GraphRequest {
 			Logger.e("Unimplemented UsageGraphRequest selected");
 			return null;
 		}
-
+		
 		// Always put the GraphRequest type itself into the intent
 		intent.putExtra(Keys.GRAPH_REQUEST_TYPE, audienceGraphRequest);
 

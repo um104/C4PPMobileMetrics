@@ -23,6 +23,7 @@ import edu.channel4.mm.db.android.util.Logger;
 public class GraphViewerActivity extends Activity {
 
 	private WebView webView;
+	private String requestUrl;
 	private GraphRequest graphRequest;
 
 	@Override
@@ -33,6 +34,9 @@ public class GraphViewerActivity extends Activity {
 		// Retrieve the GraphRequest from the Intent
 		graphRequest = (GraphRequest) getIntent().getExtras().getSerializable(
 				Keys.GRAPH_REQUEST_TYPE);
+		
+		// TODO(mlerner): Uncomment the following once graph requests put the URL in the Intent they create.
+		// requestUrl = getIntent().getStringExtra(Keys.REQUEST_URL);
 
 		// Setup the WebView
 		webView = (WebView) findViewById(R.id.webViewGraphViewer);
@@ -64,6 +68,9 @@ public class GraphViewerActivity extends Activity {
 
 		// construct URL parameters
 		url = addParamsToUrl(url);
+		
+		// TODO(mlerner): Uncomment the following once graph requests put the URL in the Intent they create.
+		// url = requestUrl;
 
 		// point WebView to Graph URL with correct params
 		webView.loadUrl(url);
