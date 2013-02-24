@@ -70,9 +70,6 @@ public class GraphViewerActivity extends Activity {
 	}
 
 	protected String addParamsToUrl(String url) {
-		if (!url.endsWith("?"))
-			url += "?";
-
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 
 //		requestType=GEOCHART

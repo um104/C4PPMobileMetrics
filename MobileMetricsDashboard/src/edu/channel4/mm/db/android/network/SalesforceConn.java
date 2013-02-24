@@ -25,7 +25,7 @@ public class SalesforceConn {
 	protected static final String SALESFORCE_BASE_REST_URL = "%s/services/apexrest/%s/";
 	protected static final String APPS_URL_SUFFIX = "channel4_apps";
 	protected static final String ATTRIBS_URL_SUFFIX = "channel4_attributes";
-	protected static final String GRAPH_VIEW_BASE_URL = "%s/apex/graphView";
+	protected static final String GRAPH_VIEW_BASE_URL = "%s/apex/graphView?oauth_token=%s";
 
 	private Context context;
 	protected HttpClient client;
@@ -45,9 +45,7 @@ public class SalesforceConn {
 	 * @return A SalesforceConn operating within the given context.
 	 */
 	// TODO(Girum): Remove singletons. We shouldn't statically refer to a
-	// Context
-	// object, since the Context could potentially be different after a Force
-	// Close.
+	// Context object, since the Context could potentially be different after a Force Close.
 	// http://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons
 	// http://blogs.msdn.com/b/scottdensmore/archive/2004/05/25/140827.aspx
 	public static SalesforceConn getInstance(Context context) {
@@ -59,14 +57,12 @@ public class SalesforceConn {
 	}
 
 	public String getGraphViewingURL() {
-		// TODO(mlerner): How do we gain access to a VisualForce page using the
-		// accessToken? Send it in the request?
 		String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
 				.getString(Keys.ACCESS_TOKEN, null);
 		String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0)
 				.getString(Keys.INSTANCE_URL, null);
 
-		String url = String.format(GRAPH_VIEW_BASE_URL, instanceUrl);
+		String url = String.format(GRAPH_VIEW_BASE_URL, instanceUrl, accessToken);
 
 		return url;
 	}
