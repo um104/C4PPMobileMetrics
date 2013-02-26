@@ -55,5 +55,5 @@ public class Keys {
 	
 	public static final String APP_NAME = "appName";
 	
-	public static final String REQUEST_URL = "request_url";
+	public static final String REQUEST_URL_PARAMETERS = "request_url_parameters";
 }

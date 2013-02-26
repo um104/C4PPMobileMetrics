@@ -19,9 +19,10 @@ public interface GraphRequest {
     * @return
     */
    public String getRestRequestType();
-
+   
    /**
-    * Use URLEncodedUtils.format(params, "utf-8") to generate this return string
+    * Use URLEncodedUtils.format(params, "utf-8") to generate this return string.
+    * Put the String into Intent.
     * 
     * @return The string representation of the parameters held in this
     *         GraphRequest.
