@@ -19,15 +19,20 @@ public interface GraphRequest {
     * @return
     */
    public String getRestRequestType();
-   
+
    /**
-    * Use URLEncodedUtils.format(params, "utf-8") to generate this return string.
-    * Put the String into Intent.
+    * Make a List<NameValuePair>, store BasicNameValuePair objects with
+    * key-param pairs, and then use URLEncodedUtils.format(params, "utf-8") to
+    * generate this return string. Put the String into Intent as a String extra
+    * under Keys.REQUEST_URL_PARAMETERS
     * 
+    * @param context
+    *           The application context, used to gather some parameters stored
+    *           in shared preferences
     * @return The string representation of the parameters held in this
     *         GraphRequest.
     */
-   public String getUrlParameterString();
+   public String getUrlParameterString(Context context);
 
    /**
     * Constructs the correct Intent for a given GraphRequest. The Intent will
