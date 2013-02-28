@@ -58,4 +58,6 @@ public class Keys {
 	public static final String REQUEST_URL_PARAMETERS = "request_url_parameters";
 	
 	public static final String APP_LABEL_URL_PARAMETER_NAME = "appLabel";
+	
+	public static final String GRAPH_REQUEST_EXTRA = "graph_request_extra";
 }
