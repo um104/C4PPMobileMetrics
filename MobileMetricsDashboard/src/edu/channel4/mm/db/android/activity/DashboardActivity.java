@@ -128,8 +128,6 @@ public class DashboardActivity extends Activity {
 	 */
 	class GridViewAdapter extends BaseAdapter {
 		protected final SubactivityDetails[] subactivityDetails = new SubactivityDetails[] {
-				// TODO: Put the actual Activity class objects in here once we
-				// make them.
 				new SubactivityDetails(R.drawable.ic_launcher, getResources()
 						.getString(R.string.usage), UsageActivity.class),
 				new SubactivityDetails(R.drawable.ic_launcher, getResources()

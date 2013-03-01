@@ -26,14 +26,14 @@ import edu.channel4.mm.db.android.util.Keys;
 
 public class EditGraphRequestActivity extends Activity implements OnEventDescriptionChangedListener {
 
-   GraphRequest graphRequest;
-   ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
-   ArrayAdapter<EventDescription> eventAdapter;
-   TextView event1View;
-   TextView durationView;
-   Spinner event1Spinner;
-   Spinner durationSpinner;
-   List<EventDescription> eventList;
+   private GraphRequest graphRequest;
+   private ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
+   private ArrayAdapter<EventDescription> eventAdapter;
+   private TextView event1View;
+   private TextView durationView;
+   private Spinner event1Spinner;
+   private Spinner durationSpinner;
+   private List<EventDescription> eventList;
 
    @SuppressLint("NewApi")
    @Override
@@ -150,6 +150,7 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
     * @return
     */
    private boolean validateInputs() {
+      //TODO: either actually do validation of input elements, or remove this method
       return true;
    }
 

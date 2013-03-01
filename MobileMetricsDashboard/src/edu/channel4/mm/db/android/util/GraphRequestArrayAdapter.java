@@ -12,16 +12,16 @@ import edu.channel4.mm.db.android.model.request.GraphRequest;
 
 public class GraphRequestArrayAdapter extends ArrayAdapter<GraphRequest> {
 
-	private GraphRequest[] data;
+	private GraphRequest[] graphRequests;
 
 	public GraphRequestArrayAdapter(Context context, GraphRequest[] data) {
 		super(context, R.layout.cell_graph_request, data);
-		this.data = data;
+		this.graphRequests = data;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		GraphRequest graphRequest = data[position];
+		GraphRequest graphRequest = graphRequests[position];
 		ImageView graphRequestIcon;
 		TextView graphRequestLabel;
 

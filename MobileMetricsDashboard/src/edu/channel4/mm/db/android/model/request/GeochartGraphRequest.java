@@ -15,6 +15,11 @@ import edu.channel4.mm.db.android.util.Keys;
 public class GeochartGraphRequest implements GraphRequest {
    
    private String appLabel;
+   
+   @Override
+   public String toString() {
+      return "Nationality Breakdown";
+   }
 
    @Override
    public String getRestRequestType() {
