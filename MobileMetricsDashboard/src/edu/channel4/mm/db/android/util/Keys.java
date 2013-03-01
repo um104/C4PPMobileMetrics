@@ -62,4 +62,8 @@ public class Keys {
 	public static final String GRAPH_REQUEST_EXTRA = "graph_request_extra";
 	
 	public static final String TIME_INTERVAL = "timeInterval";
+	
+	public static final String EVENT_NAME_1 = "eventName1";
+	
+	public static final String ATTRIB_NAME_1 = "attribName1";
 }

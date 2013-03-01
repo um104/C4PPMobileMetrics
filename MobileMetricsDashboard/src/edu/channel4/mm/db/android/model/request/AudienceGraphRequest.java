@@ -8,9 +8,11 @@ import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Logger;
 
+// TODO: Remove this class, it is unused
+
 // TODO: Don't use string literals:
 // http://stackoverflow.com/questions/9742050/is-there-an-enum-string-resource-lookup-pattern-for-android
-public enum AudienceGraphRequest implements GraphRequest {
+public enum AudienceGraphRequest  {
 	GEOGRAHPIC("Geographic", Keys.GEOCHART), DEVICE_TYPE("Device Type", null), OS_VERSION(
 			"OS Version", null), LANGUAGE_LOCALE("Language Locale", null), NETWORK_CARRIER(
 			"Network Carrier", null);
@@ -33,17 +35,17 @@ public enum AudienceGraphRequest implements GraphRequest {
 		return restRequestType;
 	}
 
-	@Override
+
 	public final Map<String, String> getFields() {
 		return fields;
 	}
 
-	@Override
+
 	public String addField(String key, String value) {
 		return fields.put(key, value);
 	}
 
-	@Override
+
 	public Intent constructGraphRequestIntent(Context context) {
 		Intent intent = null;
 		AudienceGraphRequest audienceGraphRequest = null;

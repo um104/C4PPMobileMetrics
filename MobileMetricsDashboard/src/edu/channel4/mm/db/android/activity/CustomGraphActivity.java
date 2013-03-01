@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
+import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
 
 public class CustomGraphActivity extends Activity {
@@ -31,12 +32,11 @@ public class CustomGraphActivity extends Activity {
 					int position, long id) {
 
 				// Grab the CustomGraphRequest for the selected item.
-				CustomGraphRequest customGraphRequest = new CustomGraphRequest();
+				GraphRequest graphRequest = new CustomGraphRequest();
 
 				// Construct the correct Intent for the selected
 				// CustomGraphRequest
-				Intent intent = customGraphRequest
-						.constructGraphRequestIntent(getApplicationContext());
+				Intent intent = graphRequest.constructGraphRequestIntent(getApplicationContext());
 
 				// Start the activity for that Intent with all of its baggage,
 				// but only if the intent could actually be constructed based
@@ -46,7 +46,7 @@ public class CustomGraphActivity extends Activity {
 				} else {
 					Toast.makeText(
 							getApplicationContext(),
-							customGraphRequest.toString()
+							graphRequest.toString()
 									+ " not yet implemented.",
 							Toast.LENGTH_SHORT).show();
 				}

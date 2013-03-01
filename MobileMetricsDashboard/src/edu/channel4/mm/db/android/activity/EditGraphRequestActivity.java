@@ -85,6 +85,8 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
          
          // TODO: update the values within eventList. Use TempoDatabase, SalesforceConn. 
       }
+      
+      //TODO: add a check for HasAttributeParameter
    }
 
    @Override
@@ -133,6 +135,7 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
          EventDescription eventDescription = eventAdapter.getItem(selectedItemPosition);
          ((HasEventNameParameter)graphRequest).setEventName(eventDescription.getName());
       }
+      //TODO: add a check for HasAttributeParameter
 
       // Create GraphViewerActivity intent and put URIParams in Intent
       Intent intent = new Intent(getApplicationContext(),

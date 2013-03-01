@@ -8,9 +8,11 @@ import edu.channel4.mm.db.android.activity.EventPickerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Logger;
 
+//TODO: Remove this class. It's unused
+
 // TODO: Don't use string literals:
 // http://stackoverflow.com/questions/9742050/is-there-an-enum-string-resource-lookup-pattern-for-android
-public enum UsageGraphRequest implements GraphRequest {
+public enum UsageGraphRequest  {
 	SESSION_LENGTH_OVER_TIME("Session Length over Time"), NUMBER_OF_SESSIONS_OVER_TIME(
 			"Number of Sesssions over Time"), EVENT_COUNT_OVER_TIME(
 			"Event Count over Time"), ACTIVE_USERS("Active Users"), TIME_OF_DAY_DIST(
@@ -28,17 +30,17 @@ public enum UsageGraphRequest implements GraphRequest {
 		return displayName;
 	}
 
-	@Override
+	
 	public final Map<String, String> getFields() {
 		return fields;
 	}
 
-	@Override
+	
 	public String addField(String key, String value) {
 		return fields.put(key, value);
 	}
 
-	@Override
+	
 	public Intent constructGraphRequestIntent(Context context) {
 		Intent intent = null;
 		UsageGraphRequest usageGraphRequest = null;
@@ -90,7 +92,7 @@ public enum UsageGraphRequest implements GraphRequest {
 		return intent;
 	}
 
-	@Override
+
 	public String getRestRequestType() {
 		// TODO Auto-generated method stub
 		return null;
