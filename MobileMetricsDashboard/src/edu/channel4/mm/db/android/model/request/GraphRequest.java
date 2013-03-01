@@ -49,13 +49,15 @@ public interface GraphRequest {
     */
    public Intent constructGraphRequestIntent(Context context);
 
-   public enum StartTime {
-      LAST_24_HOURS("From the last 24 hours"), LAST_WEEK("From the last week"), LAST_MONTH(
-               "From the last month");
+   public enum TimeInterval {
+      DAY("From the last day"), 
+      WEEK("From the last week"), 
+      MONTH("From the last month"),
+      YEAR("From the last year");
 
       private String displayName;
 
-      private StartTime(String displayName) {
+      private TimeInterval(String displayName) {
          this.displayName = displayName;
       }
 
@@ -66,8 +68,8 @@ public interface GraphRequest {
 
       public static List<String> getStringArray() {
          List<String> startTimes = new ArrayList<String>(
-                  GraphRequest.StartTime.values().length);
-         for (GraphRequest.StartTime startTime : GraphRequest.StartTime
+                  GraphRequest.TimeInterval.values().length);
+         for (GraphRequest.TimeInterval startTime : GraphRequest.TimeInterval
                   .values()) {
             startTimes.add(startTime.toString());
          }

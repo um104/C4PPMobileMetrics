@@ -52,7 +52,7 @@ public class CreateNewCustomGraphActivity extends Activity implements
 		// Setup the startTime spinner
 		adapterStartTime = new ArrayAdapter<String>(getApplicationContext(),
 				android.R.layout.simple_spinner_item,
-				GraphRequest.StartTime.getStringArray());
+				GraphRequest.TimeInterval.getStringArray());
 		spinnerStartTime.setAdapter(adapterStartTime);
 
 		// Subscribe the activity to the Database for changes to

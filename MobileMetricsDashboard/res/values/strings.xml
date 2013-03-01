@@ -47,5 +47,7 @@
     <string name="attribute2">Attribute 2 (optional): </string>
     <string name="in_the_last">In the last: </string>
     <string name="view_new_custom_graph">View New Custom Graph</string>
+    <string name="title_activity_edit_graph_request">EditGraphRequestActivity</string>
+    <string name="please_enter_valid_inputs_">Please enter valid inputs.</string>
 
 </resources>
