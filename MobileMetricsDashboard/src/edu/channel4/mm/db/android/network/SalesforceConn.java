@@ -71,6 +71,8 @@ public class SalesforceConn {
 
 		return url;
 	}
+	
+	//TODO: add getEventList() once APEX RestResource is written
 
 	/**
 	 * Gets the list of attributes valid for this particular type of graph

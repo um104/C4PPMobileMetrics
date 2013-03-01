@@ -1,5 +1,8 @@
 package edu.channel4.mm.db.android.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,20 +16,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest.TimeInterval;
 import edu.channel4.mm.db.android.model.request.HasEventNameParameter;
 import edu.channel4.mm.db.android.model.request.HasOverTimeParameter;
 import edu.channel4.mm.db.android.util.Keys;
 
-public class EditGraphRequestActivity extends Activity {
+public class EditGraphRequestActivity extends Activity implements OnEventDescriptionChangedListener {
 
    GraphRequest graphRequest;
    ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
+   ArrayAdapter<EventDescription> eventAdapter;
    TextView event1View;
    TextView durationView;
    Spinner event1Spinner;
    Spinner durationSpinner;
+   List<EventDescription> eventList;
 
    @SuppressLint("NewApi")
    @Override
@@ -61,13 +68,22 @@ public class EditGraphRequestActivity extends Activity {
          // fill the spinner with actual values
          durationAdapter = new ArrayAdapter<GraphRequest.TimeInterval>(getApplicationContext(), 
                   android.R.layout.simple_spinner_item, GraphRequest.TimeInterval.values());
+         
+         durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+         durationSpinner.setAdapter(durationAdapter);
       }
       if (graphRequest instanceof HasEventNameParameter) {
-         // turn on event selecting elemends
+         // turn on event selecting elements
          event1Spinner.setVisibility(View.VISIBLE);
          event1View.setVisibility(View.VISIBLE);
          
-         //TODO: fill the event spinner with actual values
+         eventList = new ArrayList<EventDescription>();
+         
+         // fill the event spinner with actual values
+         eventAdapter = new ArrayAdapter<EventDescription>(getApplicationContext(),
+                  android.R.layout.simple_spinner_item, eventList);
+         
+         // TODO: update the values within eventList. Use TempoDatabase, SalesforceConn. 
       }
    }
 
@@ -112,7 +128,10 @@ public class EditGraphRequestActivity extends Activity {
          ((HasOverTimeParameter)graphRequest).setTimeDuration(timeInterval.name());
       }
       if (graphRequest instanceof HasEventNameParameter) {
-         // TODO: retrieve selected event from eventspinner, put in graphrequest
+         // retrieve selected event from eventspinner, put in graphrequest
+         int selectedItemPosition = event1Spinner.getSelectedItemPosition();
+         EventDescription eventDescription = eventAdapter.getItem(selectedItemPosition);
+         ((HasEventNameParameter)graphRequest).setEventName(eventDescription.getName());
       }
 
       // Create GraphViewerActivity intent and put URIParams in Intent
@@ -132,6 +151,13 @@ public class EditGraphRequestActivity extends Activity {
     */
    private boolean validateInputs() {
       return true;
+   }
+
+   @Override
+   public void onAppDescriptionChanged(List<EventDescription> newEventDescriptions) {
+      eventList.clear();
+      eventList.addAll(newEventDescriptions);
+      eventAdapter.notifyDataSetChanged();
    }
 
 }

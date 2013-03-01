@@ -103,4 +103,6 @@ public class TempoDatabase {
 		return onAttributeDescriptionChangedListeners
 				.remove(onAttributeDescriptionChangedListener);
 	}
+	
+	//TODO: add set/add/on methods for EventDescription once APEX RestResource is written
 }
