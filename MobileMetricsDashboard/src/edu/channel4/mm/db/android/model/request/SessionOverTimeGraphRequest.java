@@ -22,6 +22,10 @@ public class SessionOverTimeGraphRequest implements GraphRequest, HasOverTimePar
    public SessionOverTimeGraphRequest() {
       super();
    }
+   
+   public String toString() {
+      return "Sessions over Time";
+   }
 
    @Override
    public String getRestRequestType() {

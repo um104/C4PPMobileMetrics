@@ -69,6 +69,8 @@ public class GraphViewerActivity extends Activity {
 		// construct URL parameters
 		//url = addParamsToUrl(url);
 		url += requestUrlParameters;
+		
+		Log.d("MyApplication", "URL: " + url);
 
 		// point WebView to Graph URL with correct params
 		webView.loadUrl(url);

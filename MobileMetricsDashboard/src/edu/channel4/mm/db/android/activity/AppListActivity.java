@@ -131,8 +131,7 @@ public class AppListActivity extends Activity implements
 			TextView packageName = (TextView) convertView
 					.findViewById(R.id.textViewPackageName);
 
-			appName.setText(appData.getAppName() + ", version "
-					+ appData.getVersionNumber());
+			appName.setText(appData.getAppName());
 			packageName.setText(appData.getPackageName());
 
 			return convertView;

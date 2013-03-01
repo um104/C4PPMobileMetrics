@@ -16,14 +16,12 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 	private long id;
 	protected String appLabel;
 	protected String packageName;
-	protected String versionNumber;
 	protected String appId;
 
 	public AppDescription(String appLabel, String packageName, String version,
 			String appId) {
 		this.appLabel = appLabel;
 		this.packageName = packageName;
-		this.versionNumber = version;
 		this.appId = appId;
 	}
 
@@ -41,10 +39,6 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 
 	public String getPackageName() {
 		return packageName;
-	}
-
-	public String getVersionNumber() {
-		return versionNumber;
 	}
 
 	public String getAppId() {
@@ -70,11 +64,10 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 
 			String appLabel = appDataObject.getString(Keys.APP_LABEL);
 			String packageName = appDataObject.getString(Keys.PACKAGE_NAME);
-			String version = appDataObject.getString(Keys.VERSION);
 			String appId = appDataObject.getString(Keys.APP_ID);
 
 			AppDescription appData = new AppDescription(appLabel, packageName,
-					version, appId);
+					"", appId);
 			appDataList.add(appData);
 		}
 
@@ -89,8 +82,6 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 				+ ((appLabel == null) ? 0 : appLabel.hashCode());
 		result = prime * result
 				+ ((packageName == null) ? 0 : packageName.hashCode());
-		result = prime * result
-				+ ((versionNumber == null) ? 0 : versionNumber.hashCode());
 		return result;
 	}
 
@@ -117,11 +108,6 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 				return false;
 		} else if (!packageName.equals(other.packageName))
 			return false;
-		if (versionNumber == null) {
-			if (other.versionNumber != null)
-				return false;
-		} else if (!versionNumber.equals(other.versionNumber))
-			return false;
 		return true;
 	}
 
@@ -129,8 +115,6 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 	public int compareTo(AppDescription another) {
 		if (!this.appLabel.equals(another.appLabel)) {
 			return this.appLabel.compareTo(another.appLabel);
-		} else if (!this.versionNumber.equals(another.versionNumber)) {
-			return this.versionNumber.compareTo(another.versionNumber);
 		} else {
 			return 0;
 		}
@@ -148,7 +132,6 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 		// Note: Parcel data is read in a FIFO manner.
 		dest.writeString(appLabel);
 		dest.writeString(packageName);
-		dest.writeString(versionNumber);
 		dest.writeString(appId);
 	}
 
@@ -167,7 +150,6 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 		// Note: Parcel data is read in a FIFO manner.
 		this.appLabel = in.readString();
 		this.packageName = in.readString();
-		this.versionNumber = in.readString();
 		this.appId = in.readString();
 	}
 }

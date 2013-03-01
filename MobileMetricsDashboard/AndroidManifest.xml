@@ -69,10 +69,8 @@
             android:name="edu.channel4.mm.db.android.activity.CreateNewCustomGraphActivity"
             android:label="@string/title_activity_create_new_custom_graph" >
         </activity>
-        <activity android:name="edu.channel4.mm.db.android.activity.EditAGraphRequestActivity" >
-        </activity>
         <activity
-            android:name="edu.channel4.mm.db.android.EditGraphRequestActivity"
+            android:name="edu.channel4.mm.db.android.activity.EditGraphRequestActivity"
             android:label="@string/title_activity_edit_graph_request"
             android:parentActivityName="edu.channel4.mm.db.android.activity.DashboardActivity" >
             <meta-data
