@@ -1,7 +1,7 @@
 package edu.channel4.mm.db.android.util;
 
 /**
- * This class should strictly contain Keys used for data exchange formats (e.g.
+ * This class should strictly contain Keys used for data exchange formats (e.g.;
  * JSON, XML, REST requests, SharedPreferences, etc.)
  * 
  * @author girum
@@ -60,4 +60,6 @@ public class Keys {
 	public static final String APP_LABEL_URL_PARAMETER_NAME = "appLabel";
 	
 	public static final String GRAPH_REQUEST_EXTRA = "graph_request_extra";
+	
+	public static final String TIME_INTERVAL = "timeInterval";
 }

@@ -34,7 +34,6 @@ public class GeochartGraphRequest implements GraphRequest {
       
       List<NameValuePair> params = new ArrayList<NameValuePair>();
 
-      //Should be "custom" "SessionOverTime", "EventOverTime", etc.
       params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, getRestRequestType()));
       params.add(new BasicNameValuePair(Keys.APP_LABEL_URL_PARAMETER_NAME, appLabel));
 

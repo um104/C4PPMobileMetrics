@@ -13,9 +13,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.model.request.GeochartGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
-import edu.channel4.mm.db.android.model.request.UsageGraphRequest;
+import edu.channel4.mm.db.android.model.request.SessionOverTimeGraphRequest;
 import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
 
 public class UsageActivity extends Activity {
@@ -58,7 +57,7 @@ public class UsageActivity extends Activity {
       });
 
       graphRequests = new ArrayList<GraphRequest>();
-      graphRequests.add(new GeochartGraphRequest());
+      graphRequests.add(new SessionOverTimeGraphRequest());
 
       adapter = new GraphRequestArrayAdapter(getApplicationContext(),
                graphRequests.toArray(new GraphRequest[0]));
