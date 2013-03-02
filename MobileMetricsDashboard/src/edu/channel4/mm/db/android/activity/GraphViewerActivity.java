@@ -68,7 +68,7 @@ public class GraphViewerActivity extends Activity {
 
 		// construct URL parameters
 		//url = addParamsToUrl(url);
-		url += requestUrlParameters;
+		url += "&" + requestUrlParameters;
 		
 		Log.d("MyApplication", "URL: " + url);
 

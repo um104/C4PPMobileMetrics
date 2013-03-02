@@ -15,11 +15,11 @@ public class Keys {
 
 	public static final String INSTANCE_URL = "instance_url";
 
-	public static final String APP_LABEL = "Label__c";
+	public static final String APP_LABEL = "C4PPMM__Label__c";
 
 	public static final String VERSION = "Version__c";
 
-	public static final String PACKAGE_NAME = "PackageName__c";
+	public static final String PACKAGE_NAME = "C4PPMM__PackageName__c";
 
 	public static final String GRAPH_TYPE = "graph_type";
 

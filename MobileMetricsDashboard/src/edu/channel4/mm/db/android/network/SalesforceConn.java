@@ -27,7 +27,7 @@ import edu.channel4.mm.db.android.util.Keys;
 
 public class SalesforceConn {
 	static private SalesforceConn instance;
-	protected static final String SALESFORCE_BASE_REST_URL = "%s/services/apexrest/%s/";
+	protected static final String SALESFORCE_BASE_REST_URL = "%s/services/apexrest/C4PPMM/%s/";
 	protected static final String APPS_URL_SUFFIX = "channel4_apps";
 	protected static final String ATTRIBS_URL_SUFFIX = "channel4_attributes";
 	protected static final String GRAPH_VIEW_BASE_URL = "%s/apex/graphView?oauth_token=%s";
@@ -67,7 +67,7 @@ public class SalesforceConn {
 		String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0)
 				.getString(Keys.INSTANCE_URL, null);
 
-		String url = String.format(GRAPH_VIEW_BASE_URL, instanceUrl, accessToken);
+		String url = String.format(GRAPH_VIEW_BASE_URL, instanceUrl, "FIXME");
 
 		return url;
 	}
