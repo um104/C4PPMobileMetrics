@@ -26,7 +26,7 @@ public class LoginActivity extends Activity {
 	private static final String REDIRECT_URI = "mobilemetrics://callback";
 	private static final String STATE = "mystate";
 	private static final String RESPONSE_TYPE = "token";
-	private static final String OAUTH_SCOPE = "visualforce%20api";
+	private static final String OAUTH_SCOPE = "full";
 	private static final String SALESFORCE_LOGIN_BASE = "https://login.salesforce.com/services/oauth2/authorize";
 	private static final String SALESFORCE_LOGIN_URL = SALESFORCE_LOGIN_BASE + 
 			"?response_type=" + RESPONSE_TYPE

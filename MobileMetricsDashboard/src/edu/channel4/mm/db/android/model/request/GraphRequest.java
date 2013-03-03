@@ -10,11 +10,16 @@ import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 
 public interface GraphRequest {
 
+   /**
+    * Must implement toString() for display purposes.
+    * 
+    * @return The display name of the GraphRequest.
+    */
    @Override
    public String toString();
 
    /**
-    * Read-only getter for the REST request type that the server expects.
+    * Read-only getter for the REST request type that the APEX server expects.
     * 
     * @return
     */
@@ -36,12 +41,15 @@ public interface GraphRequest {
 
    /**
     * Constructs the correct Intent for a given GraphRequest. The Intent will
-    * open the correct next Activity (e.g. Number of Sessions over Time goes
-    * straight to {@link GraphViewerActivity} whereas Events over Time requires
-    * you to choose the Event first in {@link EventPickerActivity}.
+    * open the correct next Activity (e.g. Nationality Breakdown goes straight
+    * to {@link GraphViewerActivity} whereas Sessions over Time requires you to
+    * choose the duration in {@link EditGraphRequestActivity}.
     * 
-    * The Intent will add fields to the GraphRequest as it is passed along the
-    * Activities.
+    * If the Intent is directed towards the {@link GraphViewerActivity}, then
+    * the UrlParameterString should be included as a String extra within the
+    * Intent. If the Intent is directed elsewhere, such as
+    * {@link EditGraphRequestActivity}, then the GraphRequest itself must
+    * implement Parcelable and be included in the Intent as an extra.
     * 
     * @param context
     * @param graphRequest
@@ -49,11 +57,14 @@ public interface GraphRequest {
     */
    public Intent constructGraphRequestIntent(Context context);
 
+   /**
+    * Enum for any events that implement HasOverTimeParameter.
+    * 
+    * @author mlerner
+    */
    public enum TimeInterval {
-      DAY("From the last day"), 
-      WEEK("From the last week"), 
-      MONTH("From the last month"),
-      YEAR("From the last year");
+      DAY("From the last day"), WEEK("From the last week"), MONTH(
+               "From the last month"), YEAR("From the last year");
 
       private String displayName;
 

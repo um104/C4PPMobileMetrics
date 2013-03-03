@@ -1,4 +1,6 @@
 echo
 echo 'Be sure to change the <instance_name> and <access_token>!'
 echo
-curl https://na9.salesforce.com/services/apexrest/channel4_apps/ -H 'Authorization: Bearer 00DE0000000dkGn!ARwAQAWoUf20s3q24zrShMkbOuEDH8vhznVtZq4.weXCSLBQivkOjX4pKYZ.Sw10GattVC9pEXfgpb8ZXUiv13F.RWlW7Ver'
+curl https://na9.salesforce.com/services/apexrest/channel4_apps/ -H 'Authorization: Bearer 00DE0000000dkGn%21ARwAQARgMRjyiZgF9qjsdj.vpv.kBvaB_CG1vB6ZbmulMZ7cJrTSK.1JwmRetrX5KPmwCHqnkWafGeMDyJlUcF0Gd2kw7tBv'
+echo
+

@@ -1,6 +1,8 @@
 package edu.channel4.mm.db.android.network;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -66,8 +69,16 @@ public class SalesforceConn {
 				.getString(Keys.ACCESS_TOKEN, null);
 		String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0)
 				.getString(Keys.INSTANCE_URL, null);
-
-		String url = String.format(GRAPH_VIEW_BASE_URL, instanceUrl, "FIXME");
+				
+		//TODO(mlerner): Tried this to fix the double login error. May have made it worse. Test.
+		try {
+         accessToken = URLEncoder.encode(accessToken, "utf-8");
+      }
+      catch (UnsupportedEncodingException e) {
+         e.printStackTrace();
+      }
+		
+		String url = String.format(GRAPH_VIEW_BASE_URL, instanceUrl, accessToken);
 
 		return url;
 	}
