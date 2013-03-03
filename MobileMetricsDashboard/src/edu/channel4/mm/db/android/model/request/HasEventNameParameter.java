@@ -1,11 +1,12 @@
 package edu.channel4.mm.db.android.model.request;
 
 /**
- * Interface for GraphRequests to implement. A concrete GraphRequest class
- * should implement this when it has a variable parameter for EventNames.
+ * This interface describes a GraphRequest that has a parameter that needs to be
+ * set by the user before it can be sent. In this case, the parameter is an
+ * Event Name. {@link EditGraphRequestActivity} will use reflection to detect
+ * what parameters a certain GraphRequest has.
  * 
  * @author mlerner
- * 
  */
 public interface HasEventNameParameter {
 

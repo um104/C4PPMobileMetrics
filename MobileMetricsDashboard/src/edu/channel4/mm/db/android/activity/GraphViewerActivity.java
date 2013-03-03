@@ -1,12 +1,5 @@
 package edu.channel4.mm.db.android.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.message.BasicNameValuePair;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -74,23 +67,5 @@ public class GraphViewerActivity extends Activity {
 
 		// point WebView to Graph URL with correct params
 		webView.loadUrl(url);
-	}
-
-	protected String addParamsToUrl(String url) {
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-
-		//Should be "custom" "SessionOverTime", "EventOverTime", etc.
-		params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, graphRequest.getRestRequestType()));
-		
-		//TOOD(mlerner): Get the URL parameters from the GraphRequest and add those to the url
-		
-		
-		// TODO FIXME: App Name is hardcoded right now
-		params.add(new BasicNameValuePair(Keys.APP_NAME, "a04E00000034dlH"));
-
-		String paramString = URLEncodedUtils.format(params, "utf-8");
-
-		url += paramString;
-		return url;
 	}
 }
