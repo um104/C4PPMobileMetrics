@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.model.request.DeviceTypeDistributionGraphRequest;
 import edu.channel4.mm.db.android.model.request.GeochartGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.LanguageLocaleGraphRequest;
@@ -60,6 +61,7 @@ public class AudienceActivity extends Activity {
       graphRequests = new ArrayList<GraphRequest>();
       graphRequests.add(new GeochartGraphRequest());
       graphRequests.add(new LanguageLocaleGraphRequest());
+      graphRequests.add(new DeviceTypeDistributionGraphRequest());
 
       adapter = new GraphRequestArrayAdapter(getApplicationContext(),
                graphRequests.toArray(new GraphRequest[0]));
