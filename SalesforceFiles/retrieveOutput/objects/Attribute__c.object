@@ -33,12 +33,14 @@
         <type>Default</type>
     </actionOverrides>
     <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
     <enableActivities>false</enableActivities>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
     <fields>
         <fullName>Event__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Event</label>
         <referenceTo>Event__c</referenceTo>
@@ -51,6 +53,7 @@
     </fields>
     <fields>
         <fullName>Key__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Key</label>
         <length>100</length>
@@ -60,6 +63,7 @@
     </fields>
     <fields>
         <fullName>Type__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Type</label>
         <length>3</length>
@@ -69,6 +73,7 @@
     </fields>
     <fields>
         <fullName>Value__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Value</label>
         <length>100</length>

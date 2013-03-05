@@ -33,12 +33,14 @@
         <type>Default</type>
     </actionOverrides>
     <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
     <enableActivities>false</enableActivities>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
     <fields>
         <fullName>AndroidIDHash__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>AndroidIDHash</label>
         <length>100</length>
@@ -48,6 +50,7 @@
     </fields>
     <fields>
         <fullName>App__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>App</label>
         <referenceTo>App__c</referenceTo>
@@ -60,6 +63,7 @@
     </fields>
     <fields>
         <fullName>DataConnectionType__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>DataConnectionType</label>
         <length>40</length>
@@ -69,6 +73,7 @@
     </fields>
     <fields>
         <fullName>DataType__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>DataType</label>
         <length>100</length>
@@ -78,6 +83,7 @@
     </fields>
     <fields>
         <fullName>DeviceCountry__c</fullName>
+        <deprecated>false</deprecated>
         <description>Country Code</description>
         <externalId>false</externalId>
         <label>DeviceCountry</label>
@@ -88,6 +94,7 @@
     </fields>
     <fields>
         <fullName>DeviceManufacturer__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>DeviceManufacturer</label>
         <length>20</length>
@@ -97,6 +104,7 @@
     </fields>
     <fields>
         <fullName>DeviceModel__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>DeviceModel</label>
         <length>30</length>
@@ -106,6 +114,7 @@
     </fields>
     <fields>
         <fullName>DeviceSerialHash__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>DeviceSerialHash</label>
         <length>100</length>
@@ -115,6 +124,7 @@
     </fields>
     <fields>
         <fullName>DeviceType__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>DeviceType</label>
         <length>20</length>
@@ -124,6 +134,7 @@
     </fields>
     <fields>
         <fullName>EpochTime__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>EpochTime</label>
         <precision>10</precision>
@@ -134,6 +145,7 @@
     </fields>
     <fields>
         <fullName>LanguageLocale__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>LanguageLocale</label>
         <length>10</length>
@@ -143,6 +155,7 @@
     </fields>
     <fields>
         <fullName>LocaleCountryCode__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>LocaleCountryCode</label>
         <length>10</length>
@@ -152,6 +165,7 @@
     </fields>
     <fields>
         <fullName>LocalyticsApiKey__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>LocalyticsApiKey</label>
         <length>100</length>
@@ -161,6 +175,7 @@
     </fields>
     <fields>
         <fullName>LocalyticsLibraryVersion__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>LocalyticsLibraryVersion</label>
         <length>20</length>
@@ -170,6 +185,7 @@
     </fields>
     <fields>
         <fullName>NetworkCarrier__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>NetworkCarrier</label>
         <length>20</length>
@@ -179,6 +195,7 @@
     </fields>
     <fields>
         <fullName>NetworkCountryCode__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>NetworkCountryCode</label>
         <length>10</length>
@@ -188,6 +205,7 @@
     </fields>
     <fields>
         <fullName>OSVersion__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>OSVersion</label>
         <length>10</length>
@@ -197,6 +215,7 @@
     </fields>
     <fields>
         <fullName>PersistentStorageCreationTimeSeconds__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>PersistentStorageCreationTimeSeconds</label>
         <precision>18</precision>
@@ -207,6 +226,7 @@
     </fields>
     <fields>
         <fullName>SDKCompatibility__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>SDKCompatibility</label>
         <length>10</length>
@@ -216,6 +236,7 @@
     </fields>
     <fields>
         <fullName>SessionLengthSeconds__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>SessionLengthSeconds</label>
         <precision>18</precision>
@@ -225,7 +246,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>SessionTime__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Time of session start as a datetime.</description>
+        <externalId>false</externalId>
+        <label>SessionTime</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
         <fullName>UUID__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>UUID</label>
         <length>100</length>
@@ -244,10 +275,9 @@
         <columns>DeviceModel__c</columns>
         <columns>DeviceType__c</columns>
         <columns>EpochTime__c</columns>
-        <columns>LanguageLocale__c</columns>
-        <columns>LocaleCountryCode__c</columns>
         <columns>NetworkCarrier__c</columns>
         <columns>NetworkCountryCode__c</columns>
+        <columns>SessionTime__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

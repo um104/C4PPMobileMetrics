@@ -2,8 +2,8 @@
 
 global class AttributeRestResource
 {    
-    @HttpGet
-    global static AttrDescList getAttributes()
+    @HttpPost
+    global static AttrDescList getAttributes(String appLabel)
     {
         AttrDescList attrList = new AttrDescList();
         
@@ -32,6 +32,7 @@ global class AttributeRestResource
         
         List<AggregateResult> results = [SELECT Event__r.EventName__c eventname, Key__c key 
                                          FROM Attribute__c 
+                                         WHERE Event__r.Session__r.App__r.Label__c = :appLabel
                                          GROUP BY Event__r.EventName__c, Key__c];
         
         

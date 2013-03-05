@@ -33,12 +33,14 @@
         <type>Default</type>
     </actionOverrides>
     <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
     <enableActivities>false</enableActivities>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
     <fields>
         <fullName>EventName__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>EventName</label>
         <length>100</length>
@@ -47,7 +49,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>EventTime__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>EventTime</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
         <fullName>EventUUID__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>EventUUID</label>
         <length>100</length>
@@ -57,6 +68,7 @@
     </fields>
     <fields>
         <fullName>Session__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Session</label>
         <referenceTo>Session__c</referenceTo>
@@ -69,6 +81,7 @@
     </fields>
     <fields>
         <fullName>WallTimeSeconds__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>WallTimeSeconds</label>
         <precision>18</precision>
@@ -86,6 +99,7 @@
         <columns>Session__c</columns>
         <columns>NAME</columns>
         <columns>OBJECT_ID</columns>
+        <columns>EventTime__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
