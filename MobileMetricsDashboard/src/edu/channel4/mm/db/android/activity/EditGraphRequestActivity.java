@@ -146,6 +146,7 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
          ((HasEventNameParameter)graphRequest).setEventName(eventDescription.getName());
       }
       //TODO: add a check for HasAttributeParameter
+      /*
       if (graphRequest instanceof HasAttributeParameter) {
          // retrieve selected attribute from spinner, put it in graphrequest
          int selectedItemPosition = attributeSpinner.getSelectedItemPosition();
@@ -153,6 +154,7 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
          ((HasAttributeParameter)graphRequest).setAttributeName(attribDescription.getName());
          ((HasAttributeParameter)graphRequest).setEventName(attribDescription.getEventName());
       }
+      */
 
       // Create GraphViewerActivity intent and put URIParams in Intent
       Intent intent = new Intent(getApplicationContext(),
