@@ -28,6 +28,7 @@ public abstract class AttributeDescription {
 
 	public static List<AttributeDescription> parseList(
 			String appDescriptionListString) throws JSONException {
+	   
 		List<AttributeDescription> attributeDescriptions = new ArrayList<AttributeDescription>();
 
 		JSONObject attribuDescListJSONObject = new JSONObject(
