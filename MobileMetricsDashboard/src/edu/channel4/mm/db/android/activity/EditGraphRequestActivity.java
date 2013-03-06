@@ -16,10 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest.TimeInterval;
+import edu.channel4.mm.db.android.model.request.HasAttributeParameter;
 import edu.channel4.mm.db.android.model.request.HasEventNameParameter;
 import edu.channel4.mm.db.android.model.request.HasOverTimeParameter;
 import edu.channel4.mm.db.android.util.Keys;
@@ -29,10 +30,13 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
    private GraphRequest graphRequest;
    private ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
    private ArrayAdapter<EventDescription> eventAdapter;
+   private ArrayAdapter<AttributeDescription> attributeAdapter;
    private TextView event1View;
    private TextView durationView;
+   private TextView attributeView;
    private Spinner event1Spinner;
    private Spinner durationSpinner;
+   private Spinner attributeSpinner;
    private List<EventDescription> eventList;
 
    @SuppressLint("NewApi")
@@ -85,8 +89,14 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
          
          // TODO: update the values within eventList. Use TempoDatabase, SalesforceConn. 
       }
-      
       //TODO: add a check for HasAttributeParameter
+      if (graphRequest instanceof HasAttributeParameter) {
+         //TODO: turn on attribute-selecting elements
+         
+         //TODO: fill the spinner with actual values
+         
+         //TODO: set view resource and set adapater
+      }
    }
 
    @Override
@@ -136,6 +146,13 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
          ((HasEventNameParameter)graphRequest).setEventName(eventDescription.getName());
       }
       //TODO: add a check for HasAttributeParameter
+      if (graphRequest instanceof HasAttributeParameter) {
+         // retrieve selected attribute from spinner, put it in graphrequest
+         int selectedItemPosition = attributeSpinner.getSelectedItemPosition();
+         AttributeDescription attribDescription = attributeAdapter.getItem(selectedItemPosition);
+         ((HasAttributeParameter)graphRequest).setAttributeName(attribDescription.getName());
+         ((HasAttributeParameter)graphRequest).setEventName(attribDescription.getEventName());
+      }
 
       // Create GraphViewerActivity intent and put URIParams in Intent
       Intent intent = new Intent(getApplicationContext(),

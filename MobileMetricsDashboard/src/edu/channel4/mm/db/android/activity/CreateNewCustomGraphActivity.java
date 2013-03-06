@@ -4,16 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
+import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
+import edu.channel4.mm.db.android.model.request.HasOverTimeParameter;
+import edu.channel4.mm.db.android.model.request.GraphRequest.TimeInterval;
 import edu.channel4.mm.db.android.network.SalesforceConn;
+import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Logger;
 
 public class CreateNewCustomGraphActivity extends Activity implements
@@ -32,6 +38,9 @@ public class CreateNewCustomGraphActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_new_custom_graph);
+		
+		// Get the graphRequest from the Intent
+		graphRequest = getIntent().getParcelableExtra(Keys.GRAPH_REQUEST_EXTRA);
 
 		// Reference the views
 		Spinner spinnerAttribute1 = (Spinner) findViewById(R.id.spinnerAttribute1);
@@ -86,6 +95,30 @@ public class CreateNewCustomGraphActivity extends Activity implements
 				.inflate(R.menu.activity_create_new_custom_graph, menu);
 		return true;
 	}
+
+	/*
+	public void onViewCustomGraphButtonClicked(View view) {
+	   
+	   Spinner spinnerAttribute1 = (Spinner) findViewById(R.id.spinnerAttribute1);
+	   Spinner spinnerStartTime = (Spinner) findViewById(R.id.spinnerStartTime);
+	   
+      // retrieve selected time from durationspinner, put in graphrequest
+      int selectedItemPosition = spinnerAttribute1.getSelectedItemPosition();
+      TimeInterval timeInterval = durationAdapter.getItem(selectedItemPosition);
+      ((HasOverTimeParameter)graphRequest).setTimeDuration(timeInterval.name());
+	   
+	   ((CustomGraphRequest) graphRequest).
+	   
+      // Create GraphViewerActivity intent and put URIParams in Intent
+      Intent intent = new Intent(getApplicationContext(),
+               GraphViewerActivity.class);
+      intent.putExtra(Keys.REQUEST_URL_PARAMETERS,
+               graphRequest.getUrlParameterString(getApplicationContext()));
+
+      // Execute the intent
+      startActivity(intent);
+	}
+	*/
 
 	@Override
 	public void onAttributeDescriptionChanged(

@@ -16,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.util.Keys;
@@ -25,12 +26,17 @@ public class DashboardActivity extends Activity {
 	private GridView gridView;
 	private GridViewAdapter adapter;
 	private TextView appLabelView;
+	
+	private ListView listView;
 
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dashboard);
+		
+		// Setup the ListView
+		listView = (ListView) findViewById(R.id.listViewDashboard);
 
 		// Setup the GridView
 		gridView = (GridView) findViewById(R.id.gridViewDashboard);
@@ -87,23 +93,6 @@ public class DashboardActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	public void genGraph(View view) {
-		// // Start up an Attribute Activity with the correct info on the app
-		// and
-		// // the graph type
-		// Intent intent = new Intent(getApplicationContext(),
-		// AttributeListActivity.class);
-		//
-		// intent.putExtra(Keys.PREFS_NS + Keys.APP_ID, appId);
-		//
-		// switch (view.getId()) {
-		// case R.id.genPieGraph:
-		// intent.putExtra(Keys.PREFS_NS + Keys.GRAPH_TYPE, GraphType.Pie);
-		// }
-		//
-		// startActivity(intent);
 	}
 
 	/**
