@@ -13,5 +13,9 @@ public interface HasAttributeParameter extends HasEventNameParameter {
    public void setAttributeName(String attribName);
 
    public String getAttributeName();
+   
+   public void setEventName(String eventName);
+   
+   public String getEventName();
 
 }
