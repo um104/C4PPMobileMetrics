@@ -5,18 +5,6 @@
     android:orientation="vertical"
     tools:context=".DashboardActivity" >
 
-    <TextView
-        android:id="@+id/textViewDashboardTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/hello_world"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
 <!--     <GridView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/gridViewDashboard"

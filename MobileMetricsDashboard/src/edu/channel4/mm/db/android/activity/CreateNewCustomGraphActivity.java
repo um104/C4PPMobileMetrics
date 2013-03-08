@@ -4,20 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
-import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
-import edu.channel4.mm.db.android.model.request.HasOverTimeParameter;
-import edu.channel4.mm.db.android.model.request.GraphRequest.TimeInterval;
 import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Logger;
@@ -86,14 +80,6 @@ public class CreateNewCustomGraphActivity extends Activity implements
 		// attributeDescription
 		TempoDatabase.getInstance()
 				.removeOnAttributeDescriptionChangedListener(this);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater()
-				.inflate(R.menu.activity_create_new_custom_graph, menu);
-		return true;
 	}
 
 	/*
