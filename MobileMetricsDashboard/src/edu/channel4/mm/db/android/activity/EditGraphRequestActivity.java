@@ -42,8 +42,10 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_edit_graph_request);
       
+      /*
       // Show the Up button in the action bar.
       getActionBar().setDisplayHomeAsUpEnabled(true);
+      */
       
       // Accept the GraphRequest through the intent
       graphRequest = getIntent().getParcelableExtra(Keys.GRAPH_REQUEST_EXTRA);
@@ -68,9 +70,12 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
          
          // fill the spinner with actual values
          durationAdapter = new ArrayAdapter<GraphRequest.TimeInterval>(getApplicationContext(), 
-                  android.R.layout.simple_spinner_item, GraphRequest.TimeInterval.values());
+                  /*android.R.layout.simple_spinner_item,*/ R.layout.cell_dropdown_item,
+                  GraphRequest.TimeInterval.values());
+
          
-         durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+         /*durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
+         durationAdapter.setDropDownViewResource(R.layout.cell_dropdown_item);
          durationSpinner.setAdapter(durationAdapter);
       }
       if (graphRequest instanceof HasEventNameParameter) {
@@ -82,9 +87,13 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
          
          // fill the event spinner with actual values
          eventAdapter = new ArrayAdapter<EventDescription>(getApplicationContext(),
-                  android.R.layout.simple_spinner_item, eventList);
+                  /*android.R.layout.simple_spinner_item,*/ R.layout.cell_dropdown_item,
+                  eventList);
          
-         // TODO: update the values within eventList. Use TempoDatabase, SalesforceConn. 
+         // TODO: update the values within eventList. Use TempoDatabase, SalesforceConn.
+         
+         eventAdapter.setDropDownViewResource(R.layout.cell_dropdown_item);
+         event1Spinner.setAdapter(eventAdapter);
       }
       //TODO: add a check for HasAttributeParameter
       if (graphRequest instanceof HasAttributeParameter) {
@@ -94,6 +103,8 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
          
          //TODO: set view resource and set adapater
       }
+      
+      setTitle(graphRequest.toString());
    }
 
 //   @Override
