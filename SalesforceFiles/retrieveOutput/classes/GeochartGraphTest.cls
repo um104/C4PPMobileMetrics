@@ -1,7 +1,7 @@
 @isTest
-global class GraphRequestHandlerTest
+public class GeochartGraphTest
 {
-    static testMethod void testHandleRequest() 
+    static testMethod void testCreateJSDatatable() 
     {
         App__c app = new App__c();
         Session__c session1 = new Session__c();
@@ -37,7 +37,7 @@ global class GraphRequestHandlerTest
         session1.DataType__c = 'data';
         session1.DataConnectionType__c = 'good';
         session1.DeviceSerialHash__c = 'abc';
-        session1.DeviceCountry__c = 'murica';
+        session1.DeviceCountry__c = 'Murica';
         session1.DeviceManufacturer__c = 'Samsung';
         session1.DeviceModel__c = 'Galaxy';
         session1.DeviceType__c = 'phone1';
@@ -60,7 +60,7 @@ global class GraphRequestHandlerTest
         session2.DataType__c = 'data';
         session2.DataConnectionType__c = 'good';
         session2.DeviceSerialHash__c = 'abc';
-        session2.DeviceCountry__c = 'murica';
+        session2.DeviceCountry__c = 'Murica';
         session2.DeviceManufacturer__c = 'Samsung';
         session2.DeviceModel__c = 'Not Galaxy';
         session2.DeviceType__c = 'phone1';
@@ -83,7 +83,7 @@ global class GraphRequestHandlerTest
         session3.DataType__c = 'data';
         session3.DataConnectionType__c = 'good';
         session3.DeviceSerialHash__c = 'abc';
-        session3.DeviceCountry__c = 'italy';
+        session3.DeviceCountry__c = 'Italy';
         session3.DeviceManufacturer__c = 'Samsung';
         session3.DeviceModel__c = 'Not Galaxy';
         session3.DeviceType__c = 'phone2';
@@ -181,150 +181,22 @@ global class GraphRequestHandlerTest
         deathTime2.Key__c = 'Time';
         insert deathTime2;
         
-        // Initialize CustomGraph
-        CustomGraphRequest cr1 = new CustomGraphRequest();
-        cr1.setAttribName1('Name');
-        cr1.setEventName1('Level Up');
-        cr1.setAppLabel(app.Label__c);
+        GeochartGraphRequest gr1 = new GeochartGraphRequest();
+        gr1.setAppLabel(app.Label__c);
         
-        CustomGraphRequest cr2 = new CustomGraphRequest();
-        cr2.setAttribName1('Score');
-        cr2.setEventName1('Death');
-        cr2.setAppLabel(app.Label__c);
-        
-        CustomGraphRequest cr3 = new CustomGraphRequest();
-        cr3.setAttribName1('DeviceModel__c');
-        cr3.setEventName1(null);
-        cr3.setAppLabel(app.Label__c);
-        
-        CustomGraphCreator gc1;
-        CustomGraphCreator gc2;
-        CustomGraphCreator gc3;
-        
-        Datatable dt1, dt2, dt3, dt4;
-        
-        // Initialize DeviceTypeDist
-        DeviceTypeDistGraphRequest dtr1 = new DeviceTypeDistGraphRequest();
-        dtr1.setAppLabel(app.Label__c);
-        
-        DeviceTypeDistGraphCreator dtc1;
-        
-        // Initialize Grochart
-        GeochartGraphRequest ggr1 = new GeochartGraphRequest();
-        ggr1.setAppLabel(app.Label__C);
-        
-        LanguageLocaleGraphRequest locReq = new LanguageLocaleGraphRequest();
-        SessionOverTimeGraphRequest sessReq = new SessionOverTimeGraphRequest();
-        
-        
-        GeochartGraphCreator ggc1;
+        GeochartGraphCreator gc1;
+        DataTable dt1;
         
         Test.startTest();
-        
-        // CustomGraph Test
-        dt1 = GraphRequestHandler.getDatatable('CUSTOM', JSON.serialize(cr1));
-        dt2 = GraphRequestHandler.getDatatable('CUSTOM', JSON.serialize(cr2));
-        dt3 = GraphRequestHandler.getDatatable('CUSTOM', JSON.serialize(cr3));
-        
-        locReq.setAppLabel(app.Label__c);
-        dt4 = GraphRequestHandler.getDatatable('LANGUAGE_LOCALE', JSON.serialize(locReq));
-        //TODO add assert here
-        
-        sessReq.setAppLabel(app.Label__c);
-        sessReq.setTimeInterval('DAY');
-        dt4 = GraphRequestHandler.getDatatable('SESSION_OVER_TIME', JSON.serialize(sessReq));
-        //TODO add assert here
-        sessReq.setTimeInterval('WEEK');
-        dt4 = GraphRequestHandler.getDatatable('SESSION_OVER_TIME', JSON.serialize(sessReq));
-        //TODO add assert here
-        sessReq.setTimeInterval('MONTH');
-        dt4 = GraphRequestHandler.getDatatable('SESSION_OVER_TIME', JSON.serialize(sessReq));
-        //TODO add assert here
+        gc1 = new GeochartGraphCreator(gr1);
+        dt1 = gc1.createJSDatatable();
         
         System.assertEquals(dt1.getRowCount(), 2);
-        for(Integer i = 0; i < dt1.getRowCount(); i++)
-        {
-            Object name = dt1.getValueAt(i, 0);
-            System.assert(name instanceof String);
-            if(name == 'Brian')
-            {
-                System.assertEquals(dt1.getValueAt(i, 1), 2);
-            }
-            else if (name == 'Girum')
-            {
-                System.assertEquals(dt1.getValueAt(i, 1), 1);
-            }
-            else 
-            {
-                //this means there is an invalid row in the table
-                System.assert(false);
-            }
-        }
-        
-        System.assertEquals(dt2.getRowCount(), 2);
-        for(Integer i = 0; i < dt2.getRowCount(); i++)
-        {
-            Object score = dt2.getValueAt(i, 0);
-            System.assert(score instanceof String);
-            if(score == '100')
-            {
-                System.assertEquals(dt2.getValueAt(i, 1), 1);
-            }
-            else if(score == '200')
-            {
-                System.assertEquals(dt2.getValueAt(i, 1), 1);
-            }
-            else
-            {
-                System.assert(false);
-            }
-        }
-        
-        System.assertEquals(dt3.getRowCount(), 2);
-        for(Integer i = 0; i < dt3.getRowCount(); i++)
-        {
-            Object deviceModel = dt3.getValueAt(i, 0);
-            System.assert(deviceModel instanceof String);
-            if(deviceModel == 'Galaxy')
-            {
-                System.assertEquals(dt3.getValueAt(i, 1), 1);
-            }
-            else if(deviceModel == 'Not Galaxy')
-            {
-                System.assertEquals(dt3.getValueAt(i, 1), 2);
-            }
-            else
-            {
-                System.assert(false);
-            }
-        }
-        
-        // DeviceTypeDist Test
-        dt1 = GraphRequestHandler.getDatatable('DEVICE_TYPE_DIST', JSON.serialize(dtr1));
-        
-        System.assertEquals(dt1.getRowCount(), 2);
-        System.assertEquals(dt1.getValueAt(0, 0), 'phone1');
-        System.assertEquals(dt1.getValueAt(0, 1), 2);
-        System.assertEquals(dt1.getValueAt(1, 0), 'phone2');
-        System.assertEquals(dt1.getValueAt(1, 1), 1);
-        
-        // Geochart Test
-        dt1 = GraphRequestHandler.getDatatable('GEOCHART', JSON.serialize(ggr1));
-        
-        System.assertEquals(dt1.getRowCount(), 2);
-        System.assertEquals(dt1.getValueAt(0, 0), 'italy');
+        System.assertEquals(dt1.getValueAt(0, 0), 'Italy');
         System.assertEquals(dt1.getValueAt(0, 1), 1);
-        System.assertEquals(dt1.getValueAt(1, 0), 'murica');
+        System.assertEquals(dt1.getValueAt(1, 0), 'Murica');
         System.assertEquals(dt1.getValueAt(1, 1), 2);
         
-        try{
-            GraphRequestHandler.getDatatable('notagraph', null);
-            System.assert(false);
-        }catch(GraphRequestHandler.UnsupportedGraphTypeException ex){
-            
-        }
-        
-        GraphRequestHandler.handleRequest('GEOCHART', JSON.serialize(ggr1));
         Test.stopTest();
     }
 }

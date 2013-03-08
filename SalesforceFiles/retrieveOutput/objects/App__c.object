@@ -33,6 +33,7 @@
         <type>Default</type>
     </actionOverrides>
     <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
     <description>Database table that stores information on apps</description>
     <enableActivities>false</enableActivities>
     <enableFeeds>false</enableFeeds>
@@ -40,6 +41,7 @@
     <enableReports>false</enableReports>
     <fields>
         <fullName>Label__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Label</label>
         <length>100</length>
@@ -49,6 +51,7 @@
     </fields>
     <fields>
         <fullName>PackageName__c</fullName>
+        <deprecated>false</deprecated>
         <description>Name of the package in which the user&apos;s app is being developed.</description>
         <externalId>false</externalId>
         <label>PackageName</label>
@@ -59,6 +62,7 @@
     </fields>
     <fields>
         <fullName>Version__c</fullName>
+        <deprecated>false</deprecated>
         <description>The string name of the version of the current app.</description>
         <externalId>false</externalId>
         <label>Version</label>
@@ -70,6 +74,7 @@
     <label>App</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>Label__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

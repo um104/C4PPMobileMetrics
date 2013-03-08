@@ -79,7 +79,5 @@ public class AppRestResourceTest
         
         System.assertEquals(appList.get(0).Label__c, 'an01');
         System.assertEquals(appList.get(0).PackageName__c, 'pn01');
-        System.assertEquals(appList.get(0).Version__c, 'av01');
-        
     }
 }

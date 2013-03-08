@@ -6,37 +6,51 @@
 public abstract class GraphCreator{
     
     /**
-     * An exception indicating that a graph type passed to getGraphCreator
-     * is not currently supported
-     */
-    public class UnsupportedGraphException extends Exception {}
-    
-    /**
      * Returns a GraphCreator that can handle a request for a graph of type graphType.
      * This is typically a subclass of GraphCreator specific to the graphType requested.
      */
-    public static GraphCreator getGraphCreator(GraphRequest.GraphType graphType)
-    {    
+    public static GraphCreator getGraphCreator(GraphRequest request)
+    {   
+        GraphCreator gc;
+        
         //no switch statements in Apex :'(
-        if(graphType == GraphRequest.GraphType.PIE)
+        if (request.getRequestType() == GraphRequest.RequestType.CUSTOM)
         {
-            return new PieGraphCreator();
+            gc = new CustomGraphCreator((CustomGraphRequest)request);
         }
-        else if(graphType == GraphRequest.GraphType.LINE)
+        else if (request.getRequestType() == GraphRequest.RequestType.EVENT_OVER_TIME)
         {
-        	return new LineGraphCreator();    
+        	gc = new EventOverTimeGraphCreator((EventOverTimeGraphRequest)request);
         }
-
-        else
+        else if (request.getRequestType() == GraphRequest.RequestType.GEOCHART)
         {
-            throw new UnsupportedGraphException();
-        }   
+            gc = new GeochartGraphCreator((GeochartGraphRequest)request);
+        }
+        else if (request.getRequestType() == GraphRequest.RequestType.SESSION_OVER_TIME)
+        {
+            gc = new SessionOverTimeGraphCreator((SessionOverTimeGraphRequest)request);
+        }
+        else if (request.getRequestType() == GraphRequest.RequestType.DEVICE_TYPE_DIST)
+        {
+            gc = new DeviceTypeDistGraphCreator((DeviceTypeDistGraphRequest)request);
+        }
+        else if (request.getRequestType() == GraphRequest.RequestType.LANGUAGE_LOCALE)
+        {
+        	gc = new LanguageLocaleGraphCreator((LanguageLocaleGraphRequest) request);
+        }
+        else if (request.getRequestType() == GraphRequest.RequestType.NET_CARRIER)
+        {
+        	gc = new NetworkCarrierGraphCreator((NetworkCarrierGraphRequest) request);    
+        }
+        
+        return gc;
+        
     }
     
     /**
      * Creates a datatable representing the requested graph. This datatable can be used to construct
      * a new google visualization datatable, which in turn can be used to draw a graph.
      */
-    public abstract Datatable createJSDataTable(GraphRequest requestedGraph);
+    public abstract Datatable createJSDataTable();
     
 }

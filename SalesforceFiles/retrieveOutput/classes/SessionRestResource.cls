@@ -10,7 +10,7 @@ global class SessionRestResource
             for(SessionClass s : sessions) 
             {
                 App__c app = new App__c();
-                
+                System.debug(s.ct);
                 List<App__c> appList = [SELECT Id FROM App__c WHERE Label__c = :s.an AND PackageName__c = :s.pn AND Version__c = :s.av];
                 if(appList.size() == 0)
                 {
@@ -36,6 +36,20 @@ global class SessionRestResource
                 session.DeviceModel__c = s.dmo;
                 session.DeviceType__c = s.dp;
                 session.EpochTime__c = s.ct;
+                
+                /* fix here */
+                if(session.EpochTime__c != null){
+                    Long epochTimeMillis = (Long)session.EpochTime__c;
+                    epochTimeMillis = 1000 * epochTimeMillis;
+                    session.SessionTime__c = DateTime.newInstance(epochTimeMillis);
+                }else{
+                    System.debug(s.ct);
+                }
+                
+                Long epochTimeMillis = (Long)session.EpochTime__c;
+                epochTimeMillis = 1000 * epochTimeMillis;
+                session.SessionTime__c = DateTime.newInstance(epochTimeMillis);
+                
                 session.LanguageLocale__c = s.dll;
                 session.LocaleCountryCode__c = s.dlc;
                 session.LocalyticsApiKey__c = s.au;
@@ -45,7 +59,7 @@ global class SessionRestResource
                 session.OSVersion__c = s.dov;
                 session.PersistentStorageCreationTimeSeconds__c = s.pa;
                 session.SDKCompatibility__c = s.dsdk;
-                session.SessionLengthSeconds__c = s.ctl;
+                session.SessionLengthSeconds__c = s.ctl; /* and this */
                 session.UUID__c = s.u;
                             
                 insert session;
@@ -57,6 +71,11 @@ global class SessionRestResource
                     event.EventName__c = e.n;
                     event.EventUUID__c = e.u;
                     event.WallTimeSeconds__c = e.ct;
+                    if(event.WallTimeSeconds__c != null){
+                        Long WallTimeMillis = (Long)event.WallTimeSeconds__c;
+                        WallTimeMillis = 1000 * WallTimeMillis;
+                        event.EventTime__c = DateTime.newInstance(WallTimeMillis);
+                    }
                 
                     insert event;
             
@@ -76,6 +95,7 @@ global class SessionRestResource
         catch(Exception e)
         {
             System.Debug(e);
+            return e.getMessage();
         }
     
 	    return 'DONE!';

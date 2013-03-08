@@ -1,23 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>MobileMetrics</fullName>
+    <apiAccessLevel>Unrestricted</apiAccessLevel>
     <description>Channel4++ Mobile Metrics Application.</description>
+    <namespacePrefix>C4PPMM</namespacePrefix>
     <types>
         <members>AppRestResource</members>
         <members>AppRestResourceTest</members>
         <members>AttrDescList</members>
         <members>AttributeRestResource</members>
         <members>AttributeRestResourceTest</members>
+        <members>CustomGraphCreator</members>
+        <members>CustomGraphCreatorTest</members>
+        <members>CustomGraphRequest</members>
         <members>Datatable</members>
         <members>DatatableTest</members>
+        <members>DeviceTypeDistGraphCreator</members>
+        <members>DeviceTypeDistGraphRequest</members>
+        <members>DevicetypeDistGraphCreatorTest</members>
         <members>EventDesc</members>
+        <members>EventDescTest</members>
+        <members>EventOverTimeGraphCreator</members>
+        <members>EventOverTimeGraphCreatorTest</members>
+        <members>EventOverTimeGraphRequest</members>
+        <members>GeochartGraphCreator</members>
+        <members>GeochartGraphRequest</members>
+        <members>GeochartGraphTest</members>
         <members>GraphCreator</members>
         <members>GraphRequest</members>
         <members>GraphRequestHandler</members>
         <members>GraphRequestHandlerTest</members>
-        <members>LineGraphCreator</members>
-        <members>PieGraphCreator</members>
-        <members>PieGraphCreatorTest</members>
+        <members>LanguageLocaleGraphCreator</members>
+        <members>LanguageLocaleGraphCreatorTest</members>
+        <members>LanguageLocaleGraphRequest</members>
+        <members>NetworkCarrierGraphCreator</members>
+        <members>NetworkCarrierGraphRequest</members>
+        <members>SessionOverTimeGraphCreator</members>
+        <members>SessionOverTimeGraphRequest</members>
         <members>SessionRestResource</members>
         <members>SessionRestResourceTest</members>
         <name>ApexClass</name>
@@ -35,6 +54,7 @@
         <members>Attribute__c.Type__c</members>
         <members>Attribute__c.Value__c</members>
         <members>Event__c.EventName__c</members>
+        <members>Event__c.EventTime__c</members>
         <members>Event__c.EventUUID__c</members>
         <members>Event__c.Session__c</members>
         <members>Event__c.WallTimeSeconds__c</members>
@@ -58,6 +78,7 @@
         <members>Session__c.PersistentStorageCreationTimeSeconds__c</members>
         <members>Session__c.SDKCompatibility__c</members>
         <members>Session__c.SessionLengthSeconds__c</members>
+        <members>Session__c.SessionTime__c</members>
         <members>Session__c.UUID__c</members>
         <name>CustomField</name>
     </types>
