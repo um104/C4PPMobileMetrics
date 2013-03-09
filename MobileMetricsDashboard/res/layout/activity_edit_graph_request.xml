@@ -38,7 +38,7 @@
         android:layout_below="@+id/spinnerEvent1"
         android:layout_marginTop="31dp"
         android:text="@string/in_the_last"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
         android:id="@+id/DurationSpinner02"

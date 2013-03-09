@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,34 +6,12 @@
     android:weightSum="100"
     tools:context=".AppListActivity" >
 
-    <TextView
-        android:id="@+id/textViewSelectApp"
-        android:layout_width="wrap_content"
-        android:layout_height="0dip"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="7"
-        android:text="@string/select_app"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/buttonRefreshAppList"
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="10"
-        android:onClick="getAppList"
-        android:text="@string/refresh_app_list" />
-
-    <ListView
-        android:id="@+id/listViewAppList"
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="73" >
-    </ListView>
-
     <RelativeLayout
+        android:id="@+id/bottomRelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="10" >
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
 
         <Button
             android:id="@+id/buttonAbout"
@@ -52,4 +30,25 @@
             android:text="@string/logout" />
     </RelativeLayout>
 
-</LinearLayout>
+    <ListView
+        android:id="@+id/listViewAppList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomRelativeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewSelectApp" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/textViewSelectApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/darker_gray"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/select_app"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>
