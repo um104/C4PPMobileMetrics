@@ -20,6 +20,7 @@ public class DashboardActivity extends Activity {
 
 	// TODO: Switch this to an ExpandableListView later. Mock it up first
 	// though.
+   //(mlerner): Why ExpandableListView? I think you're thinking of the AttributePicker(?)  
 	private ListView listView;
 	private ListViewAdapter adapter;
 

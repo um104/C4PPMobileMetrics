@@ -65,7 +65,7 @@ public class SalesforceConn {
          instance.context = context;
       return instance;
    }
-
+   
    public String getGraphViewingURL() {
       String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
                .getString(Keys.ACCESS_TOKEN, null);
