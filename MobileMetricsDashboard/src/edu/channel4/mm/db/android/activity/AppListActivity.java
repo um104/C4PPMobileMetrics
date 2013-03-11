@@ -36,6 +36,10 @@ public class AppListActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_app_list);
+		
+		// Disable unimplemented features and unnecessary UI elements
+		View button = findViewById(R.id.buttonLogOut);
+		button.setVisibility(View.GONE);
 
 		// Initialization
 		sfConn = SalesforceConn.getInstance(getApplicationContext());

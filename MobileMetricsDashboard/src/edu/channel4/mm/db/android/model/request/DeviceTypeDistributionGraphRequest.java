@@ -7,6 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 
+import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 import android.content.Context;
@@ -46,6 +47,11 @@ public class DeviceTypeDistributionGraphRequest implements GraphRequest {
       intent.putExtra(Keys.REQUEST_URL_PARAMETERS, getUrlParameterString(context));
       
       return intent;
+   }
+
+   @Override
+   public int getIconId() {
+      return R.drawable.device_type_dist;
    }
 
 }

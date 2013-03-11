@@ -56,6 +56,8 @@ public interface GraphRequest {
     * @return
     */
    public Intent constructGraphRequestIntent(Context context);
+   
+   public int getIconId();
 
    /**
     * Enum for any events that implement HasOverTimeParameter.

@@ -7,6 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 
+import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
 import edu.channel4.mm.db.android.util.Keys;
 import android.content.Context;
@@ -110,6 +111,11 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter, 
       this.appLabel = in.readString();
       this.eventName1 = in.readString();
       this.attribName1 = in.readString();
+   }
+
+   @Override
+   public int getIconId() {
+      return R.drawable.ic_launcher;
    }
 
 

@@ -9,6 +9,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 import android.content.Intent;
+import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 
@@ -49,5 +50,10 @@ public class GeochartGraphRequest implements GraphRequest {
       intent.putExtra(Keys.REQUEST_URL_PARAMETERS, getUrlParameterString(context));
       
       return intent;
+   }
+
+   @Override
+   public int getIconId() {
+      return R.drawable.nationality_breakdown;
    }
 }
