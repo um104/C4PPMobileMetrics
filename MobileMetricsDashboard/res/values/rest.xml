@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="account_type">edu.channel4.mm.db.android</string>
+	<string name="oauth_callback_url">mobilemetrics://callback</string>
+	<string name="oauth_client_id">3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4</string>
+	<string name="api_version">v23.0</string>
+</resources>

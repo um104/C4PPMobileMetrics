@@ -1,25 +1,37 @@
 package edu.channel4.mm.db.android.util;
 
+import org.apache.http.client.HttpClient;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-public abstract class BaseAsyncTask extends AsyncTask<Void, Integer, String> {
+public abstract class BaseAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
 
 	/**
 	 * Application context passed in from the constructor.
 	 */
 	private Context context;
+	private HttpClient client;
 
 	/**
 	 * Require all AsyncTasks to pass in a {@link Context} in their constructor.
 	 * 
 	 * @param context
 	 */
-	public BaseAsyncTask(Context context) {
+	public BaseAsyncTask(Context context, HttpClient client) {
 		this.context = context;
+		this.client = client;
+	}
+	
+	public Context getContext() {
+		return context;
+	}
+	
+	public HttpClient getClient() {
+		return client;
 	}
 
 	/**
@@ -38,7 +50,7 @@ public abstract class BaseAsyncTask extends AsyncTask<Void, Integer, String> {
 	}
 
 	@Override
-	protected abstract String doInBackground(Void... params);
+	protected abstract Result doInBackground(Params... params);
 
 	/**
 	 * Helper method to determine if this phone is connected to the Internet or

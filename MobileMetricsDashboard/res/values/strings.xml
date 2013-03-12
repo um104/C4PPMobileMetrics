@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name"><b>Template</b></string>
+    <string name="welcome">Welcome %s</string>
+    <string name="logout_button">Logout</string>
+    <string name="fetch_contacts_button">Fetch Contacts</string>
+    <string name="fetch_accounts_button">Fetch Accounts</string>
+    <string name="clear_button">Clear</string>
     <string name="app_name">Salesforce Mobile Metrics</string>
     <string name="select_app">Select an App</string>
     <string name="menu_settings">Settings</string>
@@ -34,6 +40,7 @@
     <string name="no_custom_graphs">No Custom Graphs</string>
     <string name="not_yet_implemented">Not Yet Implemented</string>
     <string name="title_activity_create_new_custom_graph">CreateNewCustomGraphActivity</string>
+    <string name="event1">Event 1:</string>
     <string name="attribute1">Attribute 1: </string>
     <string name="attribute2">Attribute 2 (optional): </string>
     <string name="in_the_last">In the last: </string>

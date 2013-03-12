@@ -13,9 +13,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.request.DeviceTypeDistributionGraphRequest;
-import edu.channel4.mm.db.android.model.request.GeochartGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.LanguageLocaleGraphRequest;
+import edu.channel4.mm.db.android.model.request.NationalityBreakdownGraphRequest;
 import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
 
 public class AudienceActivity extends Activity {
@@ -57,7 +57,7 @@ public class AudienceActivity extends Activity {
 		});
 
 		graphRequests = new ArrayList<GraphRequest>();
-		graphRequests.add(new GeochartGraphRequest());
+		graphRequests.add(new NationalityBreakdownGraphRequest());
 		graphRequests.add(new LanguageLocaleGraphRequest());
 		graphRequests.add(new DeviceTypeDistributionGraphRequest());
 

@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.callback.EventDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.model.description.EventNameDescription;
@@ -209,15 +209,14 @@ public class EditGraphRequestActivity extends Activity implements
          ((HasAttributeParameter)graphRequest).setEventName(event.getName());
       }
 
-      // Create GraphViewerActivity intent and put URIParams in Intent
-      Intent intent = new Intent(getApplicationContext(),
-               GraphViewerActivity.class);
-      intent.putExtra(Keys.REQUEST_URL_PARAMETERS,
-               graphRequest.getUrlParameterString(getApplicationContext()));
+		// Create GraphViewerActivity intent and put URIParams in Intent
+		Intent intent = new Intent(getApplicationContext(),
+				GraphViewerActivity.class);
+		intent.putExtra(Keys.GRAPH_REQUEST_EXTRA, graphRequest);
 
-      // Execute the intent
-      startActivity(intent);
-   }
+		// Execute the intent
+		startActivity(intent);
+	}
 
    /**
     * Use this method to do simple validation on user inputs
@@ -231,8 +230,7 @@ public class EditGraphRequestActivity extends Activity implements
    }
 
    @Override
-   public void onEventDescriptionChanged(
-            List<EventDescription> newEventDescriptions) {
+   public void onAppDescriptionChanged(List<EventDescription> newEventDescriptions) {
       eventList.clear();
       eventList.addAll(newEventDescriptions);
       eventAdapter.notifyDataSetChanged();

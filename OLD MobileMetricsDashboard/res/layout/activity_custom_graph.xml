@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <ListView
+        android:id="@+id/listViewCustomGraphActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonCreateNewCustomGraph"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/textViewNoCustomGraphs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/no_custom_graphs" />
+
+    <Button
+        android:id="@+id/buttonCreateNewCustomGraph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/listViewCustomGraphActivity"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="createNewCustomGraph"
+        android:text="@string/create_new_custom_graph" />
+
+</RelativeLayout>

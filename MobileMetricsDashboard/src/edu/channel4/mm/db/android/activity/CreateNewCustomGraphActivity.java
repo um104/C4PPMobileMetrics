@@ -9,120 +9,104 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.callback.AttributeDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.Keys;
-import edu.channel4.mm.db.android.util.Logger;
+import edu.channel4.mm.db.android.util.Log;
 
 public class CreateNewCustomGraphActivity extends Activity implements
-		OnAttributeDescriptionChangedListener {
+         AttributeDescriptionCallback {
 
-	protected SalesforceConn sfConn;
-	private List<String> attributeDescriptions = new ArrayList<String>();
-	private ArrayAdapter<String> adapterAttribute1;
-	private ArrayAdapter<String> adapterStartTime;
+   protected SalesforceConn sfConn;
+   private List<String> attributeDescriptions = new ArrayList<String>();
+   private ArrayAdapter<String> adapterAttribute1;
+   private ArrayAdapter<String> adapterStartTime;
 
-	private AttributeDescription attributeDescription1;
-	private AttributeDescription attributeDescription2;
-	private GraphRequest graphRequest;
+   private AttributeDescription attributeDescription1;
+   private AttributeDescription attributeDescription2;
+   private GraphRequest graphRequest;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_create_new_custom_graph);
-		
-		// Get the graphRequest from the Intent
-		graphRequest = getIntent().getParcelableExtra(Keys.GRAPH_REQUEST_EXTRA);
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_create_new_custom_graph);
 
-		// Reference the views
-		Spinner spinnerAttribute1 = (Spinner) findViewById(R.id.spinnerAttribute1);
-		Spinner spinnerAttribute2 = (Spinner) findViewById(R.id.spinnerAttribute2);
-		Spinner spinnerStartTime = (Spinner) findViewById(R.id.spinnerStartTime);
+      // Get the graphRequest from the Intent
+      graphRequest = getIntent().getParcelableExtra(Keys.GRAPH_REQUEST_EXTRA);
 
-		// Create the SFConn for this activity
-		sfConn = SalesforceConn.getInstance(getApplicationContext());
+      // Reference the views
+      Spinner spinnerAttribute1 = (Spinner) findViewById(R.id.spinnerAttribute1);
+      Spinner spinnerAttribute2 = (Spinner) findViewById(R.id.spinnerAttribute2);
+      Spinner spinnerStartTime = (Spinner) findViewById(R.id.spinnerStartTime);
 
-		// Setup the attribute1 Spinner.
-		adapterAttribute1 = new ArrayAdapter<String>(getApplicationContext(),
-				android.R.layout.simple_spinner_item, attributeDescriptions);
-		spinnerAttribute1.setAdapter(adapterAttribute1);
+      // Create the SFConn for this activity
+      sfConn = new SalesforceConn(getApplicationContext());
 
-		// Disable the attribute2 Spinner (for now).
-		spinnerAttribute2.setEnabled(false);
+      // Setup the attribute1 Spinner.
+      adapterAttribute1 = new ArrayAdapter<String>(getApplicationContext(),
+               android.R.layout.simple_spinner_item, attributeDescriptions);
+      spinnerAttribute1.setAdapter(adapterAttribute1);
 
-		// Setup the startTime spinner
-		adapterStartTime = new ArrayAdapter<String>(getApplicationContext(),
-				android.R.layout.simple_spinner_item,
-				GraphRequest.TimeInterval.getStringArray());
-		spinnerStartTime.setAdapter(adapterStartTime);
+      // Disable the attribute2 Spinner (for now).
+      spinnerAttribute2.setEnabled(false);
 
-		// Subscribe the activity to the Database for changes to
-		// attributeDescription
-		TempoDatabase.getInstance().addOnAttributeDescriptionChangedListener(
-				this);
-	}
+      // Setup the startTime spinner
+      adapterStartTime = new ArrayAdapter<String>(getApplicationContext(),
+               android.R.layout.simple_spinner_item,
+               GraphRequest.TimeInterval.getStringArray());
+      spinnerStartTime.setAdapter(adapterStartTime);
+   }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+   @Override
+   protected void onResume() {
+      super.onResume();
 
-		// Send an asynchronous request to SF to get the current attribute list.
-		sfConn.getAttribList();
-	}
+      // Send an asynchronous request to SF to get the current attribute list.
+      sfConn.getAttribListViaNetwork(this);
+   }
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+   /*
+    * public void onViewCustomGraphButtonClicked(View view) {
+    * 
+    * Spinner spinnerAttribute1 = (Spinner)
+    * findViewById(R.id.spinnerAttribute1); Spinner spinnerStartTime = (Spinner)
+    * findViewById(R.id.spinnerStartTime);
+    * 
+    * // retrieve selected time from durationspinner, put in graphrequest int
+    * selectedItemPosition = spinnerAttribute1.getSelectedItemPosition();
+    * TimeInterval timeInterval = durationAdapter.getItem(selectedItemPosition);
+    * ((HasOverTimeParameter)graphRequest
+    * ).setTimeDuration(timeInterval.name());
+    * 
+    * ((CustomGraphRequest) graphRequest).
+    * 
+    * // Create GraphViewerActivity intent and put URIParams in Intent Intent
+    * intent = new Intent(getApplicationContext(), GraphViewerActivity.class);
+    * intent.putExtra(Keys.REQUEST_URL_PARAMETERS,
+    * graphRequest.getUrlParameterString(getApplicationContext()));
+    * 
+    * // Execute the intent startActivity(intent); }
+    */
 
-		// Unsubscribe this activity from the database for changes to
-		// attributeDescription
-		TempoDatabase.getInstance()
-				.removeOnAttributeDescriptionChangedListener(this);
-	}
+   @Override
+   public void onAttributeDescriptionChanged(
+            List<AttributeDescription> newAttributeDescriptions) {
+      attributeDescriptions.clear();
 
-	/*
-	public void onViewCustomGraphButtonClicked(View view) {
-	   
-	   Spinner spinnerAttribute1 = (Spinner) findViewById(R.id.spinnerAttribute1);
-	   Spinner spinnerStartTime = (Spinner) findViewById(R.id.spinnerStartTime);
-	   
-      // retrieve selected time from durationspinner, put in graphrequest
-      int selectedItemPosition = spinnerAttribute1.getSelectedItemPosition();
-      TimeInterval timeInterval = durationAdapter.getItem(selectedItemPosition);
-      ((HasOverTimeParameter)graphRequest).setTimeDuration(timeInterval.name());
-	   
-	   ((CustomGraphRequest) graphRequest).
-	   
-      // Create GraphViewerActivity intent and put URIParams in Intent
-      Intent intent = new Intent(getApplicationContext(),
-               GraphViewerActivity.class);
-      intent.putExtra(Keys.REQUEST_URL_PARAMETERS,
-               graphRequest.getUrlParameterString(getApplicationContext()));
+      // Convert the attribute descriptions to Strings for the Spinner's
+      // ArrayAdapter
+      for (AttributeDescription attributeDescription : newAttributeDescriptions) {
+         attributeDescriptions.add(attributeDescription.getName());
+      }
 
-      // Execute the intent
-      startActivity(intent);
-	}
-	*/
+      adapterAttribute1.notifyDataSetChanged();
 
-	@Override
-	public void onAttributeDescriptionChanged(
-			List<AttributeDescription> newAttributeDescriptions) {
-		attributeDescriptions.clear();
-
-		// Convert the attribute descriptions to Strings for the Spinner's
-		// ArrayAdapter
-		for (AttributeDescription attributeDescription : newAttributeDescriptions) {
-			attributeDescriptions.add(attributeDescription.getName());
-		}
-
-		adapterAttribute1.notifyDataSetChanged();
-
-		Toast.makeText(
-				getApplicationContext(),
-				"Refreshed attributes. Got " + newAttributeDescriptions.size()
-						+ " attributes.", Toast.LENGTH_SHORT).show();
-		Logger.d("Got new attribute descriptions: " + attributeDescriptions);
-	}
+      Toast.makeText(
+               getApplicationContext(),
+               "Refreshed attributes. Got " + newAttributeDescriptions.size()
+                        + " attributes.", Toast.LENGTH_SHORT).show();
+      Log.d("Got new attribute descriptions: " + attributeDescriptions);
+   }
 }

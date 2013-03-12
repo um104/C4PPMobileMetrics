@@ -7,7 +7,7 @@ import android.widget.ListView;
 import edu.channel4.mm.db.android.R;
 
 public class AboutActivity extends Activity {
-
+   
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

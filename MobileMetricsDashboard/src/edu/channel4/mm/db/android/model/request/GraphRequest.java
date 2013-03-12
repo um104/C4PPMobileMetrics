@@ -1,43 +1,37 @@
 package edu.channel4.mm.db.android.model.request;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import edu.channel4.mm.db.android.activity.EventPickerActivity;
+import android.os.Parcelable;
+import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
+import edu.channel4.mm.db.android.network.RestClientAccess;
 
-public interface GraphRequest {
+public interface GraphRequest extends Parcelable {
 
    /**
-    * Must implement toString() for display purposes.
-    * 
-    * @return The display name of the GraphRequest.
+    * Pretty print.
     */
    @Override
    public String toString();
 
    /**
-    * Read-only getter for the REST request type that the APEX server expects.
-    * 
-    * @return
+    * @return Android resource id for the icon
     */
-   public String getRestRequestType();
+   public int getIcon();
 
    /**
-    * Make a List<NameValuePair>, store BasicNameValuePair objects with
-    * key-param pairs, and then use URLEncodedUtils.format(params, "utf-8") to
-    * generate this return string. Put the String into Intent as a String extra
-    * under Keys.REQUEST_URL_PARAMETERS
+    * Consolidate GraphRequest URI logic into a single method. Sanity-check it
+    * by putting it through {@link URI} for validity.
     * 
     * @param context
-    *           The application context, used to gather some parameters stored
-    *           in shared preferences
-    * @return The string representation of the parameters held in this
-    *         GraphRequest.
+    * @return
     */
-   public String getUrlParameterString(Context context);
+   public URI getUri(RestClientAccess restClientManager, Context context);
 
    /**
     * Constructs the correct Intent for a given GraphRequest. The Intent will

@@ -1,22 +1,7 @@
 package edu.channel4.mm.db.android.network;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
 
 import android.content.Context;
 import android.net.Uri;
@@ -30,42 +15,36 @@ import edu.channel4.mm.db.android.util.BaseAsyncTask;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class SalesforceConn {
-   static private SalesforceConn instance;
-   protected static final String SALESFORCE_BASE_REST_URL = "%s/services/apexrest/C4PPMM/%s/";
-   protected static final String APPS_URL_SUFFIX = "channel4_apps";
-   protected static final String ATTRIBS_URL_SUFFIX = "channel4_attributes";
-   protected static final String EVENTS_URL_SUFFIX = "channel4_events";
-   protected static final String GRAPH_VIEW_BASE_URL = "%s/apex/graphView?oauth_token=%s";
+	public static final String SALESFORCE_BASE_REST_URL = "%s/services/apexrest/C4PPMM/%s";
 
-   private Context context;
-   protected HttpClient client;
+	public static final String EVENTS_URL_SUFFIX = "channel4_events";
 
-   private SalesforceConn(Context context) {
-      this.context = context;
+	private Context context;
+	protected HttpClient client;
 
-      client = new DefaultHttpClient();
-   }
+	/**
+	 * Fixed(Girum): Removed singleton. We shouldn't statically refer to a
+	 * Context object, since the Context could potentially be different after a
+	 * Force Close. This actually broke for us when we tried to pull the
+	 * access_token from SharedPrefs (the context was bad)
+	 * 
+	 * http://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons
+	 * http://blogs.msdn.com/b/scottdensmore/archive/2004/05/25/140827.aspx
+	 * 
+	 */
+	public SalesforceConn(Context context) {
+		this.context = context;
 
-   /**
-    * Public instantiator for a SalesforceConn object. Ensures no more than one
-    * object exists.
-    * 
-    * @param context
-    *           The application-level context.
-    * @return A SalesforceConn operating within the given context.
-    */
-   // TODO(Girum): Remove singletons. We shouldn't statically refer to a
-   // Context object, since the Context could potentially be different after a
-   // Force Close.
-   // http://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons
-   // http://blogs.msdn.com/b/scottdensmore/archive/2004/05/25/140827.aspx
-   public static SalesforceConn getInstance(Context context) {
-      if (instance == null)
-         instance = new SalesforceConn(context);
-      else
-         instance.context = context;
-      return instance;
-   }
+		client = new DefaultHttpClient();
+	}
+
+	/**
+	 * Gets the list of attributes valid for this particular type of graph.
+	 * Don't call this method directly. There will be a factory for this later?
+	 */
+	public void getAttribListViaNetwork(AttributeDescriptionCallback callback) {
+		new GetAttribListAsyncTask(context, client, callback).execute();
+	}
 
    public String getGraphViewingURL() {
       String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
@@ -355,12 +334,14 @@ public class SalesforceConn {
       }
    }
 
-   /**
-    * Gets the app list from Salesforce.
-    */
-   public void getAppList() {
-      new GetAppListTask(context).execute();
-   }
+	/**
+	 * Gets the app list from Salesforce. Don't call this method directly.
+	 * Instead, call the GraphFactory.
+	 */
+	public void getGraphViaNetwork(GraphRequest graphRequest,
+			GraphLoadCallback callback) {
+		new GraphRequestAsyncTask(context, client, graphRequest, callback).execute();
+	}
 
    protected class GetAppListTask extends BaseAsyncTask {
       private final String TAG = GetAppListTask.class.getSimpleName();
