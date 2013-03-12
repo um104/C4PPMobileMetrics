@@ -51,7 +51,8 @@ public class AppListActivityTest extends ActivityUnitTestCase<AppListActivity> {
 
       //TODO FIXME: java.lang.AssertionError: LayoutIflator not found. 
       // start the activity under test
-      activity = startActivity(new Intent(), null, null);
+      //activity = startActivity(new Intent(), null, null);
+      activity = startActivity(new Intent(getInstrumentation().getTargetContext(), AppListActivity.class), null, null);
 
       // Get the ListView and ListAdapter to check that they were set correctly
       ListView listView = (ListView) getActivity().findViewById(

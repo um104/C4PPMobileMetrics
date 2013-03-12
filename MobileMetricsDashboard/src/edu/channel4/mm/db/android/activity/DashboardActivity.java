@@ -82,7 +82,10 @@ public class DashboardActivity extends Activity {
 				new SubactivityDetails(R.drawable.usage_icon, getResources()
 						.getString(R.string.usage), UsageActivity.class),
 				new SubactivityDetails(R.drawable.audience_icon, getResources()
-						.getString(R.string.audience), AudienceActivity.class) };
+						.getString(R.string.audience), AudienceActivity.class),
+				new SubactivityDetails(R.drawable.ic_launcher, getResources()
+				      .getString(R.string.custom_graphs), CustomGraphActivity.class)
+		};
 
 		public ListViewAdapter() {
 		}

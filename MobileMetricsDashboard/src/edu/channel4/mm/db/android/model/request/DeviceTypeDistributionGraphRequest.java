@@ -22,7 +22,7 @@ public class DeviceTypeDistributionGraphRequest implements GraphRequest {
 
    @Override
    public String getRestRequestType() {
-      return "DEVICE_TYPE_DIST";
+      return "CUSTOM";
    }
 
    @Override
@@ -34,6 +34,8 @@ public class DeviceTypeDistributionGraphRequest implements GraphRequest {
 
       params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, getRestRequestType()));
       params.add(new BasicNameValuePair(Keys.APP_LABEL_URL_PARAMETER_NAME, appLabel));
+      params.add(new BasicNameValuePair(Keys.ATTRIB_NAME_1, "DeviceType__c"));
+      params.add(new BasicNameValuePair(Keys.EVENT_NAME_1, ""));
 
       String paramString = URLEncodedUtils.format(params, "utf-8");
 

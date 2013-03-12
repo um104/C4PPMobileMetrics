@@ -30,6 +30,8 @@ public class CustomGraphActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
+			   // TODO: rather than making a new CustomGraphRequest, grab the actual selected one from the adapter
+			   
 				// Grab the CustomGraphRequest for the selected item.
 				GraphRequest graphRequest = new CustomGraphRequest();
 
@@ -52,14 +54,15 @@ public class CustomGraphActivity extends Activity {
 			}
 		});
 
+		//TODO: Fill this adapter with a list of CustomGraphRequests from TempoDB
 		adapter = new GraphRequestArrayAdapter(getApplicationContext(),
 				new CustomGraphRequest[] {});
 		listView.setAdapter(adapter);
 	}
 
 	public void createNewCustomGraph(View v) {
-		startActivity(new Intent(getApplicationContext(),
-				CreateNewCustomGraphActivity.class));
+	   GraphRequest graphRequest = new CustomGraphRequest();
+	   Intent intent = graphRequest.constructGraphRequestIntent(getApplicationContext());
+		startActivity(intent);
 	}
-
 }

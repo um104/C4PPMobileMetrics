@@ -22,7 +22,7 @@ public class LanguageLocaleGraphRequest implements GraphRequest {
 
    @Override
    public String getRestRequestType() {
-      return "LANGUAGE_LOCALE";
+      return "CUSTOM";
    }
 
    @Override
@@ -35,6 +35,8 @@ public class LanguageLocaleGraphRequest implements GraphRequest {
 
       params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, getRestRequestType()));
       params.add(new BasicNameValuePair(Keys.APP_LABEL_URL_PARAMETER_NAME, appLabel));
+      params.add(new BasicNameValuePair(Keys.ATTRIB_NAME_1, "LanguageLocal__c"));
+      params.add(new BasicNameValuePair(Keys.EVENT_NAME_1, ""));
 
       String paramString = URLEncodedUtils.format(params, "utf-8");
 

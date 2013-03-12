@@ -4,6 +4,97 @@
     android:layout_height="match_parent"
     tools:context=".EditGraphRequestActivity" >
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonCreateNewCustomGraph"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/event1Group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            
+
+            <TextView
+                android:id="@+id/textViewEvent1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/event_1_"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Spinner
+                android:id="@+id/spinnerEvent1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View 
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/attribute1Group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewAttribute1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Attribute 1:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Spinner
+                android:id="@+id/spinnerAttribute1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View 
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/durationGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/in_the_last"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Spinner
+                android:id="@+id/spinnerDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View 
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
     <Button
         android:id="@+id/buttonCreateNewCustomGraph"
         android:layout_width="wrap_content"
@@ -12,39 +103,5 @@
         android:layout_centerHorizontal="true"
         android:onClick="onDoneButtonClicked"
         android:text="@string/view_new_custom_graph" />
-
-    <TextView
-        android:id="@+id/textViewEvent1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="28dp"
-        android:text="Event 1:"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <Spinner
-        android:id="@+id/spinnerEvent1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewEvent1" />
-
-    <TextView
-        android:id="@+id/TextViewDuration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/spinnerEvent1"
-        android:layout_marginTop="31dp"
-        android:text="@string/in_the_last"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Spinner
-        android:id="@+id/DurationSpinner02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TextViewDuration" />
 
 </RelativeLayout>

@@ -19,12 +19,13 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.description.AppDescription;
-import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.model.description.EventDescription;
+import edu.channel4.mm.db.android.model.description.EventNameDescription;
 import edu.channel4.mm.db.android.util.BaseAsyncTask;
 import edu.channel4.mm.db.android.util.Keys;
 
@@ -65,7 +66,7 @@ public class SalesforceConn {
          instance.context = context;
       return instance;
    }
-   
+
    public String getGraphViewingURL() {
       String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
                .getString(Keys.ACCESS_TOKEN, null);
@@ -87,8 +88,11 @@ public class SalesforceConn {
       return url;
    }
 
-   // TODO: add getEventList() once APEX RestResource is written
-   /*
+   /**
+    * Call this when you want to update your list of "attributes"! It will
+    * update the list of EventDescriptions, which contains the list of
+    * AttributeDescriptions.
+    */
    public void getEventList() {
       new GetEventListTask(context).execute();
    }
@@ -117,20 +121,27 @@ public class SalesforceConn {
 
          // Put together the HTTP Request to be sent to Salesforce for the
          // Event list
-         HttpPost attribRequest = new HttpPost(String.format(
-                  SALESFORCE_BASE_REST_URL, instanceUrl, EVENTS_URL_SUFFIX));
-         attribRequest.setHeader("Authorization", "Bearer " + accessToken);
-
-         // Add AppLabel parameter
          String appLabel = context.getSharedPreferences(Keys.PREFS_NS, 0)
                   .getString(Keys.APP_LABEL, null);
-         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-         nameValuePairs.add(new BasicNameValuePair("appLabel", appLabel));
+         
+         appLabel = Uri.encode(appLabel);
+         
+         HttpGet eventRequest = new HttpGet(String.format(
+                  SALESFORCE_BASE_REST_URL, instanceUrl, ATTRIBS_URL_SUFFIX)
+                           + "?appLabel=" + appLabel);
+         // HttpPost eventRequest = new
+         // HttpPost(String.format(SALESFORCE_BASE_REST_URL, instanceUrl,
+         // ATTRIBS_URL_SUFFIX));
+         eventRequest.setHeader("Authorization", "Bearer " + accessToken);
+
+         // Add AppLabel parameter
+         //List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+         //nameValuePairs.add(new BasicNameValuePair("appLabel", appLabel));
 
          try {
-            attribRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            //eventRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             // Get the response string, the Attribute List in JSON form
-            responseString = EntityUtils.toString(client.execute(attribRequest)
+            responseString = EntityUtils.toString(client.execute(eventRequest)
                      .getEntity());
          }
          catch (ClientProtocolException e) {
@@ -169,10 +180,98 @@ public class SalesforceConn {
             return;
          }
       }
-   }*/
+   }
 
    /**
-    * Gets the list of attributes valid for this particular type of graph
+    * Call this when you want to update your list of "event names"! It will
+    * update the list of EventNameDescriptions.
+    */
+   public void getEventNameList() {
+      new GetEventNameListTask(context).execute();
+   }
+
+   protected class GetEventNameListTask extends BaseAsyncTask {
+      private String responseString = null;
+      private final String TAG = GetEventListTask.class.getSimpleName();
+
+      public GetEventNameListTask(Context context) {
+         super(context);
+      }
+
+      @Override
+      protected String doInBackground(Void... params) {
+         Log.i(TAG, "Sending GET request to get event list");
+
+         String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
+                  .getString(Keys.ACCESS_TOKEN, null);
+         String instanceUrl = context.getSharedPreferences(Keys.PREFS_NS, 0)
+                  .getString(Keys.INSTANCE_URL, null);
+
+         if (accessToken == null) {
+            Log.e(TAG, "No access token currently saved");
+            return null;
+         }
+
+         // Put together the HTTP Request to be sent to Salesforce for the
+         // Event list
+         HttpPost eventNameRequest = new HttpPost(String.format(
+                  SALESFORCE_BASE_REST_URL, instanceUrl, EVENTS_URL_SUFFIX));
+         eventNameRequest.setHeader("Authorization", "Bearer " + accessToken);
+
+         // Add AppLabel parameter
+         String appLabel = context.getSharedPreferences(Keys.PREFS_NS, 0)
+                  .getString(Keys.APP_LABEL, null);
+         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+         nameValuePairs.add(new BasicNameValuePair("appLabel", appLabel));
+
+         try {
+            eventNameRequest
+                     .setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            // Get the response string, the Attribute List in JSON form
+            responseString = EntityUtils.toString(client.execute(
+                     eventNameRequest).getEntity());
+         }
+         catch (ClientProtocolException e) {
+            Log.e(TAG, e.getMessage());
+         }
+         catch (IOException e) {
+            Log.e(TAG, e.getMessage());
+         }
+
+         Log.d(TAG, "Got JSON result: " + responseString);
+
+         return responseString;
+      }
+
+      @Override
+      protected void onPostExecute(String result) {
+         super.onPostExecute(result);
+
+         if (responseString == null) {
+            final String errorMessage = "ERROR: Attempted to parse null Event list.";
+            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
+            Log.e(TAG, errorMessage);
+            return;
+         }
+
+         // Try to parse the resulting JSON
+         List<EventNameDescription> eventNameList = null;
+         try {
+            eventNameList = EventNameDescription.parseList(responseString);
+
+            TempoDatabase tempoDatabase = TempoDatabase.getInstance();
+            tempoDatabase.setEventNameDescriptions(eventNameList);
+         }
+         catch (JSONException e) {
+            Log.e(TAG, e.getMessage());
+            return;
+         }
+      }
+   }
+
+   /**
+    * Gets the list of attributes valid for this particular type of graph TODO:
+    * Remove this. It's replaced by getEventList()
     */
    public void getAttribList() {
       new GetAttribListTask(context).execute();
@@ -242,12 +341,12 @@ public class SalesforceConn {
          }
 
          // Try to parse the resulting JSON
-         List<AttributeDescription> attributeList = null;
+         List<EventDescription> eventList = null;
          try {
-            attributeList = AttributeDescription.parseList(responseString);
+            eventList = EventDescription.parseList(responseString);
 
             TempoDatabase tempoDatabase = TempoDatabase.getInstance();
-            tempoDatabase.setAttributeDescriptions(attributeList);
+            tempoDatabase.setEventDescriptions(eventList);
          }
          catch (JSONException e) {
             Log.e(TAG, e.getMessage());

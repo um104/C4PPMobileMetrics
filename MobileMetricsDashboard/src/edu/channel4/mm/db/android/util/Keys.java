@@ -63,7 +63,15 @@ public class Keys {
 	
 	public static final String TIME_INTERVAL = "timeInterval";
 	
+	/**
+	 * Used for creating custom graphs
+	 */
 	public static final String EVENT_NAME_1 = "eventName1";
 	
+	/**
+	 * Used for creating custom graphs
+	 */
 	public static final String ATTRIB_NAME_1 = "attribName1";
+	
+	public static final String EVENT_NAME_C4PPMM = "C4PPMM__EventName__c";
 }

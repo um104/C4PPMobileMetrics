@@ -7,7 +7,7 @@ import edu.channel4.mm.db.android.model.description.EventDescription;
 public interface OnEventDescriptionChangedListener {
 
    /**
-    * Called when an App Description in the database is changed.
+    * Called when an Event Description in the database is changed.
     */
-   public void onAppDescriptionChanged(List<EventDescription> newEventDescriptions);
+   public void onEventDescriptionChanged(List<EventDescription> newEventDescriptions);
 }

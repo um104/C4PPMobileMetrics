@@ -7,24 +7,36 @@ import java.util.Set;
 
 import edu.channel4.mm.db.android.activity.OnAppDescriptionChangedListener;
 import edu.channel4.mm.db.android.activity.OnAttributeDescriptionChangedListener;
+import edu.channel4.mm.db.android.activity.OnEventDescriptionChangedListener;
+import edu.channel4.mm.db.android.activity.OnEventNameDescriptionChangedListener;
 import edu.channel4.mm.db.android.model.description.AppDescription;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
+import edu.channel4.mm.db.android.model.description.EventDescription;
+import edu.channel4.mm.db.android.model.description.EventNameDescription;
 
 /**
  * BS temp database. This is just a singleton containing a bunch of ArrayLists
  * of models.
  * 
- * @author girum
+ * @author girum & mark
  * 
  */
 public class TempoDatabase {
 
 	private static TempoDatabase instance = new TempoDatabase();
+	
 	private List<AppDescription> appDescriptions = new ArrayList<AppDescription>();
 	private Set<OnAppDescriptionChangedListener> onAppDescriptionChangedListeners = new HashSet<OnAppDescriptionChangedListener>();
+	
 	private List<AttributeDescription> attributeDescriptions = new ArrayList<AttributeDescription>();
 	private Set<OnAttributeDescriptionChangedListener> onAttributeDescriptionChangedListeners = new HashSet<OnAttributeDescriptionChangedListener>();
-
+	
+	private List<EventDescription> eventDescriptions = new ArrayList<EventDescription>();
+	private Set<OnEventDescriptionChangedListener> onEventDescriptionChangedListeners =  new HashSet<OnEventDescriptionChangedListener>();
+	
+	private List<EventNameDescription> eventNameDescriptions = new ArrayList<EventNameDescription>();
+	private Set<OnEventNameDescriptionChangedListener> onEventNameDescriptionChangedListeners =  new HashSet<OnEventNameDescriptionChangedListener>();
+	
 	private TempoDatabase() {
 		// singleton (hide constructor)
 	}
@@ -32,6 +44,46 @@ public class TempoDatabase {
 	public static TempoDatabase getInstance() {
 		return instance;
 	}
+	
+	/**
+	 * EventDescriptions from here below
+	 * @param eventDescriptions
+	 */
+	public void setEventDescriptions(List<EventDescription> eventDescriptions) {
+	   this.eventDescriptions = eventDescriptions;
+	   
+	   for (OnEventDescriptionChangedListener listener : onEventDescriptionChangedListeners) {
+	      listener.onEventDescriptionChanged(this.eventDescriptions);
+	   }
+	}
+	
+	public boolean addOnEventDescriptionChangedListener(OnEventDescriptionChangedListener listener) {
+	   return onEventDescriptionChangedListeners.add(listener);
+	}
+	
+	public boolean removeOnEventDescriptionChangedListener(OnEventDescriptionChangedListener listener) {
+	   return onEventDescriptionChangedListeners.remove(listener);
+	}
+	
+	/**
+	 * EventNameDescriptions from here below
+	 * @param eventNameDescriptions
+	 */
+   public void setEventNameDescriptions(List<EventNameDescription> eventNameDescriptions) {
+      this.eventNameDescriptions = eventNameDescriptions;
+      
+      for (OnEventNameDescriptionChangedListener listener : onEventNameDescriptionChangedListeners) {
+         listener.onEventNameDescriptionChanged(this.eventNameDescriptions);
+      }
+   }
+   
+   public boolean addOnEventNameDescriptionChangedListener(OnEventNameDescriptionChangedListener listener) {
+      return onEventNameDescriptionChangedListeners.add(listener);
+   }
+   
+   public boolean removeOnEventNameDescriptionChangedListener(OnEventNameDescriptionChangedListener listener) {
+      return onEventNameDescriptionChangedListeners.remove(listener);
+   }
 
 	/**
 	 * Sets the tempo DB to have a new list of AppDescriptions, notifying all
@@ -44,7 +96,7 @@ public class TempoDatabase {
 
 		for (OnAppDescriptionChangedListener onAppDescriptionChangedListener : onAppDescriptionChangedListeners) {
 			onAppDescriptionChangedListener
-					.onAppDescriptionChanged(appDescriptions);
+					.onAppDescriptionChanged(this.appDescriptions);
 		}
 	}
 
@@ -80,7 +132,7 @@ public class TempoDatabase {
 
 		for (OnAttributeDescriptionChangedListener onAttributeDescriptionChangedListener : onAttributeDescriptionChangedListeners) {
 			onAttributeDescriptionChangedListener
-					.onAttributeDescriptionChanged(attributeDescriptions);
+					.onAttributeDescriptionChanged(this.attributeDescriptions);
 		}
 	}
 
@@ -103,6 +155,4 @@ public class TempoDatabase {
 		return onAttributeDescriptionChangedListeners
 				.remove(onAttributeDescriptionChangedListener);
 	}
-	
-	//TODO: add set/add/on methods for EventDescription once APEX RestResource is written
 }

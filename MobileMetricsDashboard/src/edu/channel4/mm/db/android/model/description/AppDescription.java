@@ -121,6 +121,8 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 	}
 
 	/* Everything from here down is for implementing the Parcelable interface */
+	//TODO: does this class still need to implement Parcelable? I think not.
+	
 	@Override
 	public int describeContents() {
 		// Auto-generated method stub

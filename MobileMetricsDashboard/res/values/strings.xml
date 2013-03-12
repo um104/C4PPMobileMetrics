@@ -30,15 +30,6 @@
     <string name="audience">Audience</string>
     <string name="event_funnels">Event Funnels</string>
     <string name="custom_graphs">Custom Graphs</string>
-
-    <string-array name="usage_graph_requests">
-        <item>Session Length over Time</item>
-        <item>Number of Sessions over Time</item>
-        <item>Event Count over Time</item>
-        <item>Active Users</item>
-        <item>Time of Day Distribution</item>
-    </string-array>
-
     <string name="create_new_custom_graph">Create New Custom Graph</string>
     <string name="no_custom_graphs">No Custom Graphs</string>
     <string name="not_yet_implemented">Not Yet Implemented</string>
@@ -49,5 +40,6 @@
     <string name="view_new_custom_graph">View New Custom Graph</string>
     <string name="title_activity_edit_graph_request">EditGraphRequestActivity</string>
     <string name="please_enter_valid_inputs_">Please enter valid inputs.</string>
+    <string name="event_1_">Event 1:</string>
 
 </resources>

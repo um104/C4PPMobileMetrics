@@ -3,107 +3,164 @@ package edu.channel4.mm.db.android.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.model.description.EventDescription;
+import edu.channel4.mm.db.android.model.description.EventNameDescription;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest.TimeInterval;
 import edu.channel4.mm.db.android.model.request.HasAttributeParameter;
 import edu.channel4.mm.db.android.model.request.HasEventNameParameter;
 import edu.channel4.mm.db.android.model.request.HasOverTimeParameter;
+import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.Keys;
 
-public class EditGraphRequestActivity extends Activity implements OnEventDescriptionChangedListener {
+public class EditGraphRequestActivity extends Activity implements
+         OnEventDescriptionChangedListener,
+         OnEventNameDescriptionChangedListener {
 
    private GraphRequest graphRequest;
-   private ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
-   private ArrayAdapter<EventDescription> eventAdapter;
-   private ArrayAdapter<AttributeDescription> attributeAdapter;
-   private TextView event1View;
-   private TextView durationView;
-   private TextView attributeView;
-   private Spinner event1Spinner;
-   private Spinner durationSpinner;
-   private Spinner attributeSpinner;
-   private List<EventDescription> eventList;
+   private SalesforceConn sfConn;
 
-   @SuppressLint("NewApi")
+   private ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
+   private ArrayAdapter<EventNameDescription> eventNameAdapter;
+   private ArrayAdapter<EventDescription> eventAdapter;
+   private ArrayAdapter<EventDescription> eventAttributeAdapter;
+   private List<ArrayAdapter<EventDescription>> eventAttributeAdapters;
+   private ArrayAdapter<AttributeDescription> attributeAdapter;
+
+   private Spinner event1Spinner;
+   private Spinner attribute1Spinner;
+   private Spinner durationSpinner;
+
+   private List<EventDescription> eventList;
+   private List<EventNameDescription> eventNameList;
+
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_edit_graph_request);
-      
-      /*
-      // Show the Up button in the action bar.
-      getActionBar().setDisplayHomeAsUpEnabled(true);
-      */
-      
+
       // Accept the GraphRequest through the intent
       graphRequest = getIntent().getParcelableExtra(Keys.GRAPH_REQUEST_EXTRA);
-      
-      // Get all UI elemends
-      durationSpinner = (Spinner) findViewById(R.id.DurationSpinner02);
+      sfConn = SalesforceConn.getInstance(getApplicationContext());
+
+      // Get the spinner elements
       event1Spinner = (Spinner) findViewById(R.id.spinnerEvent1);
-      durationView = (TextView) findViewById(R.id.TextViewDuration);
-      event1View = (TextView) findViewById(R.id.textViewEvent1);
-      
-      //turn off all UI elements
-      durationSpinner.setVisibility(View.GONE);
-      event1Spinner.setVisibility(View.GONE);
-      durationView.setVisibility(View.GONE);
-      event1View.setVisibility(View.GONE);
-      
-      // turn on/off UI elements depending on graphRequest's interfaces
+      attribute1Spinner = (Spinner) findViewById(R.id.spinnerAttribute1);
+      durationSpinner = (Spinner) findViewById(R.id.spinnerDuration);
+
+      // turn off all UI elements
+      View event1Group = findViewById(R.id.event1Group);
+      View attribute1Group = findViewById(R.id.attribute1Group);
+      View durationGroup = findViewById(R.id.durationGroup);
+      event1Group.setVisibility(View.GONE);
+      attribute1Group.setVisibility(View.GONE);
+      durationGroup.setVisibility(View.GONE);
+
+      // turn on UI elements depending on graphRequest's interfaces
       if (graphRequest instanceof HasOverTimeParameter) {
          // turn on time selecting elements
-         durationSpinner.setVisibility(View.VISIBLE);
-         durationView.setVisibility(View.VISIBLE);
-         
-         // fill the spinner with actual values
-         durationAdapter = new ArrayAdapter<GraphRequest.TimeInterval>(getApplicationContext(), 
-                  /*android.R.layout.simple_spinner_item,*/ R.layout.cell_dropdown_item,
+         durationGroup.setVisibility(View.VISIBLE);
+
+         // fill the adapter with different possible time values
+         durationAdapter = new ArrayAdapter<GraphRequest.TimeInterval>(
+                  getApplicationContext(), R.layout.cell_dropdown_item,
                   GraphRequest.TimeInterval.values());
 
-         
-         /*durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
+         // TODO: make a new layout that works better for the dropdown part
+         // set the layout for displaying options
+         /*
+          * durationAdapter.setDropDownViewResource(android.R.layout.
+          * simple_spinner_dropdown_item);
+          */
          durationAdapter.setDropDownViewResource(R.layout.cell_dropdown_item);
+
+         // set the adapter that fills the spinner
          durationSpinner.setAdapter(durationAdapter);
       }
       if (graphRequest instanceof HasEventNameParameter) {
          // turn on event selecting elements
-         event1Spinner.setVisibility(View.VISIBLE);
-         event1View.setVisibility(View.VISIBLE);
-         
-         eventList = new ArrayList<EventDescription>();
-         
-         // fill the event spinner with actual values
-         eventAdapter = new ArrayAdapter<EventDescription>(getApplicationContext(),
-                  /*android.R.layout.simple_spinner_item,*/ R.layout.cell_dropdown_item,
-                  eventList);
-         
-         // TODO: update the values within eventList. Use TempoDatabase, SalesforceConn.
-         
-         eventAdapter.setDropDownViewResource(R.layout.cell_dropdown_item);
-         event1Spinner.setAdapter(eventAdapter);
+         event1Group.setVisibility(View.VISIBLE);
+
+         // make the eventName list and adapter
+         eventNameList = new ArrayList<EventNameDescription>();
+         eventNameAdapter = new ArrayAdapter<EventNameDescription>(
+                  getApplicationContext(), R.layout.cell_dropdown_item,
+                  eventNameList);
+
+         // fill the eventNameList with values pulled from SFConn/TempoDB
+         TempoDatabase.getInstance().addOnEventNameDescriptionChangedListener(
+                  this);
+         sfConn.getEventNameList();
+
+         // set the layout for displaying options
+         eventNameAdapter.setDropDownViewResource(R.layout.cell_dropdown_item);
+
+         // set the adapter that fills the spinner
+         event1Spinner.setAdapter(eventNameAdapter);
       }
-      //TODO: add a check for HasAttributeParameter
+      // this one should never happen alongside HasEventNameParameter
       if (graphRequest instanceof HasAttributeParameter) {
-         //TODO: turn on attribute-selecting elements
+         // turn on event- and attribute-selecting elements
+         event1Group.setVisibility(View.VISIBLE);
+         attribute1Group.setVisibility(View.VISIBLE);
+
+         // make the eventList and adapters for the event names and attributes
+         eventList = new ArrayList<EventDescription>();
+         // this adapter just needs to call toString() to get names of the
+         // events
+         eventAdapter = new ArrayAdapter<EventDescription>(
+                  getApplicationContext(), R.layout.cell_dropdown_item,
+                  eventList);
+         //attributeAdapter = new ();
+
+         // When something is selected in the event1Spinner, it changes the attribute1Spinner
+         event1Spinner.setOnItemSelectedListener(new OnItemSelectedListener(){
+            public void onItemSelected(AdapterView<?> parent, View view,
+                     int position, long id) {
+               // get the event that was selected. NOTE: "Session" is in here too
+               EventDescription eventDescription = eventAdapter
+                        .getItem(position);
+               // Make a new adapter out of the attributes of that event
+               attributeAdapter = new ArrayAdapter<AttributeDescription>(
+                        getApplicationContext(), R.layout.cell_dropdown_item,
+                        eventDescription.getAttributes());
+               // set the new adapter on the attribute1Spinner
+               attribute1Spinner.setAdapter(attributeAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+         });
+
+         // fill the eventList with values pulled from SFConn/TempoDB
+         TempoDatabase.getInstance().addOnEventDescriptionChangedListener(this);
+         sfConn.getEventList();
          
-         //TODO: fill the spinner with actual values
+
+         // set the layout for displaying options
+         eventAdapter.setDropDownViewResource(R.layout.cell_dropdown_item);
+
+         // set the adapters that fill the spinners
+         event1Spinner.setAdapter(eventAdapter);
+         //attribute1Spinner.setAdapter(attributeAdapter);
          
-         //TODO: set view resource and set adapater
+         // make sure that the onItemSelecedListener gets fired off
+         // event1Spinner.setSelection(0);
       }
-      
+
       setTitle(graphRequest.toString());
    }
 
@@ -118,27 +175,39 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
 
       // fill in the graphRequest based on its interfaces
       if (graphRequest instanceof HasOverTimeParameter) {
-         // retrieve selected time from durationspinner, put in graphrequest
+         // retrieve selected time from durationSpinner, put in graphRequest
          int selectedItemPosition = durationSpinner.getSelectedItemPosition();
-         TimeInterval timeInterval = durationAdapter.getItem(selectedItemPosition);
-         ((HasOverTimeParameter)graphRequest).setTimeDuration(timeInterval.name());
+         TimeInterval timeInterval = durationAdapter
+                  .getItem(selectedItemPosition);
+         ((HasOverTimeParameter) graphRequest).setTimeDuration(timeInterval
+                  .name());
       }
       if (graphRequest instanceof HasEventNameParameter) {
-         // retrieve selected event from eventspinner, put in graphrequest
+         // retrieve selected event from event1Spinner, put in graphRequest
          int selectedItemPosition = event1Spinner.getSelectedItemPosition();
-         EventDescription eventDescription = eventAdapter.getItem(selectedItemPosition);
-         ((HasEventNameParameter)graphRequest).setEventName(eventDescription.getName());
+         EventDescription eventDescription = eventAdapter
+                  .getItem(selectedItemPosition);
+         ((HasEventNameParameter) graphRequest).setEventName(eventDescription
+                  .getName());
       }
-      //TODO: add a check for HasAttributeParameter
-      /*
       if (graphRequest instanceof HasAttributeParameter) {
-         // retrieve selected attribute from spinner, put it in graphrequest
-         int selectedItemPosition = attributeSpinner.getSelectedItemPosition();
-         AttributeDescription attribDescription = attributeAdapter.getItem(selectedItemPosition);
-         ((HasAttributeParameter)graphRequest).setAttributeName(attribDescription.getName());
-         ((HasAttributeParameter)graphRequest).setEventName(attribDescription.getEventName());
+         // put their info in the graphRequest
+         // get positions of selected event and attribute
+         int selectedEventPosition = event1Spinner.getSelectedItemPosition();
+         int selectedAttributePosition = attribute1Spinner.getSelectedItemPosition();
+         
+         // get the actual event and attribute
+         EventDescription event = eventAdapter.getItem(selectedEventPosition);
+         AttributeDescription attribute = attributeAdapter.getItem(selectedAttributePosition);
+         
+         // if the event name is "Session Attributes", replace it with an empty string
+         String eventName = event.getName();
+         eventName = eventName.replace("Session Attributes", "");
+         
+         // put the event and attribute info into the graphRequest
+         ((HasAttributeParameter)graphRequest).setAttributeName(attribute.getName());
+         ((HasAttributeParameter)graphRequest).setEventName(event.getName());
       }
-      */
 
       // Create GraphViewerActivity intent and put URIParams in Intent
       Intent intent = new Intent(getApplicationContext(),
@@ -156,15 +225,23 @@ public class EditGraphRequestActivity extends Activity implements OnEventDescrip
     * @return
     */
    private boolean validateInputs() {
-      //TODO: either actually do validation of input elements, or remove this method
+      // TODO: either actually do validation of input elements, or remove this
+      // method
       return true;
    }
 
    @Override
-   public void onAppDescriptionChanged(List<EventDescription> newEventDescriptions) {
+   public void onEventDescriptionChanged(
+            List<EventDescription> newEventDescriptions) {
       eventList.clear();
       eventList.addAll(newEventDescriptions);
       eventAdapter.notifyDataSetChanged();
+   }
+
+   @Override
+   public void onEventNameDescriptionChanged(
+            List<EventNameDescription> newEventNameDescriptions) {
+      this.eventNameList = newEventNameDescriptions;
    }
 
 }
