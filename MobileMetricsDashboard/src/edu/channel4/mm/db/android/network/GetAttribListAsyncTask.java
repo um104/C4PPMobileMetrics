@@ -19,6 +19,7 @@ import edu.channel4.mm.db.android.util.BaseAsyncTask;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 
+//TODO FIXME DELETE NOW PLEASE KILL ME
 class GetAttribListAsyncTask extends BaseAsyncTask<Void, Void, String> {
 	protected static final String ATTRIBS_URL_SUFFIX = "channel4_attributes";
 	private String responseString = null;
@@ -86,11 +87,11 @@ class GetAttribListAsyncTask extends BaseAsyncTask<Void, Void, String> {
 			Log.e(errorMessage);
 			return;
 		}
-
+/*
 		// Try to parse the resulting JSON
 		List<AttributeDescription> attributeList = null;
 		try {
-			attributeList = AttributeDescription.parseList(responseString);
+			//attributeList = AttributeDescription.parseList(responseString);
 
 			TempoDatabase tempoDatabase = TempoDatabase.getInstance();
 			tempoDatabase.setAttributeDescriptions(attributeList);
@@ -98,7 +99,7 @@ class GetAttribListAsyncTask extends BaseAsyncTask<Void, Void, String> {
 			Log.e(e.getMessage());
 			return;
 		}
-
-		listener.onAttributeDescriptionChanged(attributeList);
+*/
+	//	listener.onAttributeDescriptionChanged(attributeList);
 	}
 }

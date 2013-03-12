@@ -1,14 +1,9 @@
-package edu.channel4.mm.db.android.activity;
+package edu.channel4.mm.db.android.callback;
 
 import java.util.List;
 
 import edu.channel4.mm.db.android.model.description.EventNameDescription;
 
-public interface OnEventNameDescriptionChangedListener {
-
-   /**
-    * Called when an Event Name Description in the database is changed.
-    */
+public interface EventNameDescriptionCallback {
    public void onEventNameDescriptionChanged(List<EventNameDescription> newEventNameDescriptions);
-   
 }

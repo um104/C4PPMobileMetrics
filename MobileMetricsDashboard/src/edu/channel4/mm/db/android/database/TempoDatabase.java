@@ -7,6 +7,7 @@ import edu.channel4.mm.db.android.model.description.AppDescription;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.model.description.EventNameDescription;
+import edu.channel4.mm.db.android.model.graph.Graph;
 
 /**
  * BS temp database. This is just a singleton containing a bunch of ArrayLists
@@ -21,13 +22,10 @@ public class TempoDatabase {
 	
 	private List<AppDescription> appDescriptions = new ArrayList<AppDescription>();
 	private List<AttributeDescription> attributeDescriptions = new ArrayList<AttributeDescription>();
-	private Set<OnAttributeDescriptionChangedListener> onAttributeDescriptionChangedListeners = new HashSet<OnAttributeDescriptionChangedListener>();
-	
 	private List<EventDescription> eventDescriptions = new ArrayList<EventDescription>();
-	private Set<OnEventDescriptionChangedListener> onEventDescriptionChangedListeners =  new HashSet<OnEventDescriptionChangedListener>();
-	
 	private List<EventNameDescription> eventNameDescriptions = new ArrayList<EventNameDescription>();
-	private Set<OnEventNameDescriptionChangedListener> onEventNameDescriptionChangedListeners =  new HashSet<OnEventNameDescriptionChangedListener>();
+	
+	private Graph graph;
 	
 	private TempoDatabase() {
 		// singleton (hide constructor)
@@ -56,6 +54,14 @@ public class TempoDatabase {
 	public void setAttributeDescriptions(
 			List<AttributeDescription> attributeDescriptions) {
 		this.attributeDescriptions = attributeDescriptions;
+	}
+	
+	public void setEventDescriptions(List<EventDescription> eventDescriptions) {
+	   this.eventDescriptions = eventDescriptions;
+	}
+	
+	public void setEventNameDescriptions(List<EventNameDescription> eventNameDescriptions) {
+	   this.eventNameDescriptions = eventNameDescriptions;
 	}
 
 	/**

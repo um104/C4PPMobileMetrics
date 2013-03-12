@@ -1,19 +1,13 @@
 package edu.channel4.mm.db.android.model.request;
 
 import java.net.URI;
-import java.util.List;
 
-import org.json.JSONException;
-
-import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
-import edu.channel4.mm.db.android.util.Keys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
+import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
-import edu.channel4.mm.db.android.model.graph.Graph;
 import edu.channel4.mm.db.android.network.RestClientAccess;
 import edu.channel4.mm.db.android.util.Keys;
 
@@ -115,9 +109,8 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter,
 	}
 
 	@Override
-	public int getIcon() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getIconId() {
+	   return R.drawable.ic_launcher;
 	}
 
 	@Override

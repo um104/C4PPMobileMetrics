@@ -8,6 +8,7 @@ import org.json.JSONException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
+import android.os.Parcelable;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.model.graph.Graph;
@@ -21,6 +22,10 @@ import edu.channel4.mm.db.android.util.Keys;
  * 
  */
 public class NationalityBreakdownGraphRequest implements GraphRequest {
+   
+   public NationalityBreakdownGraphRequest() {
+      
+   }
 
 	@Override
 	public String toString() {
@@ -63,7 +68,7 @@ public class NationalityBreakdownGraphRequest implements GraphRequest {
 	}
 
 	@Override
-	public int getIcon() {
+	public int getIconId() {
 		return R.drawable.nationality_breakdown;
 	}
 
@@ -78,6 +83,21 @@ public class NationalityBreakdownGraphRequest implements GraphRequest {
 		// TODO Auto-generated method stub
 
 	}
+	
+   public static final Parcelable.Creator<NationalityBreakdownGraphRequest> CREATOR = new Parcelable.Creator<NationalityBreakdownGraphRequest>(){
+      public NationalityBreakdownGraphRequest createFromParcel(Parcel in) {
+         return new NationalityBreakdownGraphRequest(in);
+      }
+
+      @Override
+      public NationalityBreakdownGraphRequest[] newArray(int size) {
+         return new NationalityBreakdownGraphRequest[size];
+      }
+   };
+   
+   public NationalityBreakdownGraphRequest(Parcel in) {
+      
+   }
 
 	@Override
 	public URI getUri(RestClientAccess restClientManager, Context context) {

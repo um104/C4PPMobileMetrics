@@ -22,7 +22,7 @@ public interface GraphRequest extends Parcelable {
    /**
     * @return Android resource id for the icon
     */
-   public int getIcon();
+   public int getIconId();
 
    /**
     * Consolidate GraphRequest URI logic into a single method. Sanity-check it
@@ -50,8 +50,6 @@ public interface GraphRequest extends Parcelable {
     * @return
     */
    public Intent constructGraphRequestIntent(Context context);
-   
-   public int getIconId();
 
    /**
     * Enum for any events that implement HasOverTimeParameter.

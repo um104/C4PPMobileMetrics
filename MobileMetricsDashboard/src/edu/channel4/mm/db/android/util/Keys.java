@@ -80,4 +80,6 @@ public class Keys {
 	public static final String BAR = "bar";
 	
 	public static final String REQUEST_AS_JSON = "requestAsJSON";
+	
+	public static final String EVENT_NAME_C4PPMM = "C4PPMM__EventName__c";
 }

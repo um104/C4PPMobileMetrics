@@ -1,9 +1,6 @@
 package edu.channel4.mm.db.android.model.request;
 
 import java.net.URI;
-import java.util.List;
-
-import org.json.JSONException;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
-import edu.channel4.mm.db.android.model.graph.Graph;
 import edu.channel4.mm.db.android.network.RestClientAccess;
 import edu.channel4.mm.db.android.util.Keys;
 
@@ -102,11 +98,6 @@ public class SessionOverTimeGraphRequest implements GraphRequest,
 		// Note: Parcel data is read in a FIFO manner.
 		this.appLabel = in.readString();
 		this.timeInterval = in.readString();
-	}
-
-	@Override
-	public int getIcon() {
-		return R.drawable.sessions_over_time;
 	}
 
 	@Override

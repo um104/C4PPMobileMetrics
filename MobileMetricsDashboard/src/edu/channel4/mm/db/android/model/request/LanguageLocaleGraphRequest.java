@@ -77,7 +77,7 @@ public class LanguageLocaleGraphRequest implements GraphRequest {
    }
 
    @Override
-   public int getIcon() {
+   public int getIconId() {
       return R.drawable.language_locale;
    }
 

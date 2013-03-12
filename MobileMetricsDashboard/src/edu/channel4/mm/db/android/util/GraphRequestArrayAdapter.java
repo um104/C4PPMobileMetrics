@@ -36,7 +36,7 @@ public class GraphRequestArrayAdapter extends ArrayAdapter<GraphRequest> {
 		graphRequestIcon = (ImageView) convertView
 				.findViewById(R.id.imageViewGraphRequestIcon);
 		graphRequestIcon.setImageDrawable(getContext().getResources()
-				.getDrawable(graphRequest.getIcon()));
+				.getDrawable(graphRequest.getIconId()));
 
 		// Reference the text view
 		graphRequestLabel = (TextView) convertView

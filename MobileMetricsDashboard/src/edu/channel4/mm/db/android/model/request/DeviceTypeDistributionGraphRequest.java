@@ -5,12 +5,17 @@ import java.net.URI;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
+import android.os.Parcelable;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.network.RestClientAccess;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class DeviceTypeDistributionGraphRequest implements GraphRequest {
+   
+   public DeviceTypeDistributionGraphRequest() {
+      
+   }
 
 	@Override
 	public String toString() {
@@ -52,7 +57,7 @@ public class DeviceTypeDistributionGraphRequest implements GraphRequest {
 	}
 
 	@Override
-	public int getIcon() {
+	public int getIconId() {
 		return R.drawable.device_type_dist;
 	}
 
@@ -65,9 +70,23 @@ public class DeviceTypeDistributionGraphRequest implements GraphRequest {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		// TODO Auto-generated method stub
-
 	}
 
+   public static final Parcelable.Creator<DeviceTypeDistributionGraphRequest> CREATOR = new Parcelable.Creator<DeviceTypeDistributionGraphRequest>(){
+      public DeviceTypeDistributionGraphRequest createFromParcel(Parcel in) {
+         return new DeviceTypeDistributionGraphRequest(in);
+      }
+
+      @Override
+      public DeviceTypeDistributionGraphRequest[] newArray(int size) {
+         return new DeviceTypeDistributionGraphRequest[size];
+      }
+   };
+   
+   public DeviceTypeDistributionGraphRequest(Parcel in) {
+      
+   }
+	
 	@Override
 	public URI getUri(RestClientAccess restClientManager, Context context) {
 		// TODO Auto-generated method stub

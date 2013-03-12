@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.callback.EventDescriptionCallback;
+import edu.channel4.mm.db.android.callback.EventNameDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.model.description.EventNameDescription;
@@ -26,8 +27,8 @@ import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class EditGraphRequestActivity extends Activity implements
-         OnEventDescriptionChangedListener,
-         OnEventNameDescriptionChangedListener {
+         EventDescriptionCallback,
+         EventNameDescriptionCallback {
 
    private GraphRequest graphRequest;
    private SalesforceConn sfConn;
@@ -53,7 +54,7 @@ public class EditGraphRequestActivity extends Activity implements
 
       // Accept the GraphRequest through the intent
       graphRequest = getIntent().getParcelableExtra(Keys.GRAPH_REQUEST_EXTRA);
-      sfConn = SalesforceConn.getInstance(getApplicationContext());
+      sfConn = new SalesforceConn(getApplicationContext());
 
       // Get the spinner elements
       event1Spinner = (Spinner) findViewById(R.id.spinnerEvent1);
@@ -99,10 +100,8 @@ public class EditGraphRequestActivity extends Activity implements
                   getApplicationContext(), R.layout.cell_dropdown_item,
                   eventNameList);
 
-         // fill the eventNameList with values pulled from SFConn/TempoDB
-         TempoDatabase.getInstance().addOnEventNameDescriptionChangedListener(
-                  this);
-         sfConn.getEventNameList();
+         // fill the eventNameList with values pulled from SFConn
+         sfConn.getEventNameListViaNetwork(this);
 
          // set the layout for displaying options
          eventNameAdapter.setDropDownViewResource(R.layout.cell_dropdown_item);
@@ -145,9 +144,8 @@ public class EditGraphRequestActivity extends Activity implements
             }
          });
 
-         // fill the eventList with values pulled from SFConn/TempoDB
-         TempoDatabase.getInstance().addOnEventDescriptionChangedListener(this);
-         sfConn.getEventList();
+         // fill the eventList with values pulled from SFConn
+         sfConn.getEventListViaNetwork(this);
          
 
          // set the layout for displaying options
@@ -230,16 +228,20 @@ public class EditGraphRequestActivity extends Activity implements
    }
 
    @Override
-   public void onAppDescriptionChanged(List<EventDescription> newEventDescriptions) {
-      eventList.clear();
-      eventList.addAll(newEventDescriptions);
-      eventAdapter.notifyDataSetChanged();
+   public void onEventNameDescriptionChanged(
+            List<EventNameDescription> newEventNameDescriptions) {
+      this.eventNameList.clear();
+      this.eventNameList.addAll(newEventNameDescriptions);
+      this.eventNameAdapter.notifyDataSetChanged();
    }
 
    @Override
-   public void onEventNameDescriptionChanged(
-            List<EventNameDescription> newEventNameDescriptions) {
-      this.eventNameList = newEventNameDescriptions;
+   public void onEventDescriptionChanged(
+            List<EventDescription> newEventDescriptions) {
+      eventList.clear();
+      eventList.addAll(newEventDescriptions);
+      eventAdapter.notifyDataSetChanged();
+      
    }
 
 }
