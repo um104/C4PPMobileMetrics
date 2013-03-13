@@ -58,7 +58,7 @@ public interface GraphRequest extends Parcelable {
     */
    public enum TimeInterval {
       DAY("From the last day"), WEEK("From the last week"), MONTH(
-               "From the last month"), YEAR("From the last year");
+               "From the last month"), /*YEAR("From the last year")*/;
 
       private String displayName;
 
