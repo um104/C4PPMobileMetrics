@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MobileMetricsTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditGraphRequestActivity" >
@@ -17,10 +18,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-            
 
             <TextView
                 android:id="@+id/textViewEvent1"
+                style="@style/MobileMetricsDefaultCellText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -31,13 +32,13 @@
                 android:id="@+id/spinnerEvent1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <View 
+
+            <View
                 android:layout_width="fill_parent"
+                android:layout_height="1dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                />
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
         <LinearLayout
@@ -48,23 +49,24 @@
 
             <TextView
                 android:id="@+id/textViewAttribute1"
+                style="@style/MobileMetricsDefaultCellText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Attribute 1:"
+                android:text="@string/attribute1"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner
                 android:id="@+id/spinnerAttribute1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <View 
+
+            <View
                 android:layout_width="fill_parent"
+                android:layout_height="1dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                />
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,6 +77,7 @@
 
             <TextView
                 android:id="@+id/textViewDuration"
+                style="@style/MobileMetricsDefaultCellText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -85,13 +88,13 @@
                 android:id="@+id/spinnerDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <View 
+
+            <View
                 android:layout_width="fill_parent"
+                android:layout_height="1dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                />
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
     </LinearLayout>
 

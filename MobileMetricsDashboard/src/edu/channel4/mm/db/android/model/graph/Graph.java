@@ -61,32 +61,32 @@ public class Graph {
       }
    }
 
-//   /**
-//    * Gets a random Intent for ACE to draw.
-//    * 
-//    * @param context
-//    * @return
-//    */
-//   public Intent getRandomIntent(Context context) {
-//
-//      // Pick a random number in the validGraphTypes
-//      Random rand = new Random();
-//      int element = rand.nextInt(validGraphTypes.size());
-//
-//      GraphType graphType = validGraphTypes.get(element);
-//
-//      switch (graphType) {
-//         case PIE:
-//            return getPieGraphIntent(context);
-//         case BAR:
-//            return getBarGraphIntent(context);
-//         case LINE:
-//            return getLineGraphIntent(context);
-//         default:
-//            Log.e("Unknown graphType: " + graphType.toString());
-//            return null;
-//      }
-//   }
+   // /**
+   // * Gets a random Intent for ACE to draw.
+   // *
+   // * @param context
+   // * @return
+   // */
+   // public Intent getRandomIntent(Context context) {
+   //
+   // // Pick a random number in the validGraphTypes
+   // Random rand = new Random();
+   // int element = rand.nextInt(validGraphTypes.size());
+   //
+   // GraphType graphType = validGraphTypes.get(element);
+   //
+   // switch (graphType) {
+   // case PIE:
+   // return getPieGraphIntent(context);
+   // case BAR:
+   // return getBarGraphIntent(context);
+   // case LINE:
+   // return getLineGraphIntent(context);
+   // default:
+   // Log.e("Unknown graphType: " + graphType.toString());
+   // return null;
+   // }
+   // }
 
    private Intent getPieGraphIntent(Context context) {
       Intent intent = null;
@@ -174,10 +174,19 @@ public class Graph {
    }
 
    private Intent getLineGraphIntent(Context context) {
-      return setupXYMultipleSeriesIntent(getLineRenderer(), context);
+
+      XYMultipleSeriesDataset dataset = setupXYMultipleSeriesIntent(
+               getLineRenderer(), context);
+      
+      XYMultipleSeriesRenderer renderer = null;
+      SimpleSeriesRenderer simpleSeriesRenderer = null;
+      
+      Intent intent = ChartFactory.getLineChartIntent(context, dataset, renderer);
+
+      return intent;
    }
 
-   private Intent setupXYMultipleSeriesIntent(
+   private XYMultipleSeriesDataset setupXYMultipleSeriesIntent(
             XYMultipleSeriesRenderer renderer, Context context) {
       Intent intent = null;
 
@@ -200,10 +209,7 @@ public class Graph {
 
       dataset.addSeries(xySeries);
 
-      intent = ChartFactory.getBarChartIntent(context, dataset, renderer,
-               Type.DEFAULT);
-
-      return intent;
+      return dataset;
    }
 
    private XYMultipleSeriesRenderer buildBarRenderer(int[] colors) {

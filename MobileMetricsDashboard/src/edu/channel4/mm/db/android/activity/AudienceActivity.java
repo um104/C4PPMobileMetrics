@@ -14,10 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
-import edu.channel4.mm.db.android.model.request.DeviceTypeDistributionGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
-import edu.channel4.mm.db.android.model.request.LanguageLocaleGraphRequest;
-import edu.channel4.mm.db.android.model.request.NationalityBreakdownGraphRequest;
 import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
 import edu.channel4.mm.db.android.util.Keys;
 

@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MobileMetricsTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GraphViewerActivity" >
@@ -24,6 +25,7 @@
         android:id="@+id/textViewGraphViewerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/MobileMetricsDefaultHeaderText"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/choose_a_chart_type"
@@ -35,10 +37,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        style="@style/MobileMetricsDefaultButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="@string/ok"
         android:onClick="loadGraph"
+        android:text="@string/ok"
         android:visibility="gone" />
 
 </RelativeLayout>

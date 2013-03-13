@@ -1,15 +1,12 @@
 package edu.channel4.mm.db.android.network;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
@@ -29,9 +26,9 @@ public class GetEventNameListAsyncTask extends
    private String responseString;
    private EventNameDescriptionCallback callback;
 
-   public GetEventNameListAsyncTask(Context context, HttpClient client,
+   public GetEventNameListAsyncTask(Context context,
                                     EventNameDescriptionCallback callback) {
-      super(context, client);
+      super(context);
 
       this.callback = callback;
    }
@@ -56,24 +53,26 @@ public class GetEventNameListAsyncTask extends
       // Event list
       String url = String.format(SalesforceConn.SALESFORCE_BASE_REST_URL,
                instanceUrl, SalesforceConn.EVENTS_URL_SUFFIX);
-      
+
       appLabel = Uri.encode(appLabel);
-      
+
       url += "?appLabel=" + appLabel;
-      
+
       // add parameters
+      HttpClient client = new DefaultHttpClient();
       HttpGet eventNameRequest = new HttpGet(url);
       eventNameRequest.setHeader("Authorization", "Bearer " + accessToken);
 
       // Add AppLabel parameter
-      //List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-      //nameValuePairs.add(new BasicNameValuePair("appLabel", appLabel));
+      // List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+      // nameValuePairs.add(new BasicNameValuePair("appLabel", appLabel));
 
       try {
-         //eventNameRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+         // eventNameRequest.setEntity(new
+         // UrlEncodedFormEntity(nameValuePairs));
          // Get the response string, the Attribute List in JSON form
-         responseString = EntityUtils.toString(getClient().execute(
-                  eventNameRequest).getEntity());
+         responseString = EntityUtils.toString(client.execute(eventNameRequest)
+                  .getEntity());
       }
       catch (ClientProtocolException e) {
          Log.e(e.getMessage());

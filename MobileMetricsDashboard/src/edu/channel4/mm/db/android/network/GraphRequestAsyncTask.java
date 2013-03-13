@@ -6,12 +6,14 @@ import java.net.URI;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
+import android.content.Context;
+
 import com.google.visualization.datasource.base.TypeMismatchException;
 
-import android.content.Context;
 import edu.channel4.mm.db.android.callback.GraphLoadCallback;
 import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.graph.Graph;
@@ -26,10 +28,9 @@ public class GraphRequestAsyncTask extends BaseAsyncTask<Void, Void, Graph> {
    private GraphRequest graphRequest;
    private GraphLoadCallback listener;
 
-   public GraphRequestAsyncTask(Context context, HttpClient client,
-                                GraphRequest graphRequest,
+   public GraphRequestAsyncTask(Context context, GraphRequest graphRequest,
                                 GraphLoadCallback listener) {
-      super(context, client);
+      super(context);
       this.graphRequest = graphRequest;
       this.listener = listener;
    }
@@ -44,13 +45,14 @@ public class GraphRequestAsyncTask extends BaseAsyncTask<Void, Void, Graph> {
 
       Log.d("URI: " + uri);
 
+      HttpClient client = new DefaultHttpClient();
       HttpGet getRequest = new HttpGet(uri);
       getRequest.setHeader("Authorization",
                "Bearer " + restClientManager.getAccessToken());
 
       try {
          // Get the response string, the Attribute List in JSON form
-         responseString = EntityUtils.toString(getClient().execute(getRequest)
+         responseString = EntityUtils.toString(client.execute(getRequest)
                   .getEntity());
       }
       catch (ClientProtocolException e) {

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MobileMetricsTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center" >
 
     <ListView
         android:id="@+id/listViewCustomGraphActivity"
+        style="@style/MobileMetricsListViewTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonCreateNewCustomGraph"
@@ -15,12 +17,14 @@
 
     <TextView
         android:id="@+id/textViewNoCustomGraphs"
+        style="@style/MobileMetricsDefaultHeaderText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/no_custom_graphs" />
 
     <Button
         android:id="@+id/buttonCreateNewCustomGraph"
+        style="@style/MobileMetricsDefaultButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/listViewCustomGraphActivity"
