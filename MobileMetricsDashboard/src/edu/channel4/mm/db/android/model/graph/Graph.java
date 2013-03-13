@@ -105,15 +105,15 @@ public class Graph {
 	}
 
 	private Intent getBarGraphIntent(Context context) {
-		String[] titles = new String[] { "Count"};
-        List<double[]> values = new ArrayList<double[]>();
-        List<String> categories = new ArrayList<String>();
-        
-        int xmax = 0;
-        double ymax = 0;
-        
-        double[] firstVals = new double[20];
-        
+		String[] titles = new String[] { "Count" };
+		List<double[]> values = new ArrayList<double[]>();
+		List<String> categories = new ArrayList<String>();
+
+		int xmax = 0;
+		double ymax = 0;
+
+		double[] firstVals = new double[20];
+
 		for (TableRow tableRow : datatable.getRows()) {
 			// FIXME: Hack that assumes that column 0 is string and column 1 is
 			// number
@@ -121,40 +121,42 @@ public class Graph {
 					.getValue();
 			Double value = ((NumberValue) tableRow.getCell(1).getValue())
 					.getValue();
-			if(value > ymax){
+			if (value > ymax) {
 				ymax = value;
 			}
-			
+
 			firstVals[xmax] = value;
 			categories.add(category);
 			xmax++;
 		}
-		
+
 		values.add(firstVals);
-		
-        int[] colors = new int[] { Color.parseColor("#77c4d3")};
-        XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);
-        renderer.setOrientation(Orientation.HORIZONTAL);
-        setChartSettings(renderer, "Production Details", "Products", "Count", 0,
-            xmax + 1, 0, 1.3 * ymax, Color.BLACK, Color.BLACK);
-        
-        renderer.setXLabels(1);
-        renderer.setYLabels(10);
-        
-        for(int i = 1; i < xmax; i++){
-        	renderer.addXTextLabel(i, categories.get(i));
-        }
-        
-        int length = renderer.getSeriesRendererCount();
-        for (int i = 0; i < length; i++) {
-          SimpleSeriesRenderer seriesRenderer = renderer.getSeriesRendererAt(i);
-          seriesRenderer.setDisplayChartValues(true);
-        }
- 
- 
-        return ChartFactory.getBarChartIntent(context, buildBarDataset(titles, values), renderer,Type.DEFAULT);
-   
-		//return setupXYMultipleSeriesIntent(getBarRenderer(), context);
+
+		int[] colors = new int[] { Color.parseColor("#77c4d3") };
+		XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);
+		renderer.setOrientation(Orientation.HORIZONTAL);
+		setChartSettings(renderer,
+				datatable.getColumnDescription(0).getLabel(), datatable
+						.getColumnDescription(0).getLabel(), "Count", 0,
+				xmax + 1, 0, 1.3 * ymax, Color.BLACK, Color.BLACK);
+
+		renderer.setXLabels(1);
+		renderer.setYLabels(10);
+
+		for (int i = 1; i <= xmax; i++) {
+			renderer.addXTextLabel(i, categories.get(i - 1));
+		}
+
+		int length = renderer.getSeriesRendererCount();
+		for (int i = 0; i < length; i++) {
+			SimpleSeriesRenderer seriesRenderer = renderer
+					.getSeriesRendererAt(i);
+			seriesRenderer.setDisplayChartValues(true);
+		}
+
+		return ChartFactory.getBarChartIntent(context,
+				buildBarDataset(titles, values), renderer, Type.DEFAULT);
+
 	}
 
 	private Intent getLineGraphIntent(Context context) {
