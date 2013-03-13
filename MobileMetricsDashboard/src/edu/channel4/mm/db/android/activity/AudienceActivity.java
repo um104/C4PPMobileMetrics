@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.request.DeviceTypeDistributionGraphRequest;
@@ -17,6 +18,7 @@ import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.LanguageLocaleGraphRequest;
 import edu.channel4.mm.db.android.model.request.NationalityBreakdownGraphRequest;
 import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
+import edu.channel4.mm.db.android.util.Keys;
 
 public class AudienceActivity extends Activity {
 
@@ -66,6 +68,12 @@ public class AudienceActivity extends Activity {
 
 		listView.setAdapter(adapter);
 		setTitle(getResources().getString(R.string.audience));
+		
+		
+		String appLabel = getApplicationContext().getSharedPreferences(
+               Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
+
+      ((TextView) findViewById(R.id.audienceHeader)).setText(appLabel);
 	}
 
 }

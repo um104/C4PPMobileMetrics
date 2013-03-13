@@ -18,9 +18,7 @@ import edu.channel4.mm.db.android.util.Keys;
 
 public class DashboardActivity extends Activity {
 
-	// TODO: Switch this to an ExpandableListView later. Mock it up first
-	// though.
-   //(mlerner): Why ExpandableListView? I think you're thinking of the AttributePicker(?)  
+	// TODO: Switch this to a better GridView later, but mock first
 	private ListView listView;
 	private ListViewAdapter adapter;
 
@@ -43,9 +41,11 @@ public class DashboardActivity extends Activity {
          }
       });
 
+      // set the title of the activity
       String appLabel = getApplicationContext().getSharedPreferences(
                Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
 
+      ((TextView) findViewById(R.id.dashboardHeader)).setText(appLabel);
       setTitle(appLabel);
    }
 

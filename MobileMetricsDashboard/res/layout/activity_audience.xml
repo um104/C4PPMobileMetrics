@@ -22,12 +22,13 @@
         android:background="@color/dark_gray" />
     
     <TextView
+        android:id="@+id/audienceHeader"
         style="@style/MobileMetricsDefaultHeaderText"
-        android:id="@+id/textViewAudience"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:text="@string/defaultAppName" />
+
 </RelativeLayout>
