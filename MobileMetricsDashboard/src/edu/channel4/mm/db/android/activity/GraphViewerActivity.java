@@ -53,7 +53,7 @@ public class GraphViewerActivity extends Activity implements GraphLoadCallback {
       // Setup the validGraphTypes Spinner.
       spinner = (Spinner) findViewById(R.id.spinnerGraphViewer);
       adapter = new ArrayAdapter<GraphType>(getApplicationContext(),
-               android.R.layout.simple_spinner_item, validGraphTypes);
+               R.layout.cell_dropdown_item, validGraphTypes);
       spinner.setAdapter(adapter);
 
       // Setup the GraphFactory and pull in the GraphRequest

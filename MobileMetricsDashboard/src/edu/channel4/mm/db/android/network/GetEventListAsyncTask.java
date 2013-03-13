@@ -6,12 +6,12 @@ import java.util.List;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
 import android.content.Context;
 import android.net.Uri;
-import android.widget.Toast;
 import edu.channel4.mm.db.android.callback.EventDescriptionCallback;
 import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.description.EventDescription;
@@ -21,13 +21,14 @@ import edu.channel4.mm.db.android.util.Log;
 
 public class GetEventListAsyncTask extends
          BaseAsyncTask<Void, Void, List<EventDescription>> {
-   
+
    private final static String ATTRIBS_URL_SUFFIX = "channel4_attributes/";
    private String responseString;
    private EventDescriptionCallback callback;
 
-   public GetEventListAsyncTask(Context context, HttpClient client, EventDescriptionCallback callback) {
-      super(context, client);
+   public GetEventListAsyncTask(Context context,
+                                EventDescriptionCallback callback) {
+      super(context);
       this.callback = callback;
    }
 
@@ -49,23 +50,25 @@ public class GetEventListAsyncTask extends
       // Event list
       String appLabel = getContext().getSharedPreferences(Keys.PREFS_NS, 0)
                .getString(Keys.APP_LABEL, null);
-      
+
       appLabel = Uri.encode(appLabel);
-      
+
+      HttpClient client = new DefaultHttpClient();
       HttpGet eventRequest = new HttpGet(String.format(
-               SalesforceConn.SALESFORCE_BASE_REST_URL, instanceUrl, ATTRIBS_URL_SUFFIX)
-                        + "?appLabel=" + appLabel);
-      
+               SalesforceConn.SALESFORCE_BASE_REST_URL, instanceUrl,
+               ATTRIBS_URL_SUFFIX)
+               + "?appLabel=" + appLabel);
+
       eventRequest.setHeader("Authorization", "Bearer " + accessToken);
 
       // Add AppLabel parameter
-      //List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-      //nameValuePairs.add(new BasicNameValuePair("appLabel", appLabel));
+      // List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+      // nameValuePairs.add(new BasicNameValuePair("appLabel", appLabel));
 
       try {
-         //eventRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+         // eventRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
          // Get the response string, the Attribute List in JSON form
-         responseString = EntityUtils.toString(getClient().execute(eventRequest)
+         responseString = EntityUtils.toString(client.execute(eventRequest)
                   .getEntity());
       }
       catch (ClientProtocolException e) {
@@ -80,7 +83,8 @@ public class GetEventListAsyncTask extends
       if (responseString == null) {
          final String errorMessage = "ERROR: Attempted to parse null Event list.";
          // TODO: Removed for testing
-         //Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+         // Toast.makeText(getContext(), errorMessage,
+         // Toast.LENGTH_SHORT).show();
          Log.e(errorMessage);
          return null;
       }
@@ -102,7 +106,7 @@ public class GetEventListAsyncTask extends
       super.onPostExecute(result);
       TempoDatabase tempoDatabase = TempoDatabase.getInstance();
       tempoDatabase.setEventDescriptions(result);
-      
+
       callback.onEventDescriptionChanged(result);
    }
 }

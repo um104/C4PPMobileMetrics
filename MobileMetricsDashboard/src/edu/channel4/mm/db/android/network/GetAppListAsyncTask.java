@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
@@ -22,9 +23,8 @@ class GetAppListAsyncTask extends
    private String responseString = null;
    private AppDescriptionCallback callback;
 
-   public GetAppListAsyncTask(Context context, HttpClient client,
-                              AppDescriptionCallback callback) {
-      super(context, client);
+   public GetAppListAsyncTask(Context context, AppDescriptionCallback callback) {
+      super(context);
       this.callback = callback;
    }
 
@@ -45,13 +45,14 @@ class GetAppListAsyncTask extends
       Log.d("Access token: " + accessToken);
       Log.d("Instance URL: " + instanceUrl);
 
+      HttpClient client = new DefaultHttpClient();
       HttpUriRequest getRequest = new HttpGet(String.format(
                SalesforceConn.SALESFORCE_BASE_REST_URL, instanceUrl,
                APPS_URL_SUFFIX));
       getRequest.setHeader("Authorization", "Bearer " + accessToken);
 
       try {
-         responseString = EntityUtils.toString(getClient().execute(getRequest)
+         responseString = EntityUtils.toString(client.execute(getRequest)
                   .getEntity());
       }
       catch (Exception e) {
@@ -63,7 +64,8 @@ class GetAppListAsyncTask extends
       if (responseString == null) {
          final String errorMessage = "ERROR: Attempted to parse null App list.";
          // TODO: commented out for testing purposes
-         // Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+         // Toast.makeText(getContext(), errorMessage,
+         // Toast.LENGTH_SHORT).show();
          Log.e(errorMessage);
          return null;
       }
