@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MobileMetricsListItemTheme"
+    android:id="@+id/cellAbout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:focusable="false"
+     >
+    
+    <TextView
+        android:id="@+id/developerName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dip"
+        android:textAppearance="@style/MobileMetricsDefaultCellText" />
+
+</LinearLayout>

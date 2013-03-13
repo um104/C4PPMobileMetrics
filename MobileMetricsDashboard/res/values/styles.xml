@@ -16,5 +16,61 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+
+    <style name="MobileMetricsTheme" parent="AppBaseTheme" >
+        <item name="android:background">@drawable/background</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+    
+    <style name="MobileMetricsListViewTheme" parent="AppBaseTheme">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:divider">@color/dark_gray</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:listSelector">@xml/list_selector</item>
+    </style>
+    
+    <style name="MobileMetricsListItemTheme">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:padding">5dp</item>
+    </style>
+    
+    <style name="MobileMetricsDefaultHeaderText">
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+    
+    <style name="MobileMetricsDefaultCellText">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">24sp</item>
+         <item name="android:typeface">serif</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+    
+    <style name="MobileMetricsDefaultSmallCellText">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+    
+    <style name="MobileMetricsDefaultButton">
+        <item name="android:background">@drawable/gray_button</item>
+        <item name="android:textSize">20sp</item>
+    </style>
     
 </resources>

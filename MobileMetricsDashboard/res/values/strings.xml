@@ -22,7 +22,7 @@
     <string name="logout">Logout</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="developers">Developers:</string>
-
+    <string name="defaultAppName">App Name</string>
     <string-array name="developer_names">
         <item>Bittah Prophet</item>
         <item>Phantom Specialist</item>

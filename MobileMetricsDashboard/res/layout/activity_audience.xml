@@ -1,13 +1,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    style="@style/MobileMetricsTheme"
     android:layout_height="match_parent"
     tools:context=".AudienceActivity" >
 
     <ListView
+        
         android:id="@+id/listviewAudienceActivity"
+        style="@style/MobileMetricsListViewTheme"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_below="@+id/audienceHorizontalBreak" >
     </ListView>
 
+    <View 
+        android:id="@+id/audienceHorizontalBreak"
+        android:layout_below="@+id/textViewAudience"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/dark_gray" />
+    
+    <TextView
+        style="@style/MobileMetricsDefaultHeaderText"
+        android:id="@+id/textViewAudience"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="@string/defaultAppName" />
 </RelativeLayout>

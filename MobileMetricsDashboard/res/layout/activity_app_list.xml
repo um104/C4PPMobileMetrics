@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MobileMetricsTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -15,40 +16,50 @@
 
         <Button
             android:id="@+id/buttonAbout"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
+            style="@style/MobileMetricsDefaultButton"
             android:layout_height="wrap_content"
             android:onClick="about"
             android:text="@string/about" />
 
         <Button
             android:id="@+id/buttonLogOut"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            style="@style/MobileMetricsDefaultButton"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:onClick="logout"
             android:text="@string/logout" />
     </RelativeLayout>
 
+    
     <ListView
         android:id="@+id/listViewAppList"
+        style="@style/MobileMetricsListViewTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomRelativeLayout"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewSelectApp" >
+        android:layout_below="@+id/appListHorizontalBreak" >
     </ListView>
 
+    <View 
+        android:id="@+id/appListHorizontalBreak"
+        android:layout_below="@+id/textViewSelectApp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/dark_gray" />
+    
     <TextView
+        style="@style/MobileMetricsDefaultHeaderText"
         android:id="@+id/textViewSelectApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/darker_gray"
         android:gravity="center_horizontal"
-        android:padding="10dp"
-        android:text="@string/select_app"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/select_app" />
+        
 
 </RelativeLayout>
