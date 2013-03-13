@@ -153,8 +153,10 @@ public class AppListActivity extends NativeMainActivity implements
 
    @Override
    public void onAppDescriptionChanged(List<AppDescription> newAppDescriptions) {
-      appList.clear();
-      appList.addAll(newAppDescriptions);
-      arrayAdapter.notifyDataSetChanged();
+      if (null != newAppDescriptions) {
+         appList.clear();
+         appList.addAll(newAppDescriptions);
+         arrayAdapter.notifyDataSetChanged();
+      }
    }
 }

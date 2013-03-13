@@ -35,10 +35,10 @@ public class GetEventListAsyncTask extends
    protected List<EventDescription> doInBackground(Void... params) {
       Log.i("Sending GET request to get event list");
 
-      String accessToken = getContext().getSharedPreferences(Keys.PREFS_NS, 0)
-               .getString(Keys.ACCESS_TOKEN, null);
-      String instanceUrl = getContext().getSharedPreferences(Keys.PREFS_NS, 0)
-               .getString(Keys.INSTANCE_URL, null);
+      RestClientAccess restClientAccess = RestClientAccess.getInstance();
+
+      String accessToken = restClientAccess.getAccessToken();
+      String instanceUrl = restClientAccess.getInstanceURL().toString();
 
       if (accessToken == null) {
          Log.e("No access token currently saved");

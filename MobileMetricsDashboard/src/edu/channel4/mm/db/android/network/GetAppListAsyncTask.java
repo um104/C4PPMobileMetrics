@@ -62,7 +62,8 @@ class GetAppListAsyncTask extends
 
       if (responseString == null) {
          final String errorMessage = "ERROR: Attempted to parse null App list.";
-         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+         // TODO: commented out for testing purposes
+         // Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
          Log.e(errorMessage);
          return null;
       }

@@ -29,7 +29,7 @@ public class LanguageLocaleGraphRequest implements GraphRequest {
    
    private final static String REQUEST_TYPE = "CUSTOM";
    private final static String EVENT1 = ""; // empty b/c session attr
-   private final static String ATTRIBUTE1 = "LanguageLocal__c";
+   private final static String ATTRIBUTE1 = "LanguageLocale__c";
 
    public LanguageLocaleGraphRequest() {
    }

@@ -69,8 +69,10 @@ public class Graph {
 
    private Intent getPieGraphIntent(Context context) {
       Intent intent = null;
+      Random rand = new Random();
 
       CategorySeries categorySeries = new CategorySeries("unknown pie chart");
+      DefaultRenderer renderer = new DefaultRenderer();
 
       for (TableRow tableRow : datatable.getRows()) {
          // FIXME: Hack that assumes that column 0 is string and column 1 is
@@ -80,11 +82,13 @@ public class Graph {
          Double value = ((NumberValue) tableRow.getCell(1).getValue())
                   .getValue();
          categorySeries.add(category, value);
+         SimpleSeriesRenderer simpleSeriesRenderer = new SimpleSeriesRenderer();
+         simpleSeriesRenderer.setColor(Color.rgb(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+         renderer.addSeriesRenderer(simpleSeriesRenderer);
       }
 
-      SimpleSeriesRenderer simpleSeriesRenderer = new SimpleSeriesRenderer();
-      DefaultRenderer renderer = new DefaultRenderer();
-      renderer.addSeriesRenderer(simpleSeriesRenderer);
+      /*SimpleSeriesRenderer simpleSeriesRenderer = new SimpleSeriesRenderer();
+      renderer.addSeriesRenderer(simpleSeriesRenderer);*/
 
       intent = ChartFactory.getPieChartIntent(context, categorySeries,
                renderer, "some activity");

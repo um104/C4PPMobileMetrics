@@ -201,10 +201,10 @@ public class EditGraphRequestActivity extends Activity implements
          // if the event name is "Session Attributes", replace it with an empty string
          String eventName = event.getName();
          eventName = eventName.replace("Session Attributes", "");
-         
+                  
          // put the event and attribute info into the graphRequest
          ((HasAttributeParameter)graphRequest).setAttributeName(attribute.getName());
-         ((HasAttributeParameter)graphRequest).setEventName(event.getName());
+         ((HasAttributeParameter)graphRequest).setEventName(eventName);
       }
 
 		// Create GraphViewerActivity intent and put URIParams in Intent
@@ -230,17 +230,21 @@ public class EditGraphRequestActivity extends Activity implements
    @Override
    public void onEventNameDescriptionChanged(
             List<EventNameDescription> newEventNameDescriptions) {
-      this.eventNameList.clear();
-      this.eventNameList.addAll(newEventNameDescriptions);
-      this.eventNameAdapter.notifyDataSetChanged();
+      if (null != newEventNameDescriptions) {
+         this.eventNameList.clear();
+         this.eventNameList.addAll(newEventNameDescriptions);
+         this.eventNameAdapter.notifyDataSetChanged();
+      }
    }
 
    @Override
    public void onEventDescriptionChanged(
             List<EventDescription> newEventDescriptions) {
-      eventList.clear();
-      eventList.addAll(newEventDescriptions);
-      eventAdapter.notifyDataSetChanged();
+      if (null != newEventDescriptions) {
+         eventList.clear();
+         eventList.addAll(newEventDescriptions);
+         eventAdapter.notifyDataSetChanged();
+      }
       
    }
 
