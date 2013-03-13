@@ -66,7 +66,11 @@ public class AudienceActivity extends Activity {
 		graphRequests.add(new CustomGraphRequest("Nationality Breakdown", "", "DeviceCountry__c", R.drawable.nationality_breakdown));
 		graphRequests.add(new CustomGraphRequest("Language Locale", "", "LanguageLocale__c", R.drawable.language_locale));
 		graphRequests.add(new CustomGraphRequest("Device Type Distribution", "", "DeviceType__c", R.drawable.device_type_dist));
-		
+		graphRequests.add(new CustomGraphRequest("Device Manufacturer", "", "DeviceManufacturer__c", R.drawable.ic_launcher));
+		graphRequests.add(new CustomGraphRequest("Device Model", "", "DeviceModel__c", R.drawable.ic_launcher));
+      graphRequests.add(new CustomGraphRequest("Network Carrier", "", "NetworkCarrier__c", R.drawable.ic_launcher));
+      graphRequests.add(new CustomGraphRequest("Network Country Code", "", "NetworkCountryCode__c", R.drawable.ic_launcher));
+      graphRequests.add(new CustomGraphRequest("SDK Compatibility", "", "SDKCompatibility__c", R.drawable.ic_launcher));
 
 		adapter = new GraphRequestArrayAdapter(getApplicationContext(),
 				graphRequests.toArray(new GraphRequest[0]));
