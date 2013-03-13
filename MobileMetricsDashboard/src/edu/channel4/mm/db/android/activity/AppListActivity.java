@@ -89,6 +89,23 @@ public class AppListActivity extends NativeMainActivity implements
    }
 
    /**
+    * DON'T USE THIS ONRESUME FOR OUR CODE. This is the regular Android
+    * onResume() and is called when AppListActivity resumes control: once
+    * *before* the Salesforce login WebView is called, and once *after*.
+    * 
+    * Instead, put our business logic in Salesforce's version of onResume()
+    * below.
+    */
+   @Override
+   public void onResume() {
+      super.onResume();
+
+      // Hide everything until we are logged in (until the Salesforce WebView
+      // passes)
+      findViewById(R.id.appListRoot).setVisibility(View.INVISIBLE);
+   }
+
+   /**
     * Don't use Android's regular onResume() in this class. Instead, use this
     * onResume(). This one comes from Salesforce's native Android SDK and gives
     * you the {@link RestClient} object exactly once.
@@ -98,7 +115,10 @@ public class AppListActivity extends NativeMainActivity implements
       // Save a reference to the rest client for use throughout the app
       RestClientAccess.getInstance().setRestClient(client);
 
-      // Retrieve the app list from Salesforce
+      // Show everything now that the Salesforce WebView has passed.
+      findViewById(R.id.appListRoot).setVisibility(View.VISIBLE);
+
+      // Asynchronously retrieve the app list from Salesforce
       getAppList(null);
    }
 
