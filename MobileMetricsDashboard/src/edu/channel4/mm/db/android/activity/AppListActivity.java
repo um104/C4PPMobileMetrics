@@ -129,15 +129,18 @@ public class AppListActivity extends NativeMainActivity implements
          // Grab the pertinent AppData object
          AppDescription appData = appList.get(position);
 
+         // Inflate the cell
          LayoutInflater inflater = (LayoutInflater) getApplicationContext()
                   .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
          convertView = inflater.inflate(R.layout.cell_app_list, null);
 
+         // Reference the Views
          TextView appName = (TextView) convertView
                   .findViewById(R.id.textViewAppName);
          TextView packageName = (TextView) convertView
                   .findViewById(R.id.textViewPackageName);
 
+         // Modify their text.
          appName.setText(appData.getAppName());
          packageName.setText(appData.getPackageName());
 
@@ -160,9 +163,11 @@ public class AppListActivity extends NativeMainActivity implements
 
    @Override
    public void onAppDescriptionChanged(List<AppDescription> newAppDescriptions) {
+      // Hide the ProgressBar
       progressBar.setVisibility(View.GONE);
 
-      if (null != newAppDescriptions) {
+      // Sanity check, then update the ArrayAdapter and its array
+      if (newAppDescriptions != null) {
          appList.clear();
          appList.addAll(newAppDescriptions);
          arrayAdapter.notifyDataSetChanged();
