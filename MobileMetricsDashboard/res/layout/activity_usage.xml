@@ -1,11 +1,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MobileMetricsTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".UsageActivity" >
 
+    <TextView
+        android:id="@+id/usageHeader"
+        style="@style/MobileMetricsDefaultHeaderText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/defaultAppName" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/dark_gray" />
+    
     <ListView
+        style="@style/MobileMetricsListViewTheme"
         android:id="@+id/listviewUsageActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
