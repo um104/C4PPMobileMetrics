@@ -6,12 +6,12 @@
     tools:context=".AudienceActivity" >
 
     <ListView
-        
         android:id="@+id/listviewAudienceActivity"
         style="@style/MobileMetricsListViewTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/audienceHorizontalBreak" >
+        android:layout_below="@+id/audienceHeader" >
+
     </ListView>
 
     <View 
