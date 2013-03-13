@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.salesforce.androidsdk.app.ForceApp;
 import com.salesforce.androidsdk.rest.ClientManager.LoginOptions;
@@ -40,6 +42,8 @@ public class AppListActivity extends NativeMainActivity implements
    protected List<AppDescription> appList;
    protected AppDataArrayAdapater arrayAdapter;
    protected SalesforceConn sfConn;
+
+   protected ProgressBar progressBar;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,26 @@ public class AppListActivity extends NativeMainActivity implements
 
       // Hook up the array adapter to the ListView
       listViewAppList.setAdapter(arrayAdapter);
+
+      // Reference the ProgressBar so we can turn it off later
+      progressBar = (ProgressBar) findViewById(R.id.progressBarAppList);
+   }
+
+   /**
+    * DON'T USE THIS ONRESUME FOR OUR CODE. This is the regular Android
+    * onResume() and is called when AppListActivity resumes control: once
+    * *before* the Salesforce login WebView is called, and once *after*.
+    * 
+    * Instead, put our business logic in Salesforce's version of onResume()
+    * below.
+    */
+   @Override
+   public void onResume() {
+      super.onResume();
+
+      // Hide everything until we are logged in (until the Salesforce WebView
+      // passes)
+      findViewById(R.id.appListRoot).setVisibility(View.INVISIBLE);
    }
 
    /**
@@ -91,7 +115,10 @@ public class AppListActivity extends NativeMainActivity implements
       // Save a reference to the rest client for use throughout the app
       RestClientAccess.getInstance().setRestClient(client);
 
-      // Retrieve the app list from Salesforce
+      // Show everything now that the Salesforce WebView has passed.
+      findViewById(R.id.appListRoot).setVisibility(View.VISIBLE);
+
+      // Asynchronously retrieve the app list from Salesforce
       getAppList(null);
    }
 
@@ -122,15 +149,18 @@ public class AppListActivity extends NativeMainActivity implements
          // Grab the pertinent AppData object
          AppDescription appData = appList.get(position);
 
+         // Inflate the cell
          LayoutInflater inflater = (LayoutInflater) getApplicationContext()
                   .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
          convertView = inflater.inflate(R.layout.cell_app_list, null);
 
+         // Reference the Views
          TextView appName = (TextView) convertView
                   .findViewById(R.id.textViewAppName);
          TextView packageName = (TextView) convertView
                   .findViewById(R.id.textViewPackageName);
 
+         // Modify their text.
          appName.setText(appData.getAppName());
          packageName.setText(appData.getPackageName());
 
@@ -153,10 +183,18 @@ public class AppListActivity extends NativeMainActivity implements
 
    @Override
    public void onAppDescriptionChanged(List<AppDescription> newAppDescriptions) {
-      if (null != newAppDescriptions) {
+      // Hide the ProgressBar
+      progressBar.setVisibility(View.GONE);
+
+      // Sanity check, then update the ArrayAdapter and its array
+      if (newAppDescriptions != null) {
          appList.clear();
          appList.addAll(newAppDescriptions);
          arrayAdapter.notifyDataSetChanged();
+      }
+      else {
+         Toast.makeText(getApplicationContext(), "Null app list...",
+                  Toast.LENGTH_SHORT).show();
       }
    }
 }

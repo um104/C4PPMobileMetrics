@@ -47,5 +47,7 @@
     <string name="title_activity_edit_graph_request">EditGraphRequestActivity</string>
     <string name="please_enter_valid_inputs_">Please enter valid inputs.</string>
     <string name="event_1_">Event 1:</string>
+    <string name="choose_a_chart_type">Choose a Chart Type</string>
+    <string name="ok">OK</string>
 
 </resources>
