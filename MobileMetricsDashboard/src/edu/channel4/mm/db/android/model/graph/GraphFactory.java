@@ -152,6 +152,6 @@ public class GraphFactory {
          Log.i(tableRow.getCells().toString());
       }
 
-      return new Graph(null, validGraphTypes, datatable);
+      return new Graph("Your graph!", validGraphTypes, datatable);
    }
 }

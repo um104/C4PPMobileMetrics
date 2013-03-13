@@ -81,7 +81,7 @@ public class NationalityBreakdownGraphRequest implements GraphRequest {
 
       // add the parameters to the uriString
       String paramString = URLEncodedUtils.format(params, "utf-8");
-      uriString += paramString;
+      uriString += "?" + paramString;
 
       // turn the string into a URI
       try {
