@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.salesforce.androidsdk.app.ForceApp;
 import com.salesforce.androidsdk.rest.ClientManager.LoginOptions;
@@ -40,6 +42,8 @@ public class AppListActivity extends NativeMainActivity implements
    protected List<AppDescription> appList;
    protected AppDataArrayAdapater arrayAdapter;
    protected SalesforceConn sfConn;
+
+   protected ProgressBar progressBar;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,9 @@ public class AppListActivity extends NativeMainActivity implements
 
       // Hook up the array adapter to the ListView
       listViewAppList.setAdapter(arrayAdapter);
+
+      // Reference the ProgressBar so we can turn it off later
+      progressBar = (ProgressBar) findViewById(R.id.progressBarAppList);
    }
 
    /**
@@ -153,10 +160,16 @@ public class AppListActivity extends NativeMainActivity implements
 
    @Override
    public void onAppDescriptionChanged(List<AppDescription> newAppDescriptions) {
+      progressBar.setVisibility(View.GONE);
+
       if (null != newAppDescriptions) {
          appList.clear();
          appList.addAll(newAppDescriptions);
          arrayAdapter.notifyDataSetChanged();
+      }
+      else {
+         Toast.makeText(getApplicationContext(), "Null app list...",
+                  Toast.LENGTH_SHORT).show();
       }
    }
 }
