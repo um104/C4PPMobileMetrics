@@ -47,7 +47,7 @@ public class Keys {
 
 	public static final String EVENT_DESCRIPTIONS = "eDescs";
 
-	public static final String EVENT_NAME = "name";
+	public static final String NAME = "name";
 
 	public static final String EVENT_ATTRIBUTES = "eAttrs";
 	
@@ -82,4 +82,6 @@ public class Keys {
 	public static final String REQUEST_AS_JSON = "requestAsJSON";
 	
 	public static final String EVENT_NAME_C4PPMM = "C4PPMM__EventName__c";
+	
+	public static final String EVENT_NAME = "eventName";
 }

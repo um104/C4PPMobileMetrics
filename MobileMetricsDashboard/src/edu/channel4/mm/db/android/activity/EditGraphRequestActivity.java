@@ -177,13 +177,13 @@ public class EditGraphRequestActivity extends Activity implements
          int selectedItemPosition = durationSpinner.getSelectedItemPosition();
          TimeInterval timeInterval = durationAdapter
                   .getItem(selectedItemPosition);
-         ((HasOverTimeParameter) graphRequest).setTimeDuration(timeInterval
+         ((HasOverTimeParameter) graphRequest).setTimeInterval(timeInterval
                   .name());
       }
       if (graphRequest instanceof HasEventNameParameter) {
          // retrieve selected event from event1Spinner, put in graphRequest
          int selectedItemPosition = event1Spinner.getSelectedItemPosition();
-         EventDescription eventDescription = eventAdapter
+         EventNameDescription eventDescription = eventNameAdapter
                   .getItem(selectedItemPosition);
          ((HasEventNameParameter) graphRequest).setEventName(eventDescription
                   .getName());

@@ -81,7 +81,7 @@ public class EventDescription {
 	      JSONObject eventAttributeDescription = eventDescriptionsJSON.getJSONObject(i);
 
 	      // Pull the out the Event name and its attributes in JSONArray form
-	      String eventNameString = eventAttributeDescription.getString(Keys.EVENT_NAME);
+	      String eventNameString = eventAttributeDescription.getString(Keys.NAME);
 	      JSONArray eventAttributesJSONArray = eventAttributeDescription.getJSONArray(Keys.EVENT_ATTRIBUTES);
 
 	      // Add all of the attributes to a List

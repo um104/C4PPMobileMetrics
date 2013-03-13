@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.DeviceTypeDistributionGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.LanguageLocaleGraphRequest;
@@ -59,9 +60,13 @@ public class AudienceActivity extends Activity {
 		});
 
 		graphRequests = new ArrayList<GraphRequest>();
-		graphRequests.add(new NationalityBreakdownGraphRequest());
-		graphRequests.add(new LanguageLocaleGraphRequest());
-		graphRequests.add(new DeviceTypeDistributionGraphRequest());
+		//graphRequests.add(new NationalityBreakdownGraphRequest());
+		//graphRequests.add(new LanguageLocaleGraphRequest());
+		//graphRequests.add(new DeviceTypeDistributionGraphRequest());
+		graphRequests.add(new CustomGraphRequest("Nationality Breakdown", "", "DeviceCountry__c", R.drawable.nationality_breakdown));
+		graphRequests.add(new CustomGraphRequest("Language Locale", "", "LanguageLocale__c", R.drawable.language_locale));
+		graphRequests.add(new CustomGraphRequest("Device Type Distribution", "", "DeviceType__c", R.drawable.device_type_dist));
+		
 
 		adapter = new GraphRequestArrayAdapter(getApplicationContext(),
 				graphRequests.toArray(new GraphRequest[0]));

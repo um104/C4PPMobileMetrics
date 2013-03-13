@@ -21,32 +21,24 @@ import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 
-public class SessionOverTimeGraphRequest implements GraphRequest,
-         HasOverTimeParameter {
-
-   private final static String REQUEST_TYPE = "SESSION_OVER_TIME";
+public class EventOverTimeGraphRequest implements GraphRequest, HasEventNameParameter, HasOverTimeParameter {
+   
+   private final static String REQUEST_TYPE = "EVENT_OVER_TIME";
    private String timeInterval;
-
-   public SessionOverTimeGraphRequest() {
+   private String eventName;
+   
+   public EventOverTimeGraphRequest() {
    }
-
+   
    public String toString() {
-      return "Sessions over Time";
+      return "Event over Time";
    }
-
+   
    @Override
    public int getIconId() {
       return R.drawable.sessions_over_time;
    }
-
-   @Override
-   public Intent constructGraphRequestIntent(Context context) {
-      Intent intent = new Intent(context, EditGraphRequestActivity.class);
-      intent.putExtra(Keys.GRAPH_REQUEST_EXTRA, this);
-
-      return intent;
-   }
-
+   
    @Override
    public URI getUri(RestClientAccess restClientManager, Context context) {
       URI uri = null;
@@ -70,6 +62,7 @@ public class SessionOverTimeGraphRequest implements GraphRequest,
       params.add(new BasicNameValuePair(Keys.APP_LABEL_URL_PARAMETER_NAME,
                appLabel));
       params.add(new BasicNameValuePair(Keys.TIME_INTERVAL, timeInterval));
+      params.add(new BasicNameValuePair(Keys.EVENT_NAME, eventName));
 
       // add the parameters to the uriString
       String paramString = URLEncodedUtils.format(params, "utf-8");
@@ -87,8 +80,26 @@ public class SessionOverTimeGraphRequest implements GraphRequest,
    }
 
    @Override
-   public void setTimeInterval(String time) {
-      this.timeInterval = time;
+   public Intent constructGraphRequestIntent(Context context) {
+      Intent intent = new Intent(context, EditGraphRequestActivity.class);
+      intent.putExtra(Keys.GRAPH_REQUEST_EXTRA, this);
+      
+      return intent;
+   }
+   
+   @Override
+   public void setEventName(String eventName) {
+      this.eventName = eventName;
+   }
+
+   @Override
+   public String getEventName() {
+      return eventName;
+   }
+   
+   @Override
+   public void setTimeInterval(String timeInterval) {
+      this.timeInterval = timeInterval;
    }
 
    @Override
@@ -96,33 +107,32 @@ public class SessionOverTimeGraphRequest implements GraphRequest,
       return timeInterval;
    }
 
-   /* Everything from here down is for implementing the Parcelable interface */
    @Override
    public int describeContents() {
-      // Auto-generated method stub
       return 0;
    }
 
    @Override
    public void writeToParcel(Parcel dest, int flags) {
-      // Note: Parcel data is read in a FIFO manner.
+      // Note: Parcel data is read in a FIFO manner
       dest.writeString(timeInterval);
+      dest.writeString(eventName);
    }
-
-   public static final Parcelable.Creator<SessionOverTimeGraphRequest> CREATOR = new Parcelable.Creator<SessionOverTimeGraphRequest>(){
-      public SessionOverTimeGraphRequest createFromParcel(Parcel in) {
-         return new SessionOverTimeGraphRequest(in);
+   
+   public static final Parcelable.Creator<EventOverTimeGraphRequest> CREATOR = new Parcelable.Creator<EventOverTimeGraphRequest>(){
+      public EventOverTimeGraphRequest createFromParcel(Parcel in) {
+         return new EventOverTimeGraphRequest(in);
       }
 
       @Override
-      public SessionOverTimeGraphRequest[] newArray(int size) {
-         return new SessionOverTimeGraphRequest[size];
+      public EventOverTimeGraphRequest[] newArray(int size) {
+         return new EventOverTimeGraphRequest[size];
       }
    };
-
-   private SessionOverTimeGraphRequest(Parcel in) {
-      // Note: Parcel data is read in a FIFO manner.
+   
+   private EventOverTimeGraphRequest(Parcel in) {
+      // Note: Parcel data is read in a fifo manner
       this.timeInterval = in.readString();
+      this.eventName = in.readString();
    }
-
 }

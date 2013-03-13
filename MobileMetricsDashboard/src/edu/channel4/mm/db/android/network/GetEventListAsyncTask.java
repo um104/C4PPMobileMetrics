@@ -79,7 +79,8 @@ public class GetEventListAsyncTask extends
 
       if (responseString == null) {
          final String errorMessage = "ERROR: Attempted to parse null Event list.";
-         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+         // TODO: Removed for testing
+         //Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
          Log.e(errorMessage);
          return null;
       }

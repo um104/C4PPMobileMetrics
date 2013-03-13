@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.model.request.EventOverTimeGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.SessionOverTimeGraphRequest;
 import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
@@ -58,6 +59,7 @@ public class UsageActivity extends Activity {
 
 		graphRequests = new ArrayList<GraphRequest>();
 		graphRequests.add(new SessionOverTimeGraphRequest());
+		graphRequests.add(new EventOverTimeGraphRequest());
 
 		adapter = new GraphRequestArrayAdapter(getApplicationContext(),
 				graphRequests.toArray(new GraphRequest[0]));
@@ -69,7 +71,6 @@ public class UsageActivity extends Activity {
                Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
 
       ((TextView) findViewById(R.id.usageHeader)).setText(appLabel);
-		
 	}
 
 }

@@ -61,7 +61,7 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter,
       Intent intent;
       
       // change what activity the Intent goes to depending on if it's predefined or not
-      intent = new Intent(context, (isPredefined)? EditGraphRequestActivity.class : GraphViewerActivity.class);
+      intent = new Intent(context, (isPredefined)? GraphViewerActivity.class : EditGraphRequestActivity.class);
       intent.putExtra(Keys.GRAPH_REQUEST_EXTRA, this);
       
 
