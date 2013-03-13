@@ -8,7 +8,7 @@ package edu.channel4.mm.db.android.model.request;
  * 
  * @author mlerner
  */
-public interface HasAttributeParameter extends HasEventNameParameter {
+public interface HasAttributeParameter {
 
    public void setAttributeName(String attribName);
 

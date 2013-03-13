@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ButtonMash</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+
+    <string-array name="MobileMetricsCredentials">
+        <item>3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4</item>
+        <item>603269615811711635</item>
+        <item>channel4pp@calpoly.edu</item>
+        <item>iceland006</item>
+        <item>CM7fXhOh9tTqV9n4rhcWGHGB</item>
+    </string-array>
+
+</resources>
