@@ -28,4 +28,4 @@ Team Members
 
   - Ray Tam
   - Mark Lerner
-  - Sir Brian J. Middaugh
+  - Sir Brian J. Middaugh III
