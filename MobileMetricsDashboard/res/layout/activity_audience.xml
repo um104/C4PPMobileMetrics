@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     style="@style/MobileMetricsTheme"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AudienceActivity" >
 
@@ -10,10 +10,10 @@
         style="@style/MobileMetricsListViewTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/audienceHeader" >
-
+        android:layout_below="@+id/audienceHeader"
+        android:cacheColorHint="#00000000" >
     </ListView>
-    
+
     <TextView
         android:id="@+id/audienceHeader"
         style="@style/MobileMetricsDefaultHeaderText"
