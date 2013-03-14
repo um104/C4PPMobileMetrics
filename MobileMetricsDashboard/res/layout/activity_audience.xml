@@ -13,13 +13,6 @@
         android:layout_below="@+id/audienceHeader" >
 
     </ListView>
-
-    <View 
-        android:id="@+id/audienceHorizontalBreak"
-        android:layout_below="@+id/textViewAudience"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/dark_gray" />
     
     <TextView
         android:id="@+id/audienceHeader"

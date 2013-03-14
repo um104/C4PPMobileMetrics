@@ -15,6 +15,7 @@ import android.widget.Toast;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.request.EventOverTimeGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
+import edu.channel4.mm.db.android.model.request.SessionLengthGraphRequest;
 import edu.channel4.mm.db.android.model.request.SessionOverTimeGraphRequest;
 import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
 import edu.channel4.mm.db.android.util.Keys;
@@ -60,6 +61,7 @@ public class UsageActivity extends Activity {
 		graphRequests = new ArrayList<GraphRequest>();
 		graphRequests.add(new SessionOverTimeGraphRequest());
 		graphRequests.add(new EventOverTimeGraphRequest());
+		graphRequests.add(new SessionLengthGraphRequest());
 
 		adapter = new GraphRequestArrayAdapter(getApplicationContext(),
 				graphRequests.toArray(new GraphRequest[0]));

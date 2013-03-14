@@ -6,5 +6,13 @@
     <color name="light_gray">#E3E0E0</color>
     <color name="black">#000000</color>
     <color name="orange">#eb760b</color>
-    
+    <color name="sf_logo_gradient_blue">#9AD3F0</color>
+    <color name="sf_light_blue">#ECF4F9</color>
+	<color name="sf_dark_blue">#0E9ECF</color> 
+	<color name="sf_bright_blue">#00AADE</color>
+	<color name="sf_red">#D83021</color>   
+	<color name="sf_dark_gray">#CCCCCC</color>
+	<color name="sf_light_gray">#E1E1E1</color>
+	<color name="sf_blue_border">#1F9FCD</color>
+	<color name="sf_gradient_blue">#6FC3DF</color>
 </resources>
