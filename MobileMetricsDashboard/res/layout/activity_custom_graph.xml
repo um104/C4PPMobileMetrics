@@ -12,14 +12,15 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonCreateNewCustomGraph"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_below="@+id/textViewNoCustomGraphs" >
+
     </ListView>
 
     <TextView
         android:id="@+id/textViewNoCustomGraphs"
         style="@style/MobileMetricsDefaultHeaderText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/no_custom_graphs" />
 
     <Button

@@ -34,7 +34,6 @@
             android:text="@string/logout" />
     </RelativeLayout>
 
-    
     <ListView
         android:id="@+id/listViewAppList"
         style="@style/MobileMetricsListViewTheme"
@@ -42,24 +41,19 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomRelativeLayout"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/appListHorizontalBreak" >
-    </ListView>
+        android:layout_below="@+id/textViewSelectApp" >
 
-    <View 
-        android:id="@+id/appListHorizontalBreak"
-        android:layout_below="@+id/textViewSelectApp"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/dark_gray" />
+    </ListView>
     
     <TextView
-        style="@style/MobileMetricsDefaultHeaderText"
         android:id="@+id/textViewSelectApp"
-        android:layout_width="match_parent"
+        style="@style/MobileMetricsDefaultHeaderText"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
+        android:paddingLeft="-10dp"
+        android:paddingRight="-10dp"
         android:text="@string/select_app" />
 
     <ProgressBar
