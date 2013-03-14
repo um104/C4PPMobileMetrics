@@ -13,4 +13,6 @@
         <item>CM7fXhOh9tTqV9n4rhcWGHGB</item>
     </string-array>
 
+    <string name="title_activity_upload_score">UploadScoreActivity</string>
+
 </resources>

@@ -24,6 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="edu.channel4.buttonmash.UploadScoreActivity"
+            android:label="@string/title_activity_upload_score" >
+        </activity>
     </application>
 
 </manifest>
