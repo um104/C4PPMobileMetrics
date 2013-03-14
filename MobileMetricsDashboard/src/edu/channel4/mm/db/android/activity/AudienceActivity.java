@@ -57,9 +57,6 @@ public class AudienceActivity extends Activity {
 		});
 
 		graphRequests = new ArrayList<GraphRequest>();
-		//graphRequests.add(new NationalityBreakdownGraphRequest());
-		//graphRequests.add(new LanguageLocaleGraphRequest());
-		//graphRequests.add(new DeviceTypeDistributionGraphRequest());
 		graphRequests.add(new CustomGraphRequest("Nationality Breakdown", "", "DeviceCountry__c", R.drawable.nationality_breakdown));
 		graphRequests.add(new CustomGraphRequest("Language Locale", "", "LanguageLocale__c", R.drawable.language_locale));
 		graphRequests.add(new CustomGraphRequest("Device Type Distribution", "", "DeviceType__c", R.drawable.device_type_dist));
