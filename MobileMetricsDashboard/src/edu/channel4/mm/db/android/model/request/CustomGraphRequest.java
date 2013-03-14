@@ -22,8 +22,8 @@ import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 
-public class CustomGraphRequest implements GraphRequest, HasAttributeParameter,
-         Parcelable {
+public class CustomGraphRequest implements GraphRequest, HasAttributeParameter
+{
 
    private final static String REQUEST_TYPE = "CUSTOM";
    private String eventName1;
