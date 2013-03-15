@@ -18,6 +18,7 @@
         <activity
             android:name="edu.channel4.buttonmash.MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +29,7 @@
         <activity
             android:name="edu.channel4.buttonmash.UploadScoreActivity"
             android:label="@string/title_activity_upload_score"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
     </application>
