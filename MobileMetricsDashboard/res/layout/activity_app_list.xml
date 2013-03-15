@@ -1,10 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/appListRoot"
     style="@style/MobileMetricsTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/appListRoot"
     android:weightSum="100"
     tools:context=".AppListActivity" >
 
@@ -17,17 +17,17 @@
 
         <Button
             android:id="@+id/buttonAbout"
-            android:layout_width="100dp"
             style="@style/MobileMetricsDefaultButton"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:onClick="about"
             android:text="@string/about" />
 
         <Button
             android:id="@+id/buttonLogOut"
+            style="@style/MobileMetricsDefaultButton"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            style="@style/MobileMetricsDefaultButton"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:onClick="logout"
@@ -41,10 +41,10 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomRelativeLayout"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewSelectApp" >
-
+        android:layout_below="@+id/textViewSelectApp"
+        android:cacheColorHint="#00000000" >
     </ListView>
-    
+
     <TextView
         android:id="@+id/textViewSelectApp"
         style="@style/MobileMetricsDefaultHeaderText"

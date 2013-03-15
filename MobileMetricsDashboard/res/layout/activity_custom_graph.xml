@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonCreateNewCustomGraph"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewNoCustomGraphs" >
-
+        android:layout_below="@+id/textViewNoCustomGraphs"
+        android:cacheColorHint="#00000000" >
     </ListView>
 
     <TextView
