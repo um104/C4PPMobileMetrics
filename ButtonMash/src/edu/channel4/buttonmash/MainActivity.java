@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-   private final static int SECONDS = 5;
+   public final static int SECONDS = 5;
    private TextView textViewTimer;
    private CountDownTimer countDownTimer;
    private int timesPressed = 0;

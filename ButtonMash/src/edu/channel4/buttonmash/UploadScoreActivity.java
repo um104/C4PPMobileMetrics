@@ -25,24 +25,28 @@ public class UploadScoreActivity extends Activity {
       timesPressed = getIntent().getIntExtra("timesPressed", 0);
 
       textViewHighScore = (TextView) findViewById(R.id.textViewHighScore);
-      
-      
+
       String highScoreString = "Clicked the button " + timesPressed
                + " times. ";
       if (timesPressed >= 0 && timesPressed < 10) {
          highScoreString += "\n\nYou have much to learn.";
-      } else if (timesPressed >= 10 && timesPressed < 20) {
+      }
+      else if (timesPressed >= 10 && timesPressed < 20) {
          highScoreString += "\n\nI see your mashing has improved.";
-      } else if (timesPressed >= 20 && timesPressed < 30) {
+      }
+      else if (timesPressed >= 20 && timesPressed < 30) {
          highScoreString += "\n\nYou have become quite skilled in the art of mashing";
-      } else if (timesPressed >= 30 && timesPressed < 40) {
+      }
+      else if (timesPressed >= 30 && timesPressed < 40) {
          highScoreString += "\n\nYou are a mashing king!";
-      } else if (timesPressed >= 40 && timesPressed < 50) {
+      }
+      else if (timesPressed >= 40 && timesPressed < 50) {
          highScoreString += "\n\nIt's mahvel baby!";
-      } else if (timesPressed >= 50) { 
+      }
+      else if (timesPressed >= 50) {
          highScoreString += "\n\nStop playing ButtonMash Girum.";
-      } 
-      
+      }
+
       textViewHighScore.setText(highScoreString);
 
       editTextName = (EditText) findViewById(R.id.editTextName);
@@ -72,6 +76,13 @@ public class UploadScoreActivity extends Activity {
    }
 
    public void uploadScore(View v) {
+
+      if (editTextName.getText().toString().trim().equals("")) {
+         Toast.makeText(getApplicationContext(), "Please enter your name.",
+                  Toast.LENGTH_SHORT).show();
+         return;
+      }
+
       LocalyticsSession.MobileMetricsEvent event = localyticsSession
                .getNewEvent("MASHED_THAT_BUTTON");
       event.addAttribute("times_mashed", timesPressed);
@@ -81,7 +92,7 @@ public class UploadScoreActivity extends Activity {
 
       Toast.makeText(getApplicationContext(), "Uploaded score!",
                Toast.LENGTH_SHORT).show();
-      
+
       finish();
    }
 
