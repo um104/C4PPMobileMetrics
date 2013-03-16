@@ -36,8 +36,6 @@ public class EditGraphRequestActivity extends Activity implements
    private ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
    private ArrayAdapter<EventNameDescription> eventNameAdapter;
    private ArrayAdapter<EventDescription> eventAdapter;
-   private ArrayAdapter<EventDescription> eventAttributeAdapter;
-   private List<ArrayAdapter<EventDescription>> eventAttributeAdapters;
    private ArrayAdapter<AttributeDescription> attributeAdapter;
 
    private Spinner event1Spinner;
