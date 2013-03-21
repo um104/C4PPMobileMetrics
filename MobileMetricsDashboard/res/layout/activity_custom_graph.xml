@@ -10,7 +10,6 @@
         style="@style/MobileMetricsListViewTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonCreateNewCustomGraph"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewNoCustomGraphs"
         android:cacheColorHint="#00000000" >
@@ -28,9 +27,8 @@
         style="@style/MobileMetricsDefaultButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/listViewCustomGraphActivity"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:onClick="createNewCustomGraph"
         android:text="@string/create_new_custom_graph" />
 

@@ -13,11 +13,11 @@ import android.content.Context;
 
 import com.google.inject.Inject;
 
-import edu.channel4.mm.db.android.util.BaseAsyncTask2;
+import edu.channel4.mm.db.android.util.BaseAsyncTask;
 import edu.channel4.mm.db.android.util.Log;
 
 public abstract class BaseGetRequestAsyncTask<ResultT> extends
-         BaseAsyncTask2<ResultT> {
+         BaseAsyncTask<ResultT> {
 
    private String accessToken = null;
    private String uri = null;

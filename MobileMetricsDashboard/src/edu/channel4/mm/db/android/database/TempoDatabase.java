@@ -11,6 +11,8 @@ import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.model.description.EventNameDescription;
 import edu.channel4.mm.db.android.model.graph.Graph;
+import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
+import edu.channel4.mm.db.android.model.request.GraphRequest;
 
 /**
  * BS temp database. This is just a singleton containing a bunch of ArrayLists
@@ -26,6 +28,7 @@ public class TempoDatabase {
    @Inject private ArrayList<AttributeDescription> attributeDescriptions;
    @Inject private ArrayList<EventDescription> eventDescriptions;
    @Inject private ArrayList<EventNameDescription> eventNameDescriptions;
+   @Inject private ArrayList<GraphRequest> customGraphRequests;
    private Graph graph = null;
 
    public void setAppDescriptions(List<AppDescription> appDescriptions) {
@@ -48,6 +51,14 @@ public class TempoDatabase {
             List<EventNameDescription> eventNameDescriptions) {
       this.eventNameDescriptions.clear();
       this.eventNameDescriptions.addAll(eventNameDescriptions);
+   }
+
+   public void addCustomGraphRequest(CustomGraphRequest customGraphRequest) {
+      this.customGraphRequests.add(customGraphRequest);
+   }
+   
+   public List<GraphRequest> getCustomGraphRequests() {
+      return customGraphRequests;
    }
 
    public void setGraph(Graph graph) {

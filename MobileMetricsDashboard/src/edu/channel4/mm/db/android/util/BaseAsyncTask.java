@@ -1,62 +1,68 @@
 package edu.channel4.mm.db.android.util;
 
+import com.google.inject.Inject;
+
+import roboguice.inject.ContextSingleton;
+import roboguice.util.RoboAsyncTask;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
-import android.widget.Toast;
 
-// TODO: @ContextSingleton
-public abstract class BaseAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
+@ContextSingleton
+public abstract class BaseAsyncTask<ResultT> extends RoboAsyncTask<ResultT> {
 
-	/**
-	 * Application context passed in from the constructor.
-	 */
-	private Context context;
+   @Inject
+   protected BaseAsyncTask(Context context) {
+      super(context);
+   }
 
-	/**
-	 * Require all AsyncTasks to pass in a {@link Context} in their constructor.
-	 * 
-	 * @param context
-	 */
-	public BaseAsyncTask(Context context) {
-		this.context = context;
-	}
-	
-	public Context getContext() {
-		return context;
-	}
-	
-	/**
-	 * Before every AsyncTask runs, we should verify that we're actually
-	 * connected to the Internet.
-	 */
-	@Override
-	protected void onPreExecute() {
-		super.onPreExecute();
+   @Override
+   public abstract ResultT call() throws Exception;
 
-		if (!phoneConnectedToInternet()) {
-			Toast.makeText(context, "Error: Not connected to Internet.",
-					Toast.LENGTH_SHORT).show();
-			cancel(true);
-		}
-	}
+   /**
+    * Before every AsyncTask runs, we should verify that we're actually
+    * connected to the Internet.
+    */
+   @Override
+   protected void onPreExecute() {
+      // do this in the UI thread before executing call()
+      if (!phoneConnectedToInternet()) {
+         Log.toastE(context, "Error: Not connected to Internet.");
+         cancel(true);
+      }
+   }
 
-	@Override
-	protected abstract Result doInBackground(Params... params);
+   /**
+    * Do this in the UI thread if call() succeeds.
+    */
+   @Override
+   protected abstract void onSuccess(ResultT result);
 
-	/**
-	 * Helper method to determine if this phone is connected to the Internet or
-	 * not.
-	 * 
-	 * @return
-	 */
-	private boolean phoneConnectedToInternet() {
-		ConnectivityManager connMgr = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+   /**
+    * Do this in the UI thread if call() threw an exception.
+    */
+   @Override
+   protected abstract void onException(Exception e);
 
-		return networkInfo != null && networkInfo.isConnected();
-	}
+   /**
+    * Always do this in the UI thread after calling call()
+    */
+   @Override
+   protected void onFinally() {
+   }
+
+   /**
+    * Helper method to determine if this phone is connected to the Internet or
+    * not.
+    * 
+    * @return
+    */
+   private boolean phoneConnectedToInternet() {
+      ConnectivityManager connMgr = (ConnectivityManager) context
+               .getSystemService(Context.CONNECTIVITY_SERVICE);
+      NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+      return networkInfo != null && networkInfo.isConnected();
+   }
 
 }

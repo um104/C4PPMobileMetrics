@@ -21,9 +21,11 @@ import com.google.inject.Inject;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.callback.EventDescriptionCallback;
 import edu.channel4.mm.db.android.callback.EventNameDescriptionCallback;
+import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.model.description.EventNameDescription;
+import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest.TimeInterval;
 import edu.channel4.mm.db.android.model.request.HasAttributeParameter;
@@ -38,6 +40,7 @@ public class EditGraphRequestActivity extends RoboActivity implements
 
    @InjectExtra(Keys.GRAPH_REQUEST_EXTRA) private GraphRequest graphRequest;
    @Inject private SalesforceConn sfConn;
+   @Inject private TempoDatabase tempoDatabase; // singleton
 
    private ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
    private ArrayAdapter<EventNameDescription> eventNameAdapter;
@@ -62,7 +65,7 @@ public class EditGraphRequestActivity extends RoboActivity implements
 
       // Set the activity's title
       setTitle(graphRequest.toString());
-      
+
       // turn off all UI elements
       event1Group.setVisibility(View.GONE);
       attribute1Group.setVisibility(View.GONE);
@@ -206,6 +209,10 @@ public class EditGraphRequestActivity extends RoboActivity implements
          ((HasAttributeParameter) graphRequest).setEventName(eventName);
       }
 
+      // Save the finalized GraphRequest into the DB, if it's a
+      // CustomGraphRequest
+      saveCustomGraphRequest(graphRequest);
+
       // Create GraphViewerActivity intent and put URIParams in Intent
       Intent intent = new Intent(getApplicationContext(),
                GraphViewerActivity.class);
@@ -213,6 +220,21 @@ public class EditGraphRequestActivity extends RoboActivity implements
 
       // Execute the intent
       startActivity(intent);
+   }
+
+   private void saveCustomGraphRequest(GraphRequest graphRequest) {
+      if (graphRequest instanceof CustomGraphRequest) {
+         CustomGraphRequest customGraphRequest = (CustomGraphRequest) graphRequest;
+
+         // Save its new name
+         customGraphRequest.setName(customGraphRequest.getAttributeName()
+                  + "." + customGraphRequest.getEventName());
+
+         // Once a CustomGraphRequest is saved, it becomes "Predefined."
+         customGraphRequest.setReadOnly(true);
+
+         tempoDatabase.addCustomGraphRequest(customGraphRequest);
+      }
    }
 
    /**

@@ -9,7 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import com.google.inject.Inject;
+
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
@@ -18,6 +22,7 @@ import edu.channel4.mm.db.android.util.Log;
 @ContentView(R.layout.activity_custom_graph)
 public class CustomGraphActivity extends RoboActivity {
 
+   @Inject TempoDatabase tempoDatabase; // singleton
    @InjectView(R.id.listViewCustomGraphActivity) private ListView listView;
    private GraphRequestArrayAdapter adapter;
 
@@ -32,11 +37,8 @@ public class CustomGraphActivity extends RoboActivity {
          public void onItemClick(AdapterView<?> parent, View view,
                   int position, long id) {
 
-            // TODO: rather than making a new CustomGraphRequest, grab the
-            // actual selected one from the adapter
-
             // Grab the CustomGraphRequest for the selected item.
-            GraphRequest graphRequest = new CustomGraphRequest();
+            GraphRequest graphRequest = tempoDatabase.getCustomGraphRequests().get(position);
 
             // Construct the correct Intent for the selected
             // CustomGraphRequest
@@ -54,10 +56,16 @@ public class CustomGraphActivity extends RoboActivity {
          }
       });
 
-      // TODO: Fill this adapter with a list of CustomGraphRequests from TempoDB
+      // Fill this adapter with a list of CustomGraphRequests from TempoDB
       adapter = new GraphRequestArrayAdapter(getApplicationContext(),
-               new CustomGraphRequest[] {});
+               tempoDatabase.getCustomGraphRequests());
       listView.setAdapter(adapter);
+   }
+   
+   @Override
+   protected void onResume() {
+      super.onResume();
+      adapter.notifyDataSetChanged();
    }
 
    public void createNewCustomGraph(View v) {

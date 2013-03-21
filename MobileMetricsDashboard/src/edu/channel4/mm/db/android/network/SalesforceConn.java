@@ -38,8 +38,8 @@ final public class SalesforceConn {
       // Grab the most up-to-date field values
       String accessToken = restClientAccess.getAccessToken();
 
-      new GetAppListAsyncTask(context, getCurrentBaseUri(), accessToken, callback)
-               .execute();
+      new GetAppListAsyncTask(context, getCurrentBaseUri(), accessToken,
+               callback).execute();
    }
 
    /**
@@ -53,8 +53,8 @@ final public class SalesforceConn {
       String accessToken = restClientAccess.getAccessToken();
       String appLabel = prefs.getString(Keys.APP_LABEL, null);
 
-      new GetEventListAsyncTask(context, getCurrentBaseUri(), accessToken, appLabel,
-               callback).execute();
+      new GetEventListAsyncTask(context, getCurrentBaseUri(), accessToken,
+               appLabel, callback).execute();
    }
 
    /**
@@ -89,6 +89,10 @@ final public class SalesforceConn {
                appLabel, graphRequest, callback).execute();
    }
 
+   /**
+    * Helper method to retrieve the current BaseURI, constructed using the
+    * current Instance URL
+    */
    private String getCurrentBaseUri() {
       String baseUriString = "";
 

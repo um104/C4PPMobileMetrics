@@ -20,13 +20,22 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
    private final static String REQUEST_TYPE = "CUSTOM";
    private String eventName1;
    private String attribName1;
-   private boolean isPredefined;
+
+   /**
+    * This field used to be called "isPredefined." Let's call it "readOnly"
+    * since we change the field at runtime now (true CustomGraphRequests turn
+    * into "readOnly" CustomGraphRequests once they're finalized, as to not
+    * bring up the EditGraphRequestActivity again the second time they're
+    * clicked).
+    */
+   private boolean readOnly;
+   
    private String graphName = "Custom Graph";
    private int iconId;
 
    public CustomGraphRequest() {
       this.graphName = "Custom Graph";
-      this.isPredefined = false;
+      this.readOnly = false;
       this.iconId = R.drawable.ic_launcher;
    }
 
@@ -48,7 +57,7 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
       this.eventName1 = eventName1;
       this.attribName1 = attribName1;
       this.iconId = iconId;
-      this.isPredefined = true;
+      this.readOnly = true;
    }
 
    public String toString() {
@@ -60,7 +69,7 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
 
       // change what activity the Intent goes to depending on if it's predefined
       // or not
-      intent = new Intent(context, (isPredefined) ? GraphViewerActivity.class
+      intent = new Intent(context, (readOnly) ? GraphViewerActivity.class
                : EditGraphRequestActivity.class);
       intent.putExtra(Keys.GRAPH_REQUEST_EXTRA, this);
 
@@ -72,51 +81,20 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
       return iconId;
    }
 
-   // @Override
-   // public URI getUri(RestClientAccess restClientManager, Context context) {
-   // URI uri = null;
-   //
-   // // get some of the basic information we'll need to make the URI
-   // String instanceURL = restClientManager.getInstanceURL().toString();
-   //
-   // // Don't use getSharedPreferences(String, int) anymore.
-   // // Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
-   // // String appLabel = getApplicationContext().getSharedPreferences(
-   // // Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
-   // String appLabel = PreferenceManager.getDefaultSharedPreferences(context)
-   // .getString(Keys.APP_LABEL, null);
-   //
-   // // make the URI String
-   // String uriString = "";
-   //
-   // // add in all non-parameterized information onto the request
-   // uriString += String.format(SalesforceConn.CHANNEL4_REST_URL,
-   // instanceURL, GraphRequestAsyncTask.GRAPH_REQUEST_URL_SUFFIX);
-   //
-   // // create a list for the URL parameters to add
-   // List<NameValuePair> params = new ArrayList<NameValuePair>();
-   //
-   // params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, this.REQUEST_TYPE));
-   // params.add(new BasicNameValuePair(Keys.APP_LABEL,
-   // appLabel));
-   // params.add(new BasicNameValuePair(Keys.ATTRIB_NAME_1, attribName1));
-   // params.add(new BasicNameValuePair(Keys.EVENT_NAME_1, eventName1));
-   //
-   // // add the parameters to the uriString
-   // String paramString = URLEncodedUtils.format(params, "utf-8");
-   // uriString += "?" + paramString;
-   //
-   // // turn the string into a URI
-   // try {
-   // uri = new URI(uriString);
-   // }
-   // catch (URISyntaxException e) {
-   // Log.e(e.getMessage());
-   // }
-   //
-   // return uri;
-   // }
+   /**
+    * This setter is used to turn a true Custom Graph into a regular old
+    * Predefined Custom Graph once its been saved into the DB. That way,
+    * clicking the saved CustomGraph won't bring up the
+    * EditGraphRequestActivity.
+    */
+   public void setReadOnly(boolean readOnly) {
+      this.readOnly = readOnly;
+   }
 
+   public void setName(String graphName) {
+      this.graphName = graphName;
+   }
+   
    @Override
    public void setEventName(String eventName) {
       this.eventName1 = eventName;
@@ -149,6 +127,7 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
       // Note: Parcel data is read in a FIFO manner.
       dest.writeString(eventName1);
       dest.writeString(attribName1);
+      dest.writeInt(iconId);
    }
 
    public static final Parcelable.Creator<CustomGraphRequest> CREATOR = new Parcelable.Creator<CustomGraphRequest>() {
@@ -166,17 +145,17 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
       // Note: Parcel data is read in a FIFO manner.
       this.eventName1 = in.readString();
       this.attribName1 = in.readString();
+      this.iconId = in.readInt();
    }
 
    @Override
    public List<NameValuePair> getAdditionalUriParameters() {
       List<NameValuePair> params = new ArrayList<NameValuePair>();
-      
-      params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, this.REQUEST_TYPE));
-//      params.add(new BasicNameValuePair(Keys.APP_LABEL, appLabel));
+
+      params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, REQUEST_TYPE));
       params.add(new BasicNameValuePair(Keys.ATTRIB_NAME_1, attribName1));
       params.add(new BasicNameValuePair(Keys.EVENT_NAME_1, eventName1));
-      
+
       return params;
    }
 

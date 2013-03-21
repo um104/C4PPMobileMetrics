@@ -1,5 +1,8 @@
 package edu.channel4.mm.db.android.util;
 
+import java.util.Arrays;
+import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,37 +15,42 @@ import edu.channel4.mm.db.android.model.request.GraphRequest;
 
 public class GraphRequestArrayAdapter extends ArrayAdapter<GraphRequest> {
 
-	private GraphRequest[] graphRequests;
+   private List<GraphRequest> graphRequests;
 
-	public GraphRequestArrayAdapter(Context context, GraphRequest[] data) {
-		super(context, R.layout.cell_graph_request, data);
-		this.graphRequests = data;
-	}
+   public GraphRequestArrayAdapter(Context context, GraphRequest[] data) {
+      super(context, R.layout.cell_graph_request, data);
+      this.graphRequests = Arrays.asList(data);
+   }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		GraphRequest graphRequest = graphRequests[position];
-		ImageView graphRequestIcon;
-		TextView graphRequestLabel;
+   public GraphRequestArrayAdapter(Context context, List<GraphRequest> data) {
+      super(context, R.layout.cell_graph_request, data);
+      this.graphRequests = data;
+   }
 
-		// If you couldn't recycle a cell, then inflate one.
-		if (convertView == null) {
-			LayoutInflater inflater = LayoutInflater.from(getContext());
-			convertView = inflater.inflate(R.layout.cell_graph_request, parent,
-					false);
-		}
+   @Override
+   public View getView(int position, View convertView, ViewGroup parent) {
+      GraphRequest graphRequest = graphRequests.get(position);
+      ImageView graphRequestIcon;
+      TextView graphRequestLabel;
 
-		// Reference the icon
-		graphRequestIcon = (ImageView) convertView
-				.findViewById(R.id.imageViewGraphRequestIcon);
-		graphRequestIcon.setImageDrawable(getContext().getResources()
-				.getDrawable(graphRequest.getIconId()));
+      // If you couldn't recycle a cell, then inflate one.
+      if (convertView == null) {
+         LayoutInflater inflater = LayoutInflater.from(getContext());
+         convertView = inflater.inflate(R.layout.cell_graph_request, parent,
+                  false);
+      }
 
-		// Reference the text view
-		graphRequestLabel = (TextView) convertView
-				.findViewById(R.id.textViewGraphRequestName);
-		graphRequestLabel.setText(graphRequest.toString());
+      // Reference the icon
+      graphRequestIcon = (ImageView) convertView
+               .findViewById(R.id.imageViewGraphRequestIcon);
+      graphRequestIcon.setImageDrawable(getContext().getResources()
+               .getDrawable(graphRequest.getIconId()));
 
-		return convertView;
-	}
+      // Reference the text view
+      graphRequestLabel = (TextView) convertView
+               .findViewById(R.id.textViewGraphRequestName);
+      graphRequestLabel.setText(graphRequest.toString());
+
+      return convertView;
+   }
 }
