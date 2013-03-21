@@ -1,9 +1,11 @@
 package edu.channel4.mm.db.android.activity;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import android.app.Activity;
+import roboguice.activity.RoboActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectExtra;
+import roboguice.inject.InjectView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,6 +13,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.inject.Inject;
+
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.callback.GraphLoadCallback;
 import edu.channel4.mm.db.android.model.graph.Graph;
@@ -24,41 +29,31 @@ import edu.channel4.mm.db.android.util.Log;
  * This Activity is now a glorified loading screen.
  * 
  * @author girum
- * 
  */
-public class GraphViewerActivity extends Activity implements GraphLoadCallback {
+@ContentView(R.layout.activity_graph_viewer)
+public class GraphViewerActivity extends RoboActivity implements
+         GraphLoadCallback {
 
-   private GraphFactory graphFactory = null;
-   private GraphRequest graphRequest = null;
+   @InjectExtra(Keys.GRAPH_REQUEST_EXTRA) private GraphRequest graphRequest;
+   @Inject private GraphFactory graphFactory;
    private Graph graph = null;
 
-   private List<GraphType> validGraphTypes = new ArrayList<GraphType>();
-   private Spinner spinner;
-   private ArrayAdapter<GraphType> adapter;
+   @InjectView(R.id.spinnerGraphViewer) private Spinner spinner;
+   @InjectView(R.id.progressBarGraphViewer) private ProgressBar progressBar;
+   @InjectView(R.id.textViewGraphViewerTitle) private TextView textViewTitle;
+   @InjectView(R.id.buttonOK) private Button buttonOK;
 
-   private ProgressBar progressBar;
-   private TextView textViewTitle;
-   private Button buttonOK;
+   @Inject private ArrayList<GraphType> validGraphTypes;
+   private ArrayAdapter<GraphType> adapter;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_graph_viewer);
-
-      // Reference all the Views
-      progressBar = (ProgressBar) findViewById(R.id.progressBarGraphViewer);
-      textViewTitle = (TextView) findViewById(R.id.textViewGraphViewerTitle);
-      buttonOK = (Button) findViewById(R.id.buttonOK);
 
       // Setup the validGraphTypes Spinner.
-      spinner = (Spinner) findViewById(R.id.spinnerGraphViewer);
       adapter = new ArrayAdapter<GraphType>(getApplicationContext(),
                R.layout.cell_dropdown_item, validGraphTypes);
       spinner.setAdapter(adapter);
-
-      // Setup the GraphFactory and pull in the GraphRequest
-      graphFactory = new GraphFactory(getApplicationContext());
-      graphRequest = getIntent().getParcelableExtra(Keys.GRAPH_REQUEST_EXTRA);
    }
 
    @Override

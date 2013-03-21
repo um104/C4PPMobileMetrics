@@ -10,8 +10,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
+import roboguice.RoboGuice;
+
 import android.content.Context;
 
+import com.google.inject.Inject;
 import com.google.visualization.datasource.base.TypeMismatchException;
 
 import edu.channel4.mm.db.android.callback.GraphLoadCallback;
@@ -28,27 +31,31 @@ public class GraphRequestAsyncTask extends BaseAsyncTask<Void, Void, Graph> {
    private GraphRequest graphRequest;
    private GraphLoadCallback listener;
 
+   @Inject private TempoDatabase tempoDatabase;
+   @Inject private RestClientAccess restClientAccess;
+
    public GraphRequestAsyncTask(Context context, GraphRequest graphRequest,
                                 GraphLoadCallback listener) {
       super(context);
       this.graphRequest = graphRequest;
       this.listener = listener;
+
+      // Inject the fields of this POJO
+      RoboGuice.getInjector(context).injectMembers(this);
    }
 
    @Override
    protected Graph doInBackground(Void... params) {
       Log.i("Sending GET request to execute graph request");
 
-      RestClientAccess restClientManager = RestClientAccess.getInstance();
-
-      URI uri = graphRequest.getUri(restClientManager, getContext());
+      URI uri = graphRequest.getUri(restClientAccess, getContext());
 
       Log.d("URI: " + uri);
 
       HttpClient client = new DefaultHttpClient();
       HttpGet getRequest = new HttpGet(uri);
       getRequest.setHeader("Authorization",
-               "Bearer " + restClientManager.getAccessToken());
+               "Bearer " + restClientAccess.getAccessToken());
 
       try {
          // Get the response string, the Attribute List in JSON form
@@ -71,7 +78,6 @@ public class GraphRequestAsyncTask extends BaseAsyncTask<Void, Void, Graph> {
          graph = GraphFactory.parseGraph(responseString);
 
          // Save the parsed graph into the local database.
-         TempoDatabase tempoDatabase = TempoDatabase.getInstance();
          tempoDatabase.setGraph(graph);
       }
       catch (JSONException e) {

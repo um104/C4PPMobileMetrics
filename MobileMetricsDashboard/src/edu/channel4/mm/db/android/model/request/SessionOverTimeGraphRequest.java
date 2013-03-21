@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
 import edu.channel4.mm.db.android.network.GraphRequestAsyncTask;
@@ -53,7 +54,12 @@ public class SessionOverTimeGraphRequest implements GraphRequest,
 
       // get some of the basic information we'll need to make the URI
       String instanceURL = restClientManager.getInstanceURL().toString();
-      String appLabel = context.getSharedPreferences(Keys.PREFS_NS, 0)
+      
+      // Don't use getSharedPreferences(String, int) anymore.
+      // Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
+      // String appLabel = getApplicationContext().getSharedPreferences(
+      // Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
+      String appLabel = PreferenceManager.getDefaultSharedPreferences(context)
                .getString(Keys.APP_LABEL, null);
 
       // make the URI String

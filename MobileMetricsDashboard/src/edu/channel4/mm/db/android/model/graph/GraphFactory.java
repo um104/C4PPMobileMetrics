@@ -7,8 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import roboguice.inject.ContextSingleton;
+
 import android.content.Context;
 
+import com.google.inject.Inject;
 import com.google.visualization.datasource.base.TypeMismatchException;
 import com.google.visualization.datasource.datatable.ColumnDescription;
 import com.google.visualization.datasource.datatable.DataTable;
@@ -32,16 +35,13 @@ import edu.channel4.mm.db.android.util.Log;
  * 
  * @author girum
  */
+@ContextSingleton
 public class GraphFactory {
 
-   private Context context;
-
-   public GraphFactory(Context context) {
-      this.context = context;
-   }
+   @Inject private Context context;
+   @Inject private SalesforceConn sfConn;
 
    public void getGraph(GraphRequest graphRequest, GraphLoadCallback callback) {
-      SalesforceConn sfConn = new SalesforceConn(context);
       sfConn.getGraphViaNetwork(graphRequest, callback);
    }
 

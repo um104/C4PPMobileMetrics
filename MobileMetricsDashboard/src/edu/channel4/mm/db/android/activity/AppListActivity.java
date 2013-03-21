@@ -3,20 +3,20 @@ package edu.channel4.mm.db.android.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.inject.Inject;
 import com.salesforce.androidsdk.app.ForceApp;
 import com.salesforce.androidsdk.rest.ClientManager.LoginOptions;
 import com.salesforce.androidsdk.rest.RestClient;
@@ -27,6 +27,7 @@ import edu.channel4.mm.db.android.callback.AppDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.AppDescription;
 import edu.channel4.mm.db.android.network.RestClientAccess;
 import edu.channel4.mm.db.android.network.SalesforceConn;
+import edu.channel4.mm.db.android.util.BaseArrayAdapter;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 
@@ -34,67 +35,69 @@ import edu.channel4.mm.db.android.util.Log;
  * Main activity. For us, this is functions as what the old AppListActivity did,
  * with LoginActivity built in.
  */
+@ContentView(R.layout.activity_app_list)
 public class AppListActivity extends NativeMainActivity implements
          AppDescriptionCallback {
 
-   protected ListView listViewAppList;
-
-   protected List<AppDescription> appList;
+   @InjectView(R.id.listViewAppList) private ListView listViewAppList;
+   @InjectView(R.id.progressBarAppList) private ProgressBar progressBar;
+   @InjectView(R.id.appListRoot) View rootView;
+   @Inject private SharedPreferences prefs;
+   @Inject private SalesforceConn sfConn;
+   @Inject private ArrayList<AppDescription> appList;
+   @Inject private RestClientAccess restClientAccess;
    protected AppDataArrayAdapater arrayAdapter;
-   protected SalesforceConn sfConn;
-
-   protected ProgressBar progressBar;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_app_list);
 
-      // Initialization
-      sfConn = new SalesforceConn(getApplicationContext());
+      // Initialize Adapter
+      arrayAdapter = new AppDataArrayAdapater(getApplicationContext(),
+               R.layout.cell_app_list);
 
-      // Fill up appList
-      appList = new ArrayList<AppDescription>();
-
-      // Setup ListView
-      listViewAppList = (ListView) findViewById(R.id.listViewAppList);
-      arrayAdapter = new AppDataArrayAdapater(this, R.id.cellAppList);
-      listViewAppList
-               .setOnItemClickListener(new AdapterView.OnItemClickListener(){
-                  @Override
-                  // When app clicked, start Dashboard for that app.
-                           public
-                           void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                     Intent intent = new Intent(getApplicationContext(),
-                              DashboardActivity.class);
-
-                     // Place chosen App Label into SharedPrefs for later
-                     // access
-                     SharedPreferences.Editor editor = getSharedPreferences(
-                              Keys.PREFS_NS, 0).edit();
-                     editor.putString(Keys.APP_LABEL, appList.get(position)
-                              .getAppName());
-                     editor.commit();
-
-                     startActivity(intent);
-                  }
-               });
-
-      // Hook up the array adapter to the ListView
+      // Setup the ListView
       listViewAppList.setAdapter(arrayAdapter);
+      listViewAppList.setOnItemClickListener(new OnItemClickListener() {
+         @Override
+         public void onItemClick(AdapterView<?> parent, View view,
+                  int position, long id) {
+            // Save the chosen App Label
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString(Keys.APP_LABEL, appList.get(position).getAppName());
+            editor.commit();
 
-      // Reference the ProgressBar so we can turn it off later
-      progressBar = (ProgressBar) findViewById(R.id.progressBarAppList);
+            // Start the DashboardActivity
+            Intent intent = new Intent(getApplicationContext(),
+                     DashboardActivity.class);
+            startActivity(intent);
+         }
+      });
+   }
+
+   private class AppDataArrayAdapater extends BaseArrayAdapter<AppDescription> {
+      protected AppDataArrayAdapater(Context context, int textViewResourceId) {
+         super(context, textViewResourceId, appList);
+      }
+
+      @Override
+      public View getViewEnhanced(AppDescription appData, View convertedView) {
+         // Reference the Views for this cell
+         TextView appName = (TextView) convertedView
+                  .findViewById(R.id.textViewAppName);
+         TextView packageName = (TextView) convertedView
+                  .findViewById(R.id.textViewPackageName);
+
+         // Modify their text.
+         appName.setText(appData.getAppName());
+         packageName.setText(appData.getPackageName());
+
+         return convertedView;
+      }
    }
 
    /**
-    * DON'T USE THIS ONRESUME FOR OUR CODE. This is the regular Android
-    * onResume() and is called when AppListActivity resumes control: once
-    * *before* the Salesforce login WebView is called, and once *after*.
-    * 
-    * Instead, put our business logic in Salesforce's version of onResume()
-    * below.
+    * DON'T USE THIS ONRESUME.
     */
    @Override
    public void onResume() {
@@ -102,21 +105,21 @@ public class AppListActivity extends NativeMainActivity implements
 
       // Hide everything until we are logged in (until the Salesforce WebView
       // passes)
-      findViewById(R.id.appListRoot).setVisibility(View.INVISIBLE);
+      // findViewById(R.id.appListRoot).setVisibility(View.INVISIBLE);
+      rootView.setVisibility(View.INVISIBLE);
    }
 
    /**
-    * Don't use Android's regular onResume() in this class. Instead, use this
-    * onResume(). This one comes from Salesforce's native Android SDK and gives
-    * you the {@link RestClient} object exactly once.
+    * Use this onResume.
     */
    @Override
    public void onResume(RestClient client) {
       // Save a reference to the rest client for use throughout the app
-      RestClientAccess.getInstance().setRestClient(client);
+//      RestClientAccess.getInstance().setRestClient(client);
+      restClientAccess.setRestClient(client);
 
       // Show everything now that the Salesforce WebView has passed.
-      findViewById(R.id.appListRoot).setVisibility(View.VISIBLE);
+      rootView.setVisibility(View.VISIBLE);
 
       // Asynchronously retrieve the app list from Salesforce
       getAppList(null);
@@ -130,42 +133,6 @@ public class AppListActivity extends NativeMainActivity implements
                getString(R.string.oauth_callback_url),
                getString(R.string.oauth_client_id), new String[] {"api"});
       return loginOptions;
-   }
-
-   private class AppDataArrayAdapater extends ArrayAdapter<AppDescription> {
-
-      public AppDataArrayAdapater(Context context, int textViewResourceId) {
-         super(context, textViewResourceId, appList);
-      }
-
-      @Override
-      public View getView(int position, View convertView, ViewGroup parent) {
-
-         if (appList == null) {
-            Log.e("appList List is null: will not draw cell");
-            return convertView;
-         }
-
-         // Grab the pertinent AppData object
-         AppDescription appData = appList.get(position);
-
-         // Inflate the cell
-         LayoutInflater inflater = (LayoutInflater) getApplicationContext()
-                  .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-         convertView = inflater.inflate(R.layout.cell_app_list, null);
-
-         // Reference the Views
-         TextView appName = (TextView) convertView
-                  .findViewById(R.id.textViewAppName);
-         TextView packageName = (TextView) convertView
-                  .findViewById(R.id.textViewPackageName);
-
-         // Modify their text.
-         appName.setText(appData.getAppName());
-         packageName.setText(appData.getPackageName());
-
-         return convertView;
-      }
    }
 
    public void getAppList(View v) {
@@ -193,8 +160,7 @@ public class AppListActivity extends NativeMainActivity implements
          arrayAdapter.notifyDataSetChanged();
       }
       else {
-         Toast.makeText(getApplicationContext(), "Null app list...",
-                  Toast.LENGTH_SHORT).show();
+         Log.toastD(getApplicationContext(), "Null app list...");
       }
    }
 }

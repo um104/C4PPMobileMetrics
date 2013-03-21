@@ -1,62 +1,46 @@
 package edu.channel4.mm.db.android.activity;
 
-import android.app.Activity;
+import roboguice.activity.RoboActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectResource;
+import roboguice.inject.InjectView;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.util.Log;
+import edu.channel4.mm.db.android.util.BaseArrayAdapter;
 
-public class AboutActivity extends Activity {
+@ContentView(R.layout.activity_about)
+public class AboutActivity extends RoboActivity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_about);
+   @InjectView(R.id.listViewDeveloperNames) private ListView listViewDeveloperNames;
+   @InjectResource(R.array.developer_names) private String[] developerNames;
 
-		// get listView from about activity
-		ListView list = (ListView) findViewById(R.id.listViewDeveloperNames);
-		// set the list view's adapter to be our custom array adapter
-		list.setAdapter(new AboutArrayAdapter(this, R.id.cellAbout,
-				getResources().getStringArray(R.array.developer_names)));
-	}
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
 
-	private class AboutArrayAdapter extends ArrayAdapter<String> {
+      // Set the list view's adapter to be our custom array adapter
+      listViewDeveloperNames.setAdapter(new AboutArrayAdapter(
+               getApplicationContext(), R.layout.cell_about, developerNames));
+   }
 
-		private String[] developerNames;
+   private static class AboutArrayAdapter extends BaseArrayAdapter<String> {
 
-		public AboutArrayAdapter(Context context, int textViewResourceId,
-				String[] developerNames) {
-			super(context, textViewResourceId, developerNames);
-			this.developerNames = developerNames;
-		}
+      AboutArrayAdapter(Context context, int textViewResourceId,
+                        String[] developerNames) {
+         super(context, textViewResourceId, developerNames);
+      }
 
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			if (developerNames == null) {
-				Log.e("appList List is null: will not draw cell");
-				return convertView;
-			}
+      public View getViewEnhanced(String object, View convertedView) {
+         // Set the cell's "name" TextView
+         TextView developerTextView = (TextView) convertedView
+                  .findViewById(R.id.developerName);
+         developerTextView.setText(object);
 
-			// Grab the pertinent name
-			String name = developerNames[position];
-
-			// inflate the cell layout
-			LayoutInflater inflater = (LayoutInflater) getApplicationContext()
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.cell_about, null);
-
-			//setting the cell's text
-			TextView developerTextView = (TextView) convertView
-					.findViewById(R.id.developerName);
-			developerTextView.setText(name);
-
-			return convertView;
-		}
-	}
+         return convertedView;
+      }
+   }
 }

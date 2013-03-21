@@ -26,7 +26,7 @@
  */
 package com.salesforce.androidsdk.ui;
 
-import android.app.Activity;
+import roboguice.activity.RoboActivity;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
@@ -43,7 +43,7 @@ import com.salesforce.androidsdk.util.TokenRevocationReceiver;
 /**
  * Native application main activity should extend this activity or duplicate its functionality
  */
-public abstract class NativeMainActivity extends Activity {
+public abstract class NativeMainActivity extends RoboActivity {
 
 	private PasscodeManager passcodeManager;
     private TokenRevocationReceiver tokenRevocationReceiver;

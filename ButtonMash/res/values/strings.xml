@@ -2,8 +2,6 @@
 <resources>
 
     <string name="app_name">ButtonMash</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
 
     <string-array name="MobileMetricsCredentials">
         <item>3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4</item>
@@ -14,5 +12,10 @@
     </string-array>
 
     <string name="title_activity_upload_score">UploadScoreActivity</string>
+    <string name="button">Button</string>
+    <string name="use_the_force">Use The Force(TM)</string>
+    <string name="start_mashing">Start Mashing!</string>
+    <string name="name">Name</string>
+    <string name="upload_score">Upload Score!</string>
 
 </resources>

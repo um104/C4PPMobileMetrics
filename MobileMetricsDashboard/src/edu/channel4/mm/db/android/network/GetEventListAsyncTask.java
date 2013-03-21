@@ -10,8 +10,14 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
+import roboguice.RoboGuice;
+
 import android.content.Context;
 import android.net.Uri;
+import android.preference.PreferenceManager;
+
+import com.google.inject.Inject;
+
 import edu.channel4.mm.db.android.callback.EventDescriptionCallback;
 import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.description.EventDescription;
@@ -26,17 +32,21 @@ public class GetEventListAsyncTask extends
    private String responseString;
    private EventDescriptionCallback callback;
 
+   @Inject private TempoDatabase tempoDatabase;
+   @Inject private RestClientAccess restClientAccess;
+
    public GetEventListAsyncTask(Context context,
                                 EventDescriptionCallback callback) {
       super(context);
       this.callback = callback;
+
+      // Inject the fields of this POJO
+      RoboGuice.getInjector(context).injectMembers(this);
    }
 
    @Override
    protected List<EventDescription> doInBackground(Void... params) {
       Log.i("Sending GET request to get event list");
-
-      RestClientAccess restClientAccess = RestClientAccess.getInstance();
 
       String accessToken = restClientAccess.getAccessToken();
       String instanceUrl = restClientAccess.getInstanceURL().toString();
@@ -48,8 +58,13 @@ public class GetEventListAsyncTask extends
 
       // Put together the HTTP Request to be sent to Salesforce for the
       // Event list
-      String appLabel = getContext().getSharedPreferences(Keys.PREFS_NS, 0)
-               .getString(Keys.APP_LABEL, null);
+
+      // Don't use getSharedPreferences(String, int) anymore.
+      // Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
+      // String appLabel = getApplicationContext().getSharedPreferences(
+      // Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
+      String appLabel = PreferenceManager.getDefaultSharedPreferences(
+               getContext()).getString(Keys.APP_LABEL, null);
 
       appLabel = Uri.encode(appLabel);
 
@@ -104,7 +119,6 @@ public class GetEventListAsyncTask extends
    @Override
    protected void onPostExecute(List<EventDescription> result) {
       super.onPostExecute(result);
-      TempoDatabase tempoDatabase = TempoDatabase.getInstance();
       tempoDatabase.setEventDescriptions(result);
 
       callback.onEventDescriptionChanged(result);

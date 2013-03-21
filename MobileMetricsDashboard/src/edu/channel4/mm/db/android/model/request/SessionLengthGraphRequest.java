@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.network.GraphRequestAsyncTask;
@@ -22,13 +23,13 @@ import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 
 public class SessionLengthGraphRequest implements GraphRequest {
-   
+
    private final static String REQUEST_TYPE = "SESSION_LENGTH";
-   
+
    public SessionLengthGraphRequest() {
-      
+
    }
-   
+
    public String toString() {
       return "Session Length";
    }
@@ -44,7 +45,12 @@ public class SessionLengthGraphRequest implements GraphRequest {
 
       // get some of the basic information we'll need to make the URI
       String instanceURL = restClientManager.getInstanceURL().toString();
-      String appLabel = context.getSharedPreferences(Keys.PREFS_NS, 0)
+      
+      // Don't use getSharedPreferences(String, int) anymore.
+      // Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
+      // String appLabel = getApplicationContext().getSharedPreferences(
+      // Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
+      String appLabel = PreferenceManager.getDefaultSharedPreferences(context)
                .getString(Keys.APP_LABEL, null);
 
       // make the URI String
@@ -80,21 +86,21 @@ public class SessionLengthGraphRequest implements GraphRequest {
    public Intent constructGraphRequestIntent(Context context) {
       Intent intent = new Intent(context, GraphViewerActivity.class);
       intent.putExtra(Keys.GRAPH_REQUEST_EXTRA, this);
-      
+
       return intent;
    }
-   
+
    @Override
    public int describeContents() {
       return 0;
    }
-   
+
    @Override
    public void writeToParcel(Parcel arg0, int arg1) {
       // No variables to write
    }
-   
-   public static final Parcelable.Creator<SessionLengthGraphRequest> CREATOR = new Parcelable.Creator<SessionLengthGraphRequest>(){
+
+   public static final Parcelable.Creator<SessionLengthGraphRequest> CREATOR = new Parcelable.Creator<SessionLengthGraphRequest>() {
       public SessionLengthGraphRequest createFromParcel(Parcel in) {
          return new SessionLengthGraphRequest(in);
       }
@@ -104,7 +110,7 @@ public class SessionLengthGraphRequest implements GraphRequest {
          return new SessionLengthGraphRequest[size];
       }
    };
-   
+
    private SessionLengthGraphRequest(Parcel in) {
       // no variables to set
    }

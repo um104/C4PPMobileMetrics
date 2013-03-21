@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="22dp"
-        android:text="Large Text"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -22,8 +22,8 @@
         android:layout_alignLeft="@+id/textViewHighScore"
         android:layout_below="@+id/textViewHighScore"
         android:layout_marginTop="48dp"
-        android:hint="Name"
         android:ems="10"
+        android:hint="@string/name"
         android:inputType="textPersonName" >
 
         <requestFocus />
@@ -33,10 +33,10 @@
         android:id="@+id/buttonUpload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="uploadScore"
         android:layout_alignLeft="@+id/editTextName"
         android:layout_alignRight="@+id/editTextName"
         android:layout_centerVertical="true"
-        android:text="Upload Score!" />
+        android:onClick="uploadScore"
+        android:text="@string/upload_score" />
 
 </RelativeLayout>

@@ -24,125 +24,128 @@ import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class AppListActivity extends Activity implements
-		OnAppDescriptionChangedListener {
+         OnAppDescriptionChangedListener {
 
-	private static final String TAG = AppListActivity.class.getSimpleName();
-	protected List<AppDescription> appList;
-	protected ListView listViewAppList;
-	protected AppDataArrayAdapater arrayAdapter;
-	protected SalesforceConn sfConn;
+   private static final String TAG = AppListActivity.class.getSimpleName();
+   protected List<AppDescription> appList;
+   protected ListView listViewAppList;
+   protected AppDataArrayAdapater arrayAdapter;
+   protected SalesforceConn sfConn;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_app_list);
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_app_list);
 
-		// Initialization
-		sfConn = SalesforceConn.getInstance(getApplicationContext());
+      // Initialization
+      sfConn = SalesforceConn.getInstance(getApplicationContext());
 
-		// Fill up appList
-		appList = new ArrayList<AppDescription>();
+      // Fill up appList
+      appList = new ArrayList<AppDescription>();
 
-		// Setup ListView
-		listViewAppList = (ListView) findViewById(R.id.listViewAppList);
-		arrayAdapter = new AppDataArrayAdapater(this, R.id.cellAppList);
-		listViewAppList
-				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-					@Override
-					// When app clicked, start Dashboard for that app.
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						Intent intent = new Intent(getApplicationContext(),
-								DashboardActivity.class);
+      // Setup ListView
+      listViewAppList = (ListView) findViewById(R.id.listViewAppList);
+      arrayAdapter = new AppDataArrayAdapater(this, R.id.cellAppList);
+      listViewAppList
+               .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                  @Override
+                  // When app clicked, start Dashboard for that app.
+                           public
+                           void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                     Intent intent = new Intent(getApplicationContext(),
+                              DashboardActivity.class);
 
-						// Place chosen App Label into SharedPrefs for later access
-						SharedPreferences.Editor editor = getSharedPreferences(Keys.PREFS_NS, 0).edit();
-						editor.putString(Keys.APP_LABEL, appList.get(position).getAppName());
-						editor.commit();
+                     // Place chosen App Label into SharedPrefs for later access
+                     SharedPreferences.Editor editor = getSharedPreferences(
+                              Keys.PREFS_NS, 0).edit();
+                     editor.putString(Keys.APP_LABEL, appList.get(position)
+                              .getAppName());
+                     editor.commit();
 
-						startActivity(intent);
-					}
-				});
+                     startActivity(intent);
+                  }
+               });
 
-		// Hook up the array adapter to the ListView
-		listViewAppList.setAdapter(arrayAdapter);
-	}
+      // Hook up the array adapter to the ListView
+      listViewAppList.setAdapter(arrayAdapter);
+   }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+   @Override
+   protected void onResume() {
+      super.onResume();
 
-		// "Subscribe" this activity to the TempoDatabase for AppDescription
-		// changes.
-		TempoDatabase.getInstance().addOnAppDescriptionChangedListener(this);
+      // "Subscribe" this activity to the TempoDatabase for AppDescription
+      // changes.
+      TempoDatabase.getInstance().addOnAppDescriptionChangedListener(this);
 
-		// Retrieve the app list from Salesforce
-		getAppList(null);
-	}
+      // Retrieve the app list from Salesforce
+      getAppList(null);
+   }
 
-	@Override
-	protected void onPause() {
-		super.onPause();
+   @Override
+   protected void onPause() {
+      super.onPause();
 
-		// "Unsubscribe" this activity from the TempoDatabase for AppDescription
-		// changes.
-		TempoDatabase.getInstance().removeOnAppDescriptionChangedListener(this);
-	}
+      // "Unsubscribe" this activity from the TempoDatabase for AppDescription
+      // changes.
+      TempoDatabase.getInstance().removeOnAppDescriptionChangedListener(this);
+   }
 
-	public void getAppList(View v) {
-		Toast.makeText(getApplicationContext(),
-				"Retrieving app list from Salesforce", Toast.LENGTH_SHORT)
-				.show();
+   public void getAppList(View v) {
+      Toast.makeText(getApplicationContext(),
+               "Retrieving app list from Salesforce", Toast.LENGTH_SHORT)
+               .show();
 
-		sfConn.getAppList();
-	}
+      sfConn.getAppList();
+   }
 
-	private class AppDataArrayAdapater extends ArrayAdapter<AppDescription> {
+   private class AppDataArrayAdapater extends ArrayAdapter<AppDescription> {
 
-		public AppDataArrayAdapater(Context context, int textViewResourceId) {
-			super(context, textViewResourceId, appList);
-		}
+      public AppDataArrayAdapater(Context context, int textViewResourceId) {
+         super(context, textViewResourceId, appList);
+      }
 
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+      @Override
+      public View getView(int position, View convertView, ViewGroup parent) {
 
-			if (appList == null) {
-				Log.e(TAG, "appList List is null: will not draw cell");
-				return convertView;
-			}
+         if (appList == null) {
+            Log.e(TAG, "appList List is null: will not draw cell");
+            return convertView;
+         }
 
-			// Grab the pertinent AppData object
-			AppDescription appData = appList.get(position);
+         // Grab the pertinent AppData object
+         AppDescription appData = appList.get(position);
 
-			LayoutInflater inflater = (LayoutInflater) getApplicationContext()
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.cell_app_list, null);
+         LayoutInflater inflater = (LayoutInflater) getApplicationContext()
+                  .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+         convertView = inflater.inflate(R.layout.cell_app_list, null);
 
-			TextView appName = (TextView) convertView
-					.findViewById(R.id.textViewAppName);
-			TextView packageName = (TextView) convertView
-					.findViewById(R.id.textViewPackageName);
+         TextView appName = (TextView) convertView
+                  .findViewById(R.id.textViewAppName);
+         TextView packageName = (TextView) convertView
+                  .findViewById(R.id.textViewPackageName);
 
-			appName.setText(appData.getAppName());
-			packageName.setText(appData.getPackageName());
+         appName.setText(appData.getAppName());
+         packageName.setText(appData.getPackageName());
 
-			return convertView;
-		}
-	}
+         return convertView;
+      }
+   }
 
-	public void about(View v) {
-		startActivity(new Intent(getApplicationContext(), AboutActivity.class));
-	}
+   public void about(View v) {
+      startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+   }
 
-	public void logout(View v) {
-		Toast.makeText(getApplicationContext(), "Logout not implemented yet",
-				Toast.LENGTH_SHORT).show();
-	}
+   public void logout(View v) {
+      Toast.makeText(getApplicationContext(), "Logout not implemented yet",
+               Toast.LENGTH_SHORT).show();
+   }
 
-	@Override
-	public void onAppDescriptionChanged(List<AppDescription> newAppDescriptions) {
-		appList.clear();
-		appList.addAll(newAppDescriptions);
-		arrayAdapter.notifyDataSetChanged();
-	}
+   @Override
+   public void onAppDescriptionChanged(List<AppDescription> newAppDescriptions) {
+      appList.clear();
+      appList.addAll(newAppDescriptions);
+      arrayAdapter.notifyDataSetChanged();
+   }
 }

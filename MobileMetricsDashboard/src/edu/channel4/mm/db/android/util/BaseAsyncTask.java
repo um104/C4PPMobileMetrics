@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+// TODO: @ContextSingleton
 public abstract class BaseAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
 
 	/**

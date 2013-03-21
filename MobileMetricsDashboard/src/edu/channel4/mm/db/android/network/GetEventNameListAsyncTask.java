@@ -10,9 +10,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
+import roboguice.RoboGuice;
+
 import android.content.Context;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
+
+import com.google.inject.Inject;
+
 import edu.channel4.mm.db.android.callback.EventNameDescriptionCallback;
 import edu.channel4.mm.db.android.database.TempoDatabase;
 import edu.channel4.mm.db.android.model.description.EventNameDescription;
@@ -26,23 +32,31 @@ public class GetEventNameListAsyncTask extends
    private String responseString;
    private EventNameDescriptionCallback callback;
 
+   @Inject private TempoDatabase tempoDatabase;
+   @Inject private RestClientAccess restClientAccess;
+
    public GetEventNameListAsyncTask(Context context,
                                     EventNameDescriptionCallback callback) {
       super(context);
-
       this.callback = callback;
+
+      // Inject the fields of this POJO
+      RoboGuice.getInjector(context).injectMembers(this);
    }
 
    @Override
    protected List<EventNameDescription> doInBackground(Void... params) {
       Log.i("Sending GET request to get event list");
 
-      RestClientAccess restClientAccess = RestClientAccess.getInstance();
-
       String accessToken = restClientAccess.getAccessToken();
       String instanceUrl = restClientAccess.getInstanceURL().toString();
-      String appLabel = getContext().getSharedPreferences(Keys.PREFS_NS, 0)
-               .getString(Keys.APP_LABEL, null);
+
+      // Don't use getSharedPreferences(String, int) anymore.
+      // Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
+      // String appLabel = getApplicationContext().getSharedPreferences(
+      // Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
+      String appLabel = PreferenceManager.getDefaultSharedPreferences(
+               getContext()).getString(Keys.APP_LABEL, null);
 
       if (accessToken == null) {
          Log.e("No access token currently saved");
@@ -106,10 +120,7 @@ public class GetEventNameListAsyncTask extends
    protected void onPostExecute(List<EventNameDescription> result) {
       super.onPostExecute(result);
 
-      TempoDatabase tempoDatabase = TempoDatabase.getInstance();
       tempoDatabase.setEventNameDescriptions(result);
-
       callback.onEventNameDescriptionChanged(result);
-
    }
 }

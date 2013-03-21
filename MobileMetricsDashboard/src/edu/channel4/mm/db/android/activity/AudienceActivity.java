@@ -1,10 +1,13 @@
 package edu.channel4.mm.db.android.activity;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import android.app.Activity;
+import roboguice.activity.RoboActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectResource;
+import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,71 +15,86 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.inject.Inject;
+
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
 import edu.channel4.mm.db.android.util.Keys;
 
-public class AudienceActivity extends Activity {
+@ContentView(R.layout.activity_audience)
+public class AudienceActivity extends RoboActivity {
 
-	private ListView listView;
-	private GraphRequestArrayAdapter adapter;
-	private List<GraphRequest> graphRequests;
+   @InjectView(R.id.listviewAudienceActivity) private ListView listView;
+   @InjectView(R.id.audienceHeader) private TextView textViewAudienceHeader;
+   @InjectResource(R.string.audience) private String activityTitle;
+   @Inject private SharedPreferences prefs;
+   @Inject private ArrayList<GraphRequest> graphRequests;
+   private GraphRequestArrayAdapter adapter;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_audience);
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
 
-		listView = (ListView) findViewById(R.id.listviewAudienceActivity);
-		listView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+      // Set the Activity's titles
+      String appLabel = prefs.getString(Keys.APP_LABEL, null);
+      setTitle(activityTitle);
+      textViewAudienceHeader.setText(appLabel);
 
-				// Grab the AudienceGraphRequest for the selected item.
-				GraphRequest graphRequest = graphRequests.get(position);
+      // Set the Adapter to use the array of GraphRequests
+      fillGraphRequests();
+      adapter = new GraphRequestArrayAdapter(getApplicationContext(),
+               graphRequests.toArray(new GraphRequest[graphRequests.size()]));
 
-				// Construct the correct Intent for the selected
-				// AudienceGraphRequest
-				Intent intent = graphRequest
-						.constructGraphRequestIntent(getApplicationContext());
+      // Configure the ListView to use the Adapter
+      listView.setAdapter(adapter);
+      listView.setOnItemClickListener(new OnItemClickListener() {
+         @Override
+         public void onItemClick(AdapterView<?> parent, View view,
+                  int position, long id) {
+            audienceItemClicked(position);
+         }
+      });
+   }
 
-				// Start the activity for that Intent with all of its baggage,
-				// but only if the intent could actually be constructed based
-				// on the GraphRequest.
-				if (intent != null) {
-					startActivity(intent);
-				} else {
-					Toast.makeText(getApplicationContext(),
-							graphRequest.toString() + " not yet implemented.",
-							Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
+   // Construct the array of GraphRequests
+   private void fillGraphRequests() {
+      graphRequests.add(new CustomGraphRequest("Nationality Breakdown", "",
+               "DeviceCountry__c", R.drawable.nationality_breakdown));
+      graphRequests.add(new CustomGraphRequest("Language Locale", "",
+               "LanguageLocale__c", R.drawable.language_locale));
+      graphRequests.add(new CustomGraphRequest("Device Type Distribution", "",
+               "DeviceType__c", R.drawable.device_type_dist));
+      graphRequests.add(new CustomGraphRequest("Device Manufacturer", "",
+               "DeviceManufacturer__c", R.drawable.ic_launcher));
+      graphRequests.add(new CustomGraphRequest("Device Model", "",
+               "DeviceModel__c", R.drawable.ic_launcher));
+      graphRequests.add(new CustomGraphRequest("Network Carrier", "",
+               "NetworkCarrier__c", R.drawable.ic_launcher));
+      graphRequests.add(new CustomGraphRequest("Network Country Code", "",
+               "NetworkCountryCode__c", R.drawable.ic_launcher));
+      graphRequests.add(new CustomGraphRequest("SDK Compatibility", "",
+               "SDKCompatibility__c", R.drawable.ic_launcher));
+   }
 
-		graphRequests = new ArrayList<GraphRequest>();
-		graphRequests.add(new CustomGraphRequest("Nationality Breakdown", "", "DeviceCountry__c", R.drawable.nationality_breakdown));
-		graphRequests.add(new CustomGraphRequest("Language Locale", "", "LanguageLocale__c", R.drawable.language_locale));
-		graphRequests.add(new CustomGraphRequest("Device Type Distribution", "", "DeviceType__c", R.drawable.device_type_dist));
-		graphRequests.add(new CustomGraphRequest("Device Manufacturer", "", "DeviceManufacturer__c", R.drawable.ic_launcher));
-		graphRequests.add(new CustomGraphRequest("Device Model", "", "DeviceModel__c", R.drawable.ic_launcher));
-      graphRequests.add(new CustomGraphRequest("Network Carrier", "", "NetworkCarrier__c", R.drawable.ic_launcher));
-      graphRequests.add(new CustomGraphRequest("Network Country Code", "", "NetworkCountryCode__c", R.drawable.ic_launcher));
-      graphRequests.add(new CustomGraphRequest("SDK Compatibility", "", "SDKCompatibility__c", R.drawable.ic_launcher));
+   private void audienceItemClicked(int position) {
+      // Grab the GraphRequest for the selected item.
+      GraphRequest graphRequest = graphRequests.get(position);
 
-		adapter = new GraphRequestArrayAdapter(getApplicationContext(),
-				graphRequests.toArray(new GraphRequest[0]));
+      // Construct the correct Intent for the selected GraphRequest
+      Intent intent = graphRequest
+               .constructGraphRequestIntent(getApplicationContext());
 
-		listView.setAdapter(adapter);
-		setTitle(getResources().getString(R.string.audience));
-		
-		
-		String appLabel = getApplicationContext().getSharedPreferences(
-               Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
-
-      ((TextView) findViewById(R.id.audienceHeader)).setText(appLabel);
-	}
+      if (intent != null) {
+         startActivity(intent);
+      }
+      else {
+         Toast.makeText(getApplicationContext(),
+                  graphRequest.toString() + " not yet implemented.",
+                  Toast.LENGTH_SHORT).show();
+      }
+   }
 
 }

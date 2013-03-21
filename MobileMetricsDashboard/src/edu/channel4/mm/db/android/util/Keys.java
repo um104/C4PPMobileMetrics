@@ -37,11 +37,13 @@ public class Keys {
 
 	public static final String APP_ID = "Id";
 
-	/**
-	 * The {@link SharedPreferences} namespace that we should use throughout the
-	 * app.
-	 */
-	public static final String PREFS_NS = "edu.channel4.mm.db.android";
+	// Don't use getSharedPreferences(String, int) anymore.
+	// Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
+//	/**
+//	 * The {@link SharedPreferences} namespace that we should use throughout the
+//	 * app.
+//	 */
+//	public static final String PREFS_NS = "edu.channel4.mm.db.android";
 
 	public static final String SESSION_ATTRIBUTE_DESCRIPTIONS = "sAttrs";
 
