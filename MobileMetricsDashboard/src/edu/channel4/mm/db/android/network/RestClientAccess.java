@@ -19,7 +19,7 @@ import edu.channel4.mm.db.android.activity.AppListActivity;
  * @author girum
  */
 @Singleton
-public class RestClientAccess {
+final public class RestClientAccess {
 
 	/**
 	 * According to the <a

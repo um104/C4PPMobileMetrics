@@ -16,21 +16,18 @@ import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 
 public class GetEventNameListAsyncTask extends
-// BaseAsyncTask<Void, Void, List<EventNameDescription>> {
          BaseGetRequestAsyncTask<List<EventNameDescription>> {
 
    public static final String EVENTS_URL_SUFFIX = "channel4_events";
-   // private String responseString;
    private EventNameDescriptionCallback callback;
 
    @Inject private TempoDatabase tempoDatabase;
 
-   // @Inject private RestClientAccess restClientAccess;
-
    @SuppressWarnings("serial")
-   public GetEventNameListAsyncTask(Context context, final String appLabel,
+   public GetEventNameListAsyncTask(Context context, String baseUri,
+                                    String accessToken, final String appLabel,
                                     EventNameDescriptionCallback callback) {
-      super(context, EVENTS_URL_SUFFIX, new HashMap<String, String>() {
+      super(context, baseUri, accessToken, new HashMap<String, String>() {
          {
             put(Keys.APP_LABEL, Uri.encode(appLabel));
          }
@@ -41,86 +38,6 @@ public class GetEventNameListAsyncTask extends
       RoboGuice.getInjector(context).injectMembers(this);
    }
 
-//   @Override
-//   protected List<EventNameDescription> doInBackground(Void... params) {
-//      Log.i("Sending GET request to get event list");
-//
-//      String accessToken = restClientAccess.getAccessToken();
-//      String instanceUrl = restClientAccess.getInstanceURL().toString();
-//
-//      // Don't use getSharedPreferences(String, int) anymore.
-//      // Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
-//      // String appLabel = getApplicationContext().getSharedPreferences(
-//      // Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
-//      String appLabel = PreferenceManager.getDefaultSharedPreferences(
-//               getContext()).getString(Keys.C4PPMM_APP_LABEL, null);
-//
-//      if (accessToken == null) {
-//         Log.e("No access token currently saved");
-//         return null;
-//      }
-//
-//      // Put together the HTTP Request to be sent to Salesforce for the
-//      // Event list
-//      String url = String.format(SalesforceConn.SALESFORCE_BASE_REST_URL,
-//               instanceUrl, EVENTS_URL_SUFFIX);
-//
-//      appLabel = Uri.encode(appLabel);
-//
-//      url += "?appLabel=" + appLabel;
-//
-//      // add parameters
-//      HttpClient client = new DefaultHttpClient();
-//      HttpGet eventNameRequest = new HttpGet(url);
-//      eventNameRequest.setHeader("Authorization", "Bearer " + accessToken);
-//
-//      // Add AppLabel parameter
-//      // List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-//      // nameValuePairs.add(new BasicNameValuePair("appLabel", appLabel));
-//
-//      try {
-//         // eventNameRequest.setEntity(new
-//         // UrlEncodedFormEntity(nameValuePairs));
-//         // Get the response string, the Attribute List in JSON form
-//         responseString = EntityUtils.toString(client.execute(eventNameRequest)
-//                  .getEntity());
-//      }
-//      catch (ClientProtocolException e) {
-//         Log.e(e.getMessage());
-//      }
-//      catch (IOException e) {
-//         Log.e(e.getMessage());
-//      }
-//
-//      Log.d("Got JSON result: " + responseString);
-//
-//      if (responseString == null) {
-//         final String errorMessage = "ERROR: Attempted to parse null Event list.";
-//         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
-//         Log.e(errorMessage);
-//         return null;
-//      }
-//
-//      // Try to parse the resulting JSON
-//      List<EventNameDescription> eventNameList = null;
-//      try {
-//         eventNameList = EventNameDescription.parseList(responseString);
-//      }
-//      catch (JSONException e) {
-//         Log.e(e.getMessage());
-//      }
-//
-//      return eventNameList;
-//   }
-//
-//   @Override
-//   protected void onPostExecute(List<EventNameDescription> result) {
-//      super.onPostExecute(result);
-//
-//      tempoDatabase.setEventNameDescriptions(result);
-//      callback.onEventNameDescriptionChanged(result);
-//   }
-
    @Override
    public List<EventNameDescription> call() throws Exception {
       // Execute the GET request
@@ -130,17 +47,25 @@ public class GetEventNameListAsyncTask extends
       List<EventNameDescription> eventNameList = EventNameDescription
                .parseList(responseString);
 
+      // Save the EventNameList into the database.
+      tempoDatabase.setEventNameDescriptions(eventNameList);
+
       return eventNameList;
    }
 
    @Override
    protected void onSuccess(List<EventNameDescription> result) {
-      tempoDatabase.setEventNameDescriptions(result);
+      // Message the listener that you're done.
       callback.onEventNameDescriptionChanged(result);
    }
 
    @Override
    protected void onException(Exception e) {
       Log.toastE(context, e.getMessage());
+   }
+
+   @Override
+   protected String getResourceUrl() {
+      return "channel4_events";
    }
 }

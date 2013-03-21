@@ -1,27 +1,19 @@
 package edu.channel4.mm.db.android.model.request;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.PreferenceManager;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
-import edu.channel4.mm.db.android.network.GraphRequestAsyncTask;
-import edu.channel4.mm.db.android.network.RestClientAccess;
-import edu.channel4.mm.db.android.network.SalesforceConn;
 import edu.channel4.mm.db.android.util.Keys;
-import edu.channel4.mm.db.android.util.Log;
 
 public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
 
@@ -80,50 +72,50 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
       return iconId;
    }
 
-   @Override
-   public URI getUri(RestClientAccess restClientManager, Context context) {
-      URI uri = null;
-
-      // get some of the basic information we'll need to make the URI
-      String instanceURL = restClientManager.getInstanceURL().toString();
-      
-      // Don't use getSharedPreferences(String, int) anymore.
-      // Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
-      // String appLabel = getApplicationContext().getSharedPreferences(
-      // Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
-      String appLabel = PreferenceManager.getDefaultSharedPreferences(context)
-               .getString(Keys.APP_LABEL, null);
-
-      // make the URI String
-      String uriString = "";
-
-      // add in all non-parameterized information onto the request
-      uriString += String.format(SalesforceConn.SALESFORCE_BASE_REST_URL,
-               instanceURL, GraphRequestAsyncTask.GRAPH_REQUEST_URL_SUFFIX);
-
-      // create a list for the URL parameters to add
-      List<NameValuePair> params = new ArrayList<NameValuePair>();
-
-      params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, this.REQUEST_TYPE));
-      params.add(new BasicNameValuePair(Keys.APP_LABEL,
-               appLabel));
-      params.add(new BasicNameValuePair(Keys.ATTRIB_NAME_1, attribName1));
-      params.add(new BasicNameValuePair(Keys.EVENT_NAME_1, eventName1));
-
-      // add the parameters to the uriString
-      String paramString = URLEncodedUtils.format(params, "utf-8");
-      uriString += "?" + paramString;
-
-      // turn the string into a URI
-      try {
-         uri = new URI(uriString);
-      }
-      catch (URISyntaxException e) {
-         Log.e(e.getMessage());
-      }
-
-      return uri;
-   }
+   // @Override
+   // public URI getUri(RestClientAccess restClientManager, Context context) {
+   // URI uri = null;
+   //
+   // // get some of the basic information we'll need to make the URI
+   // String instanceURL = restClientManager.getInstanceURL().toString();
+   //
+   // // Don't use getSharedPreferences(String, int) anymore.
+   // // Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
+   // // String appLabel = getApplicationContext().getSharedPreferences(
+   // // Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
+   // String appLabel = PreferenceManager.getDefaultSharedPreferences(context)
+   // .getString(Keys.APP_LABEL, null);
+   //
+   // // make the URI String
+   // String uriString = "";
+   //
+   // // add in all non-parameterized information onto the request
+   // uriString += String.format(SalesforceConn.CHANNEL4_REST_URL,
+   // instanceURL, GraphRequestAsyncTask.GRAPH_REQUEST_URL_SUFFIX);
+   //
+   // // create a list for the URL parameters to add
+   // List<NameValuePair> params = new ArrayList<NameValuePair>();
+   //
+   // params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, this.REQUEST_TYPE));
+   // params.add(new BasicNameValuePair(Keys.APP_LABEL,
+   // appLabel));
+   // params.add(new BasicNameValuePair(Keys.ATTRIB_NAME_1, attribName1));
+   // params.add(new BasicNameValuePair(Keys.EVENT_NAME_1, eventName1));
+   //
+   // // add the parameters to the uriString
+   // String paramString = URLEncodedUtils.format(params, "utf-8");
+   // uriString += "?" + paramString;
+   //
+   // // turn the string into a URI
+   // try {
+   // uri = new URI(uriString);
+   // }
+   // catch (URISyntaxException e) {
+   // Log.e(e.getMessage());
+   // }
+   //
+   // return uri;
+   // }
 
    @Override
    public void setEventName(String eventName) {
@@ -174,6 +166,18 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
       // Note: Parcel data is read in a FIFO manner.
       this.eventName1 = in.readString();
       this.attribName1 = in.readString();
+   }
+
+   @Override
+   public List<NameValuePair> getAdditionalUriParameters() {
+      List<NameValuePair> params = new ArrayList<NameValuePair>();
+      
+      params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, this.REQUEST_TYPE));
+//      params.add(new BasicNameValuePair(Keys.APP_LABEL, appLabel));
+      params.add(new BasicNameValuePair(Keys.ATTRIB_NAME_1, attribName1));
+      params.add(new BasicNameValuePair(Keys.EVENT_NAME_1, eventName1));
+      
+      return params;
    }
 
 }

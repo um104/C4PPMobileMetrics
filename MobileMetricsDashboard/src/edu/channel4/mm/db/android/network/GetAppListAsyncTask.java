@@ -13,13 +13,14 @@ import edu.channel4.mm.db.android.model.description.AppDescription;
 import edu.channel4.mm.db.android.util.Log;
 
 class GetAppListAsyncTask extends BaseGetRequestAsyncTask<List<AppDescription>> {
-   protected static final String APPS_URL_SUFFIX = "channel4_apps";
    private AppDescriptionCallback callback;
 
    @Inject TempoDatabase tempoDatabase;
 
-   public GetAppListAsyncTask(Context context, AppDescriptionCallback callback) {
-      super(context, APPS_URL_SUFFIX);
+   public GetAppListAsyncTask(Context context, String baseUri,
+                              String accessToken,
+                              AppDescriptionCallback callback) {
+      super(context, baseUri, accessToken);
       this.callback = callback;
 
       // Inject the fields of this POJO
@@ -34,14 +35,14 @@ class GetAppListAsyncTask extends BaseGetRequestAsyncTask<List<AppDescription>> 
       // Try to parse the resulting JSON
       List<AppDescription> appList = AppDescription.parseList(responseString);
 
+      // Save the app descriptions in the database
+      tempoDatabase.setAppDescriptions(appList);
+
       return appList;
    }
 
    @Override
    protected void onSuccess(List<AppDescription> result) {
-      // Save the app descriptions in the database
-      tempoDatabase.setAppDescriptions(result);
-
       // Message the listener that you're done.
       callback.onAppDescriptionChanged(result);
    }
@@ -49,5 +50,10 @@ class GetAppListAsyncTask extends BaseGetRequestAsyncTask<List<AppDescription>> 
    @Override
    protected void onException(Exception e) {
       Log.toastE(context, e.getMessage());
+   }
+
+   @Override
+   protected String getResourceUrl() {
+      return "channel4_apps";
    }
 }

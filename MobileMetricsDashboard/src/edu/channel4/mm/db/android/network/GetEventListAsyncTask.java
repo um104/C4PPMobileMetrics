@@ -18,16 +18,16 @@ import edu.channel4.mm.db.android.util.Log;
 public class GetEventListAsyncTask extends
          BaseGetRequestAsyncTask<List<EventDescription>> {
 
-   private final static String ATTRIBS_URL_SUFFIX = "channel4_attributes/";
    private EventDescriptionCallback callback;
 
    @Inject private TempoDatabase tempoDatabase;
    @Inject private RestClientAccess restClientAccess;
 
    @SuppressWarnings("serial")
-   public GetEventListAsyncTask(Context context, final String appLabel,
+   public GetEventListAsyncTask(Context context, String baseUri,
+                                String accessToken, final String appLabel,
                                 EventDescriptionCallback callback) {
-      super(context, ATTRIBS_URL_SUFFIX, new HashMap<String, String>() {
+      super(context, baseUri, accessToken, new HashMap<String, String>() {
          {
             put(Keys.APP_LABEL, Uri.encode(appLabel));
          }
@@ -47,18 +47,25 @@ public class GetEventListAsyncTask extends
       List<EventDescription> eventList = EventDescription
                .parseList(responseString);
 
+      // Save the parsed EventList into the database
+      tempoDatabase.setEventDescriptions(eventList);
+
       return eventList;
    }
 
    @Override
    protected void onSuccess(List<EventDescription> result) {
-      tempoDatabase.setEventDescriptions(result);
-
+      // Message the listener that you're done.
       callback.onEventDescriptionChanged(result);
    }
 
    @Override
    protected void onException(Exception e) {
       Log.toastE(context, e.getMessage());
+   }
+
+   @Override
+   protected String getResourceUrl() {
+      return "channel4_attributes";
    }
 }

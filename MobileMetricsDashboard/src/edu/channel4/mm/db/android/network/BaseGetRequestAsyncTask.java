@@ -1,5 +1,6 @@
 package edu.channel4.mm.db.android.network;
 
+import java.net.URI;
 import java.util.Map;
 
 import org.apache.http.client.HttpClient;
@@ -18,58 +19,60 @@ import edu.channel4.mm.db.android.util.Log;
 public abstract class BaseGetRequestAsyncTask<ResultT> extends
          BaseAsyncTask2<ResultT> {
 
-   @Inject private RestClientAccess restClientAccess; // singleton
+   private String accessToken = null;
+   private String uri = null;
    @Inject protected String responseString;
-   private String url = null;
-   protected Map<String, String> params = null;
 
-   protected BaseGetRequestAsyncTask(Context context, String url) {
+   protected BaseGetRequestAsyncTask(Context context, String baseUri,
+                                     String accessToken) {
       super(context);
-      this.url = url;
+      this.uri = baseUri + getResourceUrl();
+      this.accessToken = accessToken;
    }
 
-   protected BaseGetRequestAsyncTask(Context context, String url,
+   protected BaseGetRequestAsyncTask(Context context, String baseUri,
+                                     String accessToken,
                                      Map<String, String> params) {
-      this(context, url);
-      this.params = params;
+      this(context, baseUri, accessToken);
+
+      // Attempt to append parameters to the URI
+      if (params != null) {
+         this.uri += "?";
+         for (String key : params.keySet()) {
+            this.uri += key + "=" + params.get(key) + "&";
+         }
+      }
+      else {
+         Log.e("Params passed in was null. Ignored it.");
+      }
+   }
+
+   protected abstract String getResourceUrl();
+
+   protected BaseGetRequestAsyncTask(Context context, URI baseUri,
+                                     String accessToken) {
+      super(context);
+      this.accessToken = accessToken;
+      this.uri = baseUri.toString();
    }
 
    @Override
    public ResultT call() throws Exception {
-      Log.i("Sending GET request");
-
-      String accessToken = restClientAccess.getAccessToken();
-      String instanceUrl = restClientAccess.getInstanceURL().toString();
+      Log.i("Sending GET request...");
 
       if (accessToken == null) {
          throw new Exception(
-                  "Error in GetAppList: No access token currently saved");
+                  "GET request failed: No access token currently saved");
       }
 
-      Log.d("Access token: " + accessToken);
-      Log.d("Instance URL: " + instanceUrl);
+      Log.v("Access token: " + accessToken);
 
       HttpClient client = new DefaultHttpClient();
 
-      // HttpUriRequest getRequest = new HttpGet(String.format(
-      // SalesforceConn.SALESFORCE_BASE_REST_URL, instanceUrl,
-      // APPS_URL_SUFFIX));
-
-      String getRequestURI = String.format(
-               SalesforceConn.SALESFORCE_BASE_REST_URL, instanceUrl, url);
-
-      if (params != null) {
-         getRequestURI += "?";
-         for (String key : params.keySet()) {
-            // final String parameterURLString = key + "=" + params.get(key) + "&";
-            getRequestURI += key + "=" + params.get(key) + "&";
-         }
-      }
-
-      HttpUriRequest getRequest = new HttpGet(getRequestURI);
-
+      HttpUriRequest getRequest = new HttpGet(uri);
       getRequest.setHeader("Authorization", "Bearer " + accessToken);
 
+      Log.v("Sending GET request with URI: " + uri);
       String responseString = EntityUtils.toString(client.execute(getRequest)
                .getEntity());
 
@@ -77,38 +80,14 @@ public abstract class BaseGetRequestAsyncTask<ResultT> extends
          Log.i("Got HTTP result: " + responseString);
       }
       else {
-         throw new Exception(
-                  "ERROR: GET request receieved null response string.");
+         throw new Exception("GET request receieved null response string.");
       }
 
       // Save the responseString internally, for inheriting classes to use
-      // (parse).
+      // (e.g. most classes will parse this string).
       this.responseString = responseString;
 
       return null;
    }
-
-   // public String getResponseString() {
-   // return responseString;
-   // }
-
-   // @Override
-   // protected void onSuccess(String result) {
-   //
-   // }
-   //
-   // @Override
-   // protected void onException(Exception e) {
-   // Log.toastE(context, e.getMessage());
-   // }
-   //
-   // @Override
-   // protected void onInterrupted(Exception e) {
-   // Log.toastE(context, e.getMessage());
-   // }
-   //
-   // @Override
-   // protected void onFinally() {
-   // }
 
 }
