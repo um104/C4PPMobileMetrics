@@ -73,7 +73,7 @@ public class SessionOverTimeGraphRequest implements GraphRequest,
       List<NameValuePair> params = new ArrayList<NameValuePair>();
 
       params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, this.REQUEST_TYPE));
-      params.add(new BasicNameValuePair(Keys.APP_LABEL_URL_PARAMETER_NAME,
+      params.add(new BasicNameValuePair(Keys.APP_LABEL,
                appLabel));
       params.add(new BasicNameValuePair(Keys.TIME_INTERVAL, timeInterval));
 

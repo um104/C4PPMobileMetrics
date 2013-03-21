@@ -16,7 +16,6 @@ import edu.channel4.mm.db.android.util.Keys;
 @ContextSingleton
 public class SalesforceConn {
    public static final String SALESFORCE_BASE_REST_URL = "%s/services/apexrest/C4PPMM/%s";
-   public static final String EVENTS_URL_SUFFIX = "channel4_events";
 
    @Inject private Context context;
    @Inject private SharedPreferences prefs;
@@ -27,7 +26,8 @@ public class SalesforceConn {
     * AttributeDescriptions.
     */
    public void getEventListViaNetwork(EventDescriptionCallback callback) {
-      
+
+      // Grab the most up-to-date appLabel
       String appLabel = prefs.getString(Keys.APP_LABEL, null);
       
       new GetEventListAsyncTask(context, appLabel, callback).execute();
@@ -39,7 +39,11 @@ public class SalesforceConn {
     */
    public void
             getEventNameListViaNetwork(EventNameDescriptionCallback callback) {
-      new GetEventNameListAsyncTask(context, callback).execute();
+
+      // Grab the most up-to-date appLabel
+      String appLabel = prefs.getString(Keys.APP_LABEL, null);
+      
+      new GetEventNameListAsyncTask(context, appLabel, callback).execute();
    }
 
    /**

@@ -105,7 +105,7 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
       List<NameValuePair> params = new ArrayList<NameValuePair>();
 
       params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, this.REQUEST_TYPE));
-      params.add(new BasicNameValuePair(Keys.APP_LABEL_URL_PARAMETER_NAME,
+      params.add(new BasicNameValuePair(Keys.APP_LABEL,
                appLabel));
       params.add(new BasicNameValuePair(Keys.ATTRIB_NAME_1, attribName1));
       params.add(new BasicNameValuePair(Keys.EVENT_NAME_1, eventName1));

@@ -62,8 +62,8 @@ public class AppDescription implements Comparable<AppDescription>, Parcelable {
 		for (int i = 0; i < appDataArray.length(); i++) {
 			JSONObject appDataObject = appDataArray.getJSONObject(i);
 
-			String appLabel = appDataObject.getString(Keys.APP_LABEL);
-			String packageName = appDataObject.getString(Keys.PACKAGE_NAME);
+			String appLabel = appDataObject.getString(Keys.C4PPMM_APP_LABEL);
+			String packageName = appDataObject.getString(Keys.C4PPMM_PACKAGE_NAME);
 			String appId = appDataObject.getString(Keys.APP_ID);
 
 			AppDescription appData = new AppDescription(appLabel, packageName,
