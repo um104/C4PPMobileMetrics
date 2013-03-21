@@ -1,14 +1,17 @@
 package edu.channel4.mm.db.android.network;
 
-import com.google.inject.Inject;
-
 import roboguice.inject.ContextSingleton;
 import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.google.inject.Inject;
+
 import edu.channel4.mm.db.android.callback.AppDescriptionCallback;
 import edu.channel4.mm.db.android.callback.EventDescriptionCallback;
 import edu.channel4.mm.db.android.callback.EventNameDescriptionCallback;
 import edu.channel4.mm.db.android.callback.GraphLoadCallback;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
+import edu.channel4.mm.db.android.util.Keys;
 
 @ContextSingleton
 public class SalesforceConn {
@@ -16,6 +19,7 @@ public class SalesforceConn {
    public static final String EVENTS_URL_SUFFIX = "channel4_events";
 
    @Inject private Context context;
+   @Inject private SharedPreferences prefs;
 
    /**
     * Call this when you want to update your list of "attributes"! It will
@@ -23,7 +27,10 @@ public class SalesforceConn {
     * AttributeDescriptions.
     */
    public void getEventListViaNetwork(EventDescriptionCallback callback) {
-      new GetEventListAsyncTask(context, callback).execute();
+      
+      String appLabel = prefs.getString(Keys.APP_LABEL, null);
+      
+      new GetEventListAsyncTask(context, appLabel, callback).execute();
    }
 
    /**
