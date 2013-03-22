@@ -1,6 +1,6 @@
 package edu.channel4.mm.db.android.activity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -14,15 +14,15 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.inject.Inject;
 
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
-import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
 import edu.channel4.mm.db.android.util.Keys;
+import edu.channel4.mm.db.android.util.Log;
+import edu.channel4.mm.db.android.view.GraphRequestArrayAdapter;
 
 @ContentView(R.layout.activity_audience)
 public class AudienceActivity extends RoboActivity {
@@ -31,7 +31,7 @@ public class AudienceActivity extends RoboActivity {
    @InjectView(R.id.audienceHeader) private TextView textViewAudienceHeader;
    @InjectResource(R.string.audience) private String activityTitle;
    @Inject private SharedPreferences prefs;
-   @Inject private ArrayList<GraphRequest> graphRequests;
+   @Inject private List<GraphRequest> graphRequests;
    private GraphRequestArrayAdapter adapter;
 
    @Override
@@ -54,7 +54,7 @@ public class AudienceActivity extends RoboActivity {
          @Override
          public void onItemClick(AdapterView<?> parent, View view,
                   int position, long id) {
-            audienceItemClicked(position);
+            startGraphRequestActivity(graphRequests.get(position));
          }
       });
    }
@@ -79,11 +79,8 @@ public class AudienceActivity extends RoboActivity {
                "SDKCompatibility__c", R.drawable.ic_launcher));
    }
 
-   private void audienceItemClicked(int position) {
-      // Grab the GraphRequest for the selected item.
-      GraphRequest graphRequest = graphRequests.get(position);
-
-      // Construct the correct Intent for the selected GraphRequest
+   private void startGraphRequestActivity(GraphRequest graphRequest) {
+      // Construct the correct Intent
       Intent intent = graphRequest
                .constructGraphRequestIntent(getApplicationContext());
 
@@ -91,10 +88,8 @@ public class AudienceActivity extends RoboActivity {
          startActivity(intent);
       }
       else {
-         Toast.makeText(getApplicationContext(),
-                  graphRequest.toString() + " not yet implemented.",
-                  Toast.LENGTH_SHORT).show();
+         Log.toastE(getApplicationContext(), graphRequest.toString()
+                  + " not yet implemented.");
       }
    }
-
 }

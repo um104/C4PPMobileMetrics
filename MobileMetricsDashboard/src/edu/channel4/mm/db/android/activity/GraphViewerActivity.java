@@ -1,6 +1,6 @@
 package edu.channel4.mm.db.android.activity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.google.inject.Inject;
 
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.callback.GraphLoadCallback;
+import edu.channel4.mm.db.android.model.callback.GraphLoadCallback;
 import edu.channel4.mm.db.android.model.graph.Graph;
 import edu.channel4.mm.db.android.model.graph.GraphFactory;
 import edu.channel4.mm.db.android.model.graph.GraphType;
@@ -43,7 +43,7 @@ public class GraphViewerActivity extends RoboActivity implements
    @InjectView(R.id.textViewGraphViewerTitle) private TextView textViewTitle;
    @InjectView(R.id.buttonOK) private Button buttonOK;
 
-   @Inject private ArrayList<GraphType> validGraphTypes;
+   @Inject private List<GraphType> validGraphTypes;
    private ArrayAdapter<GraphType> adapter;
 
    @Override

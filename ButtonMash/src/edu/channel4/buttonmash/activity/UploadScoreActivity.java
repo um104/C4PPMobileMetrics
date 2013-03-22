@@ -11,7 +11,7 @@ import android.widget.Toast;
 import edu.channel4.mobilemetrics.sdk.android.LocalyticsSession;
 
 @ContentView(R.layout.activity_upload_score)
-public class UploadScoreActivity extends RoboActivity {
+public final class UploadScoreActivity extends RoboActivity {
 
    private final static String LOCALYTICS_APP_KEY = "2b9b47ca4e9178b076524b4-d8a060da-215f-11e2-5ebd-00ef75f32667";
    private LocalyticsSession localyticsSession;
@@ -47,6 +47,7 @@ public class UploadScoreActivity extends RoboActivity {
 
    public void uploadScore(View v) {
 
+      // Empty name sanity check
       if (editTextName.getText().toString().trim().equals("")) {
          Toast.makeText(getApplicationContext(), "Please enter your name.",
                   Toast.LENGTH_SHORT).show();

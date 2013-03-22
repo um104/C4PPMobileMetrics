@@ -140,7 +140,7 @@ public abstract class ForceApp extends Application implements AccountRemoved {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        
         // Initialize encryption module
         Encryptor.init(this);
 

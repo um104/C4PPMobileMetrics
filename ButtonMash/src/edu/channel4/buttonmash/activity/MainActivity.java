@@ -1,5 +1,7 @@
 package edu.channel4.buttonmash.activity;
 
+import java.util.List;
+
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -9,14 +11,17 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.inject.Inject;
 
 @ContentView(R.layout.activity_main)
-public class MainActivity extends RoboActivity {
+public final class MainActivity extends RoboActivity {
 
    /**
     * The number of seconds you want to mash for.
     */
-   public final static int SECONDS = 5;
+   public static final int SECONDS = 5;
 
    /**
     * Time spent for all of the following actions:
@@ -26,12 +31,12 @@ public class MainActivity extends RoboActivity {
     * 
     * in milliseconds.
     */
-   private final static int TOTAL_TIMER_TIME = SECONDS * 1000 + 2000;
+   private static final int TOTAL_TIMER_TIME = SECONDS * 1000 + 2000;
 
    /**
     * Main counter for The Button.
     */
-   private int timesPressed = 0;
+   private static int timesPressed = 0;
 
    @InjectView(R.id.textViewTimer) private TextView textViewTimer;
    @InjectView(R.id.buttonStartMashing) private Button buttonStartMashing;

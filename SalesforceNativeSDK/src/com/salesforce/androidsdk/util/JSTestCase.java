@@ -36,6 +36,7 @@ import com.salesforce.androidsdk.ui.SalesforceDroidGapActivity;
 /**
  * Extend this class to run tests written in JavaScript
  */
+@SuppressWarnings("deprecation")
 public class JSTestCase extends
 		ActivityInstrumentationTestCase2<SalesforceDroidGapActivity> {
 

@@ -7,8 +7,8 @@ import android.content.Context;
 
 import com.google.inject.Inject;
 
-import edu.channel4.mm.db.android.callback.AppDescriptionCallback;
 import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.model.callback.AppDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.AppDescription;
 import edu.channel4.mm.db.android.util.Log;
 

@@ -9,10 +9,10 @@ import android.content.SharedPreferences;
 
 import com.google.inject.Inject;
 
-import edu.channel4.mm.db.android.callback.AppDescriptionCallback;
-import edu.channel4.mm.db.android.callback.EventDescriptionCallback;
-import edu.channel4.mm.db.android.callback.EventNameDescriptionCallback;
-import edu.channel4.mm.db.android.callback.GraphLoadCallback;
+import edu.channel4.mm.db.android.model.callback.AppDescriptionCallback;
+import edu.channel4.mm.db.android.model.callback.EventDescriptionCallback;
+import edu.channel4.mm.db.android.model.callback.EventNameDescriptionCallback;
+import edu.channel4.mm.db.android.model.callback.GraphLoadCallback;
 import edu.channel4.mm.db.android.model.graph.Graph;
 import edu.channel4.mm.db.android.model.graph.GraphFactory;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
@@ -20,7 +20,7 @@ import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 
 // TODO: Change AsyncTasks to be fields of this class. That way, we don't repeat an AsyncTask
-// multiple times before the first calls of it finish.
+// multiple times before the its first calls finish.
 // TODO: Implement a "cancelAllAsyncTasks()" method that cancels any in-progress AsyncTasks.
 @ContextSingleton
 final public class SalesforceConn {
@@ -33,13 +33,20 @@ final public class SalesforceConn {
    /**
     * Gets the app list from Salesforce. Don't call this method directly?
     */
+   // TODO: Figure out how to auto-inject the logic to retrieve the BaseURI and
+   // AccessToken, instead of repeatedly retrieving those 3 strings in each of
+   // these methods.
    public void getAppListViaNetwork(AppDescriptionCallback callback) {
 
       // Grab the most up-to-date field values
+      // TODO: Type-safe these all of these strings using Guice's Binding
+      // Annotations:
+      // http://youtu.be/hBVJbzAagfs?t=20m39s
+      String baseUri = getCurrentBaseUri();
       String accessToken = restClientAccess.getAccessToken();
 
-      new GetAppListAsyncTask(context, getCurrentBaseUri(), accessToken,
-               callback).execute();
+      new GetAppListAsyncTask(context, baseUri, accessToken, callback)
+               .execute();
    }
 
    /**
@@ -50,11 +57,12 @@ final public class SalesforceConn {
    public void getEventListViaNetwork(EventDescriptionCallback callback) {
 
       // Grab the most up-to-date field values
+      String baseUri = getCurrentBaseUri();
       String accessToken = restClientAccess.getAccessToken();
       String appLabel = prefs.getString(Keys.APP_LABEL, null);
 
-      new GetEventListAsyncTask(context, getCurrentBaseUri(), accessToken,
-               appLabel, callback).execute();
+      new GetEventListAsyncTask(context, baseUri, accessToken, appLabel,
+               callback).execute();
    }
 
    /**
@@ -65,11 +73,12 @@ final public class SalesforceConn {
             getEventNameListViaNetwork(EventNameDescriptionCallback callback) {
 
       // Grab the most up-to-date field values
+      String baseUri = getCurrentBaseUri();
       String accessToken = restClientAccess.getAccessToken();
       String appLabel = prefs.getString(Keys.APP_LABEL, null);
 
-      new GetEventNameListAsyncTask(context, getCurrentBaseUri(), accessToken,
-               appLabel, callback).execute();
+      new GetEventNameListAsyncTask(context, baseUri, accessToken, appLabel,
+               callback).execute();
    }
 
    /**
@@ -82,11 +91,12 @@ final public class SalesforceConn {
             GraphLoadCallback callback) {
 
       // Grab the most up-to-date field values
+      String baseUri = getCurrentBaseUri();
       String accessToken = restClientAccess.getAccessToken();
       String appLabel = prefs.getString(Keys.APP_LABEL, null);
 
-      new GraphRequestAsyncTask(context, getCurrentBaseUri(), accessToken,
-               appLabel, graphRequest, callback).execute();
+      new GraphRequestAsyncTask(context, baseUri, accessToken, appLabel,
+               graphRequest, callback).execute();
    }
 
    /**

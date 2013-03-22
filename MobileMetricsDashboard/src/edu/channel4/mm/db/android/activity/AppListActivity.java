@@ -1,6 +1,5 @@
 package edu.channel4.mm.db.android.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import roboguice.inject.ContentView;
@@ -23,7 +22,7 @@ import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.ui.NativeMainActivity;
 
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.callback.AppDescriptionCallback;
+import edu.channel4.mm.db.android.model.callback.AppDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.AppDescription;
 import edu.channel4.mm.db.android.network.RestClientAccess;
 import edu.channel4.mm.db.android.network.SalesforceConn;
@@ -44,7 +43,7 @@ public class AppListActivity extends NativeMainActivity implements
    @InjectView(R.id.appListRoot) View rootView;
    @Inject private SharedPreferences prefs;
    @Inject private SalesforceConn sfConn;
-   @Inject private ArrayList<AppDescription> appList;
+   @Inject private List<AppDescription> appList;
    @Inject private RestClientAccess restClientAccess;
    protected AppDataArrayAdapater arrayAdapter;
 

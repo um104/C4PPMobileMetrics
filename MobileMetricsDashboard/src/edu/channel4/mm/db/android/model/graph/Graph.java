@@ -32,7 +32,7 @@ public class Graph {
    private List<GraphType> validGraphTypes;
    private DataTable datatable;
 
-   public Graph(String title, List<GraphType> validGraphTypes,
+   protected Graph(String title, List<GraphType> validGraphTypes,
                 DataTable datatable) {
       this.title = title;
       this.validGraphTypes = validGraphTypes;

@@ -10,8 +10,8 @@ import android.content.Context;
 import com.google.inject.Inject;
 import com.google.visualization.datasource.base.TypeMismatchException;
 
-import edu.channel4.mm.db.android.callback.GraphLoadCallback;
 import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.model.callback.GraphLoadCallback;
 import edu.channel4.mm.db.android.model.graph.Graph;
 import edu.channel4.mm.db.android.model.graph.GraphFactory;
 import edu.channel4.mm.db.android.model.request.GraphRequest;

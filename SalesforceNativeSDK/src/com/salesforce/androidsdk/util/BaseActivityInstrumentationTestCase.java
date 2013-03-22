@@ -41,6 +41,7 @@ import com.salesforce.androidsdk.util.EventsObservable.EventType;
 /**
  * Super class to activity tests
  */
+@SuppressWarnings("deprecation")
 public class BaseActivityInstrumentationTestCase<T extends Activity> extends ActivityInstrumentationTestCase2<T> {
 
     private EventsListenerQueue eq;

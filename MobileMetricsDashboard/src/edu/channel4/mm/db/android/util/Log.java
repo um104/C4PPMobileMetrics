@@ -19,10 +19,8 @@ import com.google.inject.Inject;
  * <br />
  * Some notes:
  * <ul>
+ * <li>TAG is automatically generated for you, as ClassName.methodName</li>
  * <li>Debug and verbose logging are automatically disabled for release builds.</li>
- * <li>Your app name, file and line of the log message, time stamp, thread, and
- * other useful information is automatically logged for you. (Some of this
- * information is disabled for release builds to improve performance).</li>
  * <li>
  * Performance of disabled logging is faster than Log due to the use of the
  * varargs. Since your most expensive logging will often be debug or verbose
@@ -91,7 +89,8 @@ public class Log {
 
    public static void toastE(Context context, Exception e) {
       android.util.Log.e(Log.getTag(), e.getMessage(), e);
-      Toast.makeText(context, "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT)
+               .show();
    }
 
    /**

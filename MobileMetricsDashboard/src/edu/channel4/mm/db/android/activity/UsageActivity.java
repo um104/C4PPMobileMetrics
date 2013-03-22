@@ -1,6 +1,6 @@
 package edu.channel4.mm.db.android.activity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -22,9 +22,9 @@ import edu.channel4.mm.db.android.model.request.EventOverTimeGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.SessionLengthGraphRequest;
 import edu.channel4.mm.db.android.model.request.SessionOverTimeGraphRequest;
-import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
+import edu.channel4.mm.db.android.view.GraphRequestArrayAdapter;
 
 @ContentView(R.layout.activity_usage)
 public class UsageActivity extends RoboActivity {
@@ -32,7 +32,7 @@ public class UsageActivity extends RoboActivity {
    @InjectView(R.id.listviewUsageActivity) private ListView listView;
    @InjectView(R.id.usageHeader) private TextView textViewUsageHeader;
    @InjectResource(R.string.usage) private String activityTitle;
-   @Inject private ArrayList<GraphRequest> graphRequests;
+   @Inject private List<GraphRequest> graphRequests;
    @Inject private SharedPreferences prefs;
    private GraphRequestArrayAdapter adapter;
 

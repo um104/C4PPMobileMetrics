@@ -1,6 +1,5 @@
 package edu.channel4.mm.db.android.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import roboguice.activity.RoboActivity;
@@ -14,14 +13,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.inject.Inject;
 
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.callback.EventDescriptionCallback;
-import edu.channel4.mm.db.android.callback.EventNameDescriptionCallback;
 import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.model.callback.EventDescriptionCallback;
+import edu.channel4.mm.db.android.model.callback.EventNameDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
 import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.model.description.EventNameDescription;
@@ -45,8 +43,6 @@ public class EditGraphRequestActivity extends RoboActivity implements
    private ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
    private ArrayAdapter<EventNameDescription> eventNameAdapter;
    private ArrayAdapter<EventDescription> eventAdapter;
-   private ArrayAdapter<EventDescription> eventAttributeAdapter;
-   private List<ArrayAdapter<EventDescription>> eventAttributeAdapters;
    private ArrayAdapter<AttributeDescription> attributeAdapter;
 
    @InjectView(R.id.spinnerEvent1) private Spinner event1Spinner;
@@ -56,8 +52,8 @@ public class EditGraphRequestActivity extends RoboActivity implements
    @InjectView(R.id.attribute1Group) private View attribute1Group;
    @InjectView(R.id.durationGroup) private View durationGroup;
 
-   @Inject private ArrayList<EventDescription> eventList;
-   @Inject private ArrayList<EventNameDescription> eventNameList;
+   @Inject private List<EventDescription> eventList;
+   @Inject private List<EventNameDescription> eventNameList;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -161,14 +157,6 @@ public class EditGraphRequestActivity extends RoboActivity implements
    }
 
    public void onDoneButtonClicked(View view) {
-      if (validateInputs() == false) {
-         // respond to invalid input
-         Toast.makeText(getApplicationContext(),
-                  R.string.please_enter_valid_inputs_, Toast.LENGTH_SHORT)
-                  .show();
-         return;
-      }
-
       // fill in the graphRequest based on its interfaces
       if (graphRequest instanceof HasOverTimeParameter) {
          // retrieve selected time from durationSpinner, put in graphRequest
@@ -227,25 +215,14 @@ public class EditGraphRequestActivity extends RoboActivity implements
          CustomGraphRequest customGraphRequest = (CustomGraphRequest) graphRequest;
 
          // Save its new name
-         customGraphRequest.setName(customGraphRequest.getAttributeName()
-                  + "." + customGraphRequest.getEventName());
+         customGraphRequest.setName(customGraphRequest.getAttributeName() + "."
+                  + customGraphRequest.getEventName());
 
          // Once a CustomGraphRequest is saved, it becomes "Predefined."
          customGraphRequest.setReadOnly(true);
 
          tempoDatabase.addCustomGraphRequest(customGraphRequest);
       }
-   }
-
-   /**
-    * Use this method to do simple validation on user inputs
-    * 
-    * @return
-    */
-   private boolean validateInputs() {
-      // TODO: either actually do validation of input elements, or remove this
-      // method
-      return true;
    }
 
    @Override

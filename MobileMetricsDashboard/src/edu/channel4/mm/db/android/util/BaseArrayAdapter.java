@@ -1,5 +1,6 @@
 package edu.channel4.mm.db.android.util;
 
+import java.util.Arrays;
 import java.util.List;
 
 import android.content.Context;
@@ -15,22 +16,12 @@ public abstract class BaseArrayAdapter<T> extends ArrayAdapter<T> {
 
    public BaseArrayAdapter(Context context, int cellLayoutId, List<T> arrayList) {
       super(context, 1, arrayList);
-      setLayoutInflater(context);
-      setCellLayoutId(cellLayoutId);
+      inflater = LayoutInflater.from(context);
+      this.cellLayoutId = cellLayoutId;
    }
 
    public BaseArrayAdapter(Context context, int cellLayoutId, T[] arrayList) {
-      super(context, 1, arrayList);
-      setLayoutInflater(context);
-      setCellLayoutId(cellLayoutId);
-   }
-
-   private void setLayoutInflater(Context context) {
-      inflater = LayoutInflater.from(context);
-   }
-
-   private void setCellLayoutId(int cellLayoutId) {
-      this.cellLayoutId = cellLayoutId;
+      this(context, 1, Arrays.asList(arrayList));
    }
 
    @Override
@@ -48,7 +39,8 @@ public abstract class BaseArrayAdapter<T> extends ArrayAdapter<T> {
 
       // Call the user's version of getViewEnhanced() on the resulting
       // convertView.
-      // While you're at it, give him the actual object at the position given.
+      // While you're at it, give him the actual object at the position given
+      // instead of just the position.
       return getViewEnhanced(getItem(position), convertView);
    }
 

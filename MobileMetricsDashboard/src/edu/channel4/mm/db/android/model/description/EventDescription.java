@@ -64,7 +64,8 @@ public class EventDescription {
 	   for (int i = 0; i < sessionAttributesJSON.length(); i++) {
 	      // get each attribute name
 	      String attribName = sessionAttributesJSON.getString(i);
-	      //TODO: cut the __c off the end of each name
+	      // TODO: cut the __c off the end of each name
+	      // (girum) why?
 	      
 	      // add the attribute to the sessionAttribList
 	      sessionAttributesList.add(new AttributeDescription(attribName));

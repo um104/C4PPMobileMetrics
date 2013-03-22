@@ -47,6 +47,7 @@ import com.salesforce.androidsdk.auth.LoginServerManager.LoginServer;
  * Custom dialog to allow the user to set a label and url to use for the login.
  * 
  */
+@SuppressWarnings("deprecation")
 public class CustomServerUrlEditor extends Dialog {
 
 	private static final String PERSISTED_CTRL_FOCUS = "focusedId";

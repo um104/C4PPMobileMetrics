@@ -1,6 +1,5 @@
 package edu.channel4.mm.db.android.database;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -19,16 +18,15 @@ import edu.channel4.mm.db.android.model.request.GraphRequest;
  * of models.
  * 
  * @author girum & mark
- * 
  */
 @Singleton
 public class TempoDatabase {
 
-   @Inject private ArrayList<AppDescription> appDescriptions;
-   @Inject private ArrayList<AttributeDescription> attributeDescriptions;
-   @Inject private ArrayList<EventDescription> eventDescriptions;
-   @Inject private ArrayList<EventNameDescription> eventNameDescriptions;
-   @Inject private ArrayList<GraphRequest> customGraphRequests;
+   @Inject private List<AppDescription> appDescriptions;
+   @Inject private List<AttributeDescription> attributeDescriptions;
+   @Inject private List<EventDescription> eventDescriptions;
+   @Inject private List<EventNameDescription> eventNameDescriptions;
+   @Inject private List<GraphRequest> customGraphRequests;
    private Graph graph = null;
 
    public void setAppDescriptions(List<AppDescription> appDescriptions) {
@@ -56,7 +54,7 @@ public class TempoDatabase {
    public void addCustomGraphRequest(CustomGraphRequest customGraphRequest) {
       this.customGraphRequests.add(customGraphRequest);
    }
-   
+
    public List<GraphRequest> getCustomGraphRequests() {
       return customGraphRequests;
    }

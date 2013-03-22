@@ -9,8 +9,8 @@ import android.net.Uri;
 
 import com.google.inject.Inject;
 
-import edu.channel4.mm.db.android.callback.EventDescriptionCallback;
 import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.model.callback.EventDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;

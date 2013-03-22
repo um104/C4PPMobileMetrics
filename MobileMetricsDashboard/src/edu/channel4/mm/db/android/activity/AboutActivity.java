@@ -27,8 +27,7 @@ public class AboutActivity extends RoboActivity {
                getApplicationContext(), R.layout.cell_about, developerNames));
    }
 
-   private static class AboutArrayAdapter extends BaseArrayAdapter<String> {
-
+   static class AboutArrayAdapter extends BaseArrayAdapter<String> {
       AboutArrayAdapter(Context context, int textViewResourceId,
                         String[] developerNames) {
          super(context, textViewResourceId, developerNames);
