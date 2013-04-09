@@ -21,7 +21,7 @@ public abstract class BaseArrayAdapter<T> extends ArrayAdapter<T> {
    }
 
    public BaseArrayAdapter(Context context, int cellLayoutId, T[] arrayList) {
-      this(context, 1, Arrays.asList(arrayList));
+      this(context, cellLayoutId, Arrays.asList(arrayList));
    }
 
    @Override

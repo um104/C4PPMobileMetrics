@@ -46,7 +46,7 @@ public class AudienceActivity extends RoboActivity {
       // Set the Adapter to use the array of GraphRequests
       fillGraphRequests();
       adapter = new GraphRequestArrayAdapter(getApplicationContext(),
-               graphRequests.toArray(new GraphRequest[graphRequests.size()]));
+               graphRequests.toArray(new GraphRequest[0]));
 
       // Configure the ListView to use the Adapter
       listView.setAdapter(adapter);

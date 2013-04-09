@@ -33,7 +33,7 @@ public class Graph {
    private DataTable datatable;
 
    protected Graph(String title, List<GraphType> validGraphTypes,
-                DataTable datatable) {
+                   DataTable datatable) {
       this.title = title;
       this.validGraphTypes = validGraphTypes;
       this.datatable = datatable;
@@ -170,25 +170,23 @@ public class Graph {
 
       return ChartFactory.getBarChartIntent(context,
                buildBarDataset(titles, values), renderer, Type.DEFAULT);
-
    }
 
    private Intent getLineGraphIntent(Context context) {
 
       XYMultipleSeriesDataset dataset = setupXYMultipleSeriesIntent(
                getLineRenderer(), context);
-      
-      XYMultipleSeriesRenderer renderer = null;
-//      SimpleSeriesRenderer simpleSeriesRenderer = null;
-      
-      Intent intent = ChartFactory.getLineChartIntent(context, dataset, renderer);
 
-      return intent;
+      XYMultipleSeriesRenderer renderer = null;
+      // SimpleSeriesRenderer simpleSeriesRenderer = null;
+
+      return ChartFactory.getLineChartIntent(context, dataset,
+               renderer);
    }
 
    private XYMultipleSeriesDataset setupXYMultipleSeriesIntent(
             XYMultipleSeriesRenderer renderer, Context context) {
-//      Intent intent = null;
+      // Intent intent = null;
 
       XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
       XYSeries xySeries = new XYSeries("some xy series");
@@ -270,29 +268,29 @@ public class Graph {
       renderer.setLabelsColor(labelsColor);
    }
 
-//   private static XYMultipleSeriesRenderer getBarRenderer() {
-//      // Define a renderer
-//      XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
-//      renderer.setAxisTitleTextSize(16);
-//      renderer.setChartTitleTextSize(20);
-//      renderer.setLabelsTextSize(15);
-//      renderer.setLegendTextSize(15);
-//      renderer.setMargins(new int[] {20, 30, 15, 0});
-//      SimpleSeriesRenderer r = new SimpleSeriesRenderer();
-//      r.setColor(Color.GREEN);
-//      renderer.addSeriesRenderer(r);
-//
-//      // Set chart settings
-//      renderer.setChartTitle("Chart demo");
-//      renderer.setXTitle("x values");
-//      renderer.setYTitle("y values");
-//      renderer.setXAxisMin(0.5);
-//      renderer.setXAxisMax(10.5);
-//      renderer.setYAxisMin(0);
-//      renderer.setYAxisMax(210);
-//
-//      return renderer;
-//   }
+   // private static XYMultipleSeriesRenderer getBarRenderer() {
+   // // Define a renderer
+   // XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
+   // renderer.setAxisTitleTextSize(16);
+   // renderer.setChartTitleTextSize(20);
+   // renderer.setLabelsTextSize(15);
+   // renderer.setLegendTextSize(15);
+   // renderer.setMargins(new int[] {20, 30, 15, 0});
+   // SimpleSeriesRenderer r = new SimpleSeriesRenderer();
+   // r.setColor(Color.GREEN);
+   // renderer.addSeriesRenderer(r);
+   //
+   // // Set chart settings
+   // renderer.setChartTitle("Chart demo");
+   // renderer.setXTitle("x values");
+   // renderer.setYTitle("y values");
+   // renderer.setXAxisMin(0.5);
+   // renderer.setXAxisMax(10.5);
+   // renderer.setYAxisMin(0);
+   // renderer.setYAxisMax(210);
+   //
+   // return renderer;
+   // }
 
    private static XYMultipleSeriesRenderer getLineRenderer() {
       // Define a renderer
