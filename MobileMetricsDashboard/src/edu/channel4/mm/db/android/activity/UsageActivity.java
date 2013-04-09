@@ -1,6 +1,6 @@
 package edu.channel4.mm.db.android.activity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -32,7 +32,7 @@ public class UsageActivity extends RoboActivity {
    @InjectView(R.id.listviewUsageActivity) private ListView listView;
    @InjectView(R.id.usageHeader) private TextView textViewUsageHeader;
    @InjectResource(R.string.usage) private String activityTitle;
-   @Inject private List<GraphRequest> graphRequests;
+   @Inject private ArrayList<GraphRequest> graphRequests;
    @Inject private SharedPreferences prefs;
    private GraphRequestArrayAdapter adapter;
 
@@ -69,13 +69,19 @@ public class UsageActivity extends RoboActivity {
          }
       });
 
-      graphRequests.add(new SessionOverTimeGraphRequest());
-      graphRequests.add(new EventOverTimeGraphRequest());
-      graphRequests.add(new SessionLengthGraphRequest());
+      if (graphRequests.isEmpty()) {
+         fillGraphRequests();
+      }
 
       adapter = new GraphRequestArrayAdapter(getApplicationContext(),
                graphRequests.toArray(new GraphRequest[0]));
 
       listView.setAdapter(adapter);
+   }
+
+   private void fillGraphRequests() {
+      graphRequests.add(new SessionOverTimeGraphRequest());
+      graphRequests.add(new EventOverTimeGraphRequest());
+      graphRequests.add(new SessionLengthGraphRequest());
    }
 }

@@ -1,6 +1,6 @@
 package edu.channel4.mm.db.android.activity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -31,7 +31,7 @@ public class AudienceActivity extends RoboActivity {
    @InjectView(R.id.audienceHeader) private TextView textViewAudienceHeader;
    @InjectResource(R.string.audience) private String activityTitle;
    @Inject private SharedPreferences prefs;
-   @Inject private List<GraphRequest> graphRequests;
+   @Inject private ArrayList<GraphRequest> graphRequests;
    private GraphRequestArrayAdapter adapter;
 
    @Override
@@ -44,7 +44,9 @@ public class AudienceActivity extends RoboActivity {
       textViewAudienceHeader.setText(appLabel);
 
       // Set the Adapter to use the array of GraphRequests
-      fillGraphRequests();
+      if (graphRequests.isEmpty()) {
+         fillGraphRequests();
+      }
       adapter = new GraphRequestArrayAdapter(getApplicationContext(),
                graphRequests.toArray(new GraphRequest[0]));
 

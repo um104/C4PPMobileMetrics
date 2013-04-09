@@ -58,14 +58,10 @@ public abstract class BaseGetRequestAsyncTask<ResultT> extends
 
    @Override
    public ResultT call() throws Exception {
-      Log.i("Sending GET request...");
-
       if (accessToken == null) {
          throw new Exception(
                   "GET request failed: No access token currently saved");
       }
-
-      Log.v("Access token: " + accessToken);
 
       HttpClient client = new DefaultHttpClient();
 
@@ -73,11 +69,12 @@ public abstract class BaseGetRequestAsyncTask<ResultT> extends
       getRequest.setHeader("Authorization", "Bearer " + accessToken);
 
       Log.v("Sending GET request with URI: " + uri);
+      Log.v("Access token: " + accessToken);
       String responseString = EntityUtils.toString(client.execute(getRequest)
                .getEntity());
 
       if (responseString != null) {
-         Log.i("Got HTTP result: " + responseString);
+         Log.v("Got HTTP result: " + responseString);
       }
       else {
          throw new Exception("GET request receieved null response string.");
