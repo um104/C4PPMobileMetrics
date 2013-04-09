@@ -33,19 +33,19 @@ import com.salesforce.androidsdk.security.Encryptor;
 
 import edu.channel4.mm.db.android.activity.AppListActivity;
 
-
 /**
  * Application class for our application
  */
 public class TemplateApp extends ForceApp {
 
-	@Override
-	public Class<? extends Activity> getMainActivityClass() {
-		return AppListActivity.class;
-	}
-	
-	@Override
-	protected String getKey(String name) {
-		return Encryptor.hash(name + "x;lksalk1jsadihh23lia;lsdhasd2", name + "112;kaslkxs0-12;skcxn1203ph");
-	}
+   @Override
+   public Class<? extends Activity> getMainActivityClass() {
+      return AppListActivity.class;
+   }
+
+   @Override
+   protected String getKey(String name) {
+      return Encryptor.hash(name + "x;lksalk1jsadihh23lia;lsdhasd2", name
+               + "112;kaslkxs0-12;skcxn1203ph");
+   }
 }

@@ -1,4 +1,4 @@
-package edu.channel4.mm.db.android.callback;
+package edu.channel4.mm.db.android.model.callback;
 
 import java.util.List;
 

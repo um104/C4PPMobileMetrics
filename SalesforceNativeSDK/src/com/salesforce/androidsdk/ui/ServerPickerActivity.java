@@ -63,6 +63,7 @@ import com.salesforce.androidsdk.auth.LoginServerManager.LoginServer;
  * url, that subsystem saves the final validated not null label and url AND
  * saves the selectedindex.
  */
+@SuppressWarnings("deprecation")
 public class ServerPickerActivity extends Activity implements
         OnDismissListener, OnCancelListener, View.OnClickListener,
         android.widget.RadioGroup.OnCheckedChangeListener {
@@ -169,7 +170,7 @@ public class ServerPickerActivity extends Activity implements
         return salesforceR.idServerListGroup();
     }
 
-    @Override
+   @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);

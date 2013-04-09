@@ -37,6 +37,7 @@ import android.net.Uri;
  * This parses a Uri fragment that uses a queryString style foo=bar&bar=foo
  * parameter passing (e.g. OAuth2)
  */
+@SuppressWarnings("deprecation")
 public class UriFragmentParser {
 
 	/**

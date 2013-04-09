@@ -15,11 +15,11 @@ public class Keys {
 
 	public static final String INSTANCE_URL = "instance_url";
 
-	public static final String APP_LABEL = "C4PPMM__Label__c";
+	public static final String C4PPMM_APP_LABEL = "C4PPMM__Label__c";
 
 	public static final String VERSION = "Version__c";
 
-	public static final String PACKAGE_NAME = "C4PPMM__PackageName__c";
+	public static final String C4PPMM_PACKAGE_NAME = "C4PPMM__PackageName__c";
 
 	public static final String GRAPH_TYPE = "graph_type";
 
@@ -37,11 +37,13 @@ public class Keys {
 
 	public static final String APP_ID = "Id";
 
-	/**
-	 * The {@link SharedPreferences} namespace that we should use throughout the
-	 * app.
-	 */
-	public static final String PREFS_NS = "edu.channel4.mm.db.android";
+	// Don't use getSharedPreferences(String, int) anymore.
+	// Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
+//	/**
+//	 * The {@link SharedPreferences} namespace that we should use throughout the
+//	 * app.
+//	 */
+//	public static final String PREFS_NS = "edu.channel4.mm.db.android";
 
 	public static final String SESSION_ATTRIBUTE_DESCRIPTIONS = "sAttrs";
 
@@ -57,7 +59,7 @@ public class Keys {
 	
 	public static final String REQUEST_URL_PARAMETERS = "request_url_parameters";
 	
-	public static final String APP_LABEL_URL_PARAMETER_NAME = "appLabel";
+	public static final String APP_LABEL = "appLabel";
 	
 	public static final String GRAPH_REQUEST_EXTRA = "graph_request_extra";
 	
@@ -81,7 +83,7 @@ public class Keys {
 	
 	public static final String REQUEST_AS_JSON = "requestAsJSON";
 	
-	public static final String EVENT_NAME_C4PPMM = "C4PPMM__EventName__c";
+	public static final String C4PPMM_EVENT_NAME = "C4PPMM__EventName__c";
 	
 	public static final String EVENT_NAME = "eventName";
 }

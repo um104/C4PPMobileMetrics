@@ -54,6 +54,7 @@ import com.salesforce.androidsdk.rest.RestClient.ClientInfo;
  * If no account is found, it kicks off the login flow which creates a new account if successful.
  *
  */
+@SuppressWarnings("deprecation")
 public class ClientManager {
 
 	public static final String ACCESS_TOKEN_REVOKE_INTENT = "access_token_revoked";

@@ -2,6 +2,7 @@ package edu.channel4.mm.db.android.network;
 
 import java.net.URI;
 
+import com.google.inject.Singleton;
 import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.ui.NativeMainActivity;
 
@@ -16,10 +17,9 @@ import edu.channel4.mm.db.android.activity.AppListActivity;
  * {@link AppListActivity}'s second, overridden onResume() method.
  * 
  * @author girum
- * 
  */
-public class RestClientAccess {
-	private static RestClientAccess instance = new RestClientAccess();
+@Singleton
+final public class RestClientAccess {
 
 	/**
 	 * According to the <a
@@ -27,16 +27,8 @@ public class RestClientAccess {
 	 * shouldn't expose access to the actual {@link RestClient}. Instead, we
 	 * should expose the fields from it that we need.
 	 */
-	private RestClient restClient;
+	private RestClient restClient = null;
 	
-	private RestClientAccess() {
-		// Singletonitis =\
-	}
-
-	public static RestClientAccess getInstance() {
-		return instance;
-	}
-
 	/**
 	 * Use this method exactly once, when Salesforce gives you it in their
 	 * {@link NativeMainActivity}.
@@ -47,23 +39,14 @@ public class RestClientAccess {
 		this.restClient = restClient;
 	}
 
-	/**
-	 * Law of demeter. Don't return the {@link RestClient} iteslf.
-	 */
 	public String getAccessToken() {
 		return restClient.getAuthToken();
 	}
 
-	/**
-	 * Law of demeter. Don't return the {@link RestClient} iteslf.
-	 */
 	public String getRefreshToken() {
 		return restClient.getRefreshToken();
 	}
 
-	/**
-	 * Law of demeter. Don't return the {@link RestClient} iteslf.
-	 */
 	public URI getInstanceURL() {
 		return restClient.getClientInfo().instanceUrl;
 	}

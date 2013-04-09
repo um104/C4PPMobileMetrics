@@ -162,7 +162,7 @@ public class ForceAppInstrumentationTestCase extends InstrumentationTestCase {
 				@Override
 				public void run() {
 					Log.i("ForceAppInstrumentationTestCase:sendJavaScript", js);
-					webView.loadUrl("javascript:" + js); // TODO proper escaping
+					webView.loadUrl("javascript:" + js); // todo: proper escaping
 				}				
 			});
 		} catch (Throwable e) {

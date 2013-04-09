@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+    "If you wish to override the default !RoboGuice bindings, 
+    you may specify a custom module classname in a string-array 
+    resource called "roboguice_modules" in res/values/roboguice.xml."
+    -->
+    <string-array name="roboguice_modules">
+        <item>edu.channel4.mm.db.android.di.RoboGuiceModule</item>
+    </string-array>
+
+</resources>

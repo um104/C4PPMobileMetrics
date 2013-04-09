@@ -57,7 +57,7 @@ public class EventNameDescription {
          JSONObject eventNameDescription = eventNameDescriptionListJSONArray.getJSONObject(i);
          
          // get the name of the event
-         String eventName = eventNameDescription.getString(Keys.EVENT_NAME_C4PPMM);
+         String eventName = eventNameDescription.getString(Keys.C4PPMM_EVENT_NAME);
          
          // create a new EventNameDescription with that name
          EventNameDescription event = new EventNameDescription(eventName);

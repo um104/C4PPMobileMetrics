@@ -1,15 +1,15 @@
 package edu.channel4.mm.db.android.model.request;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.NameValuePair;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
-import edu.channel4.mm.db.android.network.RestClientAccess;
 
 public interface GraphRequest extends Parcelable {
 
@@ -24,14 +24,16 @@ public interface GraphRequest extends Parcelable {
     */
    public int getIconId();
 
-   /**
-    * Consolidate GraphRequest URI logic into a single method. Sanity-check it
-    * by putting it through {@link URI} for validity.
-    * 
-    * @param context
-    * @return
-    */
-   public URI getUri(RestClientAccess restClientManager, Context context);
+//   /**
+//    * Consolidate GraphRequest URI logic into a single method. Sanity-check it
+//    * by putting it through {@link URI} for validity.
+//    * 
+//    * @param context
+//    * @return
+//    */
+//   public URI getUri(RestClientAccess restClientManager, Context context);
+   
+   public List<NameValuePair> getAdditionalUriParameters();
 
    /**
     * Constructs the correct Intent for a given GraphRequest. The Intent will

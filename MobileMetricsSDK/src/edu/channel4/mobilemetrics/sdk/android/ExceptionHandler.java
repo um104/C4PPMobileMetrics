@@ -23,7 +23,7 @@ import android.util.Log;
                 Log.e(Constants.LOG_TAG, "Localytics library threw an uncaught exception", throwable); //$NON-NLS-1$
             }
 
-            // TODO: Upload uncaught exceptions so that we can fix them
+            // todo: Upload uncaught exceptions so that we can fix them
         }
         catch (final Exception e)
         {

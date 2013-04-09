@@ -1,35 +1,52 @@
 package edu.channel4.mm.db.android.network;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import roboguice.inject.ContextSingleton;
 import android.content.Context;
-import edu.channel4.mm.db.android.callback.AppDescriptionCallback;
-import edu.channel4.mm.db.android.callback.EventDescriptionCallback;
-import edu.channel4.mm.db.android.callback.EventNameDescriptionCallback;
-import edu.channel4.mm.db.android.callback.GraphLoadCallback;
+import android.content.SharedPreferences;
+
+import com.google.inject.Inject;
+
+import edu.channel4.mm.db.android.model.callback.AppDescriptionCallback;
+import edu.channel4.mm.db.android.model.callback.EventDescriptionCallback;
+import edu.channel4.mm.db.android.model.callback.EventNameDescriptionCallback;
+import edu.channel4.mm.db.android.model.callback.GraphLoadCallback;
+import edu.channel4.mm.db.android.model.graph.Graph;
+import edu.channel4.mm.db.android.model.graph.GraphFactory;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
+import edu.channel4.mm.db.android.util.Keys;
+import edu.channel4.mm.db.android.util.Log;
 
-public class SalesforceConn {
-   public static final String SALESFORCE_BASE_REST_URL = "%s/services/apexrest/C4PPMM/%s";
+// TODO: Change AsyncTasks to be fields of this class. That way, we don't repeat an AsyncTask
+// multiple times before the its first calls finish.
+// TODO: Implement a "cancelAllAsyncTasks()" method that cancels any in-progress AsyncTasks.
+@ContextSingleton
+final public class SalesforceConn {
+   public static final String CHANNEL4_REST_URL = "/services/apexrest/C4PPMM/";
 
-   public static final String EVENTS_URL_SUFFIX = "channel4_events";
-
-   private Context context;
-
-   // protected HttpClient client;
+   @Inject private RestClientAccess restClientAccess; // singleton
+   @Inject private SharedPreferences prefs;
+   @Inject private Context context;
 
    /**
-    * Fixed(Girum): Removed singleton. We shouldn't statically refer to a
-    * Context object, since the Context could potentially be different after a
-    * Force Close. This actually broke for us when we tried to pull the
-    * access_token from SharedPrefs (the context was bad)
-    * 
-    * http://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons
-    * http://blogs.msdn.com/b/scottdensmore/archive/2004/05/25/140827.aspx
-    * 
+    * Gets the app list from Salesforce. Don't call this method directly?
     */
-   public SalesforceConn(Context context) {
-      this.context = context;
+   // TODO: Figure out how to auto-inject the logic to retrieve the BaseURI and
+   // AccessToken, instead of repeatedly retrieving those 3 strings in each of
+   // these methods.
+   public void getAppListViaNetwork(AppDescriptionCallback callback) {
 
-      // client = new DefaultHttpClient();
+      // Grab the most up-to-date field values
+      // TODO: Type-safe these all of these strings using Guice's Binding
+      // Annotations:
+      // http://youtu.be/hBVJbzAagfs?t=20m39s
+      String baseUri = getCurrentBaseUri();
+      String accessToken = restClientAccess.getAccessToken();
+
+      new GetAppListAsyncTask(context, baseUri, accessToken, callback)
+               .execute();
    }
 
    /**
@@ -38,7 +55,14 @@ public class SalesforceConn {
     * AttributeDescriptions.
     */
    public void getEventListViaNetwork(EventDescriptionCallback callback) {
-      new GetEventListAsyncTask(context, callback).execute();
+
+      // Grab the most up-to-date field values
+      String baseUri = getCurrentBaseUri();
+      String accessToken = restClientAccess.getAccessToken();
+      String appLabel = prefs.getString(Keys.APP_LABEL, null);
+
+      new GetEventListAsyncTask(context, baseUri, accessToken, appLabel,
+               callback).execute();
    }
 
    /**
@@ -47,81 +71,53 @@ public class SalesforceConn {
     */
    public void
             getEventNameListViaNetwork(EventNameDescriptionCallback callback) {
-      new GetEventNameListAsyncTask(context, callback).execute();
+
+      // Grab the most up-to-date field values
+      String baseUri = getCurrentBaseUri();
+      String accessToken = restClientAccess.getAccessToken();
+      String appLabel = prefs.getString(Keys.APP_LABEL, null);
+
+      new GetEventNameListAsyncTask(context, baseUri, accessToken, appLabel,
+               callback).execute();
    }
 
    /**
-    * Gets the list of attributes valid for this particular type of graph TODO:
-    * Remove this. It's replaced by getEventList()
-    */
-   /*
-    * public void getAttribList() { new GetAttribListTask(context).execute(); }
-    */
-   /*
-    * protected class GetAttribListTask extends BaseAsyncTask { private String
-    * responseString = null; private final String TAG =
-    * GetAppListTask.class.getSimpleName();
+    * Gets the {@link Graph} for the given {@link GraphRequest} from Salesforce.
+    * Don't call this method directly. Instead, call the {@link GraphFactory}.
     * 
-    * public GetAttribListTask(Context context) { super(context); }
-    * 
-    * @Override protected String doInBackground(Void... params) { Log.i(TAG,
-    * "Sending GET request to get app list");
-    * 
-    * String accessToken = context.getSharedPreferences(Keys.PREFS_NS, 0)
-    * .getString(Keys.ACCESS_TOKEN, null); String instanceUrl =
-    * context.getSharedPreferences(Keys.PREFS_NS, 0)
-    * .getString(Keys.INSTANCE_URL, null);
-    * 
-    * if (accessToken == null) { Log.e(TAG, "No access token currently saved");
-    * return null; }
-    * 
-    * // Put together the HTTP Request to be sent to Salesforce for the //
-    * Attibute list HttpPost attribRequest = new HttpPost(String.format(
-    * SALESFORCE_BASE_REST_URL, instanceUrl, ATTRIBS_URL_SUFFIX));
-    * attribRequest.setHeader("Authorization", "Bearer " + accessToken);
-    * 
-    * // Add AppLabel parameter String appLabel =
-    * context.getSharedPreferences(Keys.PREFS_NS, 0) .getString(Keys.APP_LABEL,
-    * null); List<NameValuePair> nameValuePairs = new
-    * ArrayList<NameValuePair>(); nameValuePairs.add(new
-    * BasicNameValuePair("appLabel", appLabel));
-    * 
-    * try { attribRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-    * // Get the response string, the Attribute List in JSON form responseString
-    * = EntityUtils.toString(client.execute(attribRequest) .getEntity()); }
-    * catch (ClientProtocolException e) { Log.e(TAG, e.getMessage()); } catch
-    * (IOException e) { Log.e(TAG, e.getMessage()); }
-    * 
-    * Log.d(TAG, "Got JSON result: " + responseString);
-    * 
-    * return responseString; }
-    * 
-    * @Override protected void onPostExecute(String result) {
-    * super.onPostExecute(result);
-    * 
-    * if (responseString == null) { final String errorMessage =
-    * "ERROR: Attempted to parse null App list."; Toast.makeText(context,
-    * errorMessage, Toast.LENGTH_SHORT).show(); Log.e(TAG, errorMessage);
-    * return; }
-    * 
-    * // Try to parse the resulting JSON List<EventDescription> eventList =
-    * null; try { eventList = EventDescription.parseList(responseString);
-    * 
-    * TempoDatabase tempoDatabase = TempoDatabase.getInstance();
-    * tempoDatabase.setEventDescriptions(eventList); } catch (JSONException e) {
-    * Log.e(TAG, e.getMessage()); return; } } }
-    */
-
-   /**
-    * Gets the app list from Salesforce. Don't call this method directly.
-    * Instead, call the GraphFactory.
+    * TODO: Enforce that we shouldn't call this method directly.
     */
    public void getGraphViaNetwork(GraphRequest graphRequest,
             GraphLoadCallback callback) {
-      new GraphRequestAsyncTask(context, graphRequest, callback).execute();
+
+      // Grab the most up-to-date field values
+      String baseUri = getCurrentBaseUri();
+      String accessToken = restClientAccess.getAccessToken();
+      String appLabel = prefs.getString(Keys.APP_LABEL, null);
+
+      new GraphRequestAsyncTask(context, baseUri, accessToken, appLabel,
+               graphRequest, callback).execute();
    }
 
-   public void getAppListViaNetwork(AppDescriptionCallback callback) {
-      new GetAppListAsyncTask(context, callback).execute();
+   /**
+    * Helper method to retrieve the current BaseURI, constructed using the
+    * current Instance URL
+    */
+   private String getCurrentBaseUri() {
+      String baseUriString = "";
+
+      baseUriString += restClientAccess.getInstanceURL().toString();
+      baseUriString += CHANNEL4_REST_URL;
+
+      // Sanity check the URI
+      try {
+         URI uri = new URI(baseUriString);
+         return uri.toString();
+      }
+      catch (URISyntaxException e) {
+         Log.toastE(context, e.getMessage());
+         return null;
+      }
    }
+
 }

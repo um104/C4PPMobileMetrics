@@ -1,78 +1,87 @@
 package edu.channel4.mm.db.android.activity;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import android.app.Activity;
+import roboguice.activity.RoboActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectResource;
+import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.inject.Inject;
+
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.request.EventOverTimeGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.SessionLengthGraphRequest;
 import edu.channel4.mm.db.android.model.request.SessionOverTimeGraphRequest;
-import edu.channel4.mm.db.android.util.GraphRequestArrayAdapter;
 import edu.channel4.mm.db.android.util.Keys;
+import edu.channel4.mm.db.android.util.Log;
+import edu.channel4.mm.db.android.view.GraphRequestArrayAdapter;
 
-public class UsageActivity extends Activity {
+@ContentView(R.layout.activity_usage)
+public class UsageActivity extends RoboActivity {
 
-	private ListView listView;
-	private GraphRequestArrayAdapter adapter;
-	private List<GraphRequest> graphRequests;
+   @InjectView(R.id.listviewUsageActivity) private ListView listView;
+   @InjectView(R.id.usageHeader) private TextView textViewUsageHeader;
+   @InjectResource(R.string.usage) private String activityTitle;
+   @Inject private ArrayList<GraphRequest> graphRequests;
+   @Inject private SharedPreferences prefs;
+   private GraphRequestArrayAdapter adapter;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_usage);
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
 
-		listView = (ListView) findViewById(R.id.listviewUsageActivity);
-		listView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+      // Set the activity's titles
+      String appLabel = prefs.getString(Keys.APP_LABEL, null);
+      textViewUsageHeader.setText(appLabel);
+      setTitle(activityTitle);
 
-				// Grab the GraphRequest for the selected item.
-				GraphRequest graphRequest = graphRequests.get(position);
+      listView.setOnItemClickListener(new OnItemClickListener() {
+         @Override
+         public void onItemClick(AdapterView<?> parent, View view,
+                  int position, long id) {
 
-				// Construct the correct Intent for the selected
-				// UsageGraphRequest
-				Intent intent = graphRequest
-						.constructGraphRequestIntent(getApplicationContext());
+            // Grab the GraphRequest for the selected item.
+            GraphRequest graphRequest = graphRequests.get(position);
 
-				// Start the activity for that Intent with all of its baggage,
-				// but only if the intent could actually be constructed based
-				// on the GraphRequest.
-				if (intent != null) {
-					startActivity(intent);
-				} else {
-					Toast.makeText(getApplicationContext(),
-							graphRequest.toString() + " not yet implemented.",
-							Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
+            // Construct the correct Intent for the selected
+            // UsageGraphRequest
+            Intent intent = graphRequest
+                     .constructGraphRequestIntent(getApplicationContext());
 
-		graphRequests = new ArrayList<GraphRequest>();
-		graphRequests.add(new SessionOverTimeGraphRequest());
-		graphRequests.add(new EventOverTimeGraphRequest());
-		graphRequests.add(new SessionLengthGraphRequest());
+            // Try to start the activity
+            if (intent != null) {
+               startActivity(intent);
+            }
+            else {
+               Log.toastD(getApplicationContext(), graphRequest.toString()
+                        + " not yet implemented.");
+            }
+         }
+      });
 
-		adapter = new GraphRequestArrayAdapter(getApplicationContext(),
-				graphRequests.toArray(new GraphRequest[0]));
+      if (graphRequests.isEmpty()) {
+         fillGraphRequests();
+      }
 
-		listView.setAdapter(adapter);
-		setTitle(getResources().getString(R.string.usage));
-		
-		String appLabel = getApplicationContext().getSharedPreferences(
-               Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
+      adapter = new GraphRequestArrayAdapter(getApplicationContext(),
+               graphRequests.toArray(new GraphRequest[0]));
 
-      ((TextView) findViewById(R.id.usageHeader)).setText(appLabel);
-	}
+      listView.setAdapter(adapter);
+   }
 
+   private void fillGraphRequests() {
+      graphRequests.add(new SessionOverTimeGraphRequest());
+      graphRequests.add(new EventOverTimeGraphRequest());
+      graphRequests.add(new SessionLengthGraphRequest());
+   }
 }
