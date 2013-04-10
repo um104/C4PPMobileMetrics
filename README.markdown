@@ -29,3 +29,5 @@ Team Members
   - Ray Tam
   - Mark Lerner
   - Sir Brian J. Middaugh III
+  - Girum Ibssa
+  - Calvin Hui Pek
