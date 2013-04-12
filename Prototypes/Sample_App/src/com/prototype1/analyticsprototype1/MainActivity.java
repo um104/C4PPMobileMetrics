@@ -8,7 +8,7 @@ import edu.channel4.mobilemetrics.sdk.android.LocalyticsSession;
 
 public class MainActivity extends Activity {
 
-	private LocalyticsSession localyticsSession;
+	private LocalyticsSession mmSession;
 	private final static String LOCALYTICS_APP_KEY = "2b9b47ca4e9178b076524b4-d8a060da-215f-11e2-5ebd-00ef75f32667";
 	private final static String NAME_AGE_EVENT = "record name and age";
 	private final static String NAME_ATTRIB = "name";
@@ -24,11 +24,11 @@ public class MainActivity extends Activity {
 		// Activity Creation Code
 
 		// Instantiate the object
-		this.localyticsSession = new LocalyticsSession(
+		this.mmSession = new LocalyticsSession(
 				this.getApplicationContext(), // Context used to access device resources
 				LOCALYTICS_APP_KEY); // Application's key
 
-		this.localyticsSession.open(); // open the session
+		this.mmSession.open(); // open the session
 
 		// At this point, Localytics Initialization is done. After uploads complete, nothing
 		// more will happen due to Localytics until the next time you call it.
@@ -41,12 +41,12 @@ public class MainActivity extends Activity {
 		String name = nameText.getText().toString();
 		int age = Integer.parseInt(ageText.getText().toString());
 		
-		LocalyticsSession.MobileMetricsEvent event = localyticsSession.getNewEvent(NAME_AGE_EVENT);
+		LocalyticsSession.MobileMetricsEvent event = mmSession.getNewEvent(NAME_AGE_EVENT);
 		event.addAttribute(NAME_ATTRIB, name);
 		event.addAttribute(AGE_ATTRIB, age);
 		event.tagEvent();
 		
-		this.localyticsSession.upload();
+		this.mmSession.upload();
 	}
 	
 	public void tagButton1(View view) {
@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private void buttonPressed(String buttonName) {
-		LocalyticsSession.MobileMetricsEvent event = localyticsSession.getNewEvent(BUTTON_PRESSED_EVENT);
+		LocalyticsSession.MobileMetricsEvent event = mmSession.getNewEvent(BUTTON_PRESSED_EVENT);
 		
 		event.addAttribute(BUTTON_ATTRIB, buttonName);
 				
@@ -70,8 +70,8 @@ public class MainActivity extends Activity {
 	}
 
 	public void onPause() {
-		this.localyticsSession.close();
-		this.localyticsSession.upload();
+		this.mmSession.close();
+		this.mmSession.upload();
 
 		super.onPause();
 	}

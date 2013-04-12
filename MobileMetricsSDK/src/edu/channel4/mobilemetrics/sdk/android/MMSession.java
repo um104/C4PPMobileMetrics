@@ -1,6 +1,6 @@
 // @formatter:off
 /*
- * LocalyticsSession.java Copyright (C) 2011 Char Software Inc., DBA Localytics This code is provided under the Localytics
+ * MMSession.java Copyright (C) 2011 Char Software Inc., DBA Localytics This code is provided under the Localytics
  * Modified BSD License. A copy of this license has been distributed in a file called LICENSE with this source code. Please visit
  * www.localytics.com for more information.
  */
@@ -63,13 +63,13 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
-import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.ApiKeysDbColumns;
-import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.AttributesDbColumns;
-import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.EventHistoryDbColumns;
-import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.EventsDbColumns;
-import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.SessionsDbColumns;
-import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.UploadBlobEventsDbColumns;
-import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.UploadBlobsDbColumns;
+import edu.channel4.mobilemetrics.sdk.android.MMProvider.ApiKeysDbColumns;
+import edu.channel4.mobilemetrics.sdk.android.MMProvider.AttributesDbColumns;
+import edu.channel4.mobilemetrics.sdk.android.MMProvider.EventHistoryDbColumns;
+import edu.channel4.mobilemetrics.sdk.android.MMProvider.EventsDbColumns;
+import edu.channel4.mobilemetrics.sdk.android.MMProvider.SessionsDbColumns;
+import edu.channel4.mobilemetrics.sdk.android.MMProvider.UploadBlobEventsDbColumns;
+import edu.channel4.mobilemetrics.sdk.android.MMProvider.UploadBlobsDbColumns;
 
 /**
  * This class manages creating, collecting, and uploading a Localytics session. Please see the following guides for information on
@@ -102,7 +102,7 @@ import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.UploadBlobsDbCo
  * </p>
  * <strong>Best Practices</strong>
  * <ul>
- * <li>Instantiate and open a {@link LocalyticsSession} object in {@code Activity#onCreate(Bundle)}. This will cause every new
+ * <li>Instantiate and open a {@link MMSession} object in {@code Activity#onCreate(Bundle)}. This will cause every new
  * Activity displayed to reconnect to any running session.</li>
  * <li>Consider also performing {@link #upload()} in {@code Activity#onCreate(Bundle)}. This makes it more likely for the upload
  * to complete before the Activity is finished, and also causes the upload to start before the user has a chance to begin any data
@@ -110,7 +110,7 @@ import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.UploadBlobsDbCo
  * <li>Close the session in {@code Activity#onPause()}. Based on the Activity lifecycle documentation, this is the last
  * terminating method which is guaranteed to be called. The final call to {@link #close()} is the only one considered, so don't
  * worry about Activity re-entrance.</li>
- * <li>Do not call any {@link LocalyticsSession} methods inside a loop. Instead, calls such as {@link #tagEvent(String)} should
+ * <li>Do not call any {@link MMSession} methods inside a loop. Instead, calls such as {@link #tagEvent(String)} should
  * follow user actions. This limits the amount of data which is stored and uploaded.</li>
  * </ul>
  * <p>
@@ -118,12 +118,12 @@ import edu.channel4.mobilemetrics.sdk.android.LocalyticsProvider.UploadBlobsDbCo
  *
  * @version 2.0
  */
-public final class LocalyticsSession
+public final class MMSession
 {
     /*
      * DESIGN NOTES
      *
-     * The LocalyticsSession stores all of its state as a SQLite database in the parent application's private database storage
+     * The MMSession stores all of its state as a SQLite database in the parent application's private database storage
      * directory.
      *
      * Every action performed within (open, close, opt-in, opt-out, customer events) are all treated as events by the library.
@@ -135,11 +135,11 @@ public final class LocalyticsSession
      *
      * MULTI-THREADING
      *
-     * The LocalyticsSession stores all of its state as a SQLite database in the parent application's private database storage
-     * directory. Disk access is slow and can block the UI in Android, so the LocalyticsSession object is a wrapper around a pair
+     * The MMSession stores all of its state as a SQLite database in the parent application's private database storage
+     * directory. Disk access is slow and can block the UI in Android, so the MMSession object is a wrapper around a pair
      * of Handler objects, with each Handler object running on its own separate thread.
      *
-     * All requests made of the LocalyticsSession are passed along to the mSessionHandler object, which does most of the work. The
+     * All requests made of the MMSession are passed along to the mSessionHandler object, which does most of the work. The
      * mSessionHandler will pass off upload requests to the mUploadHandler, to prevent the mSessionHandler from being blocked by
      * network traffic.
      *
@@ -148,7 +148,7 @@ public final class LocalyticsSession
      * second upload request is made while the first one is underway, the mSessionHandler notifies the mUploadHandler, which will
      * notify the mSessionHandler to retry that upload request when the first upload is completed.
      *
-     * Although each LocalyticsSession object will have its own unique instance of mSessionHandler, thread-safety is handled by
+     * Although each MMSession object will have its own unique instance of mSessionHandler, thread-safety is handled by
      * using a single sSessionHandlerThread.
      */
 
@@ -184,7 +184,7 @@ public final class LocalyticsSession
 
     /**
      * Background thread used for all Localytics session processing. This thread is shared across all instances of
-     * LocalyticsSession within a process.
+     * MMSession within a process.
      */
     /*
      * By using the class name for the HandlerThread, obfuscation through Proguard is more effective: if Proguard changes the
@@ -194,7 +194,7 @@ public final class LocalyticsSession
 
     /**
      * Background thread used for all Localytics upload processing. This thread is shared across all instances of
-     * LocalyticsSession within a process.
+     * MMSession within a process.
      */
     /*
      * By using the class name for the HandlerThread, obfuscation through Proguard is more effective: if Proguard changes the
@@ -223,9 +223,9 @@ public final class LocalyticsSession
     }
 
     /**
-     * Handler object where all session requests of this instance of LocalyticsSession are handed off to.
+     * Handler object where all session requests of this instance of MMSession are handed off to.
      * <p>
-     * This Handler is the key thread synchronization point for all work inside the LocalyticsSession.
+     * This Handler is the key thread synchronization point for all work inside the MMSession.
      * <p>
      * This handler runs on {@link #sSessionHandlerThread}.
      */
@@ -261,7 +261,7 @@ public final class LocalyticsSession
     private static String instance_url;
 
     /**
-     * Constructs a new {@link LocalyticsSession} object.
+     * Constructs a new {@link MMSession} object.
      *
      * @param context The context used to access resources on behalf of the app. It is recommended to use
      *            {@link Context#getApplicationContext()} to avoid the potential memory leak incurred by maintaining references to
@@ -270,7 +270,7 @@ public final class LocalyticsSession
      * @throws IllegalArgumentException if {@code context} is null
      * @throws IllegalArgumentException if {@code key} is null or empty
      */
-    public LocalyticsSession(final Context context, final String key)
+    public MMSession(final Context context, final String key)
     {
         if (context == null)
         {
@@ -304,7 +304,7 @@ public final class LocalyticsSession
 
         /*
          * Complete Handler initialization on a background thread. Note that this is not generally a good best practice, as the
-         * LocalyticsSession object (and its child objects) should be fully initialized by the time the constructor returns.
+         * MMSession object (and its child objects) should be fully initialized by the time the constructor returns.
          * However this implementation is safe, as the Handler will process this initialization message before any other message.
          */
         mSessionHandler.sendMessage(mSessionHandler.obtainMessage(SessionHandler.MESSAGE_INIT));
@@ -608,8 +608,8 @@ public final class LocalyticsSession
     }
     
     /**
-     * Creates a MobileMetricsEvent object with the given name. Load this Event object with attributes, and use its 
-     * {@code tagEvent()} method to submit it to the session as an event to be tagged. Create a new MobileMetricsEvent
+     * Creates a MMEvent object with the given name. Load this Event object with attributes, and use its 
+     * {@code tagEvent()} method to submit it to the session as an event to be tagged. Create a new MMEvent
      * every time a significant event should be recorded.<br><br>
      * 
      * For example, if a view has three buttons, it might make sense to tag each button with the name of the button which was clicked.
@@ -626,11 +626,11 @@ public final class LocalyticsSession
      * </ul>
      * 
      * @param eventName The name of the event.
-     * @return A new MobileMetricsEvent, with the given name, and with no attributes.
+     * @return A new MMEvent, with the given name, and with no attributes.
      * @throws IllegalArgumentException if {@code event} is null.
      * @throws IllegalArgumentException if {@code event} is empty.
      */
-    public MobileMetricsEvent getNewEvent(String eventName)
+    public MMEvent getNewEvent(String eventName)
     {
     	if (Constants.ENABLE_PARAMETER_CHECKING)
         {
@@ -644,7 +644,7 @@ public final class LocalyticsSession
                 throw new IllegalArgumentException("event cannot be empty"); //$NON-NLS-1$
             }
         }
-    	return new MobileMetricsEvent(this, eventName);
+    	return new MMEvent(this, eventName);
     }
 
     /*
@@ -770,7 +770,7 @@ public final class LocalyticsSession
 
 
     /**
-     * Helper class to handle session-related work on the {@link LocalyticsSession#sSessionHandlerThread}.
+     * Helper class to handle session-related work on the {@link MMSession#sSessionHandlerThread}.
      */
     /* package */static final class SessionHandler extends Handler
     {
@@ -848,7 +848,7 @@ public final class LocalyticsSession
         /**
          * Localytics database
          */
-        private LocalyticsProvider mProvider;
+        private MMProvider mProvider;
 
         /**
          * The Localytics API key for the session.
@@ -856,7 +856,7 @@ public final class LocalyticsSession
         private final String mApiKey;
 
         /**
-         * {@link ApiKeysDbColumns#_ID} for the {@link LocalyticsSession#mLocalyticsKey}.
+         * {@link ApiKeysDbColumns#_ID} for the {@link MMSession#mLocalyticsKey}.
          */
         private long mApiKeyId;
 
@@ -876,7 +876,7 @@ public final class LocalyticsSession
         private boolean mIsOptedOut = false;
 
         /**
-         * Handler object where all upload of this instance of LocalyticsSession are handed off to.
+         * Handler object where all upload of this instance of MMSession are handed off to.
          * <p>
          * This handler runs on {@link #sUploadHandlerThread}.
          */
@@ -1064,7 +1064,7 @@ public final class LocalyticsSession
          */
         public void init()
         {
-            mProvider = LocalyticsProvider.getInstance(mContext, mApiKey);
+            mProvider = MMProvider.getInstance(mContext, mApiKey);
 
             /*
              * Check whether this session key is opted out
@@ -1500,7 +1500,7 @@ public final class LocalyticsSession
             /*
              * This is placed here so that the DatapointHelper has a chance to retrieve the old UUID before it is deleted.
              */
-            LocalyticsProvider.deleteOldFiles(mContext);
+            MMProvider.deleteOldFiles(mContext);
         }
 
         /**
@@ -2019,7 +2019,7 @@ public final class LocalyticsSession
 
         /**
          * Handler message indicating that there is a queued upload request. When this message is processed, this handler simply
-         * forwards the request back to {@link LocalyticsSession#mSessionHandler} with {@link SessionHandler#MESSAGE_UPLOAD}.
+         * forwards the request back to {@link MMSession#mSessionHandler} with {@link SessionHandler#MESSAGE_UPLOAD}.
          * <p>
          * {@link Message#obj} is a {@code Runnable} to execute when upload is complete. The thread that this runnable will
          * executed on is undefined.
@@ -2029,7 +2029,7 @@ public final class LocalyticsSession
         /**
          * Reference to the Localytics database
          */
-        private final LocalyticsProvider mProvider;
+        private final MMProvider mProvider;
 
         /**
          * Application context
@@ -2061,7 +2061,7 @@ public final class LocalyticsSession
             super(looper);
 
             mContext = context;
-            mProvider = LocalyticsProvider.getInstance(context, apiKey);
+            mProvider = MMProvider.getInstance(context, apiKey);
             mSessionHandler = sessionHandler;
             //TODO(mlerner): apiKey should be removed -- we're not using it.
             mApiKey = apiKey;
@@ -2416,7 +2416,7 @@ public final class LocalyticsSession
          *
          * @param provider Localytics database provider. Cannot be null.
          */
-        /* package */static void deleteBlobsAndSessions(final LocalyticsProvider provider)
+        /* package */static void deleteBlobsAndSessions(final MMProvider provider)
         {
             /*
              * Deletion needs to occur in a specific order due to database constraints. Specifically, blobevents need to be
@@ -2520,7 +2520,7 @@ public final class LocalyticsSession
          * @return The time in seconds since the Unix Epoch when the API key entry was created in the database.
          * @throws RuntimeException if the API key entry doesn't exist in the database.
          */
-        /* package */static long getApiKeyCreationTime(final LocalyticsProvider provider, final String key)
+        /* package */static long getApiKeyCreationTime(final MMProvider provider, final String key)
         {
             Cursor cursor = null;
             try
@@ -2555,7 +2555,7 @@ public final class LocalyticsSession
          * @return a JSONObject representation of the session attributes
          * @throws JSONException if a problem occurred converting the element to JSON.
          */
-        /* package */static JSONObject getAttributesFromSession(final LocalyticsProvider provider, final String apiKey, final long sessionId) throws JSONException
+        /* package */static JSONObject getAttributesFromSession(final MMProvider provider, final String apiKey, final long sessionId) throws JSONException
         {
             Cursor cursor = null;
             try
@@ -2613,7 +2613,7 @@ public final class LocalyticsSession
          * @return JSON representation of the event.
          * @throws JSONException if a problem occurred converting the element to JSON.
          */
-        /* package */static JSONObject convertEventToJson(final LocalyticsProvider provider, final Context context, final long eventId, final long blobId, final String apiKey)
+        /* package */static JSONObject convertEventToJson(final MMProvider provider, final Context context, final long eventId, final long blobId, final String apiKey)
                                                                                                                                                                                throws JSONException
         {
             final JSONObject result = new JSONObject();
@@ -2829,7 +2829,7 @@ public final class LocalyticsSession
          * @param eventId {@link EventsDbColumns#_ID} of the event to look up
          * @return The {@link SessionsDbColumns#_ID} of the session that owns the event.
          */
-        /* package */static long getSessionIdForEventId(final LocalyticsProvider provider, final long eventId)
+        /* package */static long getSessionIdForEventId(final MMProvider provider, final long eventId)
         {
             Cursor cursor = null;
             try
@@ -2863,7 +2863,7 @@ public final class LocalyticsSession
          * @param sessionId {@link SessionsDbColumns#_ID} of the event to look up
          * @return The {@link SessionsDbColumns#UUID} of the session.
          */
-        /* package */static String getSessionUuid(final LocalyticsProvider provider, final long sessionId)
+        /* package */static String getSessionUuid(final MMProvider provider, final long sessionId)
         {
             Cursor cursor = null;
             try
@@ -2897,7 +2897,7 @@ public final class LocalyticsSession
          * @param sessionId {@link SessionsDbColumns#_ID} of the event to look up
          * @return The {@link SessionsDbColumns#SESSION_START_WALL_TIME} of the session.
          */
-        /* package */static long getSessionStartTime(final LocalyticsProvider provider, final long sessionId)
+        /* package */static long getSessionStartTime(final MMProvider provider, final long sessionId)
         {
             Cursor cursor = null;
             try
@@ -2933,7 +2933,7 @@ public final class LocalyticsSession
          *         change from call to call of this method. If the event has no attributes, returns null.
          * @throws JSONException if an error occurs converting the attributes to JSON
          */
-        /* package */static JSONArray convertAttributesToJson(final LocalyticsProvider provider, final long eventId) throws JSONException
+        /* package */static JSONArray convertAttributesToJson(final MMProvider provider, final long eventId) throws JSONException
         {
         	// TODO(mlerner): change this to return a JSONArray of [{"key":"foo", "value":"bar"}, {}, {}]
             Cursor cursor = null;
@@ -3070,18 +3070,18 @@ public final class LocalyticsSession
      * Event class that allows users of the SDK to add multiple types of attributes to the same event.
      * @author mlerner
      */
-    public static final class MobileMetricsEvent {
+    public static final class MMEvent {
     	
     	private static final String PREFIX_STRING = "str.";
     	private static final String PREFIX_NUM = "num.";
     	private static final String PREFIX_BOOL = "boo.";
     	private static final String PREFIX_CHAR = "chr.";
-    	private LocalyticsSession session;		//TODO(mlerner): is this needed, or can I get around it? 
+    	private MMSession session;		//TODO(mlerner): is this needed, or can I get around it? 
     	
     	/*package*/ Map<String, String> attribsMap;
     	/*package*/ String eventName;
     	
-    	/*package*/ MobileMetricsEvent(LocalyticsSession session, String eventName) {
+    	/*package*/ MMEvent(MMSession session, String eventName) {
     		this.session = session;
     		this.eventName = eventName;
     		attribsMap = new HashMap<String, String>();
