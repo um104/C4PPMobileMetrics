@@ -1,8 +1,8 @@
 package edu.channel4.mm.db.android.model.description;
 
-import junit.framework.TestCase;
-
 import java.util.List;
+
+import junit.framework.TestCase;
 
 import org.json.JSONException;
 

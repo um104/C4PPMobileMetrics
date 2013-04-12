@@ -1,23 +1,12 @@
 package edu.channel4.mm.db.android.activity;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.test.ActivityUnitTestCase;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.database.TempoDatabase;
-import edu.channel4.mm.db.android.model.description.AppDescriptionTest;
-import edu.channel4.mm.db.android.network.SalesforceConn;
 
 public class AppListActivityTest extends ActivityUnitTestCase<AppListActivity> {
 

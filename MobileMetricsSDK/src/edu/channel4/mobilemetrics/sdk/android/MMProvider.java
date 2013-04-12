@@ -25,7 +25,7 @@ import java.util.Set;
  * <p>
  * This is not a public API.
  */
-/* package */final class LocalyticsProvider
+/* package */final class MMProvider
 {
     /**
      * Name of the Localytics database, stored in the host application's {@link Context#getDatabasePath(String)}.
@@ -51,9 +51,9 @@ import java.util.Set;
     private static final int DATABASE_VERSION = 3;
 
     /**
-     * Singleton instance of the {@link LocalyticsProvider}. Lazily initialized via {@link #getInstance(Context, String)}.
+     * Singleton instance of the {@link MMProvider}. Lazily initialized via {@link #getInstance(Context, String)}.
      */
-    private static final Map<String, LocalyticsProvider> sLocalyticsProviderMap = new HashMap<String, LocalyticsProvider>();
+    private static final Map<String, MMProvider> sLocalyticsProviderMap = new HashMap<String, MMProvider>();
 
     /**
      * Intrinsic lock for synchronizing the initialization of {@link #sLocalyticsProviderMap}.
@@ -82,10 +82,10 @@ import java.util.Set;
      *
      * @param context Application context. Cannot be null.
      * @param apiKey TODO
-     * @return An instance of {@link LocalyticsProvider}.
+     * @return An instance of {@link MMProvider}.
      * @throws IllegalArgumentException if {@code context} is null
      */
-    public static LocalyticsProvider getInstance(final Context context, final String apiKey)
+    public static MMProvider getInstance(final Context context, final String apiKey)
     {
         /*
          * Note: Don't call getApplicationContext() on the context, as that would return a different context and defeat useful
@@ -106,16 +106,16 @@ import java.util.Set;
          */
         if (context.getClass().getName().equals("android.test.RenamingDelegatingContext")) //$NON-NLS-1$
         {
-            return new LocalyticsProvider(context, apiKey);
+            return new MMProvider(context, apiKey);
         }
 
         synchronized (sLocalyticsProviderIntrinsicLock)
         {
-            LocalyticsProvider provider = sLocalyticsProviderMap.get(apiKey);
+            MMProvider provider = sLocalyticsProviderMap.get(apiKey);
 
             if (null == provider)
             {
-                provider = new LocalyticsProvider(context, apiKey);
+                provider = new MMProvider(context, apiKey);
                 sLocalyticsProviderMap.put(apiKey, provider);
             }
 
@@ -130,7 +130,7 @@ import java.util.Set;
      *
      * @param context application context. Cannot be null.
      */
-    private LocalyticsProvider(final Context context, final String apiKey)
+    private MMProvider(final Context context, final String apiKey)
     {
         /*
          * Rather than use the API key directly in the file name, it is put through SHA-256. The main reason for doing that is to
@@ -337,7 +337,7 @@ import java.util.Set;
         }
     }
     /**
-     * Closes the LocalyticsProvider object. Normally the provider is a long-lived object and should not be closed during normal
+     * Closes the MMProvider object. Normally the provider is a long-lived object and should not be closed during normal
      * application use. This method is intended for unit testing purposes only, where a lot of temporary provider objects are
      * created and should be closed.
      */
@@ -346,7 +346,7 @@ import java.util.Set;
         synchronized (sLocalyticsProviderIntrinsicLock)
         {
             String key = null;
-            for (Entry<String, LocalyticsProvider> entry : sLocalyticsProviderMap.entrySet())
+            for (Entry<String, MMProvider> entry : sLocalyticsProviderMap.entrySet())
             {
                 if (this == entry.getValue())
                 {
@@ -387,7 +387,7 @@ import java.util.Set;
     }
 
     /**
-     * Private helper that knows all the tables that {@link LocalyticsProvider} can operate on.
+     * Private helper that knows all the tables that {@link MMProvider} can operate on.
      *
      * @return returns a set of the valid tables.
      */
