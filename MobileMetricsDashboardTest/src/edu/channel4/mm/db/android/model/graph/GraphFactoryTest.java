@@ -13,5 +13,9 @@ public class GraphFactoryTest extends TestCase {
    public void test() {
       fail("Not yet implemented");
    }
+   
+   public void testParseGraph() {
+      fail("Not yet implemented");
+   }
 
 }

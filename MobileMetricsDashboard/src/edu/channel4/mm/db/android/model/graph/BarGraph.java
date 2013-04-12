@@ -23,7 +23,7 @@ import com.google.visualization.datasource.datatable.value.TextValue;
 
 public class BarGraph {
 
-   static Intent getBarGraphIntent(Context context, DataTable datatable) {
+   /*package*/ static Intent getBarGraphIntent(Context context, DataTable datatable) {
       String[] titles = new String[] {"Count"};
       List<double[]> values = new ArrayList<double[]>();
       List<String> categories = new ArrayList<String>();

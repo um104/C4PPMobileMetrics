@@ -17,10 +17,8 @@ import edu.channel4.mm.db.android.util.Keys;
 public class SessionLengthGraphRequest implements GraphRequest {
 
    private final static String REQUEST_TYPE = "SESSION_LENGTH";
-
-   public SessionLengthGraphRequest() {
-
-   }
+   
+   public SessionLengthGraphRequest(){}
 
    public String toString() {
       return "Session Length";

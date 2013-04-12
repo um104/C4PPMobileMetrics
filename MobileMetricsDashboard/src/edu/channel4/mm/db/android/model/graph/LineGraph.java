@@ -21,7 +21,7 @@ import com.google.visualization.datasource.datatable.value.TextValue;
 
 public class LineGraph {
 
-   static Intent getLineGraphIntent(Context context, DataTable datatable) {
+   /*package*/ static Intent getLineGraphIntent(Context context, DataTable datatable) {
       String[] titles = new String[] {"Count"};
       List<double[]> values = new ArrayList<double[]>();
       List<String> categories = new ArrayList<String>();

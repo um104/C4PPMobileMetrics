@@ -56,6 +56,7 @@ public abstract class BaseGetRequestAsyncTask<ResultT> extends
       this.uri = baseUri.toString();
    }
 
+   // TODO: should that be ResultT or Result<T>?
    @Override
    public ResultT call() throws Exception {
       if (accessToken == null) {
