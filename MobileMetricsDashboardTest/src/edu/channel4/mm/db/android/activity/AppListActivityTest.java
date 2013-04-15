@@ -11,8 +11,6 @@ import android.test.ActivityUnitTestCase;
 public class AppListActivityTest extends ActivityUnitTestCase<AppListActivity> {
 
    AppListActivity activity;
-   TempoDatabase mockTempDB;
-   SalesforceConn mockSFConn;
    Context mockContext;
    SharedPreferences mockSharedPrefs;
    SharedPreferences.Editor mockEditor;
@@ -44,14 +42,10 @@ public class AppListActivityTest extends ActivityUnitTestCase<AppListActivity> {
 
    private void initializeMockSFConn() {
       // Set the SalesforceConn instance to be a mock for full testing purposes
-      mockSFConn = mock(SalesforceConn.class);
-      initializeMockSingleton(SalesforceConn.class, mockSFConn);
    }
 
    private void initializeMockTempDB() {
       // Set the TempoDatabase instance to be a mock for full testing purposes
-      mockTempDB = mock(TempoDatabase.class);
-      initializeMockSingleton(TempoDatabase.class, mockTempDB);
    }
 
    /**
