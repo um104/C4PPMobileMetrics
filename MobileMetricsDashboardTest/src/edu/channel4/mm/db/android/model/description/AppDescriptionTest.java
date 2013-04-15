@@ -12,12 +12,6 @@ public class AppDescriptionTest extends TestCase {
    private static final String invalidTestString = "[{\"attributes\":{\"type\":\"C4PPMM__App__c\",\"url\":\"/services/data/v26.0/sobjects/C4PPMM__App__c/a04E00000034dlHIAQ\"},\"C4PPMM__PackageName__c\":\"com.prototype1.analyticsprototype1\",\"Id\":\"a04E00000034dlHIAQ\",\"C4PPMM__Label__c\":\"My First App\"";
    private static final String veryInvalidTestString = "HTTP ERROR 400 FAILURE ABORT";
 
-   public void setUp() throws Exception {
-   }
-
-   public void tearDown() throws Exception {
-   }
-
    public void testParseValidJSON() {
       
       try {
