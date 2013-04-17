@@ -18,12 +18,36 @@ import com.google.visualization.datasource.datatable.value.TextValue;
 
 public class PieGraph {
 
-   static Intent getPieGraphIntent(Context context, DataTable datatable) {
+   /* package */static Intent getPieGraphIntent(Context context,
+            DataTable datatable) {
       Intent intent = null;
-      Random rand = new Random();
-
+      
       CategorySeries categorySeries = new CategorySeries("unknown pie chart");
       DefaultRenderer renderer = new DefaultRenderer();
+      
+      parseDataTable(datatable, categorySeries, renderer);
+
+      intent = ChartFactory.getPieChartIntent(context, categorySeries,
+               renderer, "some activity");
+
+      return intent;
+   }
+
+   /**
+    * Convenience method (for using as well as for testing) that takes the
+    * DataTable to be parsed and puts its data into the CategorySeries and
+    * DefaultRenderer passed in.
+    * 
+    * @param datatable
+    *           The DataTable to be parsed
+    * @param categorySeries
+    *           The CategorySeries to be filled with the data from the DataTable
+    * @param renderer
+    *           The Renderer to be used to display the data
+    */
+   /* package */static void parseDataTable(DataTable datatable,
+            CategorySeries categorySeries, DefaultRenderer renderer) {
+      Random rand = new Random();
 
       for (TableRow tableRow : datatable.getRows()) {
          // FIXME: Hack that assumes that column 0 is string and column 1 is
@@ -38,15 +62,6 @@ public class PieGraph {
                   rand.nextInt(255), rand.nextInt(255)));
          renderer.addSeriesRenderer(simpleSeriesRenderer);
       }
-
-      /*
-       * SimpleSeriesRenderer simpleSeriesRenderer = new SimpleSeriesRenderer();
-       * renderer.addSeriesRenderer(simpleSeriesRenderer);
-       */
-
-      intent = ChartFactory.getPieChartIntent(context, categorySeries,
-               renderer, "some activity");
-
-      return intent;
+      
    }
 }
