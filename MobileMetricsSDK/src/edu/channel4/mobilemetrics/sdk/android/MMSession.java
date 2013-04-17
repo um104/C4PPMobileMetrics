@@ -418,7 +418,7 @@ public final class MMSession
      *
      * @param isOptedOut True if the user should be be opted out and have all his Localytics data deleted.
      */
-    public void setOptOut(final boolean isOptedOut)
+    /* package */ void setOptOut(final boolean isOptedOut)
     {
         mSessionHandler.sendMessage(mSessionHandler.obtainMessage(SessionHandler.MESSAGE_OPT_OUT, isOptedOut ? 1 : 0, 0));
     }
@@ -450,6 +450,7 @@ public final class MMSession
     public void close()
     {
         mSessionHandler.sendEmptyMessage(SessionHandler.MESSAGE_CLOSE);
+        upload();
     }
 
     /**
@@ -602,7 +603,7 @@ public final class MMSession
      * order to guarantee as much time as possible for slow connections to complete. It is necessary to do this even if the user
      * has opted out because this is how the opt out is transported to the webservice.
      */
-    public void upload()
+    /* package */ void upload()
     {
         mSessionHandler.sendMessage(mSessionHandler.obtainMessage(SessionHandler.MESSAGE_UPLOAD, null));
     }

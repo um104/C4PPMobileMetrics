@@ -1,7 +1,6 @@
 package edu.channel4.buttonmash.activity;
 
-import java.util.List;
-
+import edu.channel4.mobilemetrics.sdk.android.MMSession;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -11,12 +10,11 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.inject.Inject;
 
 @ContentView(R.layout.activity_main)
 public final class MainActivity extends RoboActivity {
+
+   final static String LOCALYTICS_APP_KEY = "2b9b47ca4e9178b076524b4-d8a060da-215f-11e2-5ebd-00ef75f32667";
 
    /**
     * The number of seconds you want to mash for.
@@ -42,11 +40,18 @@ public final class MainActivity extends RoboActivity {
    @InjectView(R.id.buttonStartMashing) private Button buttonStartMashing;
    @InjectView(R.id.buttonTheButton) private Button buttonTheButton;
 
+   private MMSession mmSession;
+
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
 
       textViewTimer.setText("");
+
+      mmSession = new MMSession(getApplicationContext(),
+               LOCALYTICS_APP_KEY);
+      mmSession.open();
+
    }
 
    @Override
@@ -59,6 +64,17 @@ public final class MainActivity extends RoboActivity {
 
       // Disable The Button
       buttonTheButton.setEnabled(false);
+      
+      // Open the MM session
+      mmSession.open();
+   }
+
+   @Override
+   protected void onPause() {
+      super.onPause();
+      
+      // Close the MM session
+      mmSession.close();
    }
 
    public void startMashing(View v) {
