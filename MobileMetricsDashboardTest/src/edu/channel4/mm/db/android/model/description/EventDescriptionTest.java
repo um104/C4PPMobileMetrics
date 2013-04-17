@@ -30,7 +30,7 @@ public class EventDescriptionTest extends TestCase {
          // CAUTION: assuming order of elements in list. Make it a @post of .parseList()
          
          // check session attributes
-         checkEventDescription(result.get(0), "Session Attribute", sessionAttributesOracle);
+         checkEventDescription(result.get(0), "Session Attributes", sessionAttributesOracle);
                   
          // check "button pressed" event description
          checkEventDescription(result.get(1), "button pressed", buttonPressedAttributesOracle);
