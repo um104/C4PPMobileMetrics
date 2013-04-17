@@ -33,7 +33,7 @@ public class EventDescriptionTest extends TestCase {
                                                      "SDKCompatibility__c",
                                                      "SessionLengthSeconds__c",
                                                      "UUID__c"};
-   
+
    private final String[] buttonPressedAttributesOracle = {"button",
                                                            "tr.button"};
    private final String[] recordNameAttributeOracle = {"age", "name"};
@@ -46,13 +46,14 @@ public class EventDescriptionTest extends TestCase {
 
    public void testParseValidJSON() {
       try {
-         List<EventDescription> result = EventDescription.parseList(validInput);
+         List<EventDescription> result = EventDescription
+                  .parseList(validTestInput);
 
          // CAUTION: assuming order of elements in list. Make it a @post of
          // .parseList()
 
          // check session attributes
-         checkEventDescription(result.get(0), "Session Attribute",
+         checkEventDescription(result.get(0), "Session Attributes",
                   sessionAttributesOracle);
 
          // check "button pressed" event description
@@ -82,7 +83,7 @@ public class EventDescriptionTest extends TestCase {
 
    public void testParseInvalidJSON() {
       try {
-         EventDescription.parseList(invalidInput);
+         EventDescription.parseList(invalidTestString);
          fail();
       }
       catch (JSONException e) {
@@ -91,7 +92,7 @@ public class EventDescriptionTest extends TestCase {
 
    public void testParseVeryInvalidJSON() {
       try {
-         EventDescription.parseList(veryInvalidInput);
+         EventDescription.parseList(veryInvalidTestString);
          fail();
       }
       catch (JSONException e) {
