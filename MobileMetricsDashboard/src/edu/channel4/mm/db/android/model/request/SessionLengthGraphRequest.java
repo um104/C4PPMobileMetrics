@@ -16,7 +16,8 @@ import edu.channel4.mm.db.android.util.Keys;
 
 public class SessionLengthGraphRequest implements GraphRequest {
 
-   private final static String REQUEST_TYPE = "SESSION_LENGTH";
+   // DO NOT CHANGE THIS STRING. APEX code relies on it!
+   private final static String REQUEST_TYPE = "SessionLength";
    
    public SessionLengthGraphRequest(){}
 

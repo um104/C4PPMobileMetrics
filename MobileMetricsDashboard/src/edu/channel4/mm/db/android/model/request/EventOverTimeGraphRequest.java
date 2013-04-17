@@ -17,7 +17,8 @@ import edu.channel4.mm.db.android.util.Keys;
 public class EventOverTimeGraphRequest implements GraphRequest,
          HasEventNameParameter, HasOverTimeParameter {
 
-   private final static String REQUEST_TYPE = "EVENT_OVER_TIME";
+   // DO NOT CHANGE THIS STRING. APEX code relies on it!
+   private final static String REQUEST_TYPE = "EventOverTime";
    private String timeInterval;
    private String eventName;
 

@@ -17,7 +17,8 @@ import edu.channel4.mm.db.android.util.Keys;
 public class SessionOverTimeGraphRequest implements GraphRequest,
          HasOverTimeParameter {
 
-   private final static String REQUEST_TYPE = "SESSION_OVER_TIME";
+   // DO NOT CHANGE THIS STRING. APEX code relies on it!
+   private final static String REQUEST_TYPE = "SessionOverTime";
    private String timeInterval;
 
    public SessionOverTimeGraphRequest() {

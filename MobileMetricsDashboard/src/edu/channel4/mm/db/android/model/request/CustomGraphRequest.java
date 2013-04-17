@@ -17,7 +17,7 @@ import edu.channel4.mm.db.android.util.Keys;
 
 public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
 
-   private final static String REQUEST_TYPE = "CUSTOM";
+   private final static String REQUEST_TYPE = "Custom";
    private String eventName1;
    private String attribName1;
 
