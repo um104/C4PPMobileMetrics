@@ -13,7 +13,6 @@ import edu.channel4.mobilemetrics.sdk.android.MMSession;
 @ContentView(R.layout.activity_upload_score)
 public final class UploadScoreActivity extends RoboActivity {
 
-   private final static String LOCALYTICS_APP_KEY = "2b9b47ca4e9178b076524b4-d8a060da-215f-11e2-5ebd-00ef75f32667";
    private MMSession localyticsSession;
    private int timesPressed;
 
@@ -25,7 +24,7 @@ public final class UploadScoreActivity extends RoboActivity {
       super.onCreate(savedInstanceState);
 
       localyticsSession = new MMSession(getApplicationContext(),
-               LOCALYTICS_APP_KEY);
+               MainActivity.LOCALYTICS_APP_KEY);
       localyticsSession.open();
 
       timesPressed = getIntent().getIntExtra("timesPressed", 0);
@@ -59,7 +58,7 @@ public final class UploadScoreActivity extends RoboActivity {
       event.addAttribute("times_mashed", timesPressed);
       event.addAttribute("name", editTextName.getText().toString());
       event.tagEvent();
-      localyticsSession.upload();
+//      localyticsSession.upload();
 
       Toast.makeText(getApplicationContext(), "Uploaded score!",
                Toast.LENGTH_SHORT).show();
