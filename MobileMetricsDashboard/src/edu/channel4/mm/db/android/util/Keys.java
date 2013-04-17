@@ -36,6 +36,10 @@ public class Keys {
 	public static final String SESSION_ATTRIBS = "session_attribs";
 
 	public static final String APP_ID = "Id";
+	
+	public static final String PACKAGE_NAME = "package_name";
+	
+	
 
 	// Don't use getSharedPreferences(String, int) anymore.
 	// Instead, use PreferenceManager.getDefaultSharedPreferences(Context)

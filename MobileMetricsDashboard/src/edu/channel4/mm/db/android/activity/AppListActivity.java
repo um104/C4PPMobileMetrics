@@ -1,5 +1,6 @@
 package edu.channel4.mm.db.android.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import roboguice.inject.ContentView;
@@ -43,7 +44,7 @@ public class AppListActivity extends NativeMainActivity implements
    @InjectView(R.id.appListRoot) View rootView;
    @Inject private SharedPreferences prefs;
    @Inject private SalesforceConn sfConn;
-   @Inject private List<AppDescription> appList;
+   @Inject private ArrayList<AppDescription> appList;
    @Inject private RestClientAccess restClientAccess;
    protected AppDataArrayAdapater arrayAdapter;
 
@@ -63,7 +64,11 @@ public class AppListActivity extends NativeMainActivity implements
                   int position, long id) {
             // Save the chosen App Label
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putString(Keys.APP_LABEL, appList.get(position).getAppName());
+            
+            AppDescription appDescription = appList.get(position);
+            
+            editor.putString(Keys.APP_LABEL, appDescription.getAppName());
+            editor.putString(Keys.APP_ID, appDescription.getAppId());
             editor.commit();
 
             // Start the DashboardActivity

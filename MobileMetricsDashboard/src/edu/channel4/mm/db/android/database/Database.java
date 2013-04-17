@@ -1,5 +1,6 @@
 package edu.channel4.mm.db.android.database;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -13,20 +14,14 @@ import edu.channel4.mm.db.android.model.graph.Graph;
 import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 
-/**
- * BS temp database. This is just a singleton containing a bunch of ArrayLists
- * of models.
- * 
- * @author girum & mark
- */
 @Singleton
-public class TempoDatabase {
+public class Database {
 
-   @Inject private List<AppDescription> appDescriptions;
-   @Inject private List<AttributeDescription> attributeDescriptions;
-   @Inject private List<EventDescription> eventDescriptions;
-   @Inject private List<EventNameDescription> eventNameDescriptions;
-   @Inject private List<GraphRequest> customGraphRequests;
+   @Inject private ArrayList<AppDescription> appDescriptions;
+   @Inject private ArrayList<AttributeDescription> attributeDescriptions;
+   @Inject private ArrayList<EventDescription> eventDescriptions;
+   @Inject private ArrayList<EventNameDescription> eventNameDescriptions;
+   @Inject private CustomGraphRequestDataSource customGraphRequestDataSource;
    private Graph graph = null;
 
    public void setAppDescriptions(List<AppDescription> appDescriptions) {
@@ -51,11 +46,24 @@ public class TempoDatabase {
       this.eventNameDescriptions.addAll(eventNameDescriptions);
    }
 
-   public void addCustomGraphRequest(CustomGraphRequest customGraphRequest) {
-      this.customGraphRequests.add(customGraphRequest);
+   public void addCustomGraphRequest(CustomGraphRequest customGraphRequest,
+            String appId) {
+      customGraphRequestDataSource.open();
+
+      customGraphRequestDataSource.insertCustomGraphRequest(customGraphRequest,
+               appId);
+
+      customGraphRequestDataSource.close();
    }
 
-   public List<GraphRequest> getCustomGraphRequests() {
+   public List<GraphRequest> getCustomGraphRequests(String appId) {
+      customGraphRequestDataSource.open();
+
+      List<GraphRequest> customGraphRequests = customGraphRequestDataSource
+               .getAllGraphRequests(appId);
+
+      customGraphRequestDataSource.close();
+
       return customGraphRequests;
    }
 

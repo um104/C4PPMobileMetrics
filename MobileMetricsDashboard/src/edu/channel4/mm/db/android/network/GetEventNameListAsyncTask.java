@@ -9,7 +9,7 @@ import android.net.Uri;
 
 import com.google.inject.Inject;
 
-import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.database.Database;
 import edu.channel4.mm.db.android.model.callback.EventNameDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.EventNameDescription;
 import edu.channel4.mm.db.android.util.Keys;
@@ -21,7 +21,7 @@ public class GetEventNameListAsyncTask extends
    public static final String EVENTS_URL_SUFFIX = "channel4_events";
    private EventNameDescriptionCallback callback;
 
-   @Inject private TempoDatabase tempoDatabase;
+   @Inject private Database tempoDatabase;
 
    @SuppressWarnings("serial")
    public GetEventNameListAsyncTask(Context context, String baseUri,

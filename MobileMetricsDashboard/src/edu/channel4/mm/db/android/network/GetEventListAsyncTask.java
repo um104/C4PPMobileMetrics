@@ -9,7 +9,7 @@ import android.net.Uri;
 
 import com.google.inject.Inject;
 
-import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.database.Database;
 import edu.channel4.mm.db.android.model.callback.EventDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.util.Keys;
@@ -20,7 +20,7 @@ public class GetEventListAsyncTask extends
 
    private EventDescriptionCallback callback;
 
-   @Inject private TempoDatabase tempoDatabase;
+   @Inject private Database tempoDatabase;
    @Inject private RestClientAccess restClientAccess;
 
    @SuppressWarnings("serial")

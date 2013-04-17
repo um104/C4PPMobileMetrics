@@ -7,7 +7,7 @@ import android.content.Context;
 
 import com.google.inject.Inject;
 
-import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.database.Database;
 import edu.channel4.mm.db.android.model.callback.AppDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.AppDescription;
 import edu.channel4.mm.db.android.util.Log;
@@ -15,7 +15,7 @@ import edu.channel4.mm.db.android.util.Log;
 class GetAppListAsyncTask extends BaseGetRequestAsyncTask<List<AppDescription>> {
    private AppDescriptionCallback callback;
 
-   @Inject TempoDatabase tempoDatabase;
+   @Inject Database tempoDatabase;
 
    public GetAppListAsyncTask(Context context, String baseUri,
                               String accessToken,
