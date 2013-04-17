@@ -9,9 +9,9 @@ import org.json.JSONException;
 
 public class EventDescriptionTest extends TestCase {
 
-   private final String validInput = "{\"sAttrs\":[\"AndroidIDHash__c\",\"DataConnectionType__c\",\"DeviceSerialHash__c\",\"DeviceCountry__c\",\"DeviceManufacturer__c\",\"DeviceModel__c\",\"DeviceType__c\",\"EpochTime__c\",\"LanguageLocale__c\",\"LocaleCountryCode__c\",\"LocalyticsApiKey__c\",\"LocalyticsLibraryVersion__c\",\"NetworkCarrier__c\",\"NetworkCountryCode__c\",\"OSVersion__c\",\"PersistentStorageCreationTimeSeconds__c\",\"SDKCompatibility__c\",\"SessionLengthSeconds__c\",\"UUID__c\"],\"eDescs\":[{\"name\":\"button pressed\",\"eAttrs\":[\"button\",\"tr.button\"]},{\"name\":\"record name and age\",\"eAttrs\":[\"age\",\"name\"]}]}";
-   private final String invalidInput = "{\"sAttrs\":[\"AndroidIDHash__c\",\"DataConnectionType__c\",\"DeviceSerialHash__c\",\"DeviceCountry__c\",\"DeviceManufacturer__c\",\"DeviceModel__c\",\"DeviceType__c\",\"EpochTime__c\",\"LanguageLocale__c\",\"LocaleCountryCode__c\",\"LocalyticsApiKey__c\",\"LocalyticsLibraryVersion__c\",\"NetworkCarrier__c\",\"NetworkCountryCode__c\",\"OSVersion__c\",\"Persistent";
-   private final String veryInvalidInput = "HTTP 400 ERROR NOT VALID ABORT";
+   private final String validTestString = "{\"sAttrs\":[\"AndroidIDHash__c\",\"DataConnectionType__c\",\"DeviceSerialHash__c\",\"DeviceCountry__c\",\"DeviceManufacturer__c\",\"DeviceModel__c\",\"DeviceType__c\",\"EpochTime__c\",\"LanguageLocale__c\",\"LocaleCountryCode__c\",\"LocalyticsApiKey__c\",\"LocalyticsLibraryVersion__c\",\"NetworkCarrier__c\",\"NetworkCountryCode__c\",\"OSVersion__c\",\"PersistentStorageCreationTimeSeconds__c\",\"SDKCompatibility__c\",\"SessionLengthSeconds__c\",\"UUID__c\"],\"eDescs\":[{\"name\":\"button pressed\",\"eAttrs\":[\"button\",\"tr.button\"]},{\"name\":\"record name and age\",\"eAttrs\":[\"age\",\"name\"]}]}";
+   private final String invalidTestString = "{\"sAttrs\":[\"AndroidIDHash__c\",\"DataConnectionType__c\",\"DeviceSerialHash__c\",\"DeviceCountry__c\",\"DeviceManufacturer__c\",\"DeviceModel__c\",\"DeviceType__c\",\"EpochTime__c\",\"LanguageLocale__c\",\"LocaleCountryCode__c\",\"LocalyticsApiKey__c\",\"LocalyticsLibraryVersion__c\",\"NetworkCarrier__c\",\"NetworkCountryCode__c\",\"OSVersion__c\",\"Persistent";
+   private final String veryInvalidTestString = "HTTP 400 ERROR NOT VALID ABORT";
 
    private final String[] sessionAttributesOracle = {
                                                      "AndoridIDHash__c",
@@ -47,7 +47,7 @@ public class EventDescriptionTest extends TestCase {
    public void testParseValidJSON() {
       try {
          List<EventDescription> result = EventDescription
-                  .parseList(validTestInput);
+                  .parseList(validTestString);
 
          // CAUTION: assuming order of elements in list. Make it a @post of
          // .parseList()
