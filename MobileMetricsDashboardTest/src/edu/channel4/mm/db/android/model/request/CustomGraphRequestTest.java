@@ -35,9 +35,9 @@ public class CustomGraphRequestTest extends TestCase {
    public void testGetAdditionalUriParameters() {
        List<NameValuePair> params = new ArrayList<NameValuePair>();
 
-       params.add(new BasicNameValuePair("requestType", requestType));
-       params.add(new BasicNameValuePair("attribName1", attribName1));
-       params.add(new BasicNameValuePair("eventName1", eventName1));
+       params.add(new BasicNameValuePair("requestType", "CUSTOM"));
+       params.add(new BasicNameValuePair("attribName1", "DeviceType__c"));
+       params.add(new BasicNameValuePair("eventName1", ""));
        
        assertEquals(params, cgr.getAdditionalUriParameters());
    }

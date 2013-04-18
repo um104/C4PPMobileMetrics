@@ -8,24 +8,24 @@ import org.apache.http.message.BasicNameValuePair;
 
 import junit.framework.TestCase;
 
-public class SessionOverTimeGraphRequestTest extends TestCase {
+public class EventOverTimeGraphRequestTest extends TestCase {
 
-    SessionOverTimeGraphRequest sotgr;
+    EventOverTimeGraphRequest eotgr;
     String requestType;
     String timeInterval;
+    String eventName;
     
     protected void setUp() throws Exception {
         super.setUp();
         
-        sotgr = new SessionOverTimeGraphRequest();
-        requestType = "SESSION_OVER_TIME";
-        timeInterval = "12";
+        eotgr = new EventOverTimeGraphRequest();
         
-        sotgr.setTimeInterval(timeInterval);
-    }
-
-    protected void tearDown() throws Exception {
-        super.tearDown();
+        requestType = "EVENT_OVER_TIME";
+        timeInterval = "12";
+        eventName = "Level up";
+        
+        eotgr.setTimeInterval(timeInterval);
+        eotgr.setEventName(eventName);
     }
    
     public void testConstructGraphRequestIntent() {
@@ -35,9 +35,10 @@ public class SessionOverTimeGraphRequestTest extends TestCase {
     public void testGetAdditionalUriParameters() {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
 
-        params.add(new BasicNameValuePair("requestType", "SESSION_OVER_TIME"));
+        params.add(new BasicNameValuePair("requestType", "EVENT_OVER_TIME"));
         params.add(new BasicNameValuePair("timeInterval", "12"));
+        params.add(new BasicNameValuePair("eventName", "Level up"));
         
-        assertEquals(params, sotgr.getAdditionalUriParameters());
+        assertEquals(params, eotgr.getAdditionalUriParameters());
     }
 }
