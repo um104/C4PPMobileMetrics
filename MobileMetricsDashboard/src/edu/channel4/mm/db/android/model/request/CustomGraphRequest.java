@@ -16,7 +16,8 @@ import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 
 public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
-
+   
+   // DO NOT CHANGE THIS STRING. APEX code relies on it!
    private final static String REQUEST_TYPE = "Custom";
    private String eventName1;
    private String attribName1;
