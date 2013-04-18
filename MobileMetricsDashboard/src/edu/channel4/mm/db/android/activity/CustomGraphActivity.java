@@ -1,9 +1,13 @@
 package edu.channel4.mm.db.android.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,18 +17,21 @@ import android.widget.ListView;
 import com.google.inject.Inject;
 
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.database.Database;
 import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
+import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 import edu.channel4.mm.db.android.view.GraphRequestArrayAdapter;
 
 @ContentView(R.layout.activity_custom_graph)
 public class CustomGraphActivity extends RoboActivity {
 
-   @Inject TempoDatabase tempoDatabase; // singleton
    @InjectView(R.id.listViewCustomGraphActivity) private ListView listView;
-   private GraphRequestArrayAdapter adapter;
+   @Inject private Database database; // singleton
+   @Inject private SharedPreferences prefs;
+   private GraphRequestArrayAdapter adapter = null;
+   private List<GraphRequest> customGraphRequests = new ArrayList<GraphRequest>();
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +45,7 @@ public class CustomGraphActivity extends RoboActivity {
                   int position, long id) {
 
             // Grab the CustomGraphRequest for the selected item.
-            GraphRequest graphRequest = tempoDatabase.getCustomGraphRequests().get(position);
+            GraphRequest graphRequest = customGraphRequests.get(position);
 
             // Construct the correct Intent for the selected
             // CustomGraphRequest
@@ -58,13 +65,19 @@ public class CustomGraphActivity extends RoboActivity {
 
       // Fill this adapter with a list of CustomGraphRequests from TempoDB
       adapter = new GraphRequestArrayAdapter(getApplicationContext(),
-               tempoDatabase.getCustomGraphRequests());
+               customGraphRequests);
       listView.setAdapter(adapter);
    }
-   
+
    @Override
    protected void onResume() {
       super.onResume();
+
+      // Re-fetch the saved CustomGraphRequests for this AppId from SQLite.
+      String appId = prefs.getString(Keys.APP_ID, null);
+      customGraphRequests.clear();
+      customGraphRequests.addAll(database.getCustomGraphRequests(appId));
+
       adapter.notifyDataSetChanged();
    }
 

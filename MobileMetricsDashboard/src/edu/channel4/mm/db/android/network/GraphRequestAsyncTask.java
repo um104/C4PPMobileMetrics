@@ -10,7 +10,7 @@ import android.content.Context;
 import com.google.inject.Inject;
 import com.google.visualization.datasource.base.TypeMismatchException;
 
-import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.database.Database;
 import edu.channel4.mm.db.android.model.callback.GraphLoadCallback;
 import edu.channel4.mm.db.android.model.graph.Graph;
 import edu.channel4.mm.db.android.model.graph.GraphFactory;
@@ -21,7 +21,7 @@ import edu.channel4.mm.db.android.util.Log;
 public class GraphRequestAsyncTask extends BaseGetRequestAsyncTask<Graph> {
    private GraphLoadCallback callback;
 
-   @Inject private TempoDatabase tempoDatabase;
+   @Inject private Database tempoDatabase;
    @Inject private RestClientAccess restClientAccess;
 
    @SuppressWarnings("serial")

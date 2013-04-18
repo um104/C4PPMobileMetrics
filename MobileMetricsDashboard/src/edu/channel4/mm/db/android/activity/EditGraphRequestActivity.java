@@ -1,5 +1,6 @@
 package edu.channel4.mm.db.android.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import roboguice.activity.RoboActivity;
@@ -7,6 +8,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +19,7 @@ import android.widget.Spinner;
 import com.google.inject.Inject;
 
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.database.TempoDatabase;
+import edu.channel4.mm.db.android.database.Database;
 import edu.channel4.mm.db.android.model.callback.EventDescriptionCallback;
 import edu.channel4.mm.db.android.model.callback.EventNameDescriptionCallback;
 import edu.channel4.mm.db.android.model.description.AttributeDescription;
@@ -38,7 +40,8 @@ public class EditGraphRequestActivity extends RoboActivity implements
 
    @InjectExtra(Keys.GRAPH_REQUEST_EXTRA) private GraphRequest graphRequest;
    @Inject private SalesforceConn sfConn;
-   @Inject private TempoDatabase tempoDatabase; // singleton
+   @Inject private Database tempoDatabase; // singleton
+   @Inject private SharedPreferences prefs;
 
    private ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
    private ArrayAdapter<EventNameDescription> eventNameAdapter;
@@ -52,8 +55,8 @@ public class EditGraphRequestActivity extends RoboActivity implements
    @InjectView(R.id.attribute1Group) private View attribute1Group;
    @InjectView(R.id.durationGroup) private View durationGroup;
 
-   @Inject private List<EventDescription> eventList;
-   @Inject private List<EventNameDescription> eventNameList;
+   @Inject private ArrayList<EventDescription> eventList;
+   @Inject private ArrayList<EventNameDescription> eventNameList;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +214,8 @@ public class EditGraphRequestActivity extends RoboActivity implements
    }
 
    private void saveCustomGraphRequest(GraphRequest graphRequest) {
+      String appId = prefs.getString(Keys.APP_ID, null);
+
       if (graphRequest instanceof CustomGraphRequest) {
          CustomGraphRequest customGraphRequest = (CustomGraphRequest) graphRequest;
 
@@ -221,7 +226,7 @@ public class EditGraphRequestActivity extends RoboActivity implements
          // Once a CustomGraphRequest is saved, it becomes "Predefined."
          customGraphRequest.setReadOnly(true);
 
-         tempoDatabase.addCustomGraphRequest(customGraphRequest);
+         tempoDatabase.addCustomGraphRequest(customGraphRequest, appId);
       }
    }
 

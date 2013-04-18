@@ -1,6 +1,6 @@
 package edu.channel4.mm.db.android.activity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -43,7 +43,7 @@ public class GraphViewerActivity extends RoboActivity implements
    @InjectView(R.id.textViewGraphViewerTitle) private TextView textViewTitle;
    @InjectView(R.id.buttonOK) private Button buttonOK;
 
-   @Inject private List<GraphType> validGraphTypes;
+   @Inject private ArrayList<GraphType> validGraphTypes;
    private ArrayAdapter<GraphType> adapter;
 
    @Override

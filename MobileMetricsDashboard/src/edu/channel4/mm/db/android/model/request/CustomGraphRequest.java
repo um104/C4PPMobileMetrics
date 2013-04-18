@@ -30,7 +30,7 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
     * clicked).
     */
    private boolean readOnly;
-   
+
    private String graphName = "Custom Graph";
    private int iconId;
 
@@ -64,6 +64,10 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
    public String toString() {
       return graphName;
    }
+   
+   public String getGraphName() {
+      return graphName;
+   }
 
    public Intent constructGraphRequestIntent(Context context) {
       Intent intent;
@@ -82,6 +86,10 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
       return iconId;
    }
 
+   public void setIconId(int iconId) {
+      this.iconId = iconId;
+   }
+
    /**
     * This setter is used to turn a true Custom Graph into a regular old
     * Predefined Custom Graph once its been saved into the DB. That way,
@@ -95,7 +103,7 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
    public void setName(String graphName) {
       this.graphName = graphName;
    }
-   
+
    @Override
    public void setEventName(String eventName) {
       this.eventName1 = eventName;

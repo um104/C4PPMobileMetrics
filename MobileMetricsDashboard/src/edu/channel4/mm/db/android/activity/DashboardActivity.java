@@ -30,7 +30,7 @@ public class DashboardActivity extends RoboActivity {
    @InjectView(R.id.dashboardHeader) private TextView textViewDashboardHeader;
    @Inject SharedPreferences prefs;
    private DashboardArrayAdapter adapter;
-   protected List<Subactivity> subactivityDetails;
+   protected ArrayList<Subactivity> subactivityDetails;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +75,8 @@ public class DashboardActivity extends RoboActivity {
       }
    }
 
-   private List<Subactivity> getSubactivityDetails() {
-      List<Subactivity> subactivityDetails = new ArrayList<DashboardActivity.Subactivity>();
+   private ArrayList<Subactivity> getSubactivityDetails() {
+      ArrayList<Subactivity> subactivityDetails = new ArrayList<DashboardActivity.Subactivity>();
 
       subactivityDetails.add(new Subactivity(R.drawable.usage_icon,
                getResources().getString(R.string.usage), UsageActivity.class));
