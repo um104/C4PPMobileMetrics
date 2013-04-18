@@ -438,6 +438,7 @@ public final class MMSession
     public void open()
     {
         mSessionHandler.sendEmptyMessage(SessionHandler.MESSAGE_OPEN);
+        upload();
     }
 
     /**

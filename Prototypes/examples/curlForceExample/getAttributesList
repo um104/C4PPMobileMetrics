@@ -1,5 +1,0 @@
-echo
-echo 'Be sure to change the <instance_name> and <access_token>!'
-echo
-curl https://na9.salesforce.com/services/apexrest/C4PPMM/channel4_attributes/?appLabel=My+First+App -H 'Authorization: Bearer 00DE0000000dkGn!ARwAQKdtzypzGQtTftjfe2l0C_l_f8qdE9O096DDh.KS_uLDNUvD5T2fozFCAVTDi9GAd7Uiow.JWuIKx9BJL_tCV36r_kVf'
-echo
