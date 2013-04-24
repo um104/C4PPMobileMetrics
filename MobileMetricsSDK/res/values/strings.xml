@@ -1,9 +1,8 @@
 <resources>
 
     <string name="app_name">MobileMeticsSDK</string>
+    <!-- This is the template for what users have to put in their res/values/strings.xml -->
     <string-array name="MobileMetricsCredentials">
-        <item>client_id</item>
-        <item>client_secret</item>
         <item>username</item>
         <item>password</item>
         <item>security_token</item>

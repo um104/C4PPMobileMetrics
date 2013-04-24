@@ -322,6 +322,8 @@ public final class MMSession
     public class AuthenticateSalesforceTask extends AsyncTask<Void, Void, String>
     {
         private final static String LOGIN_URL = "https://login.salesforce.com/services/oauth2/token";
+        private final static String CLIENT_ID = "3MVG9y6x0357HlecylRTsJx8y_qIjGh9Z7CQEA0bTx5xHsmQRBBXZaOldH3._q.NTUYlX1A4JdiewYx5qMvU4";
+        private final static String CLIENT_SECRET = "603269615811711635";
     	
     	@Override
     	protected void onPreExecute() {
@@ -345,11 +347,11 @@ public final class MMSession
 	            String[] credentials = mContext.getResources().getStringArray(credentialId);
 	            
 	            nameValuePairs.add(new BasicNameValuePair("grant_type","password"));
-	            nameValuePairs.add(new BasicNameValuePair("client_id", credentials[0]));
-	            nameValuePairs.add(new BasicNameValuePair("client_secret", credentials[1]));
-	            nameValuePairs.add(new BasicNameValuePair("username", credentials[2]));
+	            nameValuePairs.add(new BasicNameValuePair("client_id", CLIENT_ID));
+	            nameValuePairs.add(new BasicNameValuePair("client_secret", CLIENT_SECRET));
+	            nameValuePairs.add(new BasicNameValuePair("username", credentials[0]));
 	            //"password" is actually "password" + "security token"
-	            nameValuePairs.add(new BasicNameValuePair("password", credentials[3] + credentials[4]));
+	            nameValuePairs.add(new BasicNameValuePair("password", credentials[1] + credentials[2]));
 	            
 	            // Place the parameters into the HttpPost
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
