@@ -2067,7 +2067,7 @@ public final class MMSession
             mContext = context;
             mProvider = MMProvider.getInstance(context, apiKey);
             mSessionHandler = sessionHandler;
-            //TODO(mlerner): apiKey should be removed -- we're not using it.
+            //TODO(mlerner): use the mApiKey instead of the app label, version, and package
             mApiKey = apiKey;
         }
 
@@ -2319,6 +2319,7 @@ public final class MMSession
                         session.put(JsonObjects.BlobHeader.KEY_UNIQUE_ID, cursor.getString(uuidColumn));
                         
                         //Add app-specific unique ID. This will be the same from all of the same app on diff devices.
+                        /*
                         final PackageManager pm = mContext.getPackageManager();
                         ApplicationInfo ai;
                         try {
@@ -2330,7 +2331,7 @@ public final class MMSession
                         final String packageName = mContext.getPackageName();
 
                         session.put(JsonObjects.BlobHeader.KEY_APP_NAME, applicationName);
-                        session.put(JsonObjects.BlobHeader.KEY_PACKAGE_NAME, packageName);
+                        session.put(JsonObjects.BlobHeader.KEY_PACKAGE_NAME, packageName);*/
                         
                         JSONArray eventsArray = new JSONArray();
                         Cursor blobEvents = null;
