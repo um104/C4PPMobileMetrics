@@ -14,7 +14,7 @@ import android.widget.TextView;
 @ContentView(R.layout.activity_main)
 public final class MainActivity extends RoboActivity {
 
-   final static String LOCALYTICS_APP_KEY = "2b9b47ca4e9178b076524b4-d8a060da-215f-11e2-5ebd-00ef75f32667";
+   final static String MM_APP_KEY = "a01G000000BNwWQ";
 
    /**
     * The number of seconds you want to mash for.
@@ -49,7 +49,7 @@ public final class MainActivity extends RoboActivity {
       textViewTimer.setText("");
 
       mmSession = new MMSession(getApplicationContext(),
-               LOCALYTICS_APP_KEY);
+               MM_APP_KEY);
       mmSession.open();
 
    }

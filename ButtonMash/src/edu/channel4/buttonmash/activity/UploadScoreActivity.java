@@ -13,7 +13,7 @@ import edu.channel4.mobilemetrics.sdk.android.MMSession;
 @ContentView(R.layout.activity_upload_score)
 public final class UploadScoreActivity extends RoboActivity {
 
-   private MMSession localyticsSession;
+   private MMSession mmSession;
    private int timesPressed;
 
    @InjectView(R.id.textViewHighScore) private TextView textViewHighScore;
@@ -23,9 +23,9 @@ public final class UploadScoreActivity extends RoboActivity {
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
 
-      localyticsSession = new MMSession(getApplicationContext(),
-               MainActivity.LOCALYTICS_APP_KEY);
-      localyticsSession.open();
+      mmSession = new MMSession(getApplicationContext(),
+               MainActivity.MM_APP_KEY);
+      mmSession.open();
 
       timesPressed = getIntent().getIntExtra("timesPressed", 0);
 
@@ -35,13 +35,13 @@ public final class UploadScoreActivity extends RoboActivity {
    @Override
    protected void onResume() {
       super.onResume();
-      localyticsSession.open();
+      mmSession.open();
    }
 
    @Override
    protected void onPause() {
       super.onPause();
-      localyticsSession.close();
+      mmSession.close();
    }
 
    public void uploadScore(View v) {
@@ -53,7 +53,7 @@ public final class UploadScoreActivity extends RoboActivity {
          return;
       }
 
-      MMSession.MMEvent event = localyticsSession
+      MMSession.MMEvent event = mmSession
                .getNewEvent("MASHED_THAT_BUTTON");
       event.addAttribute("times_mashed", timesPressed);
       event.addAttribute("name", editTextName.getText().toString());
