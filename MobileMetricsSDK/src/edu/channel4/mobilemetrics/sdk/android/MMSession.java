@@ -2011,7 +2011,7 @@ public final class MMSession
         /**
          * Salesforce upload URL, as a format string that contains a format for the Instance URL key.
          */
-        private final static String UPDATE_URL = "%s/services/apexrest/C4PPMM/channel4_upload/"; //$NON-NLS-1$
+        private final static String UPDATE_URL = "%s/services/apexrest/channel4_upload/"; //$NON-NLS-1$
                 
         /**
          * Handler message to upload all data collected so far

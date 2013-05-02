@@ -4,9 +4,9 @@
     <string name="app_name">ButtonMash</string>
 
     <string-array name="MobileMetricsCredentials">
-        <item>channel4pp@calpoly.edu</item>
-        <item>iceland006</item>
-        <item>CM7fXhOh9tTqV9n4rhcWGHGB</item>
+        <item>c4@capstone.com</item>
+        <item>escape76</item>
+        <item>FVp2n6LFH2kPrAXfrUMzinne</item>
     </string-array>
 
     <string name="title_activity_upload_score">UploadScoreActivity</string>

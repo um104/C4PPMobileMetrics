@@ -24,7 +24,7 @@ import edu.channel4.mm.db.android.util.Log;
 // TODO: Implement a "cancelAllAsyncTasks()" method that cancels any in-progress AsyncTasks.
 @ContextSingleton
 final public class SalesforceConn {
-   public static final String CHANNEL4_REST_URL = "/services/apexrest/C4PPMM/";
+   public static final String CHANNEL4_REST_URL = "/services/apexrest/";
 
    @Inject private RestClientAccess restClientAccess; // singleton
    @Inject private SharedPreferences prefs;

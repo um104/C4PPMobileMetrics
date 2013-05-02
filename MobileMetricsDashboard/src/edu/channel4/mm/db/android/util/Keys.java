@@ -15,11 +15,11 @@ public class Keys {
 
 	public static final String INSTANCE_URL = "instance_url";
 
-	public static final String C4PPMM_APP_LABEL = "C4PPMM__Label__c";
+	public static final String C4PPMM_APP_LABEL = "Name";
 
 	public static final String VERSION = "Version__c";
 
-	public static final String C4PPMM_PACKAGE_NAME = "C4PPMM__PackageName__c";
+	public static final String C4PPMM_PACKAGE_NAME = "PackageName__c";
 
 	public static final String GRAPH_TYPE = "graph_type";
 
@@ -87,7 +87,7 @@ public class Keys {
 	
 	public static final String REQUEST_AS_JSON = "requestAsJSON";
 	
-	public static final String C4PPMM_EVENT_NAME = "C4PPMM__EventName__c";
+	public static final String C4PPMM_EVENT_NAME = "EventName__c";
 	
 	public static final String EVENT_NAME = "eventName";
 }
