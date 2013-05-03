@@ -214,7 +214,7 @@ public class EditGraphRequestActivity extends RoboActivity implements
    }
 
    private void saveCustomGraphRequest(GraphRequest graphRequest) {
-      String appId = prefs.getString(Keys.APP_ID, null);
+      String appId = prefs.getString(Keys.ID, null);
 
       if (graphRequest instanceof CustomGraphRequest) {
          CustomGraphRequest customGraphRequest = (CustomGraphRequest) graphRequest;

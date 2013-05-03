@@ -74,7 +74,7 @@ public class CustomGraphActivity extends RoboActivity {
       super.onResume();
 
       // Re-fetch the saved CustomGraphRequests for this AppId from SQLite.
-      String appId = prefs.getString(Keys.APP_ID, null);
+      String appId = prefs.getString(Keys.ID, null);
       customGraphRequests.clear();
       customGraphRequests.addAll(database.getCustomGraphRequests(appId));
 

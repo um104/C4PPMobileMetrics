@@ -68,7 +68,7 @@ public class AppListActivity extends NativeMainActivity implements
             AppDescription appDescription = appList.get(position);
             
             editor.putString(Keys.APP_LABEL, appDescription.getAppName());
-            editor.putString(Keys.APP_ID, appDescription.getAppId());
+            editor.putString(Keys.ID, appDescription.getAppId());
             editor.commit();
 
             // Start the DashboardActivity

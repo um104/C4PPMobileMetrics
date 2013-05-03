@@ -79,17 +79,17 @@ public class Log {
 
    public static void toastD(Context context, String message) {
       android.util.Log.d(Log.getTag(), message);
-      Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, message, Toast.LENGTH_LONG).show();
    }
 
    public static void toastE(Context context, String message) {
       android.util.Log.e(Log.getTag(), message);
-      Toast.makeText(context, "ERROR: " + message, Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, "ERROR: " + message, Toast.LENGTH_LONG).show();
    }
 
    public static void toastE(Context context, Exception e) {
       android.util.Log.e(Log.getTag(), e.getMessage(), e);
-      Toast.makeText(context, "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT)
+      Toast.makeText(context, "ERROR: " + e.getMessage(), Toast.LENGTH_LONG)
                .show();
    }
 

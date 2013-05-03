@@ -35,9 +35,11 @@ public class Keys {
 
 	public static final String SESSION_ATTRIBS = "session_attribs";
 
-	public static final String APP_ID = "Id";
+	public static final String ID = "Id";
 	
 	public static final String PACKAGE_NAME = "package_name";
+	
+	public static final String APP_ID = "appId";
 	
 	
 
@@ -90,4 +92,6 @@ public class Keys {
 	public static final String C4PPMM_EVENT_NAME = "EventName__c";
 	
 	public static final String EVENT_NAME = "eventName";
+	
+
 }

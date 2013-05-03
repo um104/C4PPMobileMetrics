@@ -48,6 +48,8 @@ public class GraphFactory {
             TypeMismatchException {
       List<GraphType> validGraphTypes = new ArrayList<GraphType>();
       DataTable datatable = new DataTable();
+      
+      Log.d(graphJSONString + " lololol");
 
       JSONObject graphJSONObject = new JSONObject(graphJSONString);
 

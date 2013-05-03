@@ -93,7 +93,7 @@ final public class SalesforceConn {
       // Grab the most up-to-date field values
       String baseUri = getCurrentBaseUri();
       String accessToken = restClientAccess.getAccessToken();
-      String appId = prefs.getString(Keys.APP_ID, null);
+      String appId = prefs.getString(Keys.ID, null);
 
       new GraphRequestAsyncTask(context, baseUri, accessToken, appId,
                graphRequest, callback).execute();
