@@ -26,12 +26,12 @@ public class GraphRequestAsyncTask extends BaseGetRequestAsyncTask<Graph> {
 
    @SuppressWarnings("serial")
    public GraphRequestAsyncTask(Context context, String baseUrl,
-                                String accessToken, final String appLabel,
+                                String accessToken, final String appId,
                                 final GraphRequest graphRequest,
                                 GraphLoadCallback callback) {
       super(context, baseUrl, accessToken, new HashMap<String, String>() {
          {
-            put(Keys.APP_LABEL, appLabel);
+            put(Keys.APP_ID, appId);
             for (NameValuePair nameValuePair : graphRequest
                      .getAdditionalUriParameters()) {
                put(nameValuePair.getName(), nameValuePair.getValue());

@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import roboguice.inject.ContextSingleton;
-
 import android.content.Context;
 
 import com.google.inject.Inject;

@@ -1,5 +1,7 @@
 package edu.channel4.mm.db.android.model.request;
 
+import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
+
 /**
  * This interface describes a GraphRequest that has a parameter that needs to be
  * set by the user before it can be sent. In this case, the parameter is an

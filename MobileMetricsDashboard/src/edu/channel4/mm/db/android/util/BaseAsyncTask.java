@@ -1,12 +1,12 @@
 package edu.channel4.mm.db.android.util;
 
-import com.google.inject.Inject;
-
 import roboguice.inject.ContextSingleton;
 import roboguice.util.RoboAsyncTask;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import com.google.inject.Inject;
 
 @ContextSingleton
 public abstract class BaseAsyncTask<ResultT> extends RoboAsyncTask<ResultT> {

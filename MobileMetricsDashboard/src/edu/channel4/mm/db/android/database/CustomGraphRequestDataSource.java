@@ -3,14 +3,15 @@ package edu.channel4.mm.db.android.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.inject.Inject;
-
 import roboguice.inject.ContextSingleton;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.google.inject.Inject;
+
 import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 
