@@ -134,6 +134,9 @@ public class CustomGraphRequest extends GraphRequest implements HasAttributePara
    @Override
    public void writeToParcel(Parcel dest, int flags) {
       // Note: Parcel data is read in a FIFO manner.
+      dest.writeString(super.getTimeScope().name());
+      dest.writeInt(super.getTimeRangeStart());
+      dest.writeInt(super.getTimeRangeStop());
       dest.writeString(eventName1);
       dest.writeString(attribName1);
       dest.writeInt(iconId);
@@ -152,6 +155,9 @@ public class CustomGraphRequest extends GraphRequest implements HasAttributePara
 
    private CustomGraphRequest(Parcel in) {
       // Note: Parcel data is read in a FIFO manner.
+      super.setTimeScope(TimeScope.valueOf(in.readString()));
+      super.setTimeRangeStart(in.readInt());
+      super.setTimeRangeStop(in.readInt());
       this.eventName1 = in.readString();
       this.attribName1 = in.readString();
       this.iconId = in.readInt();
@@ -168,7 +174,7 @@ public class CustomGraphRequest extends GraphRequest implements HasAttributePara
       
       if (rangedTime) {
          params.add(new BasicNameValuePair(Keys.RANGE_START, "" + super.getTimeRangeStart()));
-         params.add(new BasicNameValuePair(Keys.RANGE_STOP, "" + super.getTimeRangeEnd()));
+         params.add(new BasicNameValuePair(Keys.RANGE_STOP, "" + super.getTimeRangeStop()));
       }
 
       return params;

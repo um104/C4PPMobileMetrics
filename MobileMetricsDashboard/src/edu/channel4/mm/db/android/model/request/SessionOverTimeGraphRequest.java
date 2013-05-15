@@ -49,7 +49,9 @@ public class SessionOverTimeGraphRequest extends GraphRequest {
    @Override
    public void writeToParcel(Parcel dest, int flags) {
       // Note: Parcel data is read in a FIFO manner.
-      dest.writeString(timeScope.name());
+      dest.writeString(super.getTimeScope().name());
+      dest.writeInt(super.getTimeRangeStart());
+      dest.writeInt(super.getTimeRangeStop());
    }
 
    public static final Parcelable.Creator<SessionOverTimeGraphRequest> CREATOR = new Parcelable.Creator<SessionOverTimeGraphRequest>() {
@@ -65,8 +67,9 @@ public class SessionOverTimeGraphRequest extends GraphRequest {
 
    private SessionOverTimeGraphRequest(Parcel in) {
       // Note: Parcel data is read in a FIFO manner.
-      String timeScopeName = in.readString();
-      this.timeScope = TimeScope.valueOf(timeScopeName);
+      super.setTimeScope(TimeScope.valueOf(in.readString()));
+      super.setTimeRangeStart(in.readInt());
+      super.setTimeRangeStop(in.readInt());
    }
 
    @Override
@@ -80,7 +83,7 @@ public class SessionOverTimeGraphRequest extends GraphRequest {
       
       if (rangedTime) {
          params.add(new BasicNameValuePair(Keys.RANGE_START, "" + super.getTimeRangeStart()));
-         params.add(new BasicNameValuePair(Keys.RANGE_STOP, "" + super.getTimeRangeEnd()));
+         params.add(new BasicNameValuePair(Keys.RANGE_STOP, "" + super.getTimeRangeStop()));
       }
       
       return params;

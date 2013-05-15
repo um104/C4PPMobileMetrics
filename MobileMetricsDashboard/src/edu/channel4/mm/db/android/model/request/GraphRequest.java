@@ -105,7 +105,7 @@ public abstract class GraphRequest implements Parcelable {
       return timeRangeStart;
    }
 
-   public int getTimeRangeEnd() {
+   public int getTimeRangeStop() {
       return timeRangeStop;
    }
    

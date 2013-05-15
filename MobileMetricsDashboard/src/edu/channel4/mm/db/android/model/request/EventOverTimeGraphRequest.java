@@ -59,7 +59,9 @@ public class EventOverTimeGraphRequest extends GraphRequest implements
    @Override
    public void writeToParcel(Parcel dest, int flags) {
       // Note: Parcel data is read in a FIFO manner
-      dest.writeString(timeScope.name());
+      dest.writeString(super.getTimeScope().name());
+      dest.writeInt(super.getTimeRangeStart());
+      dest.writeInt(super.getTimeRangeStop());
       dest.writeString(eventName);
    }
 
@@ -76,7 +78,9 @@ public class EventOverTimeGraphRequest extends GraphRequest implements
 
    private EventOverTimeGraphRequest(Parcel in) {
       // Note: Parcel data is read in a fifo manner
-      this.timeScope = TimeScope.valueOf(in.readString());
+      super.setTimeScope(TimeScope.valueOf(in.readString()));
+      super.setTimeRangeStart(in.readInt());
+      super.setTimeRangeStop(in.readInt());
       this.eventName = in.readString();
    }
 
@@ -91,7 +95,7 @@ public class EventOverTimeGraphRequest extends GraphRequest implements
       
       if (rangedTime) {
          params.add(new BasicNameValuePair(Keys.RANGE_START, "" + super.getTimeRangeStart()));
-         params.add(new BasicNameValuePair(Keys.RANGE_STOP, "" + super.getTimeRangeEnd()));
+         params.add(new BasicNameValuePair(Keys.RANGE_STOP, "" + super.getTimeRangeStop()));
       }
       
       return params;
