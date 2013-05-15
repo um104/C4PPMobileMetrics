@@ -21,6 +21,8 @@ public class EventOverTimeGraphRequest implements GraphRequest,
    private final static String REQUEST_TYPE = "Line";
    private TimeScope timeScope = TimeScope.DAY;
    private String eventName;
+   private int timeRangeStart;
+   private int timeRangeStop;
 
    public EventOverTimeGraphRequest() {
    }
@@ -33,50 +35,6 @@ public class EventOverTimeGraphRequest implements GraphRequest,
    public int getIconId() {
       return R.drawable.sessions_over_time;
    }
-
-//   @Override
-//   public URI getUri(RestClientAccess restClientManager, Context context) {
-//      URI uri = null;
-//
-//      // get some of the basic information we'll need to make the URI
-//      String instanceURL = restClientManager.getInstanceURL().toString();
-//      // Don't use getSharedPreferences(String, int) anymore.
-//      // Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
-//      // String appLabel = getApplicationContext().getSharedPreferences(
-//      // Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
-//      String appLabel = PreferenceManager.getDefaultSharedPreferences(context)
-//               .getString(Keys.APP_LABEL, null);
-//
-//      // make the URI String
-//      String uriString = "";
-//
-//      // add in all non-parameterized information onto the request
-//      uriString += String.format(SalesforceConn.CHANNEL4_REST_URL,
-//               instanceURL, GraphRequestAsyncTask.GRAPH_REQUEST_URL_SUFFIX);
-//
-//      // create a list for the URL parameters to add
-//      List<NameValuePair> params = new ArrayList<NameValuePair>();
-//
-//      params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, this.REQUEST_TYPE));
-//      params.add(new BasicNameValuePair(Keys.APP_LABEL,
-//               appLabel));
-//      params.add(new BasicNameValuePair(Keys.TIME_INTERVAL, timeInterval));
-//      params.add(new BasicNameValuePair(Keys.EVENT_NAME, eventName));
-//
-//      // add the parameters to the uriString
-//      String paramString = URLEncodedUtils.format(params, "utf-8");
-//      uriString += "?" + paramString;
-//
-//      // turn the string into a URI
-//      try {
-//         uri = new URI(uriString);
-//      }
-//      catch (URISyntaxException e) {
-//         Log.e(e.getMessage());
-//      }
-//
-//      return uri;
-//   }
 
    @Override
    public Intent constructGraphRequestIntent(Context context) {
@@ -145,6 +103,26 @@ public class EventOverTimeGraphRequest implements GraphRequest,
       params.add(new BasicNameValuePair(Keys.EVENT_NAME, eventName));
       
       return params;
+   }
+
+   @Override
+   public void setTimeRangeStart(int rangeStart) {
+      this.timeRangeStart = rangeStart;
+   }
+
+   @Override
+   public void setTimeRangeStop(int rangeStop) {
+      this.timeRangeStop = rangeStop;
+   }
+
+   @Override
+   public int getTimeRangeStart() {
+      return timeRangeStart;
+   }
+
+   @Override
+   public int getTimeRangeEnd() {
+      return timeRangeStop;
    }
 
 }

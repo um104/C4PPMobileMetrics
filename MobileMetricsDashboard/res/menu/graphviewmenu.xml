@@ -24,6 +24,9 @@
 			<item 
 			    android:id="@+id/menu_time_decade"
 			    android:title="This Decade"/>
+			<item
+			    android:id="@+id/menu_time_custom"
+			    android:title="Custom Range"/>
         </menu>
     </item>
 

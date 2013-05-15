@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import edu.channel4.mm.db.android.R;
-import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 
@@ -20,6 +19,8 @@ public class SessionOverTimeGraphRequest implements GraphRequest {
    // DO NOT CHANGE THIS STRING. APEX code relies on it!
    private final static String REQUEST_TYPE = "Line";
    private TimeScope timeScope = TimeScope.DAY;
+   private int timeRangeStart;
+   private int timeRangeStop;
 
    public SessionOverTimeGraphRequest() {
    }
@@ -91,6 +92,26 @@ public class SessionOverTimeGraphRequest implements GraphRequest {
       params.add(new BasicNameValuePair(Keys.EVENT_NAME, ""));
       
       return params;
+   }
+
+   @Override
+   public void setTimeRangeStart(int rangeStart) {
+      this.timeRangeStart = rangeStart;
+   }
+
+   @Override
+   public int getTimeRangeStart() {
+      return timeRangeStart;
+   }
+
+   @Override
+   public void setTimeRangeStop(int rangeStop) {
+      this.timeRangeStop = rangeStop;
+   }
+
+   @Override
+   public int getTimeRangeEnd() {
+      return timeRangeStop;
    }
 
 }

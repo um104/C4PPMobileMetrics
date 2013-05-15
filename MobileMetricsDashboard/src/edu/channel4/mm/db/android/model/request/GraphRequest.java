@@ -50,8 +50,11 @@ public interface GraphRequest extends Parcelable {
     * @author mlerner
     */
    public enum TimeScope {
-      DAY("Since Midnight"), /*WEEK("Since Sunday"),*/ MONTH(
-               "Since 1st of Month"), YEAR("Since Jan 1st"), DECADE("Since Jan 1st, 2013");
+      DAY("Since Midnight"),
+      /*WEEK("Since Sunday"),*/
+      MONTH("Since 1st of Month"),
+      YEAR("Since Jan 1st"),
+      DECADE("Since Jan 1st, 2013");
 
       private String displayName;
 
@@ -79,4 +82,12 @@ public interface GraphRequest extends Parcelable {
    public void setTimeScope(TimeScope scope);
    
    public TimeScope getTimeScope();
+   
+   public void setTimeRangeStart(int rangeStart);
+   
+   public int getTimeRangeStart();
+   
+   public void setTimeRangeStop(int rangeStop);
+   
+   public int getTimeRangeEnd();
 }

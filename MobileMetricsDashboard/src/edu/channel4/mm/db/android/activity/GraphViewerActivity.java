@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
@@ -99,6 +98,8 @@ public class GraphViewerActivity extends RoboActivity implements
          case R.id.menu_time_decade:
             changeTimeScope(TimeScope.DECADE);
             break;
+         case R.id.menu_time_custom:
+            Log.toastD(getApplicationContext(), "Custom Time Range Requested!");
          default:
             break;
       }

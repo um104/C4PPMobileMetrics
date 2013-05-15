@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.google.inject.Inject;
 
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.EventOverTimeGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.SessionOverTimeGraphRequest;

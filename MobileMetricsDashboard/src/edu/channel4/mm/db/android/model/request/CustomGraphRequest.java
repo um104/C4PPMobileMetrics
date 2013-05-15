@@ -22,6 +22,8 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter, 
    private String eventName1;
    private String attribName1;
    private TimeScope timeScope = TimeScope.DAY;
+   private int timeRangeStart;
+   private int timeRangeStop;
 
    /**
     * This field used to be called "isPredefined." Let's call it "readOnly"
@@ -176,6 +178,26 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter, 
       params.add(new BasicNameValuePair(Keys.TIME_SCOPE, timeScope.name()));
 
       return params;
+   }
+
+   @Override
+   public void setTimeRangeStart(int rangeStart) {
+      this.timeRangeStart = rangeStart;
+   }
+
+   @Override
+   public void setTimeRangeStop(int rangeStop) {
+      this.timeRangeStop = rangeStop;
+   }
+
+   @Override
+   public int getTimeRangeStart() {
+      return timeRangeStart;
+   }
+
+   @Override
+   public int getTimeRangeEnd() {
+      return timeRangeStop;
    }
 
 }
