@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     style="@style/MobileMetricsListItemTheme"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
 
@@ -11,16 +11,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_logo" />
 
     <TextView
         android:id="@+id/textViewGraphRequestName"
         style="@style/MobileMetricsDefaultCellText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
         android:layout_gravity="center_vertical"
-        android:text="@string/hello_world"
-         />
-    
+        android:layout_marginLeft="5dp"
+        android:text="@string/hello_world" />
+
 </LinearLayout>

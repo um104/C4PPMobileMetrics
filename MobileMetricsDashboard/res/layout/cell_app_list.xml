@@ -12,7 +12,7 @@
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/this_is_an_android_app"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_logo" />
 
     <LinearLayout
         android:layout_width="wrap_content"
