@@ -15,15 +15,12 @@ import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 
-public class CustomGraphRequest implements GraphRequest, HasAttributeParameter, HasOverTimeParameter {
+public class CustomGraphRequest extends GraphRequest implements HasAttributeParameter, HasOverTimeParameter {
    
    // DO NOT CHANGE THIS STRING. APEX code relies on it!
    private final static String REQUEST_TYPE = "Custom";
    private String eventName1;
    private String attribName1;
-   private TimeScope timeScope = TimeScope.DAY;
-   private int timeRangeStart;
-   private int timeRangeStop;
 
    /**
     * This field used to be called "isPredefined." Let's call it "readOnly"
@@ -127,14 +124,6 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter, 
       return attribName1;
    }
    
-   public void setTimeScope(TimeScope scope) {
-      this.timeScope = scope;
-   }
-   
-   public TimeScope getTimeScope() {
-      return this.timeScope;
-   }
-
    /* Everything from here down is for implementing the Parcelable interface */
    @Override
    public int describeContents() {
@@ -176,28 +165,13 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter, 
       params.add(new BasicNameValuePair(Keys.ATTRIB_NAME, attribName1));
       params.add(new BasicNameValuePair(Keys.EVENT_NAME, eventName1));
       params.add(new BasicNameValuePair(Keys.TIME_SCOPE, timeScope.name()));
+      
+      if (rangedTime) {
+         params.add(new BasicNameValuePair(Keys.RANGE_START, "" + super.getTimeRangeStart()));
+         params.add(new BasicNameValuePair(Keys.RANGE_STOP, "" + super.getTimeRangeEnd()));
+      }
 
       return params;
-   }
-
-   @Override
-   public void setTimeRangeStart(int rangeStart) {
-      this.timeRangeStart = rangeStart;
-   }
-
-   @Override
-   public void setTimeRangeStop(int rangeStop) {
-      this.timeRangeStop = rangeStop;
-   }
-
-   @Override
-   public int getTimeRangeStart() {
-      return timeRangeStart;
-   }
-
-   @Override
-   public int getTimeRangeEnd() {
-      return timeRangeStop;
    }
 
 }

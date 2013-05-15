@@ -14,15 +14,12 @@ import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
 import edu.channel4.mm.db.android.util.Keys;
 
-public class EventOverTimeGraphRequest implements GraphRequest,
+public class EventOverTimeGraphRequest extends GraphRequest implements
          HasEventNameParameter, HasOverTimeParameter {
 
    // DO NOT CHANGE THIS STRING. APEX code relies on it!
    private final static String REQUEST_TYPE = "Line";
-   private TimeScope timeScope = TimeScope.DAY;
    private String eventName;
-   private int timeRangeStart;
-   private int timeRangeStop;
 
    public EventOverTimeGraphRequest() {
    }
@@ -52,16 +49,6 @@ public class EventOverTimeGraphRequest implements GraphRequest,
    @Override
    public String getEventName() {
       return eventName;
-   }
-
-   @Override
-   public void setTimeScope(TimeScope timeScope) {
-      this.timeScope = timeScope;
-   }
-
-   @Override
-   public TimeScope getTimeScope() {
-      return timeScope;
    }
 
    @Override
@@ -102,27 +89,12 @@ public class EventOverTimeGraphRequest implements GraphRequest,
       params.add(new BasicNameValuePair(Keys.TIME_SCOPE, timeScope.name()));
       params.add(new BasicNameValuePair(Keys.EVENT_NAME, eventName));
       
+      if (rangedTime) {
+         params.add(new BasicNameValuePair(Keys.RANGE_START, "" + super.getTimeRangeStart()));
+         params.add(new BasicNameValuePair(Keys.RANGE_STOP, "" + super.getTimeRangeEnd()));
+      }
+      
       return params;
-   }
-
-   @Override
-   public void setTimeRangeStart(int rangeStart) {
-      this.timeRangeStart = rangeStart;
-   }
-
-   @Override
-   public void setTimeRangeStop(int rangeStop) {
-      this.timeRangeStop = rangeStop;
-   }
-
-   @Override
-   public int getTimeRangeStart() {
-      return timeRangeStart;
-   }
-
-   @Override
-   public int getTimeRangeEnd() {
-      return timeRangeStop;
    }
 
 }

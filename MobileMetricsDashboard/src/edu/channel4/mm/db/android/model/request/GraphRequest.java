@@ -11,20 +11,25 @@ import android.os.Parcelable;
 import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 
-public interface GraphRequest extends Parcelable {
+public abstract class GraphRequest implements Parcelable {
+   
+   protected TimeScope timeScope = TimeScope.DAY;
+   protected boolean rangedTime = false;
+   protected int timeRangeStart;
+   protected int timeRangeStop;
 
    /**
     * Pretty print.
     */
    @Override
-   public String toString();
+   public abstract String toString();
 
    /**
     * @return Android resource id for the icon
     */
-   public int getIconId();
+   public abstract int getIconId();
    
-   public List<NameValuePair> getAdditionalUriParameters();
+   public abstract List<NameValuePair> getAdditionalUriParameters();
 
    /**
     * Constructs the correct Intent for a given GraphRequest. The Intent will
@@ -42,7 +47,7 @@ public interface GraphRequest extends Parcelable {
     * @param graphRequest
     * @return
     */
-   public Intent constructGraphRequestIntent(Context context);
+   public abstract Intent constructGraphRequestIntent(Context context);
 
    /**
     * Enum for any events that implement HasOverTimeParameter.
@@ -79,15 +84,37 @@ public interface GraphRequest extends Parcelable {
       }
    }
    
-   public void setTimeScope(TimeScope scope);
+   /**
+    * Set this to true if the graph request is using a ranged time interval
+    * as opposed to just querying the entire timeScope table
+    * @param rangedTime
+    */
+   public void setRangedTime(boolean rangedTime) {
+      this.rangedTime = rangedTime;
+   }
    
-   public TimeScope getTimeScope();
+   public void setTimeRangeStart(int rangeStart) {
+      this.timeRangeStart = rangeStart;
+   }
+
+   public void setTimeRangeStop(int rangeStop) {
+      this.timeRangeStop = rangeStop;
+   }
+
+   public int getTimeRangeStart() {
+      return timeRangeStart;
+   }
+
+   public int getTimeRangeEnd() {
+      return timeRangeStop;
+   }
    
-   public void setTimeRangeStart(int rangeStart);
+   public void setTimeScope(TimeScope scope) {
+      this.timeScope = scope;
+   }
    
-   public int getTimeRangeStart();
-   
-   public void setTimeRangeStop(int rangeStop);
-   
-   public int getTimeRangeEnd();
+   public TimeScope getTimeScope() {
+      return this.timeScope;
+   }
+
 }

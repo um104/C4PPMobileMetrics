@@ -14,13 +14,10 @@ import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 
-public class SessionOverTimeGraphRequest implements GraphRequest {
+public class SessionOverTimeGraphRequest extends GraphRequest {
 
    // DO NOT CHANGE THIS STRING. APEX code relies on it!
    private final static String REQUEST_TYPE = "Line";
-   private TimeScope timeScope = TimeScope.DAY;
-   private int timeRangeStart;
-   private int timeRangeStop;
 
    public SessionOverTimeGraphRequest() {
    }
@@ -42,16 +39,6 @@ public class SessionOverTimeGraphRequest implements GraphRequest {
       return intent;
    }
    
-   @Override
-   public void setTimeScope(TimeScope scope) {
-      this.timeScope = scope;      
-   }
-
-   @Override
-   public TimeScope getTimeScope() {
-      return this.timeScope;
-   }
-
    /* Everything from here down is for implementing the Parcelable interface */
    @Override
    public int describeContents() {
@@ -91,27 +78,11 @@ public class SessionOverTimeGraphRequest implements GraphRequest {
       params.add(new BasicNameValuePair(Keys.TIME_SCOPE, timeScope.name()));
       params.add(new BasicNameValuePair(Keys.EVENT_NAME, ""));
       
+      if (rangedTime) {
+         params.add(new BasicNameValuePair(Keys.RANGE_START, "" + super.getTimeRangeStart()));
+         params.add(new BasicNameValuePair(Keys.RANGE_STOP, "" + super.getTimeRangeEnd()));
+      }
+      
       return params;
    }
-
-   @Override
-   public void setTimeRangeStart(int rangeStart) {
-      this.timeRangeStart = rangeStart;
-   }
-
-   @Override
-   public int getTimeRangeStart() {
-      return timeRangeStart;
-   }
-
-   @Override
-   public void setTimeRangeStop(int rangeStop) {
-      this.timeRangeStop = rangeStop;
-   }
-
-   @Override
-   public int getTimeRangeEnd() {
-      return timeRangeStop;
-   }
-
 }
