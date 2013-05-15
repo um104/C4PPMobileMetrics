@@ -3,7 +3,6 @@ package edu.channel4.mm.db.android.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
@@ -32,10 +31,11 @@ import edu.channel4.mm.db.android.model.request.HasAttributeParameter;
 import edu.channel4.mm.db.android.model.request.HasEventNameParameter;
 import edu.channel4.mm.db.android.model.request.HasOverTimeParameter;
 import edu.channel4.mm.db.android.network.SalesforceConn;
+import edu.channel4.mm.db.android.util.BaseActivity;
 import edu.channel4.mm.db.android.util.Keys;
 
 @ContentView(R.layout.activity_edit_graph_request)
-public class EditGraphRequestActivity extends RoboActivity implements
+public class EditGraphRequestActivity extends BaseActivity implements
          EventDescriptionCallback, EventNameDescriptionCallback {
 
    @InjectExtra(Keys.GRAPH_REQUEST_EXTRA) private GraphRequest graphRequest;
@@ -61,9 +61,9 @@ public class EditGraphRequestActivity extends RoboActivity implements
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      
-      // Hide the action bar 
-      getActionBar().hide();
+
+      // Enable the "Up" button.
+      getActionBar().setDisplayHomeAsUpEnabled(true);
 
       // Set the activity's title
       setTitle(graphRequest.toString());
@@ -167,8 +167,7 @@ public class EditGraphRequestActivity extends RoboActivity implements
       if (graphRequest instanceof HasOverTimeParameter) {
          // retrieve selected time from durationSpinner, put in graphRequest
          int selectedItemPosition = durationSpinner.getSelectedItemPosition();
-         TimeScope timeScope = durationAdapter
-                  .getItem(selectedItemPosition);
+         TimeScope timeScope = durationAdapter.getItem(selectedItemPosition);
          graphRequest.setTimeScope(timeScope);
       }
       if (graphRequest instanceof HasEventNameParameter) {

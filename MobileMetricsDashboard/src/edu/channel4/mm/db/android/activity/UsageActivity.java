@@ -2,7 +2,6 @@ package edu.channel4.mm.db.android.activity;
 
 import java.util.ArrayList;
 
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.inject.Inject;
 
@@ -22,15 +20,15 @@ import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.EventOverTimeGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.SessionOverTimeGraphRequest;
+import edu.channel4.mm.db.android.util.BaseActivity;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 import edu.channel4.mm.db.android.view.GraphRequestArrayAdapter;
 
 @ContentView(R.layout.activity_usage)
-public class UsageActivity extends RoboActivity {
+public class UsageActivity extends BaseActivity {
 
    @InjectView(R.id.listviewUsageActivity) private ListView listView;
-   @InjectView(R.id.usageHeader) private TextView textViewUsageHeader;
    @InjectResource(R.string.usage) private String activityTitle;
    @Inject private ArrayList<GraphRequest> graphRequests;
    @Inject private SharedPreferences prefs;
@@ -39,14 +37,13 @@ public class UsageActivity extends RoboActivity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      
-      // Hide the action bar 
-      getActionBar().hide();
+
+      // Enable the "Up" button.
+      getActionBar().setDisplayHomeAsUpEnabled(true);
 
       // Set the activity's titles
       String appLabel = prefs.getString(Keys.APP_LABEL, null);
-      textViewUsageHeader.setText(appLabel);
-      setTitle(activityTitle);
+      setTitle(appLabel + ": " + activityTitle);
 
       listView.setOnItemClickListener(new OnItemClickListener() {
          @Override

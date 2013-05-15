@@ -6,17 +6,6 @@
     android:orientation="vertical"
     tools:context=".AboutActivity" >
 
-    <TextView
-        style="@style/MobileMetricsDefaultHeaderText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:text="@string/developers"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="24sp" />
-
     <ListView
         android:id="@+id/listViewDeveloperNames"
         style="@style/MobileMetricsListViewTheme"

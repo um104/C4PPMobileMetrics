@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -51,8 +53,10 @@ public class AppListActivity extends NativeMainActivity implements
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      
-      // Hide the action bar 
+
+      setTitle("Select an app");
+
+      // Hide the ActionBar until Salesforce is done loading in their onResume()
       getActionBar().hide();
 
       // Initialize Adapter
@@ -67,9 +71,9 @@ public class AppListActivity extends NativeMainActivity implements
                   int position, long id) {
             // Save the chosen App Label
             SharedPreferences.Editor editor = prefs.edit();
-            
+
             AppDescription appDescription = appList.get(position);
-            
+
             editor.putString(Keys.APP_LABEL, appDescription.getAppName());
             editor.putString(Keys.ID, appDescription.getAppId());
             editor.commit();
@@ -80,6 +84,12 @@ public class AppListActivity extends NativeMainActivity implements
             startActivity(intent);
          }
       });
+   }
+
+   @Override
+   public boolean onCreateOptionsMenu(Menu menu) {
+      getMenuInflater().inflate(R.menu.activity_app_list, menu);
+      return true;
    }
 
    private class AppDataArrayAdapater extends BaseArrayAdapter<AppDescription> {
@@ -122,11 +132,14 @@ public class AppListActivity extends NativeMainActivity implements
    @Override
    public void onResume(RestClient client) {
       // Save a reference to the rest client for use throughout the app
-//      RestClientAccess.getInstance().setRestClient(client);
+      // RestClientAccess.getInstance().setRestClient(client);
       restClientAccess.setRestClient(client);
 
       // Show everything now that the Salesforce WebView has passed.
       rootView.setVisibility(View.VISIBLE);
+
+      // Show the ActionBar now that Salesforce is done loading.
+      getActionBar().show();
 
       // Asynchronously retrieve the app list from Salesforce
       getAppList(null);
@@ -147,12 +160,14 @@ public class AppListActivity extends NativeMainActivity implements
       sfConn.getAppListViaNetwork(this);
    }
 
-   public void about(View v) {
+   public boolean showAboutActivity(MenuItem item) {
       startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+      return true;
    }
 
-   public void logout(View v) {
+   public boolean logout(MenuItem item) {
       ForceApp.APP.logout(this);
+      return true;
    }
 
    @Override

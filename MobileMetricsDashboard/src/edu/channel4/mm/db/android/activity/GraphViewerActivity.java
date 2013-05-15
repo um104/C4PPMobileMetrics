@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.achartengine.GraphicalView;
 
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
@@ -26,6 +25,7 @@ import edu.channel4.mm.db.android.model.graph.GraphFactory;
 import edu.channel4.mm.db.android.model.graph.GraphType;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest.TimeScope;
+import edu.channel4.mm.db.android.util.BaseActivity;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 
@@ -35,7 +35,7 @@ import edu.channel4.mm.db.android.util.Log;
  * @author girum
  */
 @ContentView(R.layout.activity_graph_viewer)
-public class GraphViewerActivity extends RoboActivity implements
+public class GraphViewerActivity extends BaseActivity implements
          GraphLoadCallback {
 
    @InjectExtra(Keys.GRAPH_REQUEST_EXTRA) private GraphRequest graphRequest;
@@ -55,27 +55,28 @@ public class GraphViewerActivity extends RoboActivity implements
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      actionBar = getActionBar();
-      actionBar.hide();
+
+      // Enable the "Up" button.
+      getActionBar().setDisplayHomeAsUpEnabled(true);
       currentScope = graphRequest.getTimeScope();
-      graphFactory.getGraph(graphRequest, this);      
+      graphFactory.getGraph(graphRequest, this);
    }
 
    @Override
    protected void onResume() {
       super.onResume();
    }
-   
+
    @Override
    public boolean onCreateOptionsMenu(Menu menu) {
       MenuInflater inflater = getMenuInflater();
       inflater.inflate(R.menu.graphviewmenu, menu);
-      
+
       this.menu = menu;
-      
+
       MenuItem item = menu.findItem(R.id.menu_time_day);
       item.setChecked(true);
-      
+
       return super.onCreateOptionsMenu(menu);
    }
 
@@ -106,63 +107,65 @@ public class GraphViewerActivity extends RoboActivity implements
 
       return super.onOptionsItemSelected(item);
    }
-   
+
    private void switchGraphTypeViewed() {
       if (currentType == GraphType.BAR) {
          currentType = GraphType.PIE;
-      } else {
+      }
+      else {
          currentType = GraphType.BAR;
       }
-      
-      GraphicalView tempView = graph.getView(currentType, getApplicationContext());
+
+      GraphicalView tempView = graph.getView(currentType,
+               getApplicationContext());
       if (tempView != null) {
          graphViewFrame.removeAllViews();
          graphView = tempView;
          graphViewFrame.addView(graphView);
          graphView.repaint();
-         
+
          setSwitchText();
       }
       else {
-         Log.d("Null GraphicalView " + currentType.name() + " tried to be displayed");
+         Log.d("Null GraphicalView " + currentType.name()
+                  + " tried to be displayed");
       }
-      
+
       // TODO: Switch the icon displayed on the action bar
    }
-   
+
    private void changeTimeScope(TimeScope scope) {
       // if the scope selected is different than the current scope
       if (scope != currentScope) {
          // change scope of graphRequest
          graphRequest.setTimeScope(scope);
-         
+
          // change current scope
          currentScope = scope;
-         
+
          // hide action bar
          actionBar.hide();
-         
+
          // placeholder visibility set to GONE
          graphViewFrame.setVisibility(View.GONE);
-         
+
          // show progress bar
          progressBar.setVisibility(View.VISIBLE);
-         
+
          // start the request for the graph again
          graphFactory.getGraph(graphRequest, this);
       }
    }
-   
+
    private void setSwitchText() {
       // Set the "Switch Graph Type" button to display proper text
       String switchText = "Switch to ";
       switchText += (currentType == GraphType.BAR) ? "Pie" : "Bar";
-      
+
       MenuItem item = menu.findItem(R.id.menu_switch_graph_type);
       item.setTitle(switchText);
    }
 
-   
    @Override
    public void onGraphLoaded(Graph graph) {
       Log.i("Graph loaded: " + graph.getTitle());
@@ -171,7 +174,7 @@ public class GraphViewerActivity extends RoboActivity implements
       // Fill up the validGraphTypes array
       validGraphTypes.clear();
       validGraphTypes.addAll(graph.getValidGraphTypes());
-      
+
       // choose a default graphType
       currentType = validGraphTypes.get(0);
       if (validGraphTypes.size() > 1) {
@@ -186,20 +189,22 @@ public class GraphViewerActivity extends RoboActivity implements
       graphViewFrame.removeAllViews();
       graphViewFrame.setVisibility(View.VISIBLE);
       graphViewFrame.addView(graphView);
-      
+
       // set the action bar title, graph type, and scope
       actionBar.show();
       actionBar.setTitle(graph.getTitle());
-      
+
       if (validGraphTypes.size() == 1) { // It's a line graph
-         // TODO: display the icon of the currently displayed type on the action bar
+         // TODO: display the icon of the currently displayed type on the action
+         // bar
          // disable the "Switch Graph Type" button
          MenuItem item = menu.findItem(R.id.menu_switch_graph_type);
          item.setVisible(false);
          item.setEnabled(false);
       }
       else {
-         // TODO: display the icon of the currently displayed type on the action bar
+         // TODO: display the icon of the currently displayed type on the action
+         // bar
 
          setSwitchText();
       }

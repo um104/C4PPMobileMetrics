@@ -10,18 +10,7 @@
         style="@style/MobileMetricsListViewTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/audienceHeader"
         android:cacheColorHint="#00000000" >
     </ListView>
-
-    <TextView
-        android:id="@+id/audienceHeader"
-        style="@style/MobileMetricsDefaultHeaderText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:text="@string/defaultAppName" />
 
 </RelativeLayout>

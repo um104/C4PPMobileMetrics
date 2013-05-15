@@ -50,6 +50,8 @@ class GetAppListAsyncTask extends BaseGetRequestAsyncTask<List<AppDescription>> 
    @Override
    protected void onException(Exception e) {
       Log.toastE(context, e.getMessage());
+      
+      callback.onAppDescriptionChanged(null);
    }
 
    @Override

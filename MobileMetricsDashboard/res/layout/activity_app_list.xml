@@ -14,24 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" >
-
-        <Button
-            android:id="@+id/buttonAbout"
-            style="@style/MobileMetricsDefaultButton"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:onClick="about"
-            android:text="@string/about" />
-
-        <Button
-            android:id="@+id/buttonLogOut"
-            style="@style/MobileMetricsDefaultButton"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:onClick="logout"
-            android:text="@string/logout" />
     </RelativeLayout>
 
     <ListView
@@ -41,20 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottomRelativeLayout"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewSelectApp"
         android:cacheColorHint="#00000000" >
     </ListView>
-
-    <TextView
-        android:id="@+id/textViewSelectApp"
-        style="@style/MobileMetricsDefaultHeaderText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="center_horizontal"
-        android:paddingLeft="-10dp"
-        android:paddingRight="-10dp"
-        android:text="@string/select_app" />
 
     <ProgressBar
         android:id="@+id/progressBarAppList"

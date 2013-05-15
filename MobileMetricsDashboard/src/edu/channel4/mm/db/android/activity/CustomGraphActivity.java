@@ -3,7 +3,6 @@ package edu.channel4.mm.db.android.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.content.Intent;
@@ -20,12 +19,13 @@ import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.database.Database;
 import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
+import edu.channel4.mm.db.android.util.BaseActivity;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
 import edu.channel4.mm.db.android.view.GraphRequestArrayAdapter;
 
 @ContentView(R.layout.activity_custom_graph)
-public class CustomGraphActivity extends RoboActivity {
+public class CustomGraphActivity extends BaseActivity {
 
    @InjectView(R.id.listViewCustomGraphActivity) private ListView listView;
    @Inject private Database database; // singleton
@@ -36,9 +36,11 @@ public class CustomGraphActivity extends RoboActivity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      
-      // Hide the action bar 
-      getActionBar().hide();
+
+      // Enable the "Up" button.
+      getActionBar().setDisplayHomeAsUpEnabled(true);
+
+      setTitle("Custom Graphs");
 
       // Setup the ListView
       listView.setEmptyView(findViewById(R.id.textViewNoCustomGraphs));

@@ -3,7 +3,6 @@ package edu.channel4.mm.db.android.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.content.Context;
@@ -20,14 +19,14 @@ import android.widget.TextView;
 import com.google.inject.Inject;
 
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.util.BaseActivity;
 import edu.channel4.mm.db.android.util.BaseArrayAdapter;
 import edu.channel4.mm.db.android.util.Keys;
 
 @ContentView(R.layout.activity_dashboard)
-public class DashboardActivity extends RoboActivity {
+public class DashboardActivity extends BaseActivity {
 
    @InjectView(R.id.listViewDashboard) private ListView listView;
-   @InjectView(R.id.dashboardHeader) private TextView textViewDashboardHeader;
    @Inject SharedPreferences prefs;
    private DashboardArrayAdapter adapter;
    protected ArrayList<Subactivity> subactivityDetails;
@@ -35,16 +34,15 @@ public class DashboardActivity extends RoboActivity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      
-      // Hide the action bar 
-      getActionBar().hide();
+
+      // Enable the "Up" button.
+      getActionBar().setDisplayHomeAsUpEnabled(true);
 
       // Load up the SubactivityDetails array
       subactivityDetails = getSubactivityDetails();
 
       // Set the titles of the activity
       String appLabel = prefs.getString(Keys.APP_LABEL, null);
-      textViewDashboardHeader.setText(appLabel);
       setTitle(appLabel);
 
       // Setup the ListView

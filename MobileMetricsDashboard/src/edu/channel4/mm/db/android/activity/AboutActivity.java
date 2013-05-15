@@ -1,6 +1,5 @@
 package edu.channel4.mm.db.android.activity;
 
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -10,10 +9,11 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.channel4.mm.db.android.R;
+import edu.channel4.mm.db.android.util.BaseActivity;
 import edu.channel4.mm.db.android.util.BaseArrayAdapter;
 
 @ContentView(R.layout.activity_about)
-public class AboutActivity extends RoboActivity {
+public class AboutActivity extends BaseActivity {
 
    @InjectView(R.id.listViewDeveloperNames) private ListView listViewDeveloperNames;
    @InjectResource(R.array.developer_names) private String[] developerNames;
@@ -21,9 +21,11 @@ public class AboutActivity extends RoboActivity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      
-      // Hide the action bar 
-      getActionBar().hide();
+
+      // Enable the "Up" button.
+      getActionBar().setDisplayHomeAsUpEnabled(true);
+
+      setTitle("Developers");
 
       // Set the list view's adapter to be our custom array adapter
       listViewDeveloperNames.setAdapter(new AboutArrayAdapter(
