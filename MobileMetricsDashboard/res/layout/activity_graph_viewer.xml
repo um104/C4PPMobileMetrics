@@ -3,7 +3,8 @@
     style="@style/MobileMetricsTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GraphViewerActivity" >
+    tools:context=".GraphViewerActivity" 
+    android:padding="0dp">
 
     <ProgressBar
         android:id="@+id/progressBarGraphViewer"
@@ -12,36 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
-
-    <Spinner
-        android:id="@+id/spinnerGraphViewer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/textViewGraphViewerTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/MobileMetricsDefaultHeaderText"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/choose_a_chart_type"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/buttonOK"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        style="@style/MobileMetricsDefaultButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:onClick="loadGraph"
-        android:text="@string/ok"
-        android:visibility="gone" />
+    
+    <FrameLayout
+        android:id="@+id/graphViewFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" >
+        
+    </FrameLayout>
 
 </RelativeLayout>

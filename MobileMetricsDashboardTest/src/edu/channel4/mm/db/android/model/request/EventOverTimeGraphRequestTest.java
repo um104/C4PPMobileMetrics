@@ -6,13 +6,15 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import edu.channel4.mm.db.android.model.request.GraphRequest.TimeScope;
+
 import junit.framework.TestCase;
 
 public class EventOverTimeGraphRequestTest extends TestCase {
 
     EventOverTimeGraphRequest eotgr;
     String requestType;
-    String timeInterval;
+    TimeScope timeScope;
     String eventName;
     
     protected void setUp() throws Exception {
@@ -21,10 +23,10 @@ public class EventOverTimeGraphRequestTest extends TestCase {
         eotgr = new EventOverTimeGraphRequest();
         
         requestType = "EVENT_OVER_TIME";
-        timeInterval = "12";
+        timeScope = TimeScope.DAY;
         eventName = "Level up";
         
-        eotgr.setTimeInterval(timeInterval);
+        eotgr.setTimeScope(timeScope);
         eotgr.setEventName(eventName);
     }
    
@@ -36,7 +38,7 @@ public class EventOverTimeGraphRequestTest extends TestCase {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
 
         params.add(new BasicNameValuePair("requestType", "EVENT_OVER_TIME"));
-        params.add(new BasicNameValuePair("timeInterval", "12"));
+        params.add(new BasicNameValuePair("timeScope", "DAY"));
         params.add(new BasicNameValuePair("eventName", "Level up"));
         
         assertEquals(params, eotgr.getAdditionalUriParameters());

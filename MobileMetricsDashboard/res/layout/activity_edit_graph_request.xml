@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/event_1_"
+                android:text="@string/event1"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner

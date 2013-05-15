@@ -27,7 +27,7 @@ import edu.channel4.mm.db.android.model.description.EventDescription;
 import edu.channel4.mm.db.android.model.description.EventNameDescription;
 import edu.channel4.mm.db.android.model.request.CustomGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
-import edu.channel4.mm.db.android.model.request.GraphRequest.TimeInterval;
+import edu.channel4.mm.db.android.model.request.GraphRequest.TimeScope;
 import edu.channel4.mm.db.android.model.request.HasAttributeParameter;
 import edu.channel4.mm.db.android.model.request.HasEventNameParameter;
 import edu.channel4.mm.db.android.model.request.HasOverTimeParameter;
@@ -43,7 +43,7 @@ public class EditGraphRequestActivity extends RoboActivity implements
    @Inject private Database tempoDatabase; // singleton
    @Inject private SharedPreferences prefs;
 
-   private ArrayAdapter<GraphRequest.TimeInterval> durationAdapter;
+   private ArrayAdapter<GraphRequest.TimeScope> durationAdapter;
    private ArrayAdapter<EventNameDescription> eventNameAdapter;
    private ArrayAdapter<EventDescription> eventAdapter;
    private ArrayAdapter<AttributeDescription> attributeAdapter;
@@ -61,6 +61,9 @@ public class EditGraphRequestActivity extends RoboActivity implements
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+      
+      // Hide the action bar 
+      getActionBar().hide();
 
       // Set the activity's title
       setTitle(graphRequest.toString());
@@ -76,9 +79,9 @@ public class EditGraphRequestActivity extends RoboActivity implements
          durationGroup.setVisibility(View.VISIBLE);
 
          // fill the adapter with different possible time values
-         durationAdapter = new ArrayAdapter<GraphRequest.TimeInterval>(
+         durationAdapter = new ArrayAdapter<GraphRequest.TimeScope>(
                   getApplicationContext(), R.layout.cell_dropdown_item,
-                  GraphRequest.TimeInterval.values());
+                  GraphRequest.TimeScope.values());
 
          // TODO: make a new layout that works better for the dropdown part
          // set the layout for displaying options
@@ -164,10 +167,9 @@ public class EditGraphRequestActivity extends RoboActivity implements
       if (graphRequest instanceof HasOverTimeParameter) {
          // retrieve selected time from durationSpinner, put in graphRequest
          int selectedItemPosition = durationSpinner.getSelectedItemPosition();
-         TimeInterval timeInterval = durationAdapter
+         TimeScope timeScope = durationAdapter
                   .getItem(selectedItemPosition);
-         ((HasOverTimeParameter) graphRequest).setTimeInterval(timeInterval
-                  .name());
+         graphRequest.setTimeScope(timeScope);
       }
       if (graphRequest instanceof HasEventNameParameter) {
          // retrieve selected event from event1Spinner, put in graphRequest

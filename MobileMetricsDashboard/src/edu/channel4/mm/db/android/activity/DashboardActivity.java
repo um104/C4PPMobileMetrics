@@ -35,6 +35,9 @@ public class DashboardActivity extends RoboActivity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+      
+      // Hide the action bar 
+      getActionBar().hide();
 
       // Load up the SubactivityDetails array
       subactivityDetails = getSubactivityDetails();

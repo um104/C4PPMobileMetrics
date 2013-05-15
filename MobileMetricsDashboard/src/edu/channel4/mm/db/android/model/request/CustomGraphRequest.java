@@ -15,12 +15,13 @@ import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
 import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 
-public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
+public class CustomGraphRequest implements GraphRequest, HasAttributeParameter, HasOverTimeParameter {
    
    // DO NOT CHANGE THIS STRING. APEX code relies on it!
    private final static String REQUEST_TYPE = "Custom";
    private String eventName1;
    private String attribName1;
+   private TimeScope timeScope = TimeScope.DAY;
 
    /**
     * This field used to be called "isPredefined." Let's call it "readOnly"
@@ -123,6 +124,14 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
    public String getAttributeName() {
       return attribName1;
    }
+   
+   public void setTimeScope(TimeScope scope) {
+      this.timeScope = scope;
+   }
+   
+   public TimeScope getTimeScope() {
+      return this.timeScope;
+   }
 
    /* Everything from here down is for implementing the Parcelable interface */
    @Override
@@ -162,8 +171,9 @@ public class CustomGraphRequest implements GraphRequest, HasAttributeParameter {
       List<NameValuePair> params = new ArrayList<NameValuePair>();
 
       params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, REQUEST_TYPE));
-      params.add(new BasicNameValuePair(Keys.ATTRIB_NAME_1, attribName1));
-      params.add(new BasicNameValuePair(Keys.EVENT_NAME_1, eventName1));
+      params.add(new BasicNameValuePair(Keys.ATTRIB_NAME, attribName1));
+      params.add(new BasicNameValuePair(Keys.EVENT_NAME, eventName1));
+      params.add(new BasicNameValuePair(Keys.TIME_SCOPE, timeScope.name()));
 
       return params;
    }

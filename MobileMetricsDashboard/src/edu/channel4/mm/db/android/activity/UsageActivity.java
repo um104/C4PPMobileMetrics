@@ -20,7 +20,6 @@ import com.google.inject.Inject;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.model.request.EventOverTimeGraphRequest;
 import edu.channel4.mm.db.android.model.request.GraphRequest;
-import edu.channel4.mm.db.android.model.request.SessionLengthGraphRequest;
 import edu.channel4.mm.db.android.model.request.SessionOverTimeGraphRequest;
 import edu.channel4.mm.db.android.util.Keys;
 import edu.channel4.mm.db.android.util.Log;
@@ -39,6 +38,9 @@ public class UsageActivity extends RoboActivity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+      
+      // Hide the action bar 
+      getActionBar().hide();
 
       // Set the activity's titles
       String appLabel = prefs.getString(Keys.APP_LABEL, null);
@@ -82,6 +84,6 @@ public class UsageActivity extends RoboActivity {
    private void fillGraphRequests() {
       graphRequests.add(new SessionOverTimeGraphRequest());
       graphRequests.add(new EventOverTimeGraphRequest());
-      graphRequests.add(new SessionLengthGraphRequest());
+      graphRequests.add(new CustomGraphRequest("Session Length", "", "sessionLengthSecons", R.drawable.ic_launcher));
    }
 }

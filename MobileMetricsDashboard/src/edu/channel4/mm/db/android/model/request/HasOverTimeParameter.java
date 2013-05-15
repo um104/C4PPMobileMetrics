@@ -19,8 +19,8 @@ public interface HasOverTimeParameter {
     * 
     * @param time
     */
-   public void setTimeInterval(String time);
+   /*public void setTimeInterval(String time);
 
-   public String getTimeInterval();
+   public String getTimeInterval();*/
 
 }

@@ -23,15 +23,6 @@ public interface GraphRequest extends Parcelable {
     * @return Android resource id for the icon
     */
    public int getIconId();
-
-//   /**
-//    * Consolidate GraphRequest URI logic into a single method. Sanity-check it
-//    * by putting it through {@link URI} for validity.
-//    * 
-//    * @param context
-//    * @return
-//    */
-//   public URI getUri(RestClientAccess restClientManager, Context context);
    
    public List<NameValuePair> getAdditionalUriParameters();
 
@@ -58,13 +49,13 @@ public interface GraphRequest extends Parcelable {
     * 
     * @author mlerner
     */
-   public enum TimeInterval {
-      DAY("From the last day"), WEEK("From the last week"), MONTH(
-               "From the last month"), /*YEAR("From the last year")*/;
+   public enum TimeScope {
+      DAY("Since Midnight"), /*WEEK("Since Sunday"),*/ MONTH(
+               "Since 1st of Month"), YEAR("Since Jan 1st"), DECADE("Since Jan 1st, 2013");
 
       private String displayName;
 
-      private TimeInterval(String displayName) {
+      private TimeScope(String displayName) {
          this.displayName = displayName;
       }
 
@@ -75,8 +66,8 @@ public interface GraphRequest extends Parcelable {
 
       public static List<String> getStringArray() {
          List<String> startTimes = new ArrayList<String>(
-                  GraphRequest.TimeInterval.values().length);
-         for (GraphRequest.TimeInterval startTime : GraphRequest.TimeInterval
+                  GraphRequest.TimeScope.values().length);
+         for (GraphRequest.TimeScope startTime : GraphRequest.TimeScope
                   .values()) {
             startTimes.add(startTime.toString());
          }
@@ -84,4 +75,8 @@ public interface GraphRequest extends Parcelable {
          return startTimes;
       }
    }
+   
+   public void setTimeScope(TimeScope scope);
+   
+   public TimeScope getTimeScope();
 }

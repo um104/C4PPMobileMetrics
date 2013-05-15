@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
 import org.achartengine.chart.BarChart.Type;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
@@ -23,7 +24,24 @@ import com.google.visualization.datasource.datatable.value.TextValue;
 
 public class BarGraph {
 
-   /*package*/ static Intent getBarGraphIntent(Context context, DataTable datatable) {
+   /* package */static GraphicalView getBarGraphView(Context context,
+            DataTable datatable) {
+      GraphicalView view = null;
+
+      view = (GraphicalView) getIntentOrView(context, datatable, false);
+      
+      return view;
+   }
+
+   /**
+    * TODO: THIS NEEDS TO CHANGE. IT'S A TERRIBLE IDEA, I JUST CAN'T THINK OF A BETTER ONE.
+    * mlerner
+    * 
+    * @param context
+    * @param datatable
+    * @param isIntent
+    */
+   private static Object getIntentOrView (Context context, DataTable datatable, boolean isIntent) {
       String[] titles = new String[] {"Count"};
       List<double[]> values = new ArrayList<double[]>();
       List<String> categories = new ArrayList<String>();
@@ -31,7 +49,70 @@ public class BarGraph {
       int xmax = 0;
       double ymax = 0;
 
-      double[] firstVals = new double[20];
+      double[] firstVals = new double[20]; // TODO: should this be
+                                           // datatable.getRows().size()?
+
+      for (TableRow tableRow : datatable.getRows()) {
+         // FIXME: Hack that assumes that column 0 is string and column 1 is
+         // number
+         String category = ((TextValue) tableRow.getCell(0).getValue())
+                  .getValue();
+         Double value = ((NumberValue) tableRow.getCell(1).getValue())
+                  .getValue();
+         if (value > ymax) {
+            ymax = value;
+         }
+
+         firstVals[xmax] = value;
+         categories.add(category);
+         xmax++;
+      }
+
+      values.add(firstVals);
+
+      int[] colors = new int[] {Color.parseColor("#77c4d3")};
+      XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);
+      renderer.setOrientation(Orientation.HORIZONTAL);
+      setChartSettings(renderer, datatable.getColumnDescription(0).getLabel(),
+               datatable.getColumnDescription(0).getLabel(), "Count", 0,
+               xmax + 1, 0, 1.3 * ymax, Color.BLACK, Color.BLACK);
+
+      renderer.setXLabels(1);
+      renderer.setYLabels(10);
+
+      for (int i = 1; i <= xmax; i++) {
+         renderer.addXTextLabel(i, categories.get(i - 1));
+      }
+
+      int length = renderer.getSeriesRendererCount();
+      for (int i = 0; i < length; i++) {
+         SimpleSeriesRenderer seriesRenderer = renderer.getSeriesRendererAt(i);
+         seriesRenderer.setDisplayChartValues(true);
+      }
+      
+      XYMultipleSeriesDataset dataset = buildBarDataset(titles, values);
+
+      if (isIntent) {
+         return ChartFactory.getBarChartIntent(context,
+                  dataset, renderer, Type.DEFAULT);
+      }
+      else {
+         return ChartFactory.getBarChartView(context, 
+                  dataset, renderer, Type.DEFAULT);
+      }
+   }
+
+   /* package */static Intent getBarGraphIntent(Context context,
+            DataTable datatable) {
+      /*String[] titles = new String[] {"Count"};
+      List<double[]> values = new ArrayList<double[]>();
+      List<String> categories = new ArrayList<String>();
+
+      int xmax = 0;
+      double ymax = 0;
+
+      double[] firstVals = new double[20]; // TODO: should this be
+                                           // datatable.getRows().size()?
 
       for (TableRow tableRow : datatable.getRows()) {
          // FIXME: Hack that assumes that column 0 is string and column 1 is
@@ -72,7 +153,9 @@ public class BarGraph {
       }
 
       return ChartFactory.getBarChartIntent(context,
-               buildBarDataset(titles, values), renderer, Type.DEFAULT);
+               buildBarDataset(titles, values), renderer, Type.DEFAULT);*/
+      
+      return (Intent) getIntentOrView(context, datatable, true);
    }
 
    private static XYMultipleSeriesDataset buildBarDataset(String[] titles,

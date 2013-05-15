@@ -2,6 +2,8 @@ package edu.channel4.mm.db.android.model.graph;
 
 import java.util.List;
 
+import org.achartengine.GraphicalView;
+
 import android.content.Context;
 import android.content.Intent;
 
@@ -38,6 +40,20 @@ public class Graph {
             return BarGraph.getBarGraphIntent(context, datatable);
          case LINE:
             return LineGraph.getLineGraphIntent(context, datatable);
+         default:
+            Log.e("Unknown graphType: " + graphType.toString());
+            return null;
+      }
+   }
+   
+   public GraphicalView getView(GraphType graphType, Context context) {
+      switch (graphType) {
+         case PIE:
+            return PieGraph.getPieGraphView(context, datatable);
+         case BAR:
+            return BarGraph.getBarGraphView(context, datatable);
+         case LINE:
+            return LineGraph.getLineGraphView(context, datatable);
          default:
             Log.e("Unknown graphType: " + graphType.toString());
             return null;

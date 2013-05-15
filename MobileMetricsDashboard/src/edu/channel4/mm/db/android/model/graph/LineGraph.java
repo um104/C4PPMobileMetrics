@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.renderer.SimpleSeriesRenderer;
@@ -20,8 +21,72 @@ import com.google.visualization.datasource.datatable.value.NumberValue;
 import com.google.visualization.datasource.datatable.value.TextValue;
 
 public class LineGraph {
+   
+   /*package*/ static GraphicalView getLineGraphView(Context context, DataTable datatable) {
+      GraphicalView view = null;
+      
+      view = (GraphicalView) getIntentOrView(context, datatable, false);
+      
+      return view;
+   }
 
    /*package*/ static Intent getLineGraphIntent(Context context, DataTable datatable) {
+      /*String[] titles = new String[] {"Count"};
+      List<double[]> values = new ArrayList<double[]>();
+      List<String> categories = new ArrayList<String>();
+
+      int xmax = 0;
+      double ymax = 0;
+
+      double[] firstVals = new double[datatable.getRows().size()];
+
+      for (TableRow tableRow : datatable.getRows()) {
+         // FIXME: Hack that assumes that column 0 is string and column 1 is
+         // number
+         String category = ((TextValue) tableRow.getCell(0).getValue())
+                  .getValue();
+         Double value = ((NumberValue) tableRow.getCell(1).getValue())
+                  .getValue();
+         if (value > ymax) {
+            ymax = value;
+         }
+
+         firstVals[xmax] = value;
+         categories.add(category);
+         xmax++;
+      }
+
+      values.add(firstVals);
+
+      // int[] colors = new int[] {Color.parseColor("#77c4d3")};
+      XYMultipleSeriesRenderer renderer = getLineRenderer();
+      /*
+       * renderer.setOrientation(Orientation.HORIZONTAL);
+       * setChartSettings(renderer,
+       * datatable.getColumnDescription(0).getLabel(),
+       * datatable.getColumnDescription(0).getLabel(), "Count", 0, xmax + 1, 0,
+       * 1.3 * ymax, Color.BLACK, Color.BLACK);
+       */
+      /*renderer.setXLabels(1);
+      renderer.setYLabels(10);
+
+      for (int i = 1; i <= xmax; i++) {
+         renderer.addXTextLabel(i, categories.get(i - 1));
+      }
+
+      int length = renderer.getSeriesRendererCount();
+      for (int i = 0; i < length; i++) {
+         SimpleSeriesRenderer seriesRenderer = renderer.getSeriesRendererAt(i);
+         seriesRenderer.setDisplayChartValues(true);
+      }
+
+      return ChartFactory.getLineChartIntent(context,
+               buildBarDataset(titles, values), renderer, "activitytitle");*/
+      
+      return (Intent) getIntentOrView(context, datatable, true);
+   }
+   
+   private static Object getIntentOrView (Context context, DataTable datatable, boolean isIntent) {
       String[] titles = new String[] {"Count"};
       List<double[]> values = new ArrayList<double[]>();
       List<String> categories = new ArrayList<String>();
@@ -70,9 +135,15 @@ public class LineGraph {
          SimpleSeriesRenderer seriesRenderer = renderer.getSeriesRendererAt(i);
          seriesRenderer.setDisplayChartValues(true);
       }
+      
+      XYMultipleSeriesDataset dataset = buildBarDataset(titles, values);
 
-      return ChartFactory.getLineChartIntent(context,
-               buildBarDataset(titles, values), renderer, "activitytitle");
+      if (isIntent) {
+         return ChartFactory.getLineChartIntent(context, dataset, renderer, "activitytitle");   
+      }
+      else {
+         return ChartFactory.getLineChartView(context, dataset, renderer);
+      }
    }
 
    // TODO: Make "buildLineDataset" instead of "buildBarDataset" here.

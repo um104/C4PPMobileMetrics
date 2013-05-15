@@ -31,8 +31,6 @@ public class Keys {
 
 	public static final String ATTRIB_DESC = "attrib_description";
 
-	public static final String ATTRIB_NAME = "attrib_name";
-
 	public static final String SESSION_ATTRIBS = "session_attribs";
 
 	public static final String ID = "Id";
@@ -69,17 +67,12 @@ public class Keys {
 	
 	public static final String GRAPH_REQUEST_EXTRA = "graph_request_extra";
 	
-	public static final String TIME_INTERVAL = "timeInterval";
+	public static final String TIME_SCOPE = "timeScope";
 	
 	/**
 	 * Used for creating custom graphs
 	 */
-	public static final String EVENT_NAME_1 = "eventName1";
-	
-	/**
-	 * Used for creating custom graphs
-	 */
-	public static final String ATTRIB_NAME_1 = "attribName1";
+	public static final String ATTRIB_NAME = "attribName";
 	
 	public static final String LINE = "line";
 	
@@ -93,5 +86,7 @@ public class Keys {
 	
 	public static final String EVENT_NAME = "eventName";
 	
-
+	public static final String RANGE_START = "rangeStart";
+	
+	public static final String RANGE_STOP = "rangeSop";
 }

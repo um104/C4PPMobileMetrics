@@ -3,25 +3,27 @@ package edu.channel4.mm.db.android.model.request;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.TestCase;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import junit.framework.TestCase;
+import edu.channel4.mm.db.android.model.request.GraphRequest.TimeScope;
 
 public class SessionOverTimeGraphRequestTest extends TestCase {
 
     SessionOverTimeGraphRequest sotgr;
     String requestType;
-    String timeInterval;
+    TimeScope timeScope;
     
     protected void setUp() throws Exception {
         super.setUp();
         
         sotgr = new SessionOverTimeGraphRequest();
         requestType = "SESSION_OVER_TIME";
-        timeInterval = "12";
+        timeScope = TimeScope.DAY;
         
-        sotgr.setTimeInterval(timeInterval);
+        sotgr.setTimeScope(timeScope);
     }
 
     protected void tearDown() throws Exception {
@@ -36,7 +38,7 @@ public class SessionOverTimeGraphRequestTest extends TestCase {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
 
         params.add(new BasicNameValuePair("requestType", "SESSION_OVER_TIME"));
-        params.add(new BasicNameValuePair("timeInterval", "12"));
+        params.add(new BasicNameValuePair("timeScope", "DAY"));
         
         assertEquals(params, sotgr.getAdditionalUriParameters());
     }

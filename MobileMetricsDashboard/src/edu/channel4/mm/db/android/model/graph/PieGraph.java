@@ -3,6 +3,7 @@ package edu.channel4.mm.db.android.model.graph;
 import java.util.Random;
 
 import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
@@ -17,7 +18,7 @@ import com.google.visualization.datasource.datatable.value.NumberValue;
 import com.google.visualization.datasource.datatable.value.TextValue;
 
 public class PieGraph {
-
+   
    /* package */static Intent getPieGraphIntent(Context context,
             DataTable datatable) {
       Intent intent = null;
@@ -31,6 +32,17 @@ public class PieGraph {
                renderer, "some activity");
 
       return intent;
+   }
+   
+   /*package*/ static GraphicalView getPieGraphView(Context context, DataTable datatable) {
+      CategorySeries categorySeries = new CategorySeries("unknown pie chart");
+      DefaultRenderer renderer = new DefaultRenderer();
+      
+      parseDataTable(datatable, categorySeries, renderer);
+      
+      GraphicalView view = ChartFactory.getPieChartView(context, categorySeries, renderer);
+      
+      return view;
    }
 
    /**

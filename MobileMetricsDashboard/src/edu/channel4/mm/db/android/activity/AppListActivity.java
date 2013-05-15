@@ -51,6 +51,9 @@ public class AppListActivity extends NativeMainActivity implements
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+      
+      // Hide the action bar 
+      getActionBar().hide();
 
       // Initialize Adapter
       arrayAdapter = new AppDataArrayAdapater(getApplicationContext(),

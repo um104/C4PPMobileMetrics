@@ -59,9 +59,9 @@ final public class SalesforceConn {
       // Grab the most up-to-date field values
       String baseUri = getCurrentBaseUri();
       String accessToken = restClientAccess.getAccessToken();
-      String appLabel = prefs.getString(Keys.APP_LABEL, null);
+      String appId = prefs.getString(Keys.ID, null);
 
-      new GetEventListAsyncTask(context, baseUri, accessToken, appLabel,
+      new GetEventListAsyncTask(context, baseUri, accessToken, appId,
                callback).execute();
    }
 
@@ -75,9 +75,9 @@ final public class SalesforceConn {
       // Grab the most up-to-date field values
       String baseUri = getCurrentBaseUri();
       String accessToken = restClientAccess.getAccessToken();
-      String appLabel = prefs.getString(Keys.APP_LABEL, null);
+      String appId = prefs.getString(Keys.ID, null);
 
-      new GetEventNameListAsyncTask(context, baseUri, accessToken, appLabel,
+      new GetEventNameListAsyncTask(context, baseUri, accessToken, appId,
                callback).execute();
    }
 

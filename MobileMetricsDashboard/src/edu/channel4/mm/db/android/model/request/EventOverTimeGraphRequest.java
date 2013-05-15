@@ -18,8 +18,8 @@ public class EventOverTimeGraphRequest implements GraphRequest,
          HasEventNameParameter, HasOverTimeParameter {
 
    // DO NOT CHANGE THIS STRING. APEX code relies on it!
-   private final static String REQUEST_TYPE = "EventOverTime";
-   private String timeInterval;
+   private final static String REQUEST_TYPE = "Line";
+   private TimeScope timeScope = TimeScope.DAY;
    private String eventName;
 
    public EventOverTimeGraphRequest() {
@@ -97,13 +97,13 @@ public class EventOverTimeGraphRequest implements GraphRequest,
    }
 
    @Override
-   public void setTimeInterval(String timeInterval) {
-      this.timeInterval = timeInterval;
+   public void setTimeScope(TimeScope timeScope) {
+      this.timeScope = timeScope;
    }
 
    @Override
-   public String getTimeInterval() {
-      return timeInterval;
+   public TimeScope getTimeScope() {
+      return timeScope;
    }
 
    @Override
@@ -114,7 +114,7 @@ public class EventOverTimeGraphRequest implements GraphRequest,
    @Override
    public void writeToParcel(Parcel dest, int flags) {
       // Note: Parcel data is read in a FIFO manner
-      dest.writeString(timeInterval);
+      dest.writeString(timeScope.name());
       dest.writeString(eventName);
    }
 
@@ -131,7 +131,7 @@ public class EventOverTimeGraphRequest implements GraphRequest,
 
    private EventOverTimeGraphRequest(Parcel in) {
       // Note: Parcel data is read in a fifo manner
-      this.timeInterval = in.readString();
+      this.timeScope = TimeScope.valueOf(in.readString());
       this.eventName = in.readString();
    }
 
@@ -141,7 +141,7 @@ public class EventOverTimeGraphRequest implements GraphRequest,
       List<NameValuePair> params = new ArrayList<NameValuePair>();
 
       params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, REQUEST_TYPE));
-      params.add(new BasicNameValuePair(Keys.TIME_INTERVAL, timeInterval));
+      params.add(new BasicNameValuePair(Keys.TIME_SCOPE, timeScope.name()));
       params.add(new BasicNameValuePair(Keys.EVENT_NAME, eventName));
       
       return params;

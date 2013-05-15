@@ -36,6 +36,9 @@ public class CustomGraphActivity extends RoboActivity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+      
+      // Hide the action bar 
+      getActionBar().hide();
 
       // Setup the ListView
       listView.setEmptyView(findViewById(R.id.textViewNoCustomGraphs));

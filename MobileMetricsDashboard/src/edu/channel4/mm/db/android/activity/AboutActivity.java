@@ -21,6 +21,9 @@ public class AboutActivity extends RoboActivity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+      
+      // Hide the action bar 
+      getActionBar().hide();
 
       // Set the list view's adapter to be our custom array adapter
       listViewDeveloperNames.setAdapter(new AboutArrayAdapter(

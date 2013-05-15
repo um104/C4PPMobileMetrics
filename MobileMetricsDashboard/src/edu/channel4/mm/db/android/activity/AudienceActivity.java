@@ -37,6 +37,9 @@ public class AudienceActivity extends RoboActivity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+      
+      // Hide the action bar 
+      getActionBar().hide();
 
       // Set the Activity's titles
       String appLabel = prefs.getString(Keys.APP_LABEL, null);

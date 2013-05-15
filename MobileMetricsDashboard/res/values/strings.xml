@@ -24,6 +24,13 @@
     <string name="developers">Developers:</string>
     <string name="defaultAppName">App Name</string>
     <string-array name="developer_names">
+        <item>Brian Middaugh</item>
+        <item>Chun Hui Pek</item>
+        <item>Ray Tam</item>
+        <item>Mark Lerner</item>
+        <item>Girum Ibssa</item>
+    </string-array>
+    <string-array name="developer_names_legit">
         <item>Bittah Prophet</item>
         <item>Phantom Specialist</item>
         <item>Ray Tam</item>
@@ -33,21 +40,17 @@
 
     <string name="usage">Usage</string>
     <string name="audience">Audience</string>
-    <string name="event_funnels">Event Funnels</string>
     <string name="custom_graphs">Custom Graphs</string>
     <string name="create_new_custom_graph">Create New Custom Graph</string>
     <string name="no_custom_graphs">No Custom Graphs</string>
     <string name="not_yet_implemented">Not Yet Implemented</string>
     <string name="title_activity_create_new_custom_graph">CreateNewCustomGraphActivity</string>
-    <string name="event1">Event 1:</string>
-    <string name="attribute1">Attribute 1: </string>
-    <string name="attribute2">Attribute 2 (optional): </string>
-    <string name="in_the_last">In the last: </string>
+    <string name="event1">Event:</string>
+    <string name="attribute1">Attribute: </string>
+    <string name="in_the_last">Since: </string>
     <string name="view_new_custom_graph">View New Custom Graph</string>
     <string name="title_activity_edit_graph_request">EditGraphRequestActivity</string>
     <string name="please_enter_valid_inputs_">Please enter valid inputs.</string>
-    <string name="event_1_">Event 1:</string>
-    <string name="choose_a_chart_type">Choose a Chart Type</string>
     <string name="ok">OK</string>
 
 </resources>

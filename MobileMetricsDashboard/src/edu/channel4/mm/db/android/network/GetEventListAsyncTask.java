@@ -25,11 +25,11 @@ public class GetEventListAsyncTask extends
 
    @SuppressWarnings("serial")
    public GetEventListAsyncTask(Context context, String baseUri,
-                                String accessToken, final String appLabel,
+                                String accessToken, final String appId,
                                 EventDescriptionCallback callback) {
       super(context, baseUri, accessToken, new HashMap<String, String>() {
          {
-            put(Keys.APP_LABEL, Uri.encode(appLabel));
+            put(Keys.APP_ID, Uri.encode(appId));
          }
       });
       this.callback = callback;

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_switch_graph_type"
+        android:showAsAction="withText|always"
+        android:title="Switch Graph Type">
+    </item>
+    
+    <item 
+        android:id="@+id/menu_graph_time"
+        android:showAsAction="withText|always"
+        android:title="Time Scope">
+        <menu>
+            <item 
+                android:id="@+id/menu_time_day"
+                android:title="Today"/>
+			<item 
+			    android:id="@+id/menu_time_month"
+			    android:title="This Month"/>
+            <item 
+                android:id="@+id/menu_time_year" 
+                android:title="This Year"/>
+			<item 
+			    android:id="@+id/menu_time_decade"
+			    android:title="This Decade"/>
+        </menu>
+    </item>
+
+</menu>

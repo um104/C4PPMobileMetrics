@@ -49,7 +49,7 @@ public class GraphFactory {
       List<GraphType> validGraphTypes = new ArrayList<GraphType>();
       DataTable datatable = new DataTable();
       
-      Log.d(graphJSONString + " lololol");
+      Log.d(graphJSONString);
 
       JSONObject graphJSONObject = new JSONObject(graphJSONString);
 

@@ -12,14 +12,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import edu.channel4.mm.db.android.R;
 import edu.channel4.mm.db.android.activity.EditGraphRequestActivity;
+import edu.channel4.mm.db.android.activity.GraphViewerActivity;
 import edu.channel4.mm.db.android.util.Keys;
 
-public class SessionOverTimeGraphRequest implements GraphRequest,
-         HasOverTimeParameter {
+public class SessionOverTimeGraphRequest implements GraphRequest {
 
    // DO NOT CHANGE THIS STRING. APEX code relies on it!
-   private final static String REQUEST_TYPE = "SessionOverTime";
-   private String timeInterval;
+   private final static String REQUEST_TYPE = "Line";
+   private TimeScope timeScope = TimeScope.DAY;
 
    public SessionOverTimeGraphRequest() {
    }
@@ -35,64 +35,20 @@ public class SessionOverTimeGraphRequest implements GraphRequest,
 
    @Override
    public Intent constructGraphRequestIntent(Context context) {
-      Intent intent = new Intent(context, EditGraphRequestActivity.class);
+      Intent intent = new Intent(context, GraphViewerActivity.class);
       intent.putExtra(Keys.GRAPH_REQUEST_EXTRA, this);
 
       return intent;
    }
-
-   // @Override
-   // public URI getUri(RestClientAccess restClientManager, Context context) {
-   // URI uri = null;
-   //
-   // // get some of the basic information we'll need to make the URI
-   // String instanceURL = restClientManager.getInstanceURL().toString();
-   //
-   // // Don't use getSharedPreferences(String, int) anymore.
-   // // Instead, use PreferenceManager.getDefaultSharedPreferences(Context)
-   // // String appLabel = getApplicationContext().getSharedPreferences(
-   // // Keys.PREFS_NS, 0).getString(Keys.APP_LABEL, null);
-   // String appLabel = PreferenceManager.getDefaultSharedPreferences(context)
-   // .getString(Keys.APP_LABEL, null);
-   //
-   // // make the URI String
-   // String uriString = "";
-   //
-   // // add in all non-parameterized information onto the request
-   // uriString += String.format(SalesforceConn.CHANNEL4_REST_URL,
-   // instanceURL, GraphRequestAsyncTask.GRAPH_REQUEST_URL_SUFFIX);
-   //
-   // // create a list for the URL parameters to add
-   // List<NameValuePair> params = new ArrayList<NameValuePair>();
-   //
-   // params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, this.REQUEST_TYPE));
-   // params.add(new BasicNameValuePair(Keys.APP_LABEL,
-   // appLabel));
-   // params.add(new BasicNameValuePair(Keys.TIME_INTERVAL, timeInterval));
-   //
-   // // add the parameters to the uriString
-   // String paramString = URLEncodedUtils.format(params, "utf-8");
-   // uriString += "?" + paramString;
-   //
-   // // turn the string into a URI
-   // try {
-   // uri = new URI(uriString);
-   // }
-   // catch (URISyntaxException e) {
-   // Log.e(e.getMessage());
-   // }
-   //
-   // return uri;
-   // }
-
+   
    @Override
-   public void setTimeInterval(String time) {
-      this.timeInterval = time;
+   public void setTimeScope(TimeScope scope) {
+      this.timeScope = scope;      
    }
 
    @Override
-   public String getTimeInterval() {
-      return timeInterval;
+   public TimeScope getTimeScope() {
+      return this.timeScope;
    }
 
    /* Everything from here down is for implementing the Parcelable interface */
@@ -105,7 +61,7 @@ public class SessionOverTimeGraphRequest implements GraphRequest,
    @Override
    public void writeToParcel(Parcel dest, int flags) {
       // Note: Parcel data is read in a FIFO manner.
-      dest.writeString(timeInterval);
+      dest.writeString(timeScope.name());
    }
 
    public static final Parcelable.Creator<SessionOverTimeGraphRequest> CREATOR = new Parcelable.Creator<SessionOverTimeGraphRequest>() {
@@ -121,7 +77,8 @@ public class SessionOverTimeGraphRequest implements GraphRequest,
 
    private SessionOverTimeGraphRequest(Parcel in) {
       // Note: Parcel data is read in a FIFO manner.
-      this.timeInterval = in.readString();
+      String timeScopeName = in.readString();
+      this.timeScope = TimeScope.valueOf(timeScopeName);
    }
 
    @Override
@@ -130,7 +87,8 @@ public class SessionOverTimeGraphRequest implements GraphRequest,
       List<NameValuePair> params = new ArrayList<NameValuePair>();
 
       params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, REQUEST_TYPE));
-      params.add(new BasicNameValuePair(Keys.TIME_INTERVAL, timeInterval));
+      params.add(new BasicNameValuePair(Keys.TIME_SCOPE, timeScope.name()));
+      params.add(new BasicNameValuePair(Keys.EVENT_NAME, ""));
       
       return params;
    }
