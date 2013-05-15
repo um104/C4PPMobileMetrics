@@ -7,7 +7,6 @@ import org.achartengine.GraphicalView;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,7 +47,6 @@ public class GraphViewerActivity extends BaseActivity implements
    @Inject private ArrayList<GraphType> validGraphTypes;
    private GraphicalView graphView;
    private Menu menu;
-   private ActionBar actionBar;
    private GraphType currentType;
    private TimeScope currentScope;
 
@@ -70,7 +68,7 @@ public class GraphViewerActivity extends BaseActivity implements
    @Override
    public boolean onCreateOptionsMenu(Menu menu) {
       MenuInflater inflater = getMenuInflater();
-      inflater.inflate(R.menu.graphviewmenu, menu);
+      inflater.inflate(R.menu.activity_graph_viewer, menu);
 
       this.menu = menu;
 
@@ -143,9 +141,6 @@ public class GraphViewerActivity extends BaseActivity implements
          // change current scope
          currentScope = scope;
 
-         // hide action bar
-         actionBar.hide();
-
          // placeholder visibility set to GONE
          graphViewFrame.setVisibility(View.GONE);
 
@@ -191,8 +186,7 @@ public class GraphViewerActivity extends BaseActivity implements
       graphViewFrame.addView(graphView);
 
       // set the action bar title, graph type, and scope
-      actionBar.show();
-      actionBar.setTitle(graph.getTitle());
+      setTitle(graph.getTitle());
 
       if (validGraphTypes.size() == 1) { // It's a line graph
          // TODO: display the icon of the currently displayed type on the action

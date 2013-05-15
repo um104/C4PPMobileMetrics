@@ -28,6 +28,10 @@ public class Graph {
       return title;
    }
 
+   public void setTitle(String title) {
+      this.title = title;
+   }
+
    public List<GraphType> getValidGraphTypes() {
       return validGraphTypes;
    }
@@ -45,7 +49,7 @@ public class Graph {
             return null;
       }
    }
-   
+
    public GraphicalView getView(GraphType graphType, Context context) {
       switch (graphType) {
          case PIE:

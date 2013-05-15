@@ -24,6 +24,8 @@ public class GraphRequestAsyncTask extends BaseGetRequestAsyncTask<Graph> {
    @Inject private Database tempoDatabase;
    @Inject private RestClientAccess restClientAccess;
 
+   private GraphRequest graphRequest;
+
    @SuppressWarnings("serial")
    public GraphRequestAsyncTask(Context context, String baseUrl,
                                 String accessToken, final String appId,
@@ -39,6 +41,7 @@ public class GraphRequestAsyncTask extends BaseGetRequestAsyncTask<Graph> {
          }
       });
       this.callback = callback;
+      this.graphRequest = graphRequest;
 
       // Inject the fields of this POJO
       RoboGuice.getInjector(context).injectMembers(this);
@@ -51,6 +54,7 @@ public class GraphRequestAsyncTask extends BaseGetRequestAsyncTask<Graph> {
 
       // Try to parse the resulting JSON
       Graph graph = GraphFactory.parseGraph(responseString);
+      graph.setTitle(graphRequest.toString());
 
       // Save the parsed graph into the local database
       tempoDatabase.setGraph(graph);
