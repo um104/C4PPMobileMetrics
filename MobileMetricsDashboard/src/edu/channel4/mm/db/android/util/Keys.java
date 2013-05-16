@@ -82,7 +82,7 @@ public class Keys {
 	
 	public static final String REQUEST_AS_JSON = "requestAsJSON";
 	
-	public static final String C4PPMM_EVENT_NAME = "EventName__c";
+	public static final String C4PPMM_EVENT_NAME = "eventName";
 	
 	public static final String EVENT_NAME = "eventName";
 	

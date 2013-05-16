@@ -57,13 +57,13 @@ public class GraphViewerActivity extends RoboActivity implements
       super.onCreate(savedInstanceState);
       actionBar = getActionBar();
       actionBar.hide();
+      currentScope = graphRequest.getTimeScope();
+      graphFactory.getGraph(graphRequest, this);      
    }
 
    @Override
    protected void onResume() {
       super.onResume();
-      currentScope = graphRequest.getTimeScope();
-      graphFactory.getGraph(graphRequest, this);      
    }
    
    @Override
@@ -183,6 +183,7 @@ public class GraphViewerActivity extends RoboActivity implements
 
       // Show the other Views
       graphView = graph.getView(currentType, getApplicationContext());
+      graphViewFrame.removeAllViews();
       graphViewFrame.setVisibility(View.VISIBLE);
       graphViewFrame.addView(graphView);
       

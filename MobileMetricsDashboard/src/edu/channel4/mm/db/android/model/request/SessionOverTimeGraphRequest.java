@@ -18,6 +18,7 @@ public class SessionOverTimeGraphRequest extends GraphRequest {
 
    // DO NOT CHANGE THIS STRING. APEX code relies on it!
    private final static String REQUEST_TYPE = "Line";
+   private final static String ATTRIB_NAME = "Count";
 
    public SessionOverTimeGraphRequest() {
    }
@@ -80,6 +81,7 @@ public class SessionOverTimeGraphRequest extends GraphRequest {
       params.add(new BasicNameValuePair(Keys.REQUEST_TYPE, REQUEST_TYPE));
       params.add(new BasicNameValuePair(Keys.TIME_SCOPE, timeScope.name()));
       params.add(new BasicNameValuePair(Keys.EVENT_NAME, ""));
+      params.add(new BasicNameValuePair(Keys.ATTRIB_NAME, ATTRIB_NAME));
       
       if (rangedTime) {
          params.add(new BasicNameValuePair(Keys.RANGE_START, "" + super.getTimeRangeStart()));
