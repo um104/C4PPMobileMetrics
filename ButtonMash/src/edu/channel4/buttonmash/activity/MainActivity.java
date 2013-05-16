@@ -14,7 +14,7 @@ import android.widget.TextView;
 @ContentView(R.layout.activity_main)
 public final class MainActivity extends RoboActivity {
 
-   final static String MM_APP_KEY = "a01G000000BNwWQ";
+   final static String MM_APP_KEY = "a01G000000BOVPP";
 
    /**
     * The number of seconds you want to mash for.
