@@ -48,6 +48,7 @@ public class GraphFactory {
             TypeMismatchException {
       List<GraphType> validGraphTypes = new ArrayList<GraphType>();
       DataTable datatable = new DataTable();
+      String graphTitle = "Your graph!";
       
       Log.d(graphJSONString);
 
@@ -62,12 +63,15 @@ public class GraphFactory {
 
          if (graphTypeString.equals(Keys.LINE)) {
             validGraphTypes.add(GraphType.LINE);
+            graphTitle = "Line Graph";
          }
          else if (graphTypeString.equals(Keys.PIE)) {
             validGraphTypes.add(GraphType.PIE);
+            graphTitle = "Pie Graph";
          }
          else if (graphTypeString.equals(Keys.BAR)) {
             validGraphTypes.add(GraphType.BAR);
+            graphTitle = "Bar Graph";
          }
          else {
             Log.e("Unknown graph type: " + graphTypeString);
@@ -83,6 +87,9 @@ public class GraphFactory {
          JSONObject columnJSONObject = colsJsonArray.getJSONObject(col);
 
          String label = columnJSONObject.getString("label");
+         if (col == 0) {
+            graphTitle = label;
+         }
 
          // Parse Google's ValueType enum from the string
          ValueType valueType = null;
@@ -153,6 +160,6 @@ public class GraphFactory {
          Log.i(tableRow.getCells().toString());
       }
 
-      return new Graph("Your graph!", validGraphTypes, datatable);
+      return new Graph(graphTitle, validGraphTypes, datatable);
    }
 }
