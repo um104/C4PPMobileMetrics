@@ -85,6 +85,6 @@ public class UsageActivity extends RoboActivity {
    private void fillGraphRequests() {
       graphRequests.add(new SessionOverTimeGraphRequest());
       graphRequests.add(new EventOverTimeGraphRequest());
-      graphRequests.add(new CustomGraphRequest("Session Length", "", "sessionLengthSeconds", R.drawable.ic_launcher));
+      graphRequests.add(new CustomGraphRequest("Session Length", "", "sessionLengthSeconds", R.drawable.ic_logo));
    }
 }

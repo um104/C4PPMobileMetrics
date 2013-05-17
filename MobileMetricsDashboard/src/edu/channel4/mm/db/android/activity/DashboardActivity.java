@@ -88,7 +88,7 @@ public class DashboardActivity extends RoboActivity {
                getResources().getString(R.string.audience),
                AudienceActivity.class));
 
-      subactivityDetails.add(new Subactivity(R.drawable.ic_launcher,
+      subactivityDetails.add(new Subactivity(R.drawable.custom_icon,
                getResources().getString(R.string.custom_graphs),
                CustomGraphActivity.class));
 

@@ -29,7 +29,7 @@ public class SessionOverTimeGraphRequest extends GraphRequest {
 
    @Override
    public int getIconId() {
-      return R.drawable.sessions_over_time;
+      return R.drawable.line_graph;
    }
 
    @Override

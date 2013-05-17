@@ -67,19 +67,19 @@ public class AudienceActivity extends RoboActivity {
    // Construct the array of GraphRequests
    private void fillGraphRequests() {
       graphRequests.add(new CustomGraphRequest("Nationality Breakdown", "",
-               "DeviceCountry", R.drawable.nationality_breakdown));
+               "DeviceCountry", R.drawable.ic_logo));
       graphRequests.add(new CustomGraphRequest("Language Locale", "",
-               "LanguageLocale", R.drawable.language_locale));
+               "LanguageLocale", R.drawable.ic_logo));
       graphRequests.add(new CustomGraphRequest("Device Manufacturer", "",
-               "DeviceManufacturer", R.drawable.ic_launcher));
+               "DeviceManufacturer", R.drawable.ic_logo));
       graphRequests.add(new CustomGraphRequest("Device Model", "",
-               "DeviceModel", R.drawable.ic_launcher));
+               "DeviceModel", R.drawable.ic_logo));
       graphRequests.add(new CustomGraphRequest("Network Carrier", "",
-               "NetworkCarrier", R.drawable.ic_launcher));
+               "NetworkCarrier", R.drawable.ic_logo));
       graphRequests.add(new CustomGraphRequest("Network Country Code", "",
-               "NetworkCountryCode", R.drawable.ic_launcher));
+               "NetworkCountryCode", R.drawable.ic_logo));
       graphRequests.add(new CustomGraphRequest("SDK Compatibility", "",
-               "SDKCompatibility", R.drawable.ic_launcher));
+               "SDKCompatibility", R.drawable.ic_logo));
    }
 
    private void startGraphRequestActivity(GraphRequest graphRequest) {
