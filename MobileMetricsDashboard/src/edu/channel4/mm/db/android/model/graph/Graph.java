@@ -24,6 +24,10 @@ public class Graph {
       this.datatable = datatable;
    }
 
+   public boolean isEmpty() {
+      return datatable.getRows().isEmpty();
+   }
+
    public String getTitle() {
       return title;
    }

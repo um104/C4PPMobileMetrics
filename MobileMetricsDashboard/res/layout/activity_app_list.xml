@@ -8,20 +8,11 @@
     android:weightSum="100"
     tools:context=".AppListActivity" >
 
-    <RelativeLayout
-        android:id="@+id/bottomRelativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" >
-    </RelativeLayout>
-
     <ListView
         android:id="@+id/listViewAppList"
         style="@style/MobileMetricsListViewTheme"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottomRelativeLayout"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:cacheColorHint="#00000000" >
     </ListView>

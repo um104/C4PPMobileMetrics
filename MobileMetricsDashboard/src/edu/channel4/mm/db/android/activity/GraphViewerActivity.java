@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.inject.Inject;
 
@@ -43,6 +44,7 @@ public class GraphViewerActivity extends BaseActivity implements
 
    @InjectView(R.id.progressBarGraphViewer) private ProgressBar progressBar;
    @InjectView(R.id.graphViewFrame) private FrameLayout graphViewFrame;
+   @InjectView(android.R.id.empty) private TextView emptyView;
 
    @Inject private ArrayList<GraphType> validGraphTypes;
    private GraphicalView graphView;
@@ -166,42 +168,52 @@ public class GraphViewerActivity extends BaseActivity implements
       Log.i("Graph loaded: " + graph.getTitle());
       this.graph = graph;
 
-      // Fill up the validGraphTypes array
-      validGraphTypes.clear();
-      validGraphTypes.addAll(graph.getValidGraphTypes());
-
-      // choose a default graphType
-      currentType = validGraphTypes.get(0);
-      if (validGraphTypes.size() > 1) {
-         currentType = GraphType.PIE;
-      }
-
       // Hide the ProgressBar
       progressBar.setVisibility(View.GONE);
 
-      // Show the other Views
-      graphView = graph.getView(currentType, getApplicationContext());
-      graphViewFrame.removeAllViews();
-      graphViewFrame.setVisibility(View.VISIBLE);
-      graphViewFrame.addView(graphView);
+      if (!graph.isEmpty()) {
+         // Fill up the validGraphTypes array
+         validGraphTypes.clear();
+         validGraphTypes.addAll(graph.getValidGraphTypes());
 
-      // set the action bar title, graph type, and scope
-      setTitle(graph.getTitle());
+         // choose a default graphType
+         currentType = validGraphTypes.get(0);
+         if (validGraphTypes.size() > 1) {
+            currentType = GraphType.PIE;
+         }
 
-      if (validGraphTypes.size() == 1) { // It's a line graph
-         // TODO: display the icon of the currently displayed type on the action
-         // bar
-         // disable the "Switch Graph Type" button
-         MenuItem item = menu.findItem(R.id.menu_switch_graph_type);
-         item.setVisible(false);
-         item.setEnabled(false);
+         // Show the other Views
+         graphView = graph.getView(currentType, getApplicationContext());
+         graphViewFrame.removeAllViews();
+         graphViewFrame.setVisibility(View.VISIBLE);
+         graphViewFrame.addView(graphView);
+
+         // set the action bar title, graph type, and scope
+         setTitle(graph.getTitle());
+
+         if (validGraphTypes.size() == 1) { // It's a line graph
+            // TODO: display the icon of the currently displayed type on the
+            // action
+            // bar
+            // disable the "Switch Graph Type" button
+            MenuItem item = menu.findItem(R.id.menu_switch_graph_type);
+            item.setVisible(false);
+            item.setEnabled(false);
+         }
+         else {
+            // TODO: display the icon of the currently displayed type on the
+            // action
+            // bar
+
+            setSwitchText();
+         }
       }
       else {
-         // TODO: display the icon of the currently displayed type on the action
-         // bar
-
-         setSwitchText();
+         emptyView.setVisibility(View.VISIBLE);
+         menu.findItem(R.id.menu_switch_graph_type).setVisible(false);
+         menu.findItem(R.id.menu_graph_time).setVisible(false);
       }
+
    }
 
 }

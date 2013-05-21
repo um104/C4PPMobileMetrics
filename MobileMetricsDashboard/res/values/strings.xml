@@ -23,6 +23,7 @@
     <string name="title_activity_about">AboutActivity</string>
     <string name="developers">Developers:</string>
     <string name="defaultAppName">App Name</string>
+
     <string-array name="developer_names">
         <item>Brian Middaugh</item>
         <item>Chun Hui Pek</item>
@@ -52,5 +53,6 @@
     <string name="title_activity_edit_graph_request">EditGraphRequestActivity</string>
     <string name="please_enter_valid_inputs_">Please enter valid inputs.</string>
     <string name="ok">OK</string>
+    <string name="no_data_for_this_graph">No data for this graph in the database.</string>
 
 </resources>
